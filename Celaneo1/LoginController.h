@@ -7,10 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ServerRequest.h"
 
-
-@interface LoginPageController : UIViewController {
+@interface LoginController : UIViewController <ServerRequestDelegate> {
+    IBOutlet UITextField* email;
+    IBOutlet UITextField* password;
+    IBOutlet UIButton* submitButton;
     
+    ServerRequest* request;
 }
+
+@property (nonatomic, retain) IBOutlet UITextField *email;
+@property (nonatomic, retain) IBOutlet UITextField *password;
+@property (nonatomic, retain) IBOutlet UIButton *submitButton;
+@property (nonatomic, retain) ServerRequest* request;
+
+- (IBAction) submit;
+- (IBAction) recoverPassword;
+- (IBAction) selectPassword;
+- (IBAction) onChange;
 
 @end

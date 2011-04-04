@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoginController.h"
 
 @interface Celaneo1AppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
-
+    IBOutlet LoginController* loginController;
+    
+    NSString* sessionId;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
+@property (nonatomic, retain) IBOutlet LoginController *loginController;
 
 @end

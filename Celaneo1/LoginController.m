@@ -6,10 +6,16 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "LoginPageController.h"
+#import "LoginController.h"
+#import "Celaneo1AppDelegate.h"
+#import "ASIHTTPRequest.h"
 
+@implementation LoginController
 
-@implementation LoginPageController
+@synthesize email;
+@synthesize password;
+@synthesize submitButton;
+@synthesize request;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -23,6 +29,10 @@
 - (void)dealloc
 {
     [super dealloc];
+    
+    [email release];
+    [password release];
+    [request release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,14 +54,75 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    
+    self.email = nil;
+    self.password = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (IBAction) submit
+{
+    self.request = [[ServerRequest alloc] initAuthentificateWithEmail:email.text withPassword:password.text];
+    request.delegate = self;
+    [request start];
+}
+
+- (void) goToTabBar
+{
+    Celaneo1AppDelegate* delegate = (Celaneo1AppDelegate*) [UIApplication sharedApplication].delegate;
+    delegate.window.rootViewController = delegate.tabBarController;    
+}
+
+- (void) serverRequest:(ServerRequest*)request didSucceedWithObject:(id)result
+{
+    [self goToTabBar];
+}
+
+- (void) serverRequest:(ServerRequest*)request didFailWithError:(NSError*)error
+{
+    
+}
+
+- (IBAction) recoverPassword
+{
+    NSString* launchUrl = @"http://www.google.com";
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: launchUrl]];
+}
+
+- (IBAction) selectPassword
+{
+    [password becomeFirstResponder];
+}
+
+- (BOOL) isValid
+{
+    NSString *emailRegEx =
+    @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
+    @"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
+    @"x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
+    @"z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"
+    @"]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"
+    @"9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
+    @"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx]; 
+
+    return password.text.length > 0 && [emailTest evaluateWithObject:email.text];
+}
+
+- (void)validateButtons
+{
+    BOOL valid = [self isValid];
+    submitButton.enabled = valid;
+}
+
+- (IBAction) onChange
+{
+    [self validateButtons];
 }
 
 @end
