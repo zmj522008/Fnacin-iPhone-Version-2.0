@@ -249,7 +249,8 @@
 - (void) handleElementEnd_article
 {
     [articles addObject:article];
-    self.article = nil;
+    // Temp fix for article -> contenu
+//    self.article = nil;
 }
 
 - (void) handleElementEnd_thematique:(NSString*)value

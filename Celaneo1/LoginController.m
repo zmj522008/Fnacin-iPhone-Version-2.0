@@ -48,7 +48,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    email.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"loginEmail"];
 }
 
 - (void)viewDidUnload
@@ -71,6 +72,8 @@
 //    self.request = [[ServerRequest alloc] initListALaUne];
     request.delegate = self;
     [request start];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:email.text forKey:@"loginEmail"];
 }
 
 - (void) goToTabBar
@@ -81,25 +84,9 @@
 
 #pragma mark Handle server Response
 
-
-- (void) serverRequest:(ServerRequest*)request didFailWithError:(NSError*)error
+- (void) serverRequest:(ServerRequest*)request didSucceedWithObject:(id)result
 {
-    NSString* title;
-    if ([error.domain compare:@"FNAC"] == 0) {
-        title = @"Erreur";
-    } else {
-        title = @"Communication";
-    }
-    UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:title 
-                                                        message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [errorView show];
-    [errorView release];
-    
-    // And we check for the need to reauthenticate
-    Celaneo1AppDelegate* delegate = [Celaneo1AppDelegate getSingleton];
-    if (delegate.sessionId.length <= 0) {
-        delegate.window.rootViewController = delegate.loginController;
-    }
+    [self goToTabBar];
 }
 
 - (IBAction) recoverPassword

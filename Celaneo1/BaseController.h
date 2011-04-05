@@ -6,11 +6,13 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "UIViewController.h"
-
+#import <UIKit/UIViewController.h>
+#import "ServerRequest.h"
 
 @interface BaseController : UIViewController {
 
 }
+
+- (void) serverRequest:(ServerRequest*)request didFailWithError:(NSError*)error;
 
 @end
