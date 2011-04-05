@@ -22,6 +22,10 @@
 		E341C877134A3308009BB506 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E341C876134A3308009BB506 /* MobileCoreServices.framework */; };
 		E341C879134A3337009BB506 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E341C878134A3337009BB506 /* libz.dylib */; };
 		E341C87C134A35F2009BB506 /* ServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E341C87B134A35F2009BB506 /* ServerRequest.m */; };
+		E341C87F134AFC05009BB506 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = E341C87E134AFC05009BB506 /* Article.m */; };
+		E341C882134AFD56009BB506 /* Magasin.m in Sources */ = {isa = PBXBuildFile; fileRef = E341C881134AFD56009BB506 /* Magasin.m */; };
+		E341C8AE134B03D0009BB506 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E341C8AD134B03D0009BB506 /* Category.m */; };
+		E341C8B1134B3CAD009BB506 /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = E341C8B0134B3CAD009BB506 /* BaseController.m */; };
 		E3D97E701349C3B300E2C1BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D97E6F1349C3B300E2C1BA /* UIKit.framework */; };
 		E3D97E721349C3B300E2C1BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D97E711349C3B300E2C1BA /* Foundation.framework */; };
 		E3D97E741349C3B300E2C1BA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D97E731349C3B300E2C1BA /* CoreGraphics.framework */; };
@@ -66,6 +70,14 @@
 		E341C878134A3337009BB506 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		E341C87A134A35F2009BB506 /* ServerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerRequest.h; sourceTree = "<group>"; };
 		E341C87B134A35F2009BB506 /* ServerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerRequest.m; sourceTree = "<group>"; };
+		E341C87D134AFC05009BB506 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Article.h; sourceTree = "<group>"; };
+		E341C87E134AFC05009BB506 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
+		E341C880134AFD56009BB506 /* Magasin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Magasin.h; sourceTree = "<group>"; };
+		E341C881134AFD56009BB506 /* Magasin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Magasin.m; sourceTree = "<group>"; };
+		E341C8AC134B03D0009BB506 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
+		E341C8AD134B03D0009BB506 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
+		E341C8AF134B3CAD009BB506 /* BaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
+		E341C8B0134B3CAD009BB506 /* BaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = BaseController.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
 		E3D97E6B1349C3B300E2C1BA /* Celaneo1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Celaneo1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3D97E6F1349C3B300E2C1BA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E3D97E711349C3B300E2C1BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -181,10 +193,18 @@
 				E3D97E8A1349C3B400E2C1BA /* FirstView.xib */,
 				E3D97E8D1349C3B400E2C1BA /* SecondView.xib */,
 				E3D97E761349C3B300E2C1BA /* Supporting Files */,
+				E341C8AF134B3CAD009BB506 /* BaseController.h */,
+				E341C8B0134B3CAD009BB506 /* BaseController.m */,
 				E3D97E951349C56B00E2C1BA /* LoginController.h */,
 				E3D97E961349C56C00E2C1BA /* LoginController.m */,
 				E341C87A134A35F2009BB506 /* ServerRequest.h */,
 				E341C87B134A35F2009BB506 /* ServerRequest.m */,
+				E341C87D134AFC05009BB506 /* Article.h */,
+				E341C87E134AFC05009BB506 /* Article.m */,
+				E341C880134AFD56009BB506 /* Magasin.h */,
+				E341C881134AFD56009BB506 /* Magasin.m */,
+				E341C8AC134B03D0009BB506 /* Category.h */,
+				E341C8AD134B03D0009BB506 /* Category.m */,
 			);
 			path = Celaneo1;
 			sourceTree = "<group>";
@@ -276,6 +296,10 @@
 				E341C86C134A31F9009BB506 /* ASINetworkQueue.m in Sources */,
 				E341C86F134A3288009BB506 /* Reachability.m in Sources */,
 				E341C87C134A35F2009BB506 /* ServerRequest.m in Sources */,
+				E341C87F134AFC05009BB506 /* Article.m in Sources */,
+				E341C882134AFD56009BB506 /* Magasin.m in Sources */,
+				E341C8AE134B03D0009BB506 /* Category.m in Sources */,
+				E341C8B1134B3CAD009BB506 /* BaseController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

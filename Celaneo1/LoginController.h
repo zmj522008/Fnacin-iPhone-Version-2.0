@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ServerRequest.h"
 
-@interface LoginController : UIViewController <ServerRequestDelegate> {
+#import "BaseController.h"
+
+@interface LoginController : BaseController <ServerRequestDelegate> {
     IBOutlet UITextField* email;
     IBOutlet UITextField* password;
     IBOutlet UIButton* submitButton;

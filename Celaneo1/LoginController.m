@@ -68,24 +68,38 @@
 - (IBAction) submit
 {
     self.request = [[ServerRequest alloc] initAuthentificateWithEmail:email.text withPassword:password.text];
+//    self.request = [[ServerRequest alloc] initListALaUne];
     request.delegate = self;
     [request start];
 }
 
 - (void) goToTabBar
 {
-    Celaneo1AppDelegate* delegate = (Celaneo1AppDelegate*) [UIApplication sharedApplication].delegate;
+    Celaneo1AppDelegate* delegate = [Celaneo1AppDelegate getSingleton];
     delegate.window.rootViewController = delegate.tabBarController;    
 }
 
-- (void) serverRequest:(ServerRequest*)request didSucceedWithObject:(id)result
-{
-    [self goToTabBar];
-}
+#pragma mark Handle server Response
+
 
 - (void) serverRequest:(ServerRequest*)request didFailWithError:(NSError*)error
 {
+    NSString* title;
+    if ([error.domain compare:@"FNAC"] == 0) {
+        title = @"Erreur";
+    } else {
+        title = @"Communication";
+    }
+    UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:title 
+                                                        message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorView show];
+    [errorView release];
     
+    // And we check for the need to reauthenticate
+    Celaneo1AppDelegate* delegate = [Celaneo1AppDelegate getSingleton];
+    if (delegate.sessionId.length <= 0) {
+        delegate.window.rootViewController = delegate.loginController;
+    }
 }
 
 - (IBAction) recoverPassword

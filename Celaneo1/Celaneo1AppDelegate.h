@@ -13,10 +13,18 @@
     IBOutlet LoginController* loginController;
     
     NSString* sessionId;
+    BOOL dirigeant;
+    int articlesPerPage;
 }
+
+@property (nonatomic, retain) NSString *sessionId;
+@property (nonatomic, assign, getter=isDirigeant) BOOL dirigeant;
+@property (nonatomic, assign) int articlesPerPage;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, retain) IBOutlet LoginController *loginController;
+
++ (Celaneo1AppDelegate*) getSingleton;
 
 @end

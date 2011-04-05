@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "ASIFormDataRequest.h"
+#import "Article.h"
+#import "Magasin.h"
+#import "Category.h"
 
 @class ServerRequest;
 
@@ -21,18 +24,46 @@
 @interface ServerRequest : NSObject <ASIHTTPRequestDelegate, NSXMLParserDelegate> {
     ASIFormDataRequest* asiRequest;
     id<ServerRequestDelegate> delegate;
+    
+    NSMutableString* currentTextString;
+    Article* article;
+    Magasin* magasin;
+    Category* category;
+    BOOL authentificated;
+    BOOL fnac;
+    
+    int currentId;
+    
+    NSMutableArray* articles;
+    NSMutableArray* thematiques;
+    NSMutableArray* rubriques;
+    NSMutableArray* magasins;
+    
+    NSString* erreurDescription;
+    int erreurCode;
+    NSError* erreur;
 }
 
 @property (nonatomic, retain) ASIFormDataRequest* asiRequest;
 @property (nonatomic, retain) id<ServerRequestDelegate> delegate;
+@property (nonatomic, retain) NSArray *articles;
+@property (nonatomic, retain) NSArray *thematiques;
+@property (nonatomic, retain) NSArray *rubriques;
+@property (nonatomic, retain) NSArray *magasins;
+@property (nonatomic, retain) Article *article;
+@property (nonatomic, retain) Magasin *magasin;
+@property (nonatomic, retain) Category *category;
+@property (nonatomic, retain) NSError *erreur;
+@property (nonatomic, retain) NSString *erreurDescription;
 
 - (id) initAuthentificateWithEmail:(NSString*)email withPassword:(NSString*)password;
-/*
+- (id) initListALaUne;
+
 - (id) initGetThematiques;
 - (id) initGetRubriques;
 - (id) initGetMagasins;
 - (id) initSendTokenId;
-*/
+
 - (void) start;
 
 - (void) cancel;

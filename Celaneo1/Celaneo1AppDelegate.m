@@ -15,6 +15,10 @@
 @synthesize tabBarController=_tabBarController;
 @synthesize loginController;
 
+@synthesize sessionId;
+@synthesize dirigeant;
+@synthesize articlesPerPage;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window.rootViewController = self.loginController;
@@ -67,7 +71,14 @@
 {
     [_window release];
     [_tabBarController release];
+    
+    [sessionId release];
     [super dealloc];
+}
+
++ (Celaneo1AppDelegate*) getSingleton
+{
+    return (Celaneo1AppDelegate*) [UIApplication sharedApplication].delegate;
 }
 
 /*
