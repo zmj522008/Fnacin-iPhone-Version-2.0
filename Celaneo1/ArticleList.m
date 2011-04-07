@@ -62,7 +62,7 @@
 
 - (ServerRequest*) createListRequest
 {
-    return [[ServerRequest alloc] initListALaUne];
+    return [[ServerRequest alloc] initListPodcast];
 }
 
 #pragma mark table view datasource

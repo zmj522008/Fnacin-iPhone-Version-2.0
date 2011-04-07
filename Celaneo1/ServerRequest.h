@@ -58,6 +58,7 @@
 
 - (id) initAuthentificateWithEmail:(NSString*)email withPassword:(NSString*)password;
 - (id) initListALaUne;
+- (id) initListPodcast;
 
 - (id) initGetThematiques;
 - (id) initGetRubriques;

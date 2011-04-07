@@ -13,12 +13,12 @@
 @interface BaseController : UIViewController <ServerRequestDelegate> {    
     ServerRequest* offlineRequest;
     ServerRequest* onlineRequest;
-    NSOperationQueue* imageQueue;
+    NSOperationQueue* imageLoadingQueue;
 }
 
 @property (nonatomic, retain) ServerRequest *offlineRequest;
 @property (nonatomic, retain) ServerRequest *onlineRequest;
-@property (nonatomic, retain) NSOperationQueue *imageQueue;
+@property (nonatomic, retain) NSOperationQueue *imageLoadingQueue;
 
 - (ServerRequest*) createListRequest;
 - (void) updateList:(ServerRequest*)request;

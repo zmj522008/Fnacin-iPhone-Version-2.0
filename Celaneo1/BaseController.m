@@ -13,7 +13,7 @@
 @implementation BaseController
 @synthesize offlineRequest;
 @synthesize onlineRequest;
-@synthesize imageQueue;
+@synthesize imageLoadingQueue;
 
 #pragma mark UIViewController
 - (void) viewWillAppear:(BOOL)animated
@@ -84,6 +84,9 @@
     if (request == offlineRequest) {
         [self doOnlineRequest:NO];
         return;
+    } else if (request == onlineRequest) {
+        Celaneo1AppDelegate* delegate = [Celaneo1AppDelegate getSingleton];
+        delegate.offline = NO;
     }
 }
 
@@ -105,6 +108,6 @@
     
     [offlineRequest release];
     [onlineRequest release];
-    [imageQueue release];
+    [imageLoadingQueue release];
 }
 @end
