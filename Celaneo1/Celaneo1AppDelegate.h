@@ -15,11 +15,15 @@
     NSString* sessionId;
     BOOL dirigeant;
     int articlesPerPage;
+    
+    BOOL offline;
 }
 
 @property (nonatomic, retain) NSString *sessionId;
 @property (nonatomic, assign, getter=isDirigeant) BOOL dirigeant;
 @property (nonatomic, assign) int articlesPerPage;
+
+@property (nonatomic, assign, getter=isOffline) BOOL offline;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;

@@ -345,6 +345,11 @@
 	return newRequest;
 }
 
+- (NSArray*) getPostData 
+{
+    return postData;
+}
+
 @synthesize postData;
 @synthesize fileData;
 @synthesize postFormat;

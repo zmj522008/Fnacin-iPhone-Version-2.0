@@ -19,12 +19,13 @@
 @synthesize dirigeant;
 @synthesize articlesPerPage;
 
+@synthesize offline;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window.rootViewController = self.loginController;
     [self.window makeKeyAndVisible];
 
-    
     return YES;
 }
 

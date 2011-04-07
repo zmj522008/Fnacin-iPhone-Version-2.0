@@ -15,7 +15,7 @@
 - (void) articleShowContent:(Article*) article;
 - (void) articlePlayMediaUrl:(NSString*) url withType:(int)type;
 - (void) articleShowRubrique:(int) rubriqueId;
-- (void) articleShowThematique:(int) url;
+- (void) articleShowThematique:(int) thematiqueId;
 - (void) article:(Article*) article makeFavoris:(BOOL) favoris;
 
 @end

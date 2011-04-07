@@ -7,12 +7,19 @@
 //
 
 #import <UIKit/UIViewController.h>
+
 #import "ServerRequest.h"
 
-@interface BaseController : UIViewController {
-
+@interface BaseController : UIViewController <ServerRequestDelegate> {    
+    ServerRequest* offlineRequest;
+    ServerRequest* onlineRequest;
+    NSOperationQueue* imageQueue;
 }
 
-- (void) serverRequest:(ServerRequest*)request didFailWithError:(NSError*)error;
+@property (nonatomic, retain) ServerRequest *offlineRequest;
+@property (nonatomic, retain) ServerRequest *onlineRequest;
+@property (nonatomic, retain) NSOperationQueue *imageQueue;
 
+- (ServerRequest*) createListRequest;
+- (void) updateList:(ServerRequest*)request;
 @end

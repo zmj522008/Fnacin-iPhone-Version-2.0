@@ -11,7 +11,7 @@
 
 #import "BaseController.h"
 
-@interface LoginController : BaseController <ServerRequestDelegate> {
+@interface LoginController : BaseController {
     IBOutlet UITextField* email;
     IBOutlet UITextField* password;
     IBOutlet UIButton* submitButton;

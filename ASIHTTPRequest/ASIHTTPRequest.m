@@ -857,10 +857,12 @@ static NSOperationQueue *sharedQueue = nil;
 		if (![self mainRequest]) {
 			[self buildPostBody];
 		}
-		
-		if (![[self requestMethod] isEqualToString:@"GET"]) {
-			[self setDownloadCache:nil];
-		}
+
+		// We support POST requests cache
+        
+//		if (![[self requestMethod] isEqualToString:@"GET"]) {
+//			[self setDownloadCache:nil];
+//		}
 		
 		
 		// If we're redirecting, we'll already have a CFHTTPMessageRef
@@ -899,7 +901,7 @@ static NSOperationQueue *sharedQueue = nil;
 			// If cached data is stale, or we have been told to ask the server if it has been modified anyway, we need to add headers for a conditional GET
 			if ([self cachePolicy] & (ASIAskServerIfModifiedWhenStaleCachePolicy|ASIAskServerIfModifiedCachePolicy)) {
 
-				NSDictionary *cachedHeaders = [[self downloadCache] cachedResponseHeadersForURL:[self url]];
+				NSDictionary *cachedHeaders = [[self downloadCache] cachedResponseHeadersForRequest:self];
 				if (cachedHeaders) {
 					NSString *etag = [cachedHeaders objectForKey:@"Etag"];
 					if (etag) {
@@ -3328,8 +3330,8 @@ static NSOperationQueue *sharedQueue = nil;
 
 - (void)useDataFromCache
 {
-	NSDictionary *headers = [[self downloadCache] cachedResponseHeadersForURL:[self url]];
-	NSString *dataPath = [[self downloadCache] pathToCachedResponseDataForURL:[self url]];
+	NSDictionary *headers = [[self downloadCache] cachedResponseHeadersForRequest:self];
+	NSString *dataPath = [[self downloadCache] pathToCachedResponseDataForRequest:self];
 
 	ASIHTTPRequest *theRequest = self;
 	if ([self mainRequest]) {
@@ -3348,7 +3350,7 @@ static NSOperationQueue *sharedQueue = nil;
 		if ([theRequest downloadDestinationPath]) {
 			[theRequest setDownloadDestinationPath:dataPath];
 		} else {
-			[theRequest setRawResponseData:[NSMutableData dataWithData:[[self downloadCache] cachedResponseDataForURL:[self url]]]];
+			[theRequest setRawResponseData:[NSMutableData dataWithData:[[self downloadCache] cachedResponseDataForRequest:self]]];
 		}
 		[theRequest setContentLength:[[[self responseHeaders] objectForKey:@"Content-Length"] longLongValue]];
 		[theRequest setTotalBytesRead:[self contentLength]];

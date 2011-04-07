@@ -9,15 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "BaseController.h"
 #import "ServerRequest.h"
+#import "ArticleCellController.h"
 
-@interface ArticleList : BaseController <UITableViewDataSource, UITableViewDelegate, ServerRequestDelegate> {
+@interface ArticleList : BaseController <UITableViewDataSource, UITableViewDelegate, ArticleCellDelegate> {
     NSArray* articles;
-    ServerRequest* request;
     
     IBOutlet UITableView* table;
 }
 @property (nonatomic, retain) NSArray *articles;
-@property (nonatomic, retain) ServerRequest *request;
 @property (nonatomic, retain) IBOutlet UITableView *table;
 
 @end

@@ -25,6 +25,8 @@
 	
 	// When YES, the cache will look for cache-control / pragma: no-cache headers, and won't reuse store responses if it finds them
 	BOOL shouldRespectCacheControlHeaders;
+    
+    NSMutableSet* ignoredKeys;
 }
 
 // Returns a static instance of an ASIDownloadCache
@@ -40,8 +42,12 @@
 // Do not use this formatter for parsing dates because the format can vary slightly - use ASIHTTPRequest's dateFromRFC1123String: class method instead
 + (NSDateFormatter *)rfc1123DateFormatter;
 
+- (void) addIgnoredPostKey:(NSString*) key;
+
 @property (assign, nonatomic) ASICachePolicy defaultCachePolicy;
 @property (retain, nonatomic) NSString *storagePath;
 @property (retain) NSRecursiveLock *accessLock;
 @property (assign) BOOL shouldRespectCacheControlHeaders;
+@property (nonatomic, retain) NSMutableSet *ignoredKeys;
+
 @end

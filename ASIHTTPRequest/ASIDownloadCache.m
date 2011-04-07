@@ -8,6 +8,7 @@
 
 #import "ASIDownloadCache.h"
 #import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
 #import <CommonCrypto/CommonHMAC.h>
 
 static ASIDownloadCache *sharedCache = nil;
@@ -16,7 +17,7 @@ static NSString *sessionCacheFolder = @"SessionStore";
 static NSString *permanentCacheFolder = @"PermanentStore";
 
 @interface ASIDownloadCache ()
-+ (NSString *)keyForURL:(NSURL *)url;
+- (NSString *)keyForRequest:(ASIHTTPRequest*)request;
 @end
 
 @implementation ASIDownloadCache
@@ -27,6 +28,8 @@ static NSString *permanentCacheFolder = @"PermanentStore";
 	[self setShouldRespectCacheControlHeaders:YES];
 	[self setDefaultCachePolicy:ASIUseDefaultCachePolicy];
 	[self setAccessLock:[[[NSRecursiveLock alloc] init] autorelease]];
+    ignoredKeys = nil;
+    
 	return self;
 }
 
@@ -44,6 +47,7 @@ static NSString *permanentCacheFolder = @"PermanentStore";
 {
 	[storagePath release];
 	[accessLock release];
+    [ignoredKeys release];
 	[super dealloc];
 }
 
@@ -84,6 +88,14 @@ static NSString *permanentCacheFolder = @"PermanentStore";
 	[[self accessLock] unlock];
 }
 
+- (void) addIgnoredPostKey:(NSString*) key
+{
+    if (!self.ignoredKeys) {
+        self.ignoredKeys = [NSMutableSet set];
+    }
+    [self.ignoredKeys addObject:key];
+}
+
 - (void)storeResponseForRequest:(ASIHTTPRequest *)request maxAge:(NSTimeInterval)maxAge
 {
 	[[self accessLock] lock];
@@ -122,25 +134,25 @@ static NSString *permanentCacheFolder = @"PermanentStore";
 	[[self accessLock] unlock];
 }
 
-- (NSDictionary *)cachedResponseHeadersForURL:(NSURL *)url
+- (NSDictionary *)cachedResponseHeadersForRequest:(ASIHTTPRequest*)request
 {
-	NSString *path = [self pathToCachedResponseHeadersForURL:url];
+	NSString *path = [self pathToCachedResponseHeadersForRequest:request];
 	if (path) {
 		return [NSDictionary dictionaryWithContentsOfFile:path];
 	}
 	return nil;
 }
 
-- (NSData *)cachedResponseDataForURL:(NSURL *)url
+- (NSData *)cachedResponseDataForRequest:(ASIHTTPRequest*)request
 {
-	NSString *path = [self pathToCachedResponseDataForURL:url];
+	NSString *path = [self pathToCachedResponseDataForRequest:request];
 	if (path) {
 		return [NSData dataWithContentsOfFile:path];
 	}
 	return nil;
 }
 
-- (NSString *)pathToCachedResponseDataForURL:(NSURL *)url
+- (NSString *)pathToCachedResponseDataForRequest:(ASIHTTPRequest*)request
 {
 	[[self accessLock] lock];
 	if (![self storagePath]) {
@@ -148,7 +160,7 @@ static NSString *permanentCacheFolder = @"PermanentStore";
 		return nil;
 	}
 	// Grab the file extension, if there is one. We do this so we can save the cached response with the same file extension - this is important if you want to display locally cached data in a web view 
-	NSString *extension = [[url path] pathExtension];
+	NSString *extension = [[request.url path] pathExtension];
 	if (![extension length]) {
 		extension = @"html";
 	}
@@ -157,14 +169,14 @@ static NSString *permanentCacheFolder = @"PermanentStore";
 
 	// Look in the session store
 	NSString *path = [[self storagePath] stringByAppendingPathComponent:sessionCacheFolder];
-	NSString *dataPath = [path stringByAppendingPathComponent:[[[self class] keyForURL:url] stringByAppendingPathExtension:extension]];
+	NSString *dataPath = [path stringByAppendingPathComponent:[[self keyForRequest:request] stringByAppendingPathExtension:extension]];
 	if ([fileManager fileExistsAtPath:dataPath]) {
 		[[self accessLock] unlock];
 		return dataPath;
 	}
 	// Look in the permanent store
 	path = [[self storagePath] stringByAppendingPathComponent:permanentCacheFolder];
-	dataPath = [path stringByAppendingPathComponent:[[[self class] keyForURL:url] stringByAppendingPathExtension:extension]];
+	dataPath = [path stringByAppendingPathComponent:[[self keyForRequest:request] stringByAppendingPathExtension:extension]];
 	if ([fileManager fileExistsAtPath:dataPath]) {
 		[[self accessLock] unlock];
 		return dataPath;
@@ -173,7 +185,7 @@ static NSString *permanentCacheFolder = @"PermanentStore";
 	return nil;
 }
 
-- (NSString *)pathToCachedResponseHeadersForURL:(NSURL *)url
+- (NSString *)pathToCachedResponseHeadersForRequest:(ASIHTTPRequest*)request
 {
 	[[self accessLock] lock];
 	if (![self storagePath]) {
@@ -185,14 +197,14 @@ static NSString *permanentCacheFolder = @"PermanentStore";
 
 	// Look in the session store
 	NSString *path = [[self storagePath] stringByAppendingPathComponent:sessionCacheFolder];
-	NSString *dataPath = [path stringByAppendingPathComponent:[[[self class] keyForURL:url] stringByAppendingPathExtension:@"cachedheaders"]];
+	NSString *dataPath = [path stringByAppendingPathComponent:[[self keyForRequest:request] stringByAppendingPathExtension:@"cachedheaders"]];
 	if ([fileManager fileExistsAtPath:dataPath]) {
 		[[self accessLock] unlock];
 		return dataPath;
 	}
 	// Look in the permanent store
 	path = [[self storagePath] stringByAppendingPathComponent:permanentCacheFolder];
-	dataPath = [path stringByAppendingPathComponent:[[[self class] keyForURL:url] stringByAppendingPathExtension:@"cachedheaders"]];
+	dataPath = [path stringByAppendingPathComponent:[[self keyForRequest:request] stringByAppendingPathExtension:@"cachedheaders"]];
 	if ([fileManager fileExistsAtPath:dataPath]) {
 		[[self accessLock] unlock];
 		return dataPath;
@@ -216,7 +228,7 @@ static NSString *permanentCacheFolder = @"PermanentStore";
 	if (![extension length]) {
 		extension = @"html";
 	}
-	path =  [path stringByAppendingPathComponent:[[[self class] keyForURL:[request url]] stringByAppendingPathExtension:extension]];
+	path =  [path stringByAppendingPathComponent:[[self keyForRequest:request] stringByAppendingPathExtension:extension]];
 	[[self accessLock] unlock];
 	return path;
 }
@@ -229,7 +241,7 @@ static NSString *permanentCacheFolder = @"PermanentStore";
 		return nil;
 	}
 	NSString *path = [[self storagePath] stringByAppendingPathComponent:([request cacheStoragePolicy] == ASICacheForSessionDurationCacheStoragePolicy ? sessionCacheFolder : permanentCacheFolder)];
-	path =  [path stringByAppendingPathComponent:[[[self class] keyForURL:[request url]] stringByAppendingPathExtension:@"cachedheaders"]];
+	path =  [path stringByAppendingPathComponent:[[self keyForRequest:request] stringByAppendingPathExtension:@"cachedheaders"]];
 	[[self accessLock] unlock];
 	return path;
 }
@@ -243,12 +255,12 @@ static NSString *permanentCacheFolder = @"PermanentStore";
 		return;
 	}
 
-	NSString *cachedHeadersPath = [self pathToCachedResponseHeadersForURL:[request url]];
+    NSString *cachedHeadersPath = [self pathToCachedResponseHeadersForRequest:request];
 	if (!cachedHeadersPath) {
 		[[self accessLock] unlock];
 		return;
 	}
-	NSString *dataPath = [self pathToCachedResponseDataForURL:[request url]];
+	NSString *dataPath = [self pathToCachedResponseDataForRequest:request];
 	if (!dataPath) {
 		[[self accessLock] unlock];
 		return;
@@ -267,12 +279,12 @@ static NSString *permanentCacheFolder = @"PermanentStore";
 		[[self accessLock] unlock];
 		return NO;
 	}
-	NSDictionary *cachedHeaders = [self cachedResponseHeadersForURL:[request url]];
+	NSDictionary *cachedHeaders = [self cachedResponseHeadersForRequest:request];
 	if (!cachedHeaders) {
 		[[self accessLock] unlock];
 		return NO;
 	}
-	NSString *dataPath = [self pathToCachedResponseDataForURL:[request url]];
+	NSString *dataPath = [self pathToCachedResponseDataForRequest:request];
 	if (!dataPath) {
 		[[self accessLock] unlock];
 		return NO;
@@ -412,13 +424,31 @@ static NSString *permanentCacheFolder = @"PermanentStore";
 }
 
 // Borrowed from: http://stackoverflow.com/questions/652300/using-md5-hash-on-a-string-in-cocoa
-+ (NSString *)keyForURL:(NSURL *)url
+- (NSString *)keyForRequest:(ASIHTTPRequest*)request
 {
-	NSString *urlString = [url absoluteString];
+    NSURL *url = request.url;
+    
+	NSMutableString *urlString = [NSMutableString stringWithString:[url absoluteString]];
 	// Strip trailing slashes so http://allseeing-i.com/ASIHTTPRequest/ is cached the same as http://allseeing-i.com/ASIHTTPRequest
 	if ([[urlString substringFromIndex:[urlString length]-1] isEqualToString:@"/"]) {
-		urlString = [urlString substringToIndex:[urlString length]-1];
+		[urlString deleteCharactersInRange:NSMakeRange([urlString length] - 1, 1)];
 	}
+    if ([request isKindOfClass:[ASIFormDataRequest class]]) {
+        ASIFormDataRequest* formRequest = (ASIFormDataRequest*)request;
+        for (id i in [formRequest getPostData]) {
+            if ([i isKindOfClass:[NSDictionary class]]) {
+                NSDictionary* nv = (NSDictionary*)i;
+                NSString* key = [nv objectForKey:@"key"];
+                if (![ignoredKeys containsObject:key]) {
+                    [urlString appendString:@"&"];
+                    [urlString appendString:key];
+                    [urlString appendString:@"="];
+                    [urlString appendString:[nv objectForKey:@"value"]];
+                }
+            }
+        }
+    }
+    NSLog(@"request hash: %@", urlString);
 	const char *cStr = [urlString UTF8String];
 	unsigned char result[16];
 	CC_MD5(cStr, (CC_LONG)strlen(cStr), result);
@@ -451,11 +481,11 @@ static NSString *permanentCacheFolder = @"PermanentStore";
 		return YES;
 	}
 
-	NSDictionary *headers = [self cachedResponseHeadersForURL:[request url]];
+	NSDictionary *headers = [self cachedResponseHeadersForRequest:request];
 	if (!headers) {
 		return NO;
 	}
-	NSString *dataPath = [self pathToCachedResponseDataForURL:[request url]];
+	NSString *dataPath = [self pathToCachedResponseDataForRequest:request];
 	if (!dataPath) {
 		return NO;
 	}
@@ -491,4 +521,5 @@ static NSString *permanentCacheFolder = @"PermanentStore";
 @synthesize defaultCachePolicy;
 @synthesize accessLock;
 @synthesize shouldRespectCacheControlHeaders;
+@synthesize ignoredKeys;
 @end

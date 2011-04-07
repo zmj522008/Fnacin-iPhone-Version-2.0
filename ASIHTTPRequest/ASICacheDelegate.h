@@ -70,16 +70,16 @@ typedef enum _ASICacheStoragePolicy {
 - (void)storeResponseForRequest:(ASIHTTPRequest *)request maxAge:(NSTimeInterval)maxAge;
 
 // Should return an NSDictionary of cached headers for the passed URL, if it is stored in the cache
-- (NSDictionary *)cachedResponseHeadersForURL:(NSURL *)url;
+- (NSDictionary *)cachedResponseHeadersForRequest:(ASIHTTPRequest *)url;
 
 // Should return the cached body of a response for the passed URL, if it is stored in the cache
-- (NSData *)cachedResponseDataForURL:(NSURL *)url;
+- (NSData *)cachedResponseDataForRequest:(ASIHTTPRequest *)request;
 
 // Returns a path to the cached response data, if it exists
-- (NSString *)pathToCachedResponseDataForURL:(NSURL *)url;
+- (NSString *)pathToCachedResponseDataForRequest:(ASIHTTPRequest *)request;
 
 // Returns a path to the cached response headers, if they url
-- (NSString *)pathToCachedResponseHeadersForURL:(NSURL *)url;
+- (NSString *)pathToCachedResponseHeadersForRequest:(ASIHTTPRequest *)request;
 
 // Returns the location to use to store cached response headers for a particular request
 - (NSString *)pathToStoreCachedResponseHeadersForRequest:(ASIHTTPRequest *)request;

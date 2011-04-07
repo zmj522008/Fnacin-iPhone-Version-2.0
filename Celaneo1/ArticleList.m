@@ -8,11 +8,8 @@
 
 #import "ArticleList.h"
 
-#import "ArticleCellController.h"
-
 @implementation ArticleList
 @synthesize articles;
-@synthesize request;
 @synthesize table;
 
 /*
@@ -38,13 +35,6 @@
     // Release any cached data, images, etc. that aren't in use.
 }
 
-- (void) viewWillAppear:(BOOL)animated
-{
-    self.request = [[ServerRequest alloc] initListALaUne];
-    request.delegate = self;
-    [request start];
-}
-
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -57,18 +47,22 @@
 {
     [table release];
     [articles release];
-    [request release];
     [super dealloc];
 }
 
 
-#pragma mark Handle server Response
+#pragma mark BaseController overrides
 
-- (void) serverRequest:(ServerRequest*)aRequest didSucceedWithObject:(id)result
+- (void) updateList:(ServerRequest*)request
 {
-    articles = aRequest.articles;
+    articles = request.articles;
     
     [table reloadData];
+}
+
+- (ServerRequest*) createListRequest
+{
+    return [[ServerRequest alloc] initListALaUne];
 }
 
 #pragma mark table view datasource
@@ -82,6 +76,7 @@
         ArticleCellController* cellController = (ArticleCellController*) [[ArticleCellController alloc] initWithNibName:@"ArticleCell" bundle:nil];
         cell = (UITableViewCell*) cellController.view;
         cellController.article = [articles objectAtIndex:indexPath.row];
+        cellController.delegate = self;
         [cellController update];
     }
     
@@ -94,5 +89,51 @@
 }
 
 #pragma mark table view delegate 
+
+#pragma mark article cell delegate
+- (void) articleShowContent:(Article*) article
+{
+    UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Article" 
+                                                        message:[NSString stringWithFormat:@"show article %d", article.articleId] 
+                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorView show];
+    [errorView release];
+}
+- (void) articlePlayMediaUrl:(NSString*) url withType:(int)type
+{
+    UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Article" 
+                                                        message:[NSString stringWithFormat:@"play url %d %@", type, url] 
+                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorView show];
+    [errorView release];    
+}
+- (void) articleShowRubrique:(int) rubriqueId
+{
+    UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Article" 
+                                                        message:[NSString stringWithFormat:@"show rubrique %d", rubriqueId] 
+                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorView show];
+    [errorView release];
+ 
+}
+- (void) articleShowThematique:(int) thematiqueId
+{
+    UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Article" 
+                                                        message:[NSString stringWithFormat:@"show thematique %d", thematiqueId]
+                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorView show];
+    [errorView release];
+    
+}
+- (void) article:(Article*) article makeFavoris:(BOOL) favoris
+{
+    article.favoris = favoris;
+    
+    UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Article" 
+                                                        message:[NSString stringWithFormat:@"article %d favoris: %d", article.articleId, favoris]
+                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorView show];
+    [errorView release];
+}
 
 @end

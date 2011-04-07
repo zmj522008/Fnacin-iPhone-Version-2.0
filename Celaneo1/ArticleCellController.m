@@ -101,4 +101,31 @@
     jaimeText.text = [NSString stringWithFormat:@"j aime (%d)", article.articleId];
 }
 
+#pragma mark actions
+
+- (IBAction) mediaClick
+{
+    [delegate articlePlayMediaUrl:article.urlMedia withType:article.type];
+}
+
+- (IBAction) contentClick
+{
+    [delegate articleShowContent:article];
+}
+
+- (IBAction) rubriqueClick
+{
+    [delegate articleShowRubrique:article.rubriqueId];
+}
+
+- (IBAction) thematiqueClick
+{
+    [delegate articleShowThematique:article.thematiqueId];
+}
+
+- (IBAction) favorisClick
+{
+    [delegate article:article makeFavoris:!article.favoris];
+}
+
 @end

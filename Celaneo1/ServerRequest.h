@@ -64,6 +64,8 @@
 - (id) initGetMagasins;
 - (id) initSendTokenId;
 
+- (void) enableCacheWithForced:(BOOL)cache;
+
 - (void) start;
 
 - (void) cancel;

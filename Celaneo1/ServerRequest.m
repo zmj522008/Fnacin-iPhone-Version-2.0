@@ -9,6 +9,8 @@
 #import "ServerRequest.h"
 #import "Celaneo1AppDelegate.h"
 
+#import "ASIDownloadCache.h"
+
 #define SERVER @"http://91.121.68.190:88/"
 
 @implementation ServerRequest
@@ -46,6 +48,7 @@
     if (self != nil) {
         [asiRequest setPostValue:email forKey:@"Email"];
         [asiRequest setPostValue:password forKey:@"Password"];
+        [asiRequest setPostValue:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] forKey:@"Version"];
     }
     return self;
 }
@@ -59,7 +62,15 @@
     return self;
 }
 
-
+- (id) initListPodcast
+{
+    [self initWithMethod:@"article"];
+    if (self != nil) {
+        // TODO pagination
+        [asiRequest setPostValue:@"1" forKey:@"podcast"];
+    }
+    return self;
+}
 
 - (id) initGetThematiques
 {
@@ -75,12 +86,25 @@
 
 - (id) initGetMagasins
 {
-    
+    [self initWithMethod:@"magasin"];
+    return self;  
 }
 
 - (id) initSendTokenId
 {
+    [self initWithMethod:@"push"];
+    return self;  
+}
+
+#pragma mark configuration
+
+- (void) enableCacheWithForced:(BOOL)cached
+{
+    ASIDownloadCache* cache = [ASIDownloadCache sharedCache];
+    [cache addIgnoredPostKey:@"session_id"]; // TODO This could be moved to sth called once per session
     
+    [asiRequest setDownloadCache:cache];
+    [asiRequest setCachePolicy:cached ? ASIDontLoadCachePolicy : ASIUseDefaultCachePolicy];
 }
 
 #pragma mark ASIFormDataRequest delegate handling
@@ -89,14 +113,18 @@
     // Use when fetching binary data
     NSData *responseData = [request responseData];
 
-    NSLog(@"%@\n%@", request.url, request.responseString);
-
-    NSXMLParser* parser = [[NSXMLParser alloc] initWithData:responseData];
-    [parser setShouldProcessNamespaces:NO];
-    [parser setShouldReportNamespacePrefixes:NO];
-    [parser setShouldResolveExternalEntities:NO];
-    parser.delegate = self;
-    [parser parse];
+    if (responseData == nil) {
+        [self requestFailed:request];
+    } else {
+        NSLog(@"%@\n%@", request.url, request.responseString);
+        
+        NSXMLParser* parser = [[NSXMLParser alloc] initWithData:responseData];
+        [parser setShouldProcessNamespaces:NO];
+        [parser setShouldReportNamespacePrefixes:NO];
+        [parser setShouldResolveExternalEntities:NO];
+        parser.delegate = self;
+        [parser parse];
+    }
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
@@ -257,6 +285,16 @@
     }
 }
 
+- (void) handleElementStart_thematique:(NSDictionary*) attributes
+{
+    if (self.article != nil) {
+        self.article.thematiqueId = [[attributes objectForKey:@"id"] intValue];
+    } else {
+        category = [[Category alloc] init];
+        category.categoryId = [[attributes objectForKey:@"id"] intValue];
+    }
+}
+
 - (void) handleElementEnd_thematique:(NSString*)value
 {
     if (self.article != nil) {
@@ -264,6 +302,16 @@
     } else {	
         self.category.name = value;
         [thematiques addObject:category];
+    }
+}
+
+- (void) handleElementStart_rubrique:(NSDictionary*) attributes
+{
+    if (self.article != nil) {
+        self.article.rubriqueId = [[attributes objectForKey:@"id"] intValue];
+    } else {
+        category = [[Category alloc] init];
+        category.categoryId = [[attributes objectForKey:@"id"] intValue];
     }
 }
 
@@ -323,11 +371,8 @@
     self.thematiques = [NSMutableArray arrayWithCapacity:20];
 }
 
-- (void) handleElementStart_thematique:(NSDictionary*) attributes
-{
-    category = [[Category alloc] init];
-    category.categoryId = [[attributes objectForKey:@"id"] intValue];
-}
+// (void) handleElementStart_thematique:(NSDictionary*) attributes (see above)
+
 
 // (void) handleElementEnd_thematique:(NSString*) value (see above)
 
@@ -338,11 +383,7 @@
     self.rubriques = [NSMutableArray arrayWithCapacity:20];
 }
 
-- (void) handleElementStart_rubrique:(NSDictionary*) attributes
-{
-    category = [[Category alloc] init];
-    category.categoryId = [[attributes objectForKey:@"id"] intValue];
-}
+// (void) handleElementStart_rubrique:(NSDictionary*) attributes (see above)
 
 // (void) handleElementEnd_rubrique:(NSString*) value (see above)
 
