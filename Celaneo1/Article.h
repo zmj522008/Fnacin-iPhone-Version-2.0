@@ -25,6 +25,10 @@
     NSString* contenu;
     NSString* urlImage;
     BOOL favoris;
+    
+    NSArray* commentaires;
+    int nb_jaime;
+    NSString* hash;
 }
 
 @property (nonatomic, assign) int articleId;
@@ -41,6 +45,9 @@
 @property (nonatomic, retain) NSString *contenu;
 @property (nonatomic, retain) NSString *urlImage;
 @property (nonatomic, assign, getter=isFavoris) BOOL favoris;
+@property (nonatomic, retain) NSArray *commentaires;
+@property (nonatomic, assign) int nb_jaime;
+@property (nonatomic, retain) NSString *hash;
 
 + (Article*) articleWithId:(int)id;
 

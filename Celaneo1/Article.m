@@ -23,6 +23,9 @@
 @synthesize contenu;
 @synthesize urlImage;
 @synthesize favoris;
+@synthesize commentaires;
+@synthesize nb_jaime;
+@synthesize hash;
 
 + (Article*) articleWithId:(int)articleId
 {
@@ -41,6 +44,8 @@
     [accroche release];
     [contenu release];
     [urlImage release];
+    [commentaires release];
+    [hash release];
     
     [super dealloc];
 }

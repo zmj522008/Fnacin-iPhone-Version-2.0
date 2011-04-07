@@ -11,6 +11,7 @@
 #import "Article.h"
 #import "Magasin.h"
 #import "Category.h"
+#import "Commentaire.h"
 
 @class ServerRequest;
 
@@ -29,6 +30,8 @@
     Article* article;
     Magasin* magasin;
     Category* category;
+    Commentaire* commentaire;
+    
     BOOL authentificated;
     BOOL fnac;
     
@@ -38,6 +41,8 @@
     NSMutableArray* thematiques;
     NSMutableArray* rubriques;
     NSMutableArray* magasins;
+    
+    NSMutableArray* commentaires;
     
     NSString* erreurDescription;
     int erreurCode;
@@ -55,6 +60,8 @@
 @property (nonatomic, retain) Category *category;
 @property (nonatomic, retain) NSError *erreur;
 @property (nonatomic, retain) NSString *erreurDescription;
+@property (nonatomic, retain) Commentaire *commentaire;
+@property (nonatomic, retain) NSMutableArray *commentaires;
 
 - (id) initAuthentificateWithEmail:(NSString*)email withPassword:(NSString*)password;
 - (id) initListALaUne;

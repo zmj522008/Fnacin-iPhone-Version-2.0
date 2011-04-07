@@ -26,6 +26,8 @@
 @synthesize category;
 @synthesize erreur;
 @synthesize erreurDescription;
+@synthesize commentaire;
+@synthesize commentaires;
 
 #pragma mark Request constructors
 - (id) initWithMethod:(NSString*)method
@@ -271,10 +273,39 @@
 
 - (void) handleElementStart_article:(NSDictionary*) attributes
 {
-    // Temp fix for article -> contenu
-        if (self.article == nil) {
-        self.article = [Article articleWithId:[[attributes objectForKey:@"id"] intValue]];
-    }
+    self.article = [Article articleWithId:[[attributes objectForKey:@"id"] intValue]];
+}
+
+- (void) handleElementStart_commentaires:(NSDictionary*) attributes
+{
+    self.commentaires = [NSMutableArray arrayWithCapacity:1];
+}
+
+- (void) handleElementEnd_commentaires
+{
+    self.article.commentaires = commentaires;
+    self.commentaires = nil;
+}
+
+- (void) handleElementStart_commentaire:(NSDictionary*) attributes
+{
+    self.commentaire = [Commentaire commentaireWithId:[[attributes objectForKey:@"id"] intValue]];
+}
+
+- (void) handleElementEnd_commentaire
+{
+    [self.commentaires addObject:commentaire];
+    self.commentaire = nil;
+}
+
+- (void) handleElementEnd_prenom:(NSString*)value
+{
+    self.commentaire.prenom = value;
+}
+
+- (void) handleElementEnd_date_depot:(NSString*)value
+{
+    self.commentaire.date = value;
 }
 
 - (void) handleElementEnd_article
@@ -351,7 +382,11 @@
 
 - (void) handleElementEnd_contenu:(NSString*)value
 {
-    self.article.contenu = value;
+    if (self.commentaire) {
+        self.commentaire.contenu = value;
+    } else {
+        self.article.contenu = value;
+    }
 }
 
 - (void) handleElementEnd_url_image:(NSString*)value
@@ -412,6 +447,8 @@
     [article release];
     [magasin release];
     
+    [commentaire release];
+    [commentaires release];
     [super dealloc];
 }
 @end
