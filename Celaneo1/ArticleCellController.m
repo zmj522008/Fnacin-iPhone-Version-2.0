@@ -7,7 +7,7 @@
 //
 
 #import "ArticleCellController.h"
-
+#import "ASIDownloadCache.h"
 
 @implementation ArticleCellController
 
@@ -23,6 +23,8 @@
 @synthesize jaimeText;
 @synthesize favorisButton;
 @synthesize delegate;
+@synthesize imageLoadingQueue;
+@synthesize imageRequest;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,6 +48,8 @@
     [jaimeIcon release];
     [jaimeText release];
     [favorisButton release];
+    [imageLoadingQueue release];
+    [imageRequest release];
     delegate = nil;
     [super dealloc];
 }
@@ -97,8 +101,23 @@
     self.titre.text = article.titre;
     self.date.text = article.dateAffichee;
     [self.accroche loadHTMLString:article.accroche baseURL:nil];
-// todo async load    self.vignette
+
+    NSString* urlString = [article.urlImage stringByAppendingFormat:@"&max_width=%d&max_height=%d", 
+                           self.vignette.bounds.size.width, self.vignette.bounds.size.height];
+    urlString = @"http://i.imgur.com/VUCyt.jpg";
+    imageRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlString]];
+    imageRequest.downloadCache = [ASIDownloadCache sharedCache];
+    imageRequest.delegate = self;
+    [imageRequest start];
     jaimeText.text = [NSString stringWithFormat:@"j aime (%d)", article.articleId];
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+    if (request == imageRequest) {
+        self.vignette.image = [UIImage imageWithData:request.responseData];
+        imageRequest = nil;
+    }
 }
 
 #pragma mark actions

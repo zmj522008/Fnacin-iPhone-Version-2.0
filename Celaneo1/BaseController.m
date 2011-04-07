@@ -28,6 +28,11 @@
     }
 }
 
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [imageLoadingQueue cancelAllOperations];
+}
+
 #pragma mark server handling
 
 - (void) doOnlineRequest:(BOOL)forced
@@ -102,6 +107,13 @@
 }
 
 #pragma mark life cycle
+
+- (void)viewDidLoad {   
+    [super viewDidLoad];
+    
+    imageLoadingQueue = [[NSOperationQueue alloc] init];
+}
+
 - (void) dealloc
 {
     [super dealloc];

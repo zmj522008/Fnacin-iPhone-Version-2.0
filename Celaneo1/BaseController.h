@@ -18,7 +18,7 @@
 
 @property (nonatomic, retain) ServerRequest *offlineRequest;
 @property (nonatomic, retain) ServerRequest *onlineRequest;
-@property (nonatomic, retain) NSOperationQueue *imageLoadingQueue;
+@property (nonatomic, readonly) NSOperationQueue *imageLoadingQueue;
 
 - (ServerRequest*) createListRequest;
 - (void) updateList:(ServerRequest*)request;

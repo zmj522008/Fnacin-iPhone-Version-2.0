@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "Article.h"
+#import "ASIHTTPRequest.h"
 
 @protocol ArticleCellDelegate <NSObject>
 
@@ -20,7 +21,7 @@
 
 @end
 
-@interface ArticleCellController : UIViewController {
+@interface ArticleCellController : UIViewController <ASIHTTPRequestDelegate> {
     Article* article;
     
     IBOutlet UIButton* rubrique;
@@ -35,6 +36,9 @@
     IBOutlet UIButton* favorisButton;
     
     id<ArticleCellDelegate> delegate;
+    
+    NSOperationQueue* imageLoadingQueue;
+    ASIHTTPRequest* imageRequest;
 }
 @property (nonatomic, retain) Article *article;
 @property (nonatomic, retain) IBOutlet UIButton *rubrique;
@@ -48,6 +52,8 @@
 @property (nonatomic, retain) IBOutlet UILabel *jaimeText;
 @property (nonatomic, retain) IBOutlet UIButton *favorisButton;
 @property (nonatomic, assign) id<ArticleCellDelegate> delegate;
+@property (nonatomic, retain) NSOperationQueue *imageLoadingQueue;
+@property (nonatomic, retain) ASIHTTPRequest *imageRequest;
 
 - (void) update;
 - (IBAction) mediaClick;

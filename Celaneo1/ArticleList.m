@@ -77,6 +77,7 @@
         cell = (UITableViewCell*) cellController.view;
         cellController.article = [articles objectAtIndex:indexPath.row];
         cellController.delegate = self;
+        cellController.imageLoadingQueue = self.imageLoadingQueue;
         [cellController update];
     }
     
