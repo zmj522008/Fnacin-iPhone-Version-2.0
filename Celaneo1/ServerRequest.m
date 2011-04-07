@@ -243,14 +243,18 @@
 
 - (void) handleElementStart_article:(NSDictionary*) attributes
 {
-    self.article = [Article articleWithId:[[attributes objectForKey:@"id"] intValue]];
+    // Temp fix for article -> contenu
+        if (self.article == nil) {
+        self.article = [Article articleWithId:[[attributes objectForKey:@"id"] intValue]];
+    }
 }
 
 - (void) handleElementEnd_article
 {
-    [articles addObject:article];
-    // Temp fix for article -> contenu
-//    self.article = nil;
+    if (self.article != nil) {
+        [articles addObject:article];
+        self.article = nil;
+    }
 }
 
 - (void) handleElementEnd_thematique:(NSString*)value

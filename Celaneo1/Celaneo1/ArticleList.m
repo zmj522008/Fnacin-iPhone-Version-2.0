@@ -6,10 +6,11 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "ArticleList.h"
 
+#import "ArticleCellController.h"
 
-@implementation FirstViewController
+@implementation ArticleList
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -47,6 +48,21 @@
 - (void)dealloc
 {
     [super dealloc];
+}
+
+#pragma mark table view datasource
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellId = @"ArticleCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellId];
+    if (cell == nil) {
+        ArticleCellController* cellController = (ArticleCellController*) [[UIViewController alloc] initWithNibName:@"ArticleCell" bundle:nil];
+        cell = (UITableViewCell*) cellController.view;
+    }
+    
+    return cell;
 }
 
 @end

@@ -69,7 +69,6 @@
 - (IBAction) submit
 {
     self.request = [[ServerRequest alloc] initAuthentificateWithEmail:email.text withPassword:password.text];
-//    self.request = [[ServerRequest alloc] initListALaUne];
     request.delegate = self;
     [request start];
     

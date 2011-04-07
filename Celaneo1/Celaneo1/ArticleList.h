@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface FirstViewController : UIViewController {
-
+@interface ArticleList : UIViewController <UITableViewDataSource, UITableViewDelegate> {
 }
 
 @end

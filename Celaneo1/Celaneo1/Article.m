@@ -33,10 +33,7 @@
 
 - (void) dealloc
 {
-    [thematique release];
-    [rubrique release];
     [titre release];
-    [dateAffichee release];
     [urlMedia release];
     [accroche release];
     [contenu release];
