@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseController.h"
 
-
-@interface SecondViewController : UIViewController {
+@interface RubriqueListController : BaseController <UITableViewDataSource, UITableViewDelegate> {
+    NSArray* rubriques;
     
+    IBOutlet UITableView* table;
 }
 
 @end
