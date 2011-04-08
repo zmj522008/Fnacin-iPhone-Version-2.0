@@ -19,4 +19,10 @@
     
     [super dealloc];
 }
+
+- (void) dump
+{
+    NSLog(@"category %d \'%@\'", categoryId, name);
+}
+
 @end

@@ -10,5 +10,8 @@
 
 
 @implementation Magasin
-
+- (void) dump
+{
+    NSLog(@"magasin");
+}
 @end

@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ModelObject.h"
 
-
-@interface Article : NSObject {
+@interface Article : NSObject <ModelObject> {
     int articleId;
     
     int rubriqueId;

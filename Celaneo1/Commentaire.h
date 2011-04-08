@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ModelObject.h"
 
-
-@interface Commentaire : NSObject {
+@interface Commentaire : NSObject <ModelObject> {
     int commentaireId;
     
     NSString* prenom;

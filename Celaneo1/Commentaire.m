@@ -22,6 +22,11 @@
     return c;
 }
 
+- (void) dump
+{
+    NSLog(@"commentaire %d from %@ at %@\ncontenu: %@", commentaireId, prenom, date, contenu);
+}
+
 - (void) dealloc
 {
     [super dealloc];

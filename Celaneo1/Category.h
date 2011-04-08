@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ModelObject.h"
 
-
-@interface Category : NSObject {
+@interface Category : NSObject <ModelObject> {
     int categoryId;
     NSString* name;
 }

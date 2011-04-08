@@ -7,7 +7,7 @@
 //
 
 #import "Article.h"
-
+#import "Commentaire.h"
 
 @implementation Article
 @synthesize articleId;
@@ -34,6 +34,15 @@
     return a;
 }
 
+- (void) dump
+{
+    NSLog(@"Article: %d\nthem %d %@\nrubri %d %@\ntype %d\ntitre %@\ndate %@\nurlMedia %@\naccroche %@\nurlImage %@\nfavoris %d\njaime %@\nhash %@",
+          articleId, thematiqueId, thematique, rubriqueId, rubrique, type, dateAffichee, urlMedia, accroche, contenu, urlImage, favoris, nb_jaime, hash);
+    for(Commentaire* c in commentaires) {
+        [c dump];
+    }
+}
+
 - (void) dealloc
 {
     [thematique release];
@@ -49,4 +58,5 @@
     
     [super dealloc];
 }
+
 @end

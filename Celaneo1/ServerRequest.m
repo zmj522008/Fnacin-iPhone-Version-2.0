@@ -107,6 +107,7 @@
     
     [asiRequest setDownloadCache:cache];
     [asiRequest setCachePolicy:cached ? ASIDontLoadCachePolicy : ASIUseDefaultCachePolicy];
+    [asiRequest setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
 }
 
 #pragma mark ASIFormDataRequest delegate handling
@@ -138,9 +139,20 @@
 
 #pragma mark Generic XML Parsing
 
+- (void) dump
+{
+    for (NSString* arg in [NSArray arrayWithObjects:@"rubriques", @"thematiques", @"articles", @"magasins", nil]) {
+        NSArray* lst = [self performSelector:NSSelectorFromString(arg)];
+        NSLog(@"%@ (%d):", arg, [lst count]);
+        for (id<ModelObject> c in lst) {
+            [c dump];
+        }
+    }
+}
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
     if (erreur == nil && fnac && [[Celaneo1AppDelegate getSingleton].sessionId length] > 0) {
+        [self dump];
         [delegate serverRequest:self didSucceedWithObject:nil];
     } else {
         [delegate serverRequest:self didFailWithError:erreur];
@@ -312,6 +324,14 @@
 {
     if (self.article != nil) {
         [articles addObject:article];
+
+        [articles addObject:article];
+        [articles addObject:article];
+        [articles addObject:article];
+        [articles addObject:article];
+        [articles addObject:article];
+        [articles addObject:article];
+
         self.article = nil;
     }
 }
@@ -336,6 +356,18 @@
     }
 }
 
+- (void) handleElementStart_rubrique_libelle:(NSDictionary*) attributes
+{
+    // WORKAROUND
+
+    if (self.article != nil) {
+        self.article.rubriqueId = [[attributes objectForKey:@"id"] intValue];
+    } else {
+        category = [[Category alloc] init];
+        category.categoryId = [[attributes objectForKey:@"id"] intValue];
+    }
+}
+
 - (void) handleElementStart_rubrique:(NSDictionary*) attributes
 {
     if (self.article != nil) {
@@ -346,6 +378,18 @@
     }
 }
 
+- (void) handleElementEnd_rubrique_libelle:(NSString*)value
+{
+    // WORKAROUND
+    
+    if (self.article != nil) {
+        self.article.rubrique = value;
+    } else {
+        self.category.name = value;
+        [rubriques addObject:category];
+    }
+}
+
 - (void) handleElementEnd_rubrique:(NSString*)value
 {
     if (self.article != nil) {
@@ -353,7 +397,8 @@
     } else {
         self.category.name = value;
         [rubriques addObject:category];
-    }}
+    }
+}
 
 - (void) handleElementEnd_titre:(NSString*)value
 {

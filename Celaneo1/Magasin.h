@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ModelObject.h"
 
-
-@interface Magasin : NSObject {
+@interface Magasin : NSObject <ModelObject> {
     
 }
 
