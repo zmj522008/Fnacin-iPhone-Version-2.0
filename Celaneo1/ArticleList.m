@@ -75,6 +75,7 @@
     if (cell == nil) {
         ArticleCellController* cellController = (ArticleCellController*) [[ArticleCellController alloc] initWithNibName:@"ArticleCell" bundle:nil];
         cell = (UITableViewCell*) cellController.view;
+        NSAssert2([CellId compare:cell.reuseIdentifier] == 0, @"Cell has invalid identifier, actual: %@, expected: %@", cell.reuseIdentifier, CellId);
         cellController.article = [articles objectAtIndex:indexPath.row];
         cellController.delegate = self;
         cellController.imageLoadingQueue = self.imageLoadingQueue;
