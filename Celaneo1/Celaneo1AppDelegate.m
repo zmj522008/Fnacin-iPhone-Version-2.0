@@ -21,6 +21,8 @@
 
 @synthesize offline;
 
+@synthesize rubriquesNavigation;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window.rootViewController = self.loginController;
@@ -74,6 +76,7 @@
     [_tabBarController release];
     
     [sessionId release];
+    [rubriquesNavigation release];
     [super dealloc];
 }
 

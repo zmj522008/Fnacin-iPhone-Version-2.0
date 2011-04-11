@@ -55,21 +55,11 @@
     return self;
 }
 
-- (id) initListALaUne
+- (id) initArticle
 {
     [self initWithMethod:@"article"];
     if (self != nil) {
         // TODO pagination
-    }
-    return self;
-}
-
-- (id) initListPodcast
-{
-    [self initWithMethod:@"article"];
-    if (self != nil) {
-        // TODO pagination
-        [asiRequest setPostValue:@"1" forKey:@"podcast"];
     }
     return self;
 }
@@ -98,16 +88,32 @@
     return self;  
 }
 
+
+- (void) setParameter:(NSString*) name withIntValue:(int)value
+{
+    [asiRequest setPostValue:[NSString stringWithFormat:@"%d", value] forKey:name];   
+}
+
+- (void) setParameter:(NSString*) name withValue:(NSString*)value
+{
+    [asiRequest setPostValue:value forKey:name];   
+}
+
 #pragma mark configuration
 
-- (void) enableCacheWithForced:(BOOL)cached
+- (void) enableCacheWithForced:(BOOL)forced
 {
     ASIDownloadCache* cache = [ASIDownloadCache sharedCache];
     [cache addIgnoredPostKey:@"session_id"]; // TODO This could be moved to sth called once per session
     
     [asiRequest setDownloadCache:cache];
-    [asiRequest setCachePolicy:cached ? ASIDontLoadCachePolicy : ASIUseDefaultCachePolicy];
+    [asiRequest setCachePolicy:forced ? ASIDontLoadCachePolicy : ASIDoNotReadFromCacheCachePolicy];
     [asiRequest setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
+}
+
+- (void) resetCache
+{
+    [[ASIDownloadCache sharedCache] removeCachedDataForRequest:asiRequest];
 }
 
 #pragma mark ASIFormDataRequest delegate handling
@@ -133,8 +139,12 @@
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
     NSError *error = [request error];
-    
-    [delegate serverRequest:self didFailWithError:error];
+ 
+    if (error.domain == NetworkRequestErrorDomain && error.code == ASIRequestCancelledErrorType) {
+        NSLog(@"%@ cancelled", self);
+    } else {
+        [delegate serverRequest:self didFailWithError:error];
+    }
 }
 
 #pragma mark Generic XML Parsing

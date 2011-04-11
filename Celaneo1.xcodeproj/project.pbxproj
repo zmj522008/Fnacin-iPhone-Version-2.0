@@ -28,6 +28,9 @@
 		E341C8B1134B3CAD009BB506 /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = E341C8B0134B3CAD009BB506 /* BaseController.m */; };
 		E3455365134DC3AE004B9D1E /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3455364134DC3AE004B9D1E /* Entitlements.plist */; };
 		E3455369134E2317004B9D1E /* Commentaire.m in Sources */ = {isa = PBXBuildFile; fileRef = E3455368134E2317004B9D1E /* Commentaire.m */; };
+		E3455375134F146F004B9D1E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E3455374134F146F004B9D1E /* logo.png */; };
+		E3455378134F16D5004B9D1E /* PrefereEdit.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3455376134F16D4004B9D1E /* PrefereEdit.xib */; };
+		E345537B134F173C004B9D1E /* PrefereEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = E345537A134F173C004B9D1E /* PrefereEditController.m */; };
 		E390EC06134C6EAA00B1B705 /* ArticleCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = E390EC04134C6EAA00B1B705 /* ArticleCellController.m */; };
 		E390EC07134C6EAA00B1B705 /* ArticleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E390EC05134C6EAA00B1B705 /* ArticleCell.xib */; };
 		E3D97E701349C3B300E2C1BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D97E6F1349C3B300E2C1BA /* UIKit.framework */; };
@@ -87,6 +90,10 @@
 		E3455367134E2317004B9D1E /* Commentaire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Commentaire.h; sourceTree = "<group>"; };
 		E3455368134E2317004B9D1E /* Commentaire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Commentaire.m; sourceTree = "<group>"; };
 		E345536A134EE05C004B9D1E /* ModelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelObject.h; sourceTree = "<group>"; };
+		E3455374134F146F004B9D1E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		E3455377134F16D5004B9D1E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PrefereEdit.xib; sourceTree = "<group>"; };
+		E3455379134F173C004B9D1E /* PrefereEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefereEditController.h; sourceTree = "<group>"; };
+		E345537A134F173C004B9D1E /* PrefereEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefereEditController.m; sourceTree = "<group>"; };
 		E390EC04134C6EAA00B1B705 /* ArticleCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCellController.m; sourceTree = "<group>"; };
 		E390EC05134C6EAA00B1B705 /* ArticleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleCell.xib; sourceTree = "<group>"; };
 		E3D97E6B1349C3B300E2C1BA /* Celaneo1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Celaneo1.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,6 +181,14 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		E3455373134F146E004B9D1E /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				E3455374134F146F004B9D1E /* logo.png */,
+			);
+			path = Images;
+			sourceTree = SOURCE_ROOT;
+		};
 		E3D97E601349C3B300E2C1BA = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +198,7 @@
 				E341C874134A3302009BB506 /* SystemConfiguration.framework */,
 				E341C872134A32FD009BB506 /* CFNetwork.framework */,
 				E341C870134A32B6009BB506 /* CoreFoundation.framework */,
+				E3455373134F146E004B9D1E /* Images */,
 				E341C850134A31F9009BB506 /* ASIHTTPRequest */,
 				E3D97E751349C3B300E2C1BA /* Celaneo1 */,
 				E3D97E6E1349C3B300E2C1BA /* Frameworks */,
@@ -211,6 +227,9 @@
 		E3D97E751349C3B300E2C1BA /* Celaneo1 */ = {
 			isa = PBXGroup;
 			children = (
+				E3455379134F173C004B9D1E /* PrefereEditController.h */,
+				E345537A134F173C004B9D1E /* PrefereEditController.m */,
+				E3455376134F16D4004B9D1E /* PrefereEdit.xib */,
 				E3455366134E22F2004B9D1E /* Model */,
 				E3D97E7E1349C3B300E2C1BA /* Celaneo1AppDelegate.h */,
 				E3D97E7F1349C3B300E2C1BA /* Celaneo1AppDelegate.m */,
@@ -299,6 +318,8 @@
 				E3D97E8F1349C3B400E2C1BA /* RubriqueList.xib in Resources */,
 				E390EC07134C6EAA00B1B705 /* ArticleCell.xib in Resources */,
 				E3455365134DC3AE004B9D1E /* Entitlements.plist in Resources */,
+				E3455375134F146F004B9D1E /* logo.png in Resources */,
+				E3455378134F16D5004B9D1E /* PrefereEdit.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,12 +351,21 @@
 				E341C8B1134B3CAD009BB506 /* BaseController.m in Sources */,
 				E390EC06134C6EAA00B1B705 /* ArticleCellController.m in Sources */,
 				E3455369134E2317004B9D1E /* Commentaire.m in Sources */,
+				E345537B134F173C004B9D1E /* PrefereEditController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		E3455376134F16D4004B9D1E /* PrefereEdit.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E3455377134F16D5004B9D1E /* en */,
+			);
+			name = PrefereEdit.xib;
+			sourceTree = "<group>";
+		};
 		E3D97E781349C3B300E2C1BA /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -397,7 +427,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ghat / VersaCom";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -405,7 +435,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96E8B351-92AF-4084-971D-D174A12465F5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

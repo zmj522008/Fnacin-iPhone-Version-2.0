@@ -7,6 +7,13 @@
 //
 
 #import "ArticleList.h"
+#import "Celaneo1AppDelegate.h"
+
+#define TAG_ITEM_A_LA_UNE 101
+#define TAG_ITEM_PREFERE 102
+#define TAG_ITEM_PODCAST 103
+#define TAG_ITEM_RUBRIQUES 104
+#define TAG_ITEM_DOSSIERS 105
 
 @implementation ArticleList
 @synthesize articles;
@@ -35,6 +42,28 @@
     // Release any cached data, images, etc. that aren't in use.
 }
 
+- (void)viewDidLoad
+{
+    int tag = self.navigationController.tabBarItem.tag | self.tabBarItem.tag;
+    switch (tag) {
+        case TAG_ITEM_A_LA_UNE:
+            break;
+        case TAG_ITEM_PREFERE:
+            prefere = YES;
+            break;
+        case TAG_ITEM_PODCAST:
+            podcast = YES;
+            break;
+        case TAG_ITEM_RUBRIQUES:
+            break;
+        case TAG_ITEM_DOSSIERS:
+            favoris = YES;
+            break;
+        default:
+            break;
+    }
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -60,11 +89,45 @@
     [table reloadData];
 }
 
-- (ServerRequest*) createListRequest
+- (ServerRequest*) doCreateListRequestWithStartingIndex:(int)startIndex
 {
-    return [[ServerRequest alloc] initListPodcast];
+    ServerRequest* request = [[ServerRequest alloc] initArticle];
+    
+    if (NO) {
+    if (favoris) {
+        [request setParameter:@"favoris" withValue:@"1"];
+    }
+    if (prefere) {
+        [request setParameter:@"prefere" withValue:@"1"];
+    }
+    if (podcast) {
+        [request setParameter:@"podcast" withValue:@"1"];
+    }
+    if (thematiqueId > 0) {
+        [request setParameter:@"thematique_id" withIntValue:thematiqueId];
+    }
+    if (rubriqueId > 0) {
+        [request setParameter:@"rubrique_id" withIntValue:rubriqueId];
+    }
+    if (magasinId > 0) {
+        [request setParameter:@"magasin_id" withIntValue:magasinId];
+    }
+    [request setParameter:@"limit_start" withIntValue:startIndex];
+    [request setParameter:@"limit_end" withIntValue:startIndex + [Celaneo1AppDelegate getSingleton].articlesPerPage];
+
+    // Disable caching for pagination
+    if (resetCache || startIndex > 0) {
+        [request resetCache];
+        resetCache = NO;
+    }
+    }
+    return request;
 }
 
+- (ServerRequest*) createListRequest
+{
+    return [self doCreateListRequestWithStartingIndex:0];
+}
 #pragma mark table view datasource
 
 
@@ -109,27 +172,27 @@
     [errorView show];
     [errorView release];    
 }
-- (void) articleShowRubrique:(int) rubriqueId
+- (void) articleShowRubrique:(int) rId
 {
     UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Article" 
-                                                        message:[NSString stringWithFormat:@"show rubrique %d", rubriqueId] 
+                                                        message:[NSString stringWithFormat:@"show rubrique %d", rId] 
                                                        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [errorView show];
     [errorView release];
  
 }
-- (void) articleShowThematique:(int) thematiqueId
+- (void) articleShowThematique:(int) tId
 {
     UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Article" 
-                                                        message:[NSString stringWithFormat:@"show thematique %d", thematiqueId]
+                                                        message:[NSString stringWithFormat:@"show thematique %d", tId]
                                                        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [errorView show];
     [errorView release];
     
 }
-- (void) article:(Article*) article makeFavoris:(BOOL) favoris
+- (void) article:(Article*) article makeFavoris:(BOOL) on
 {
-    article.favoris = favoris;
+    article.favoris = on;
     
     UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Article" 
                                                         message:[NSString stringWithFormat:@"article %d favoris: %d", article.articleId, favoris]

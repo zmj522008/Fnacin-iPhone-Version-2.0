@@ -10,6 +10,12 @@
 
 #import "Celaneo1AppDelegate.h"
 
+@interface BaseController()
+
+- (void) doOfflineRequest;
+- (void) doOnlineRequest:(BOOL)forced;
+@end
+
 @implementation BaseController
 @synthesize offlineRequest;
 @synthesize onlineRequest;
@@ -17,6 +23,24 @@
 
 #pragma mark UIViewController
 - (void) viewWillAppear:(BOOL)animated
+{
+    [self doOfflineRequest];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [imageLoadingQueue cancelAllOperations];
+}
+
+- (void) refresh {
+    [self.offlineRequest cancel];
+    [self.onlineRequest cancel];
+    [self doOfflineRequest];
+}
+
+#pragma mark server handling
+
+- (void) doOfflineRequest
 {
     ServerRequest* request = [self createListRequest];
     NSLog(@"offline Request %@", request);
@@ -27,13 +51,6 @@
         [offlineRequest start];
     }
 }
-
-- (void) viewWillDisappear:(BOOL)animated
-{
-    [imageLoadingQueue cancelAllOperations];
-}
-
-#pragma mark server handling
 
 - (void) doOnlineRequest:(BOOL)forced
 {

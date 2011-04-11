@@ -17,6 +17,8 @@
     int articlesPerPage;
     
     BOOL offline;
+
+    IBOutlet UINavigationController* rubriquesNavigation;
 }
 
 @property (nonatomic, retain) NSString *sessionId;
@@ -28,6 +30,7 @@
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, retain) IBOutlet LoginController *loginController;
+@property (nonatomic, retain) IBOutlet UINavigationController *rubriquesNavigation;
 
 + (Celaneo1AppDelegate*) getSingleton;
 

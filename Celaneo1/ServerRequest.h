@@ -64,15 +64,20 @@
 @property (nonatomic, retain) NSMutableArray *commentaires;
 
 - (id) initAuthentificateWithEmail:(NSString*)email withPassword:(NSString*)password;
-- (id) initListALaUne;
-- (id) initListPodcast;
+- (id) initArticle;
 
 - (id) initGetThematiques;
 - (id) initGetRubriques;
 - (id) initGetMagasins;
 - (id) initSendTokenId;
 
-- (void) enableCacheWithForced:(BOOL)cache;
+- (void) setParameter:(NSString*) name withValue:(NSString*)value;
+- (void) setParameter:(NSString*) name withIntValue:(int)value;
+
+// Calling this method turns on cache use.
+// If forced is true, only cached data is fetched, when false, data is stored in cache
+- (void) enableCacheWithForced:(BOOL)forced;
+- (void) resetCache;
 
 - (void) start;
 

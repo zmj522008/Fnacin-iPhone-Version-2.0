@@ -6,10 +6,10 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "RubriqueListController.h"
+#import "PrefereEditController.h"
 #import "ServerRequest.h"
 
-@implementation RubriqueListController
+@implementation PrefereEditController
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -66,14 +66,15 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellId = @"RubriqueCell";
+    static NSString *CellId = @"PrefereEditCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellId];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellId];
     }
     cell.textLabel.text = [[rubriques objectAtIndex:indexPath.row] name];
-    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    cell.editing = YES;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -87,6 +88,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView cellForRowAtIndexPath:indexPath].accessoryType ^= UITableViewCellAccessoryCheckmark;
 }
 
 @end

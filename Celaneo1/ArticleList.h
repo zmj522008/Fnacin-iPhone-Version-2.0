@@ -14,6 +14,15 @@
 @interface ArticleList : BaseController <UITableViewDataSource, UITableViewDelegate, ArticleCellDelegate> {
     NSArray* articles;
     
+    BOOL favoris;
+    BOOL prefere;
+    BOOL podcast;
+    int rubriqueId;
+    int thematiqueId;
+    int magasinId;
+    
+    BOOL resetCache;
+    
     IBOutlet UITableView* table;
 }
 @property (nonatomic, retain) NSArray *articles;
