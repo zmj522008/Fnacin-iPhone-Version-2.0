@@ -25,6 +25,7 @@
 @synthesize favoris;
 @synthesize commentaires;
 @synthesize nb_jaime;
+@synthesize nb_commentaires;
 @synthesize hash;
 
 + (Article*) articleWithId:(int)articleId
@@ -36,8 +37,8 @@
 
 - (void) dump
 {
-    NSLog(@"Article: %d\nthem %d %@\nrubri %d %@\ntype %d\ntitre %@\ndate %@\nurlMedia %@\naccroche %@\nurlImage %@\nfavoris %d\njaime %@\nhash %@",
-          articleId, thematiqueId, thematique, rubriqueId, rubrique, type, dateAffichee, urlMedia, accroche, contenu, urlImage, favoris, nb_jaime, hash);
+    NSLog(@"Article: %d\nthem %d '%@'\nrubri %d '%@'\ntype %d\ntitre '%@'\ndate %@\nurlMedia '%@'\naccroche '%@'\nurlImage '%@'\nfavoris %d\njaime %d\n commentaires %d\nhash '%@'",
+          articleId, thematiqueId, thematique, rubriqueId, rubrique, type, dateAffichee, urlMedia, accroche, contenu, urlImage, favoris, nb_jaime, nb_commentaires, hash);
     for(Commentaire* c in commentaires) {
         [c dump];
     }

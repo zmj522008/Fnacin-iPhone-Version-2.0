@@ -27,6 +27,7 @@
     BOOL favoris;
     
     NSArray* commentaires;
+    int nb_commentaires;
     int nb_jaime;
     NSString* hash;
 }
@@ -47,6 +48,7 @@
 @property (nonatomic, assign, getter=isFavoris) BOOL favoris;
 @property (nonatomic, retain) NSArray *commentaires;
 @property (nonatomic, assign) int nb_jaime;
+@property (nonatomic, assign) int nb_commentaires;
 @property (nonatomic, retain) NSString *hash;
 
 + (Article*) articleWithId:(int)id;

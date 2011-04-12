@@ -175,7 +175,7 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
     if (erreur == nil && fnac && [[Celaneo1AppDelegate getSingleton].sessionId length] > 0) {
-//        [self dump];
+        [self dump];
         [delegate serverRequest:self didSucceedWithObject:nil];
     } else {
         [delegate serverRequest:self didFailWithError:erreur];
@@ -226,9 +226,11 @@
         [self performSelector:sel];
     } else {
         SEL sel = NSSelectorFromString( [NSString stringWithFormat:@"handleElementEnd_%@:", elementName] );
+
         if( [self respondsToSelector:sel] )
         {
-            [self performSelector:sel withObject: currentTextString];
+            [self performSelector:sel withObject: [currentTextString stringByTrimmingCharactersInSet:
+                                                   [NSCharacterSet whitespaceAndNewlineCharacterSet]]];
         }
     }
 }
@@ -348,13 +350,14 @@
     if (self.article != nil) {
         [articles addObject:article];
 
+        if (NO) {
+        [articles addObject:article]; // DEBUG
         [articles addObject:article];
         [articles addObject:article];
         [articles addObject:article];
         [articles addObject:article];
         [articles addObject:article];
-        [articles addObject:article];
-
+        }
         self.article = nil;
     }
 }
@@ -421,6 +424,16 @@
         self.category.name = value;
         [rubriques addObject:category];
     }
+}
+
+- (void) handleElementEnd_nb_jaime:(NSString*)value
+{
+    self.article.nb_jaime = [value intValue];
+}
+
+- (void) handleElementEnd_nb_commentaires:(NSString*)value
+{
+    self.article.nb_commentaires = [value intValue];
 }
 
 - (void) handleElementEnd_titre:(NSString*)value

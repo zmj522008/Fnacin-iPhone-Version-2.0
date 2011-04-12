@@ -21,7 +21,10 @@
 @synthesize mediaButton;
 @synthesize jaimeIcon;
 @synthesize jaimeText;
+@synthesize reactionsIcon;
+@synthesize reactionsText;
 @synthesize favorisButton;
+@synthesize detailAccessory;
 @synthesize delegate;
 @synthesize imageLoadingQueue;
 @synthesize imageRequest;
@@ -47,6 +50,8 @@
     [mediaButton release];
     [jaimeIcon release];
     [jaimeText release];
+    [reactionsIcon release];
+    [reactionsText release];
     [favorisButton release];
     [imageLoadingQueue release];
     [imageRequest release];
@@ -81,8 +86,10 @@
     self.mediaButton = nil;
     self.jaimeIcon = nil;
     self.jaimeText = nil;
+    self.reactionsIcon = nil;
+    self.reactionsText = nil;
     self.favorisButton = nil;
-
+    self.detailAccessory = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -96,10 +103,30 @@
 
 - (void) update
 {
-    [self.rubrique setTitle:article.rubrique forState:UIControlStateNormal];
-    [self.thematique setTitle:article.thematique forState:UIControlStateNormal];
     self.titre.text = article.titre;
+    
+
+    int x = 5;
+    
+    CGSize rubriqueSize = [article.rubrique sizeWithFont:self.rubrique.titleLabel.font];
+    rubriqueSize.width += 5;
+    rubriqueSize.height = self.rubrique.frame.size.height;
+    self.rubrique.frame = CGRectMake(x, rubrique.frame.origin.y, rubriqueSize.width, rubriqueSize.height);
+    self.rubrique.bounds = CGRectMake(0, 0, rubriqueSize.width, rubriqueSize.height);
+    x += rubriqueSize.width;
+    [self.rubrique setTitle:article.rubrique forState:UIControlStateNormal];
+    
+
+    x += 5; // margin
+    
+    CGSize thematiqueSize = [article.thematique sizeWithFont:self.thematique.titleLabel.font];
+    thematiqueSize.width += 15;
+    thematiqueSize.height = self.thematique.frame.size.height;
+    self.thematique.frame = CGRectMake(x, thematique.frame.origin.y, thematiqueSize.width, thematiqueSize.height);
+    [self.thematique setTitle:article.thematique forState:UIControlStateNormal];
+
     self.date.text = article.dateAffichee;
+    
     [self.accroche loadHTMLString:article.accroche baseURL:nil];
     [self.accroche loadHTMLString:article.contenu baseURL:nil]; // DEBUG
 
@@ -110,7 +137,13 @@
     imageRequest.downloadCache = [ASIDownloadCache sharedCache];
     imageRequest.delegate = self;
     [imageRequest start];
-    jaimeText.text = [NSString stringWithFormat:@"j aime (%d)", article.articleId];
+    jaimeText.text = [NSString stringWithFormat:@"j aime (%d)", article.nb_jaime];
+    BOOL showCommentaires = article.nb_commentaires > 0;
+    reactionsText.hidden = !showCommentaires;
+    reactionsIcon.hidden = !showCommentaires;
+    if (showCommentaires) {
+        reactionsText.text = [NSString stringWithFormat:@"Réactions (%d)", article.nb_commentaires];
+    }
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request

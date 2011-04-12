@@ -33,7 +33,10 @@
     IBOutlet UIImageView* mediaButton;
     IBOutlet UIImageView* jaimeIcon;
     IBOutlet UILabel* jaimeText;
+    IBOutlet UIImageView* reactionsIcon;
+    IBOutlet UILabel* reactionsText;
     IBOutlet UIButton* favorisButton;
+    IBOutlet UIImageView* detailAccessory;
     
     id<ArticleCellDelegate> delegate;
     
@@ -50,7 +53,11 @@
 @property (nonatomic, retain) IBOutlet UIImageView *mediaButton;
 @property (nonatomic, retain) IBOutlet UIImageView *jaimeIcon;
 @property (nonatomic, retain) IBOutlet UILabel *jaimeText;
+@property (nonatomic, retain) IBOutlet UIImageView *reactionsIcon;
+@property (nonatomic, retain) IBOutlet UILabel *reactionsText;
 @property (nonatomic, retain) IBOutlet UIButton *favorisButton;
+@property (nonatomic, retain) IBOutlet UIImageView *detailAccessory;
+
 @property (nonatomic, assign) id<ArticleCellDelegate> delegate;
 @property (nonatomic, retain) NSOperationQueue *imageLoadingQueue;
 @property (nonatomic, retain) ASIHTTPRequest *imageRequest;
