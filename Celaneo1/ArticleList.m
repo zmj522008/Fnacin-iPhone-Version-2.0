@@ -18,6 +18,13 @@
 @implementation ArticleList
 @synthesize articles;
 @synthesize table;
+@synthesize favoris;
+@synthesize prefere;
+@synthesize podcast;
+@synthesize rubriqueId;
+@synthesize thematiqueId;
+@synthesize magasinId;
+@synthesize resetCache;
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -44,6 +51,7 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     int tag = self.navigationController.tabBarItem.tag | self.tabBarItem.tag;
     switch (tag) {
         case TAG_ITEM_A_LA_UNE:
@@ -163,6 +171,7 @@
                                                        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [errorView show];
     [errorView release];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (void) articlePlayMediaUrl:(NSString*) url withType:(int)type
 {

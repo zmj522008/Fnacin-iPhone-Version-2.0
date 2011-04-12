@@ -8,6 +8,9 @@
 
 #import "RubriqueListController.h"
 #import "ServerRequest.h"
+#import "ArticleList.h"
+
+#import "Celaneo1AppDelegate.h"
 
 @implementation RubriqueListController
 
@@ -87,6 +90,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    ArticleList* controller = [[ArticleList alloc] initWithNibName:@"ArticleList" bundle:nil];
+    controller.rubriqueId = [[rubriques objectAtIndex:indexPath.row] categoryId];
+    // [Celaneo1AppDelegate getSingleton].rubriquesNavigation
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 @end

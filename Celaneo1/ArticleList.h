@@ -27,5 +27,12 @@
 }
 @property (nonatomic, retain) NSArray *articles;
 @property (nonatomic, retain) IBOutlet UITableView *table;
+@property (nonatomic, assign, getter=isFavoris) BOOL favoris;
+@property (nonatomic, assign, getter=isPrefere) BOOL prefere;
+@property (nonatomic, assign, getter=isPodcast) BOOL podcast;
+@property (nonatomic, assign) int rubriqueId;
+@property (nonatomic, assign) int thematiqueId;
+@property (nonatomic, assign) int magasinId;
+@property (nonatomic, assign, getter=isResetCache) BOOL resetCache;
 
 @end

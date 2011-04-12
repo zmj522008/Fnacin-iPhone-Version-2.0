@@ -125,7 +125,7 @@
     if (responseData == nil) {
         [self requestFailed:request];
     } else {
-        NSLog(@"%@\n%@", request.url, request.responseString);
+//        NSLog(@"%@\n%@", request.url, request.responseString);
         
         NSXMLParser* parser = [[NSXMLParser alloc] initWithData:responseData];
         [parser setShouldProcessNamespaces:NO];
@@ -143,6 +143,7 @@
     if (error.domain == NetworkRequestErrorDomain && error.code == ASIRequestCancelledErrorType) {
         NSLog(@"%@ cancelled", self);
     } else {
+        NSLog(@"serverRequest error :%@", error);
         [delegate serverRequest:self didFailWithError:error];
     }
 }
@@ -162,7 +163,7 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
     if (erreur == nil && fnac && [[Celaneo1AppDelegate getSingleton].sessionId length] > 0) {
-        [self dump];
+//        [self dump];
         [delegate serverRequest:self didSucceedWithObject:nil];
     } else {
         [delegate serverRequest:self didFailWithError:erreur];

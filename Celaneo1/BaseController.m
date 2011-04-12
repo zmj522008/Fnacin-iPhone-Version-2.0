@@ -22,13 +22,16 @@
 @synthesize imageLoadingQueue;
 
 #pragma mark UIViewController
+
 - (void) viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self doOfflineRequest];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [imageLoadingQueue cancelAllOperations];
 }
 
@@ -125,10 +128,17 @@
 
 #pragma mark life cycle
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
 - (void)viewDidLoad {   
     [super viewDidLoad];
     
-    imageLoadingQueue = [[NSOperationQueue alloc] init];
+    imageLoadingQueue = [[NSOperationQueue alloc] init];    
+    self.navigationItem.titleView = [[UIView alloc] init];
+    self.navigationItem.hidesBackButton = NO;
 }
 
 - (void) dealloc
@@ -138,5 +148,14 @@
     [offlineRequest release];
     [onlineRequest release];
     [imageLoadingQueue release];
+}
+@end
+
+
+@implementation UINavigationBar (UINavigationBarCategory)
+- (void)drawRect:(CGRect)rect {
+    UIImage *img	= [UIImage imageNamed: @"nav.png"];
+    [img drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    self.tintColor = [UIColor colorWithRed:1.0 green:168/256.0 blue:0.1 alpha:1.0];
 }
 @end
