@@ -125,7 +125,7 @@
 
 - (IBAction) mediaClick
 {
-    [delegate articlePlayMediaUrl:article.urlMedia withType:article.type];
+    [delegate article:article playMediaUrl:article.urlMedia withType:article.type];
 }
 
 - (IBAction) contentClick

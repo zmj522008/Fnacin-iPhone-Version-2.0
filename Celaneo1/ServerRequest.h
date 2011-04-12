@@ -36,6 +36,8 @@
     BOOL fnac;
     
     int currentId;
+    int limitStart;
+    int limitEnd;
     
     NSMutableArray* articles;
     NSMutableArray* thematiques;
@@ -62,6 +64,8 @@
 @property (nonatomic, retain) NSString *erreurDescription;
 @property (nonatomic, retain) Commentaire *commentaire;
 @property (nonatomic, retain) NSMutableArray *commentaires;
+@property (nonatomic, assign) int limitStart;
+@property (nonatomic, assign) int limitEnd;
 
 - (id) initAuthentificateWithEmail:(NSString*)email withPassword:(NSString*)password;
 - (id) initArticle;
@@ -70,6 +74,7 @@
 - (id) initGetRubriques;
 - (id) initGetMagasins;
 - (id) initSendTokenId;
+- (id) initSetFavoris:(BOOL)favoris withArticleId:(int)articleId;
 
 - (void) setParameter:(NSString*) name withValue:(NSString*)value;
 - (void) setParameter:(NSString*) name withIntValue:(int)value;

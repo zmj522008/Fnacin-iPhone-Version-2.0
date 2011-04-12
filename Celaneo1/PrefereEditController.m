@@ -10,6 +10,9 @@
 #import "ServerRequest.h"
 
 @implementation PrefereEditController
+@synthesize rubriques;
+@synthesize selectedRubriques;
+@synthesize table;
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -38,13 +41,15 @@
 {
     [super viewDidUnload];
 
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.table = nil;
 }
 
 
 - (void)dealloc
 {
+    [rubriques release];
+    [selectedRubriques release];
+    [table release];
     [super dealloc];
 }
 
@@ -52,7 +57,7 @@
 
 - (void) updateList:(ServerRequest*)request
 {
-    rubriques = request.rubriques;
+    self.rubriques = request.rubriques;
     
     [table reloadData];
 }

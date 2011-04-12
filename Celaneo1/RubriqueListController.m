@@ -76,7 +76,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellId];
     }
     cell.textLabel.text = [[rubriques objectAtIndex:indexPath.row] name];
-    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow.png"]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -92,7 +92,6 @@
 {
     ArticleList* controller = [[ArticleList alloc] initWithNibName:@"ArticleList" bundle:nil];
     controller.rubriqueId = [[rubriques objectAtIndex:indexPath.row] categoryId];
-    // [Celaneo1AppDelegate getSingleton].rubriquesNavigation
     [self.navigationController pushViewController:controller animated:YES];
 }
 

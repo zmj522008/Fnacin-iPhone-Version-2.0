@@ -12,7 +12,7 @@
 #import "ArticleCellController.h"
 
 @interface ArticleList : BaseController <UITableViewDataSource, UITableViewDelegate, ArticleCellDelegate> {
-    NSArray* articles;
+    NSMutableArray* articles;
     
     BOOL favoris;
     BOOL prefere;
@@ -23,9 +23,11 @@
     
     BOOL resetCache;
     
+    BOOL hasMore;
+    
     IBOutlet UITableView* table;
 }
-@property (nonatomic, retain) NSArray *articles;
+@property (nonatomic, retain) NSMutableArray *articles;
 @property (nonatomic, retain) IBOutlet UITableView *table;
 @property (nonatomic, assign, getter=isFavoris) BOOL favoris;
 @property (nonatomic, assign, getter=isPrefere) BOOL prefere;

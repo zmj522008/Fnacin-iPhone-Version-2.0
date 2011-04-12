@@ -28,6 +28,8 @@
 @synthesize erreurDescription;
 @synthesize commentaire;
 @synthesize commentaires;
+@synthesize limitStart;
+@synthesize limitEnd;
 
 #pragma mark Request constructors
 - (id) initWithMethod:(NSString*)method
@@ -40,6 +42,8 @@
         if (sessionId != nil) {
             [asiRequest setPostValue:sessionId forKey:@"session_id"];
         }
+        self.limitEnd = -1;
+        self.limitStart = -1;
     }
     return self;
 }
@@ -88,6 +92,14 @@
     return self;  
 }
 
+- (id) initSetFavoris:(BOOL)favoris withArticleId:(int)articleId {
+    [self initWithMethod:@"setfavoris"];
+    if (self != nil) {
+        [asiRequest setPostValue:favoris ? @"1" : @"0" forKey:@"type"];
+        [self setParameter:@"article_id" withIntValue:articleId];
+    }
+    return self;
+}
 
 - (void) setParameter:(NSString*) name withIntValue:(int)value
 {
@@ -482,6 +494,13 @@
 #pragma mark lifecycle
 - (void) start
 {
+    if (limitStart >= 0) {
+        [self setParameter:@"limit_start" withIntValue:limitStart];
+    }
+    if (limitEnd >= 0) {
+        [self setParameter:@"limit_end" withIntValue:limitEnd];
+    }
+
     [asiRequest startAsynchronous];
 }
 

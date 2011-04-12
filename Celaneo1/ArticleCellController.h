@@ -14,7 +14,7 @@
 @protocol ArticleCellDelegate <NSObject>
 
 - (void) articleShowContent:(Article*) article;
-- (void) articlePlayMediaUrl:(NSString*) url withType:(int)type;
+- (void) article:(Article*) article playMediaUrl:(NSString*) url withType:(int)type;
 - (void) articleShowRubrique:(int) rubriqueId;
 - (void) articleShowThematique:(int) thematiqueId;
 - (void) article:(Article*) article makeFavoris:(BOOL) favoris;

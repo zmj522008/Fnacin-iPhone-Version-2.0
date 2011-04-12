@@ -11,8 +11,12 @@
 
 @interface PrefereEditController : BaseController <UITableViewDataSource, UITableViewDelegate> {
     NSArray* rubriques;
+    NSMutableIndexSet* selectedRubriques;
     
     IBOutlet UITableView* table;
 }
+@property (nonatomic, retain) NSArray *rubriques;
+@property (nonatomic, retain) NSMutableIndexSet *selectedRubriques;
+@property (nonatomic, retain) IBOutlet UITableView *table;
 
 @end

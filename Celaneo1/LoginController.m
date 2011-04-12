@@ -62,7 +62,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [email becomeFirstResponder];
+    if (email.text.length == 0) {
+        [email becomeFirstResponder];
+    } else {
+        [password becomeFirstResponder];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
