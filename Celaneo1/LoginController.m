@@ -60,6 +60,11 @@
     self.password = nil;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [email becomeFirstResponder];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
