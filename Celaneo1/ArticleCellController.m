@@ -130,13 +130,9 @@
     [self.accroche loadHTMLString:article.accroche baseURL:nil];
     [self.accroche loadHTMLString:article.contenu baseURL:nil]; // DEBUG
 
-    NSString* urlString = [article.urlImage stringByAppendingFormat:@"&max_width=%d&max_height=%d", 
-                           self.vignette.bounds.size.width, self.vignette.bounds.size.height];
-    urlString = @"http://i.imgur.com/VUCyt.jpg"; // DEBUG
-    imageRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlString]];
-    imageRequest.downloadCache = [ASIDownloadCache sharedCache];
-    imageRequest.delegate = self;
-    [imageRequest start];
+    imageRequest = [article startImageRequestWithWidth:vignette.bounds.size.width 
+                                            withHeight:vignette.bounds.size.height toDelegate:self];
+    
     jaimeText.text = [NSString stringWithFormat:@"j aime (%d)", article.nb_jaime];
     BOOL showCommentaires = article.nb_commentaires > 0;
     reactionsText.hidden = !showCommentaires;
@@ -150,7 +146,7 @@
 {
     if (request == imageRequest) {
         self.vignette.image = [UIImage imageWithData:request.responseData];
-        imageRequest = nil;
+        self.imageRequest = nil;
     }
 }
 

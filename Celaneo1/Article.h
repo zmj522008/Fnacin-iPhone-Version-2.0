@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ModelObject.h"
+#import "ASIHTTPRequest.h"
 
 @interface Article : NSObject <ModelObject> {
     int articleId;
@@ -52,5 +53,7 @@
 @property (nonatomic, retain) NSString *hash;
 
 + (Article*) articleWithId:(int)id;
+
+- (ASIHTTPRequest*)startImageRequestWithWidth:(int) width withHeight:(int)height toDelegate:(id<ASIHTTPRequestDelegate>) delegate;
 
 @end

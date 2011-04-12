@@ -9,15 +9,27 @@
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MPMoviePlayerController.h>
 #import "BaseController.h"
+#import "ASIHTTPRequest.h"
+#import "Article.h"
 
-@interface MediaPlayer : BaseController {
-    NSURL* movieUrl;
-    NSString* movieTitle;
+@interface MediaPlayer : BaseController <ASIHTTPRequestDelegate> {
+    Article* article;
+    
     MPMoviePlayerController* moviePlayer;
+    
+    IBOutlet UILabel* movieTitle;
+    IBOutlet UIView* playerParentView;
+    IBOutlet UIImageView* image;
+    
+    ASIHTTPRequest* imageRequest;
 }
-@property (nonatomic, retain) NSURL *movieUrl;
-@property (nonatomic, retain) NSString *movieTitle;
+@property (nonatomic, retain) Article* article;
 @property (nonatomic, retain) MPMoviePlayerController *moviePlayer;
 
+@property (nonatomic, retain) IBOutlet UILabel* movieTitle;
+@property (nonatomic, retain) IBOutlet UIView *playerParentView;
+@property (nonatomic, retain) IBOutlet UIImageView *image;
+
+@property (nonatomic, retain) ASIHTTPRequest* imageRequest;
 
 @end

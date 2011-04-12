@@ -250,8 +250,7 @@
         url = @"http://members.dcsi.net.au/stefangr/mp3/Mr.%20Oizo%20-%20Flat%20Beat.mp3";
     }
     MediaPlayer* mediaPlayer = [[MediaPlayer alloc] initWithNibName:@"MediaPlayer" bundle:nil];
-    mediaPlayer.movieUrl = [NSURL URLWithString:url];
-    mediaPlayer.movieTitle = article.titre;
+    mediaPlayer.article = article;
     [self.navigationController pushViewController:mediaPlayer animated:YES];
 }
 

@@ -8,6 +8,7 @@
 
 #import "Article.h"
 #import "Commentaire.h"
+#import "ASIDownloadCache.h"
 
 @implementation Article
 @synthesize articleId;
@@ -58,6 +59,21 @@
     [hash release];
     
     [super dealloc];
+}
+
+- (ASIHTTPRequest *)startImageRequestWithWidth:(int)width withHeight:(int)height toDelegate:(id<ASIHTTPRequestDelegate>)delegate
+{
+    ASIHTTPRequest* imageRequest;
+    
+    NSString* urlString = [self.urlImage stringByAppendingFormat:@"&max_width=%d&max_height=%d", 
+                           width, height];
+    urlString = @"http://i.imgur.com/VUCyt.jpg"; // DEBUG
+    imageRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlString]];
+    imageRequest.downloadCache = [ASIDownloadCache sharedCache];
+    imageRequest.delegate = self;
+    [imageRequest start];
+    
+    return imageRequest;
 }
 
 @end

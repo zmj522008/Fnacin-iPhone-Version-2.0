@@ -11,9 +11,12 @@
 
 @implementation MediaPlayer
 
-@synthesize movieUrl;
-@synthesize movieTitle;
+@synthesize article;
 @synthesize moviePlayer;
+@synthesize playerParentView;
+@synthesize image;
+@synthesize movieTitle;
+@synthesize imageRequest;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,9 +29,13 @@
 
 - (void)dealloc
 {
-    [movieUrl release];
-    [movieTitle release];
+    [article release];
     [moviePlayer release];
+    [playerParentView release];
+    [image release];
+    [movieTitle release];
+    [imageRequest release];
+    
     [super dealloc];
 }
 
@@ -51,12 +58,14 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-
+    self.playerParentView = nil;
+    self.image = nil;
+    self.movieTitle = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:movieUrl];
+    self.moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL URLWithString:article.urlMedia]];
     
     moviePlayer.scalingMode = MPMovieScalingModeAspectFit;
     
@@ -67,17 +76,31 @@
      name: MPMoviePlayerPlaybackDidFinishNotification
      object: moviePlayer];
     
-    self.view = moviePlayer.view;
-//    [self.view addSubview:moviePlayer.view];
+    [self.playerParentView addSubview:moviePlayer.view];
+    moviePlayer.view.frame = self.playerParentView.bounds;
 
     [moviePlayer play];
     
-//    self.tabBarItem.title = movieTitle;
+    movieTitle.text = article.titre;
+
+    self.imageRequest = [article startImageRequestWithWidth:image.bounds.size.width 
+                                            withHeight:image.bounds.size.height toDelegate:self];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void) viewWillDisappear:(BOOL)animated
 {
+    [imageRequest cancel];
+    self.imageRequest = nil;
+    
     [moviePlayer stop];
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+    if (request == imageRequest) {
+        self.image.image = [UIImage imageWithData:request.responseData];
+        self.imageRequest = nil;
+    }
 }
 
 // When the movie is done, release the controller.
