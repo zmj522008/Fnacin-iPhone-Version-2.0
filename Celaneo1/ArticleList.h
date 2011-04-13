@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "BaseController.h"
 #import "ServerRequest.h"
-#import "ArticleCellController.h"
+#import "ArticleCell.h"
 
-@interface ArticleList : BaseController <UITableViewDataSource, UITableViewDelegate, ArticleCellDelegate> {
+@interface ArticleList : BaseController <UITableViewDataSource, UITableViewDelegate> {
     NSMutableArray* articles;
     
     BOOL favoris;
@@ -36,5 +36,11 @@
 @property (nonatomic, assign) int thematiqueId;
 @property (nonatomic, assign) int magasinId;
 @property (nonatomic, assign, getter=isResetCache) BOOL resetCache;
+
+- (IBAction) cellMediaClick:(id)sender;
+- (IBAction) cellContentClick:(id)sender;
+- (IBAction) cellRubriqueClick:(id)sender;
+- (IBAction) cellThematiqueClick:(id)sender;
+- (IBAction) cellFavorisClick:(id)sender;
 
 @end

@@ -61,7 +61,7 @@
     [super dealloc];
 }
 
-- (ASIHTTPRequest *)startImageRequestWithWidth:(int)width withHeight:(int)height toDelegate:(id<ASIHTTPRequestDelegate>)delegate
+- (ASIHTTPRequest *)createImageRequestWithWidth:(int)width withHeight:(int)height toDelegate:(id<ASIHTTPRequestDelegate>)delegate
 {
     ASIHTTPRequest* imageRequest;
     
@@ -71,7 +71,6 @@
     imageRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlString]];
     imageRequest.downloadCache = [ASIDownloadCache sharedCache];
     imageRequest.delegate = delegate;
-    [imageRequest start];
     
     return imageRequest;
 }

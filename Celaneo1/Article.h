@@ -58,6 +58,6 @@
 
 + (Article*) articleWithId:(int)id;
 
-- (ASIHTTPRequest*)startImageRequestWithWidth:(int) width withHeight:(int)height toDelegate:(id<ASIHTTPRequestDelegate>) delegate;
+- (ASIHTTPRequest*)createImageRequestWithWidth:(int) width withHeight:(int)height toDelegate:(id<ASIHTTPRequestDelegate>) delegate;
 
 @end

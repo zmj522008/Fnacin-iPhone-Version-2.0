@@ -161,26 +161,34 @@
 }
 #pragma mark table view datasource
 
+- (ArticleCell *)loadCellFromNib:(NSString *)nibName
+{
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:nibName 
+                                                 owner:self options:nil];
+    ArticleCell * cell = nil;
+    for( NSObject *obj in nib )
+    {
+        if( [obj isKindOfClass:[UITableViewCell class]] )
+        {
+            cell = (ArticleCell*)obj;
+            break;
+        }
+    }
+    return cell;
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         static NSString *CellId = @"ArticleCell";
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellId];
-        ArticleCellController* cellController;
+        ArticleCell *cell = (ArticleCell*) [tableView dequeueReusableCellWithIdentifier:CellId];
         
         if (cell == nil) {
-            cellController = (ArticleCellController*) [[ArticleCellController alloc] initWithNibName:@"ArticleCell" bundle:nil];
-            cell = (UITableViewCell*) cellController.view;
+            cell = [self loadCellFromNib:@"ArticleCell"];
             NSAssert2([CellId compare:cell.reuseIdentifier] == 0, @"Cell has invalid identifier, actual: %@, expected: %@", cell.reuseIdentifier, CellId);
-        } else {
-            cellController = [[ArticleCellController alloc] init];
-            cellController.view = cell;
         }
-        cellController.article = [articles objectAtIndex:indexPath.row];
-        cellController.delegate = self;
-        cellController.imageLoadingQueue = self.imageLoadingQueue;
-        [cellController update];
+        [cell updateWithArticle:[articles objectAtIndex:indexPath.row] usingImageLoadingQueue:self.imageLoadingQueue];
         return cell;
     } else {
         static NSString *CellId = @"MoreCell";
@@ -231,31 +239,42 @@
     }
 }
 
-#pragma mark article cell delegate
-- (void) articleShowContent:(Article*) article
+#pragma mark article cell actions
+
+- (ArticleCell*) articleCell:(id)sender
 {
-    UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Article" 
-                                                        message:[NSString stringWithFormat:@"show article %d", article.articleId] 
-                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [errorView show];
-    [errorView release];
-    if (self.navigationController.topViewController == self) {
-        [self.navigationController popViewControllerAnimated:YES];
+    UIView* v = sender;
+    while (v != nil) {
+        v = v.superview;
+        if ([v isKindOfClass:[ArticleCell class]]) {
+            return (ArticleCell*) v;
+        }
     }
+    return nil;
 }
 
-- (void) article:(Article*) article playMediaUrl:(NSString*) url withType:(int)type
+- (Article*) articleFromSender:(id)sender
+{
+    return [articles objectAtIndex:[table indexPathForCell:[self articleCell:sender]].row];
+}
+
+- (IBAction) cellMediaClick:(id)sender
 {
     MediaPlayer* mediaPlayer = [[MediaPlayer alloc] initWithNibName:@"MediaPlayer" bundle:nil];
-    mediaPlayer.article = article;
-    [self.navigationController pushViewController:mediaPlayer animated:YES];
-}
+    mediaPlayer.article = [self articleFromSender:sender];
 
-- (void) articleShowRubrique:(int) rId
+    [self.navigationController pushViewController:mediaPlayer animated:YES];   
+}
+- (IBAction) cellContentClick:(id)sender
+{
+    
+}
+- (IBAction) cellRubriqueClick:(id)sender
 {
     self.tabBarController.selectedIndex = 3;
     UINavigationController* rubriqueNavigationController = (UINavigationController*) self.tabBarController.selectedViewController;
     ArticleList* articleListController;
+    int rId = [self articleFromSender:sender].rubriqueId;
     if ([rubriqueNavigationController.topViewController isKindOfClass:[ArticleList class]]) {
         articleListController = (ArticleList*) rubriqueNavigationController.topViewController;
         articleListController.rubriqueId = rId;
@@ -266,24 +285,17 @@
         [rubriqueNavigationController pushViewController:articleListController animated:YES];
     }
 }
-
-- (void) articleShowThematique:(int) tId
+- (IBAction) cellThematiqueClick:(id)sender
 {
     ArticleList* articleListController = [[ArticleList alloc] initWithNibName:@"ArticleList" bundle:nil];
-    articleListController.thematiqueId = tId;
+    articleListController.thematiqueId = [self articleFromSender:sender].thematiqueId;
     articleListController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:articleListController animated:YES];
+   
 }
-
-- (void) article:(Article*) article makeFavoris:(BOOL) on
+- (IBAction) cellFavorisClick:(id)sender
 {
-    article.favoris = on;
     
-    UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Article" 
-                                                        message:[NSString stringWithFormat:@"article %d favoris: %d", article.articleId, favoris]
-                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [errorView show];
-    [errorView release];
 }
 
 @end

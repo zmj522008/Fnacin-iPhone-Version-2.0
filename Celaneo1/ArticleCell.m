@@ -6,12 +6,11 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "ArticleCellController.h"
+#import "ArticleCell.h"
 #import "ASIDownloadCache.h"
 
-@implementation ArticleCellController
+@implementation ArticleCell
 
-@synthesize article;
 @synthesize rubrique;
 @synthesize thematique;
 @synthesize titre;
@@ -25,22 +24,10 @@
 @synthesize reactionsText;
 @synthesize favorisButton;
 @synthesize detailAccessory;
-@synthesize delegate;
-@synthesize imageLoadingQueue;
 @synthesize imageRequest;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)dealloc
 {
-    [article release];
     [rubrique release];
     [thematique release];
     [titre release];
@@ -53,59 +40,12 @@
     [reactionsIcon release];
     [reactionsText release];
     [favorisButton release];
-    [imageLoadingQueue release];
     [imageRequest cancel];
     [imageRequest release];
-    delegate = nil;
     [super dealloc];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
-
-- (void)viewDidUnload
-{   
-    self.rubrique = nil;
-    self.thematique = nil;
-    self.titre = nil;
-    self.date = nil;
-    self.accroche = nil;
-    self.vignette = nil;
-    self.mediaButton = nil;
-    self.jaimeIcon = nil;
-    self.jaimeText = nil;
-    self.reactionsIcon = nil;
-    self.reactionsText = nil;
-    self.favorisButton = nil;
-    self.detailAccessory = nil;
-    
-    [imageRequest cancel];
-    self.imageRequest = nil;
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void) update
+- (void) updateWithArticle:(Article*) article usingImageLoadingQueue:(NSOperationQueue*)imageLoadingQueue
 {
     self.titre.text = article.titre;
     
@@ -134,8 +74,10 @@
     [self.accroche loadHTMLString:article.accroche baseURL:nil];
     [self.accroche loadHTMLString:article.contenu baseURL:nil]; // DEBUG
 
-    self.imageRequest = [article startImageRequestWithWidth:vignette.bounds.size.width 
-                                            withHeight:vignette.bounds.size.height toDelegate:self];
+    self.imageRequest = [article createImageRequestWithWidth:vignette.bounds.size.width 
+                                                 withHeight:vignette.bounds.size.height 
+                                                 toDelegate:self];
+    [imageLoadingQueue addOperation:self.imageRequest];
     
     jaimeText.text = [NSString stringWithFormat:@"j aime (%d)", article.nb_jaime];
     BOOL showCommentaires = article.nb_commentaires > 0;
@@ -152,33 +94,6 @@
         self.vignette.image = [UIImage imageWithData:request.responseData];
         self.imageRequest = nil;
     }
-}
-
-#pragma mark actions
-
-- (IBAction) mediaClick
-{
-    [delegate article:article playMediaUrl:article.urlMedia withType:article.type];
-}
-
-- (IBAction) contentClick
-{
-    [delegate articleShowContent:article];
-}
-
-- (IBAction) rubriqueClick
-{
-    [delegate articleShowRubrique:article.rubriqueId];
-}
-
-- (IBAction) thematiqueClick
-{
-    [delegate articleShowThematique:article.thematiqueId];
-}
-
-- (IBAction) favorisClick
-{
-    [delegate article:article makeFavoris:!article.favoris];
 }
 
 @end

@@ -88,8 +88,9 @@
     movieTitle.text = article.titre;
     
     if (article.type == ARTICLE_TYPE_AUDIO) {
-        self.imageRequest = [article startImageRequestWithWidth:image.bounds.size.width 
+        self.imageRequest = [article createImageRequestWithWidth:image.bounds.size.width 
                                                      withHeight:image.bounds.size.height toDelegate:self];
+        [self.imageRequest start];
     }
 }
 
