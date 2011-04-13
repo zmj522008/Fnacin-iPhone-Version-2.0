@@ -9,6 +9,7 @@
 #import "ArticleList.h"
 #import "Celaneo1AppDelegate.h"
 #import "MediaPlayer.h"
+#import "PrefereEditController.h"
 
 #define TAG_ITEM_A_LA_UNE 101
 #define TAG_ITEM_PREFERE 102
@@ -59,6 +60,9 @@
             break;
         case TAG_ITEM_PREFERE:
             prefere = YES;
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                                      initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
+                                                      target:self action:@selector(editPrefere)];
             break;
         case TAG_ITEM_PODCAST:
             podcast = YES;
@@ -67,7 +71,10 @@
             break;
         case TAG_ITEM_DOSSIERS:
             favoris = YES;
-            break;
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] 
+                                                      initWithBarButtonSystemItem:UIBarButtonSystemItemTrash 
+                                                      target:self action:@selector(showDelete)]; 
+             break;
         default:
             break;
     }
@@ -92,22 +99,23 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    if (favoris) {
-        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] 
-                                                    initWithBarButtonSystemItem:UIBarButtonSystemItemTrash 
-                                                        target:self action:@selector(showDelete)]];                                                                                                                                                
-    }
 }
 
+#pragma  mark tab bar button actions
 - (void) showDelete
 {
     [table setEditing:!table.editing animated:YES];
 }
 
+- (void) editPrefere
+{
+    [self.navigationController pushViewController:
+     [[PrefereEditController alloc] initWithNibName:@"PrefereEdit" bundle:nil] animated:YES];    
+}
+
 #pragma mark BaseController overrides
 
-- (void) updateList:(ServerRequest*)request
+- (void) updateList:(ServerRequest*)request onlineContent:(BOOL)onlineContent
 {
     [articles removeObjectsInRange:NSMakeRange(request.limitStart, articles.count - request.limitStart)];
     if (request.articles.count) {
@@ -116,6 +124,13 @@
     hasMore = [articles count] < request.articleCount;
 //    hasMore = YES; // DEBUG
     [table reloadData];
+    
+    if (onlineContent) {
+        if (prefere && articles.count == 0 && ![Celaneo1AppDelegate getSingleton].prefereEditDone) {
+            [self.navigationController pushViewController:
+                [[PrefereEditController alloc] initWithNibName:@"PrefereEdit" bundle:nil] animated:NO];
+        }
+    }
 }
 
 - (ServerRequest*) doCreateListRequestWithStartingIndex:(int)startIndex

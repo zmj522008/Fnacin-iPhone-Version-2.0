@@ -23,5 +23,5 @@
 - (void) refresh;
 
 - (ServerRequest*) createListRequest;
-- (void) updateList:(ServerRequest*)request;
+- (void) updateList:(ServerRequest*)request onlineContent:(BOOL)onlineContent;
 @end

@@ -71,6 +71,11 @@
 
 - (void) serverRequest:(ServerRequest*)request didFailWithError:(NSError*)error
 {
+//    if (request == onlineRequest) // DEBUG!
+//    {
+//        [self updateList:request onlineContent:YES];
+//        return;
+//    }
     if (request == offlineRequest) {
         [self doOnlineRequest:YES];
         return;
@@ -105,7 +110,7 @@
 
 - (void) serverRequest:(ServerRequest*)request didSucceedWithObject:(id)result
 {
-    [self updateList:request];
+    [self updateList:request onlineContent:request == onlineRequest];
     if (request == offlineRequest) {
         [self doOnlineRequest:NO];
         return;
@@ -117,8 +122,9 @@
 
 #pragma mark BaseController overrides
 
-- (void) updateList:(ServerRequest*)request;
+- (void) updateList:(ServerRequest*)request onlineContent:(BOOL)onlineContent;
 {
+    
 }
 
 - (ServerRequest*) createListRequest

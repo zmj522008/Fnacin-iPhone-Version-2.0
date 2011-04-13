@@ -13,6 +13,10 @@
 #import "Category.h"
 #import "Commentaire.h"
 
+#define TYPE_THEMATIQUE 0
+#define TYPE_RUBRIQUE 1
+#define TYPE_MAGASIN 2
+
 @class ServerRequest;
 
 @protocol ServerRequestDelegate <NSObject>
@@ -77,6 +81,7 @@
 - (id) initGetMagasins;
 - (id) initSendTokenId;
 - (id) initSetFavoris:(BOOL)favoris withArticleId:(int)articleId;
+- (id) initSetPreferences:(NSIndexSet*)indexSet forType:(int)type;
 
 - (void) setParameter:(NSString*) name withValue:(NSString*)value;
 - (void) setParameter:(NSString*) name withIntValue:(int)value;

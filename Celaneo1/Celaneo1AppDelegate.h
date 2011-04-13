@@ -17,7 +17,8 @@
     int articlesPerPage;
     
     BOOL offline;
-
+    BOOL prefereEditDone;
+    
     IBOutlet UINavigationController* rubriquesNavigation;
 }
 
@@ -26,6 +27,7 @@
 @property (nonatomic, assign) int articlesPerPage;
 
 @property (nonatomic, assign, getter=isOffline) BOOL offline;
+@property (nonatomic, assign, getter=isPrefereEditDone) BOOL prefereEditDone;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;

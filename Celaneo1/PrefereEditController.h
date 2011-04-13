@@ -14,9 +14,11 @@
     NSMutableIndexSet* selectedRubriques;
     
     IBOutlet UITableView* table;
+    ServerRequest* prefereUpdateRequest;
 }
 @property (nonatomic, retain) NSArray *rubriques;
 @property (nonatomic, retain) NSMutableIndexSet *selectedRubriques;
 @property (nonatomic, retain) IBOutlet UITableView *table;
+@property (nonatomic, retain) ServerRequest *prefereUpdateRequest;
 
 @end

@@ -20,6 +20,7 @@
 @synthesize articlesPerPage;
 
 @synthesize offline;
+@synthesize prefereEditDone;
 
 @synthesize rubriquesNavigation;
 

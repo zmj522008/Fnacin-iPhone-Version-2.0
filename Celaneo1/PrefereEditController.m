@@ -9,11 +9,13 @@
 #import "PrefereEditController.h"
 #import "ServerRequest.h"
 #import "ArticleList.h"
+#import "Celaneo1AppDelegate.h"
 
 @implementation PrefereEditController
 @synthesize rubriques;
 @synthesize selectedRubriques;
 @synthesize table;
+@synthesize prefereUpdateRequest;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -35,6 +37,8 @@
     [super viewDidUnload];
 
     self.table = nil;
+    [prefereUpdateRequest cancel];
+    self.prefereUpdateRequest = nil;
 }
 
 - (void) viewDidLoad
@@ -43,6 +47,7 @@
     
     selectedRubriques = [[NSMutableIndexSet alloc] init];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButton)];
+    self.navigationItem.hidesBackButton = YES;
 }
 
 - (void)dealloc
@@ -50,13 +55,17 @@
     [rubriques release];
     [selectedRubriques release];
     [table release];
+    [prefereUpdateRequest cancel];
+    [prefereUpdateRequest release];
     [super dealloc];
 }
 
 #pragma mark BaseController overrides
 
-- (void) updateList:(ServerRequest*)request
+- (void) updateList:(ServerRequest*)request onlineContent:(BOOL)onlineContent
 {
+    [super updateList:request onlineContent:onlineContent];
+    
     self.rubriques = request.rubriques;
     
     [table reloadData];
@@ -70,9 +79,32 @@
 #pragma mark navigation actions
 - (void) doneButton
 {
-    // TODO send preferences and wait!
-    
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([selectedRubriques count] == 0) {
+        UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Préféré" 
+                                                            message:@"Veuillez sélectionner au moins une rubrique"
+                                                           delegate:nil 
+                                                  cancelButtonTitle:@"OK" 
+                                                  otherButtonTitles:nil];
+        [errorView show];
+        [errorView release];
+    } else {
+        [Celaneo1AppDelegate getSingleton].prefereEditDone = YES;
+
+        ServerRequest* serverRequest = [[ServerRequest alloc] initSetPreferences:selectedRubriques forType:TYPE_RUBRIQUE];
+        serverRequest.delegate = self;
+        self.prefereUpdateRequest = serverRequest;
+        [serverRequest start];
+    }
+}
+
+- (void) serverRequest:(ServerRequest*)request didSucceedWithObject:(id)result
+{
+    if (request == prefereUpdateRequest) {
+        [self.navigationController popViewControllerAnimated:YES];
+        self.prefereUpdateRequest = nil;
+    } else {
+        [super serverRequest:request didSucceedWithObject:result];
+    }
 }
 
 #pragma mark table view datasource
@@ -88,11 +120,13 @@
     Category* rubrique  = [rubriques objectAtIndex:indexPath.row];
 
     cell.textLabel.text = rubrique.name;
-    cell.accessoryView = [[UIImageView alloc] initWithImage:
+    UIView* checkView = [[UIImageView alloc] initWithImage:
                           [UIImage imageNamed:
                            [selectedRubriques containsIndex:rubrique.categoryId] 
                                     ? @"checkbox_checked.png"
                                              : @"checkbox_unchecked.png"]];
+    cell.accessoryView = checkView;
+    [checkView release];
     cell.editing = YES;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

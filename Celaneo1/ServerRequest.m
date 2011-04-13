@@ -102,6 +102,27 @@
     return self;
 }
 
+- (id) initSetPreferences:(NSIndexSet*)indexSet forType:(int)type
+{
+    [self initWithMethod:@"setpreference"];
+    static NSString* preferenceName[] = { @"thematique", @"rubrique", @"magasin" };
+    static NSString* preferenceKey[] = { @"thematique_ids", @"rubrique_ids", @"magasin_ids" };
+    [self setParameter:@"type" withValue:preferenceName[type]];
+    NSMutableString* indexString = [NSMutableString stringWithCapacity:1];
+    int count = indexSet.count;
+    NSUInteger* indexes = (NSUInteger*) malloc(sizeof(NSUInteger) * count);
+    [indexSet getIndexes:indexes maxCount:count inIndexRange:nil];
+    for (int i = 0; i < count; i++) {
+        [indexString appendFormat:@"%d", indexes[i]];
+        if (i < count - 1) {
+            [indexString appendString:@","];
+        }
+    }
+    free(indexes);
+    [self setParameter:preferenceKey[type] withValue:indexString];
+    return self;
+}
+
 - (void) setParameter:(NSString*) name withIntValue:(int)value
 {
     [asiRequest setPostValue:[NSString stringWithFormat:@"%d", value] forKey:name];   
