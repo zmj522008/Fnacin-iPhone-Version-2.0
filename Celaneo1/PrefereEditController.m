@@ -8,19 +8,12 @@
 
 #import "PrefereEditController.h"
 #import "ServerRequest.h"
+#import "ArticleList.h"
 
 @implementation PrefereEditController
 @synthesize rubriques;
 @synthesize selectedRubriques;
 @synthesize table;
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-*/
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -44,6 +37,13 @@
     self.table = nil;
 }
 
+- (void) viewDidLoad
+{
+    [super viewDidLoad];
+    
+    selectedRubriques = [[NSMutableIndexSet alloc] init];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButton)];
+}
 
 - (void)dealloc
 {
@@ -67,6 +67,14 @@
     return [[ServerRequest alloc] initGetRubriques];
 }
 
+#pragma mark navigation actions
+- (void) doneButton
+{
+    // TODO send preferences and wait!
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark table view datasource
 
 
@@ -77,8 +85,14 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellId];
     }
-    cell.textLabel.text = [[rubriques objectAtIndex:indexPath.row] name];
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    Category* rubrique  = [rubriques objectAtIndex:indexPath.row];
+
+    cell.textLabel.text = rubrique.name;
+    cell.accessoryView = [[UIImageView alloc] initWithImage:
+                          [UIImage imageNamed:
+                           [selectedRubriques containsIndex:rubrique.categoryId] 
+                                    ? @"checkbox_checked.png"
+                                             : @"checkbox_unchecked.png"]];
     cell.editing = YES;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -93,7 +107,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView cellForRowAtIndexPath:indexPath].accessoryType ^= UITableViewCellAccessoryCheckmark;
+    Category* rubrique  = [rubriques objectAtIndex:indexPath.row];
+    if ([selectedRubriques containsIndex:rubrique.categoryId]) {
+        [selectedRubriques removeIndex:rubrique.categoryId];
+    } else {
+        [selectedRubriques addIndex:rubrique.categoryId];
+    }
+    [table reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 @end

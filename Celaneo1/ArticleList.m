@@ -197,7 +197,12 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellId];
         }
-        cell.textLabel.text = @"Plus d'articles...";
+        cell.textLabel.opaque = NO;
+        cell.textLabel.backgroundColor = [UIColor clearColor];
+        cell.textLabel.text = @"Voir les articles plus anciens";
+        cell.textLabel.font = [UIFont fontWithName:nil size:14];
+        cell.textLabel.textAlignment = UITextAlignmentCenter;
+        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"more.jpg"]];
         return cell;
     }
 }
@@ -213,6 +218,11 @@
 }
 
 #pragma mark table view delegate 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return indexPath.section == 0 ? table.rowHeight : 30;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) {
@@ -260,10 +270,15 @@
 
 - (IBAction) cellMediaClick:(id)sender
 {
-    MediaPlayer* mediaPlayer = [[MediaPlayer alloc] initWithNibName:@"MediaPlayer" bundle:nil];
-    mediaPlayer.article = [self articleFromSender:sender];
-
-    [self.navigationController pushViewController:mediaPlayer animated:YES];   
+    Article* article = [self articleFromSender:sender];
+    if (article.type == ARTICLE_TYPE_TEXT) {
+        [self cellContentClick:sender];
+    } else {
+        MediaPlayer* mediaPlayer = [[MediaPlayer alloc] initWithNibName:@"MediaPlayer" bundle:nil];
+        mediaPlayer.article = article;
+        
+        [self.navigationController pushViewController:mediaPlayer animated:YES];   
+    }
 }
 - (IBAction) cellContentClick:(id)sender
 {

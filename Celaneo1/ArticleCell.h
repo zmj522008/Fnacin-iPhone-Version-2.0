@@ -18,7 +18,7 @@
     IBOutlet UILabel* date;
     IBOutlet UIWebView* accroche;
     IBOutlet UIImageView* vignette;
-    IBOutlet UIImageView* mediaButton;
+    IBOutlet UILabel* mediaButton;
     IBOutlet UIImageView* jaimeIcon;
     IBOutlet UILabel* jaimeText;
     IBOutlet UIImageView* reactionsIcon;
@@ -34,7 +34,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *date;
 @property (nonatomic, retain) IBOutlet UIWebView *accroche;
 @property (nonatomic, retain) IBOutlet UIImageView *vignette;
-@property (nonatomic, retain) IBOutlet UIImageView *mediaButton;
+@property (nonatomic, retain) IBOutlet UILabel *mediaButton;
 @property (nonatomic, retain) IBOutlet UIImageView *jaimeIcon;
 @property (nonatomic, retain) IBOutlet UILabel *jaimeText;
 @property (nonatomic, retain) IBOutlet UIImageView *reactionsIcon;

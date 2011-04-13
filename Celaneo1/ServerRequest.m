@@ -356,14 +356,6 @@
     if (self.article != nil) {
         [articles addObject:article];
 
-        if (NO) {
-        [articles addObject:article]; // DEBUG
-        [articles addObject:article];
-        [articles addObject:article];
-        [articles addObject:article];
-        [articles addObject:article];
-        [articles addObject:article];
-        }
         self.article = nil;
     }
 }

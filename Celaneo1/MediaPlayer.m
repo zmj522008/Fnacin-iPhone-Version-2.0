@@ -72,14 +72,6 @@
     [super viewWillAppear:animated];
     
     NSString* url = article.urlMedia;
-    static int cnt = 0;
-    if (cnt++ & 1) {
-        url = @"http://www.etrezen.com/media/videos/massage_cadeau/conseils.mp4"; // DEBUG
-        article.type = ARTICLE_TYPE_VIDEO;
-    } else {
-        article.type = ARTICLE_TYPE_AUDIO;
-        url = @"http://members.dcsi.net.au/stefangr/mp3/Mr.%20Oizo%20-%20Flat%20Beat.mp3";
-    }
 
     self.moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL URLWithString:url]];
     
@@ -88,6 +80,8 @@
     movieTitle.text = article.titre;
     
     if (article.type == ARTICLE_TYPE_AUDIO) {
+        self.image.image = [UIImage imageNamed:@"loading_detail.jpg"];
+
         self.imageRequest = [article createImageRequestWithWidth:image.bounds.size.width 
                                                      withHeight:image.bounds.size.height toDelegate:self];
         [self.imageRequest start];
@@ -116,8 +110,9 @@
     [self.playerParentView addSubview:moviePlayer.view];
     if (article.type == ARTICLE_TYPE_AUDIO) {
         CGRect bounds = self.playerParentView.bounds;
-        moviePlayer.view.frame = CGRectMake(bounds.origin.x, bounds.origin.y + bounds.size.height - AUDIO_HEIGHT,
-                                            bounds.size.width, AUDIO_HEIGHT);
+        moviePlayer.view.frame = 
+            CGRectMake(bounds.origin.x, bounds.origin.y + bounds.size.height - AUDIO_HEIGHT,
+                       bounds.size.width, AUDIO_HEIGHT);
     } else {
         moviePlayer.view.frame = self.playerParentView.bounds;
     }

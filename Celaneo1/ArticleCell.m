@@ -71,20 +71,34 @@
 
     self.date.text = article.dateAffichee;
     
-    [self.accroche loadHTMLString:article.accroche baseURL:nil];
-    [self.accroche loadHTMLString:article.contenu baseURL:nil]; // DEBUG
+    [self.accroche loadHTMLString:[@"<style>body { margin: 0; padding: 0; font-size: 12px; }</style>" stringByAppendingString:article.accroche] baseURL:nil];
 
+    self.vignette.image = [UIImage imageNamed:@"loading_list.jpg"];
     self.imageRequest = [article createImageRequestWithWidth:vignette.bounds.size.width 
                                                  withHeight:vignette.bounds.size.height 
                                                  toDelegate:self];
     [imageLoadingQueue addOperation:self.imageRequest];
     
-    jaimeText.text = [NSString stringWithFormat:@"j aime (%d)", article.nb_jaime];
+    jaimeText.text = [NSString stringWithFormat:@"J'aime (%d)", article.nb_jaime];
     BOOL showCommentaires = article.nb_commentaires > 0;
     reactionsText.hidden = !showCommentaires;
     reactionsIcon.hidden = !showCommentaires;
     if (showCommentaires) {
         reactionsText.text = [NSString stringWithFormat:@"Réactions (%d)", article.nb_commentaires];
+    }
+    
+    switch (article.type) {
+        case ARTICLE_TYPE_TEXT:
+            mediaButton.hidden = YES;
+            break;
+        case ARTICLE_TYPE_VIDEO:
+            mediaButton.hidden = NO;
+            mediaButton.text = @"➜ Lire la vidéo";
+            break;
+        case ARTICLE_TYPE_AUDIO:
+            mediaButton.hidden = NO;
+            mediaButton.text = @"➜ Écouter";
+            break;
     }
 }
 
