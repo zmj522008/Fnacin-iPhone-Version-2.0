@@ -38,6 +38,7 @@
     int currentId;
     int limitStart;
     int limitEnd;
+    int articleCount;
     
     NSMutableArray* articles;
     NSMutableArray* thematiques;
@@ -66,6 +67,7 @@
 @property (nonatomic, retain) NSMutableArray *commentaires;
 @property (nonatomic, assign) int limitStart;
 @property (nonatomic, assign) int limitEnd;
+@property (nonatomic, assign) int articleCount;
 
 - (id) initAuthentificateWithEmail:(NSString*)email withPassword:(NSString*)password;
 - (id) initArticle;

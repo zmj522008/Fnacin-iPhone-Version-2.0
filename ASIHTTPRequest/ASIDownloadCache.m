@@ -440,7 +440,7 @@ static NSString *permanentCacheFolder = @"PermanentStore";
                 NSDictionary* nv = (NSDictionary*)i;
                 NSString* key = [nv objectForKey:@"key"];
                 if (![ignoredKeys containsObject:key]) {
-                    [urlString appendString:@"&"];
+                    [urlString appendString:@"~"];
                     [urlString appendString:key];
                     [urlString appendString:@"="];
                     [urlString appendString:[nv objectForKey:@"value"]];

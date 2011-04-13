@@ -30,6 +30,7 @@
 @synthesize commentaires;
 @synthesize limitStart;
 @synthesize limitEnd;
+@synthesize articleCount;
 
 #pragma mark Request constructors
 - (id) initWithMethod:(NSString*)method
@@ -52,9 +53,10 @@
 {
     [self initWithMethod:@"authentification"];
     if (self != nil) {
-        [asiRequest setPostValue:email forKey:@"Email"];
-        [asiRequest setPostValue:password forKey:@"Password"];
-        [asiRequest setPostValue:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] forKey:@"Version"];
+        [asiRequest setPostValue:email forKey:@"email"];
+        [asiRequest setPostValue:password forKey:@"password"];
+//        [asiRequest setPostValue:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] forKey:@"Version"];
+        [asiRequest setPostValue:@"I123" forKey:@"version"];
     }
     return self;
 }
@@ -63,7 +65,6 @@
 {
     [self initWithMethod:@"article"];
     if (self != nil) {
-        // TODO pagination
     }
     return self;
 }
@@ -137,7 +138,7 @@
     if (responseData == nil) {
         [self requestFailed:request];
     } else {
-//        NSLog(@"%@\n%@", request.url, request.responseString);
+        NSLog(@"%@\n%@", request.url, request.responseString);
         
         NSXMLParser* parser = [[NSXMLParser alloc] initWithData:responseData];
         [parser setShouldProcessNamespaces:NO];
@@ -269,6 +270,11 @@
 - (void) handleElementEnd_nb_articles_page:(NSString*)nArticles
 {
     [Celaneo1AppDelegate getSingleton].articlesPerPage = [nArticles intValue];
+}
+
+- (void) handleElementEnd_nb_articles:(NSString*)nArticles
+{
+    self.articleCount = [nArticles intValue];
 }
 
 - (void) handleElementEnd_dirigeant:(NSString*)dirigeant

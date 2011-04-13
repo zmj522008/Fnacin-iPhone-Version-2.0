@@ -113,8 +113,8 @@
     if (request.articles.count) {
         [articles addObjectsFromArray:request.articles];
     }
-    hasMore = [articles count] == request.limitEnd;
-    hasMore = YES; // DEBUG
+    hasMore = [articles count] < request.articleCount;
+//    hasMore = YES; // DEBUG
     [table reloadData];
 }
 
@@ -142,7 +142,7 @@
     }
     int articlesPerPage = [Celaneo1AppDelegate getSingleton].articlesPerPage;
     if (articlesPerPage == 0) {
-        articlesPerPage = 20;
+        articlesPerPage = 13;
     }
     request.limitStart = startIndex;
     request.limitEnd = startIndex + articlesPerPage;
@@ -168,6 +168,7 @@
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellId];
         ArticleCellController* cellController;
+        
         if (cell == nil) {
             cellController = (ArticleCellController*) [[ArticleCellController alloc] initWithNibName:@"ArticleCell" bundle:nil];
             cell = (UITableViewCell*) cellController.view;
