@@ -8,6 +8,7 @@
 
 #import "MediaPlayer.h"
 
+#define AUDIO_HEIGHT 40.0
 
 @implementation MediaPlayer
 
@@ -34,6 +35,7 @@
     [playerParentView release];
     [image release];
     [movieTitle release];
+    [imageRequest cancel];
     [imageRequest release];
     
     [super dealloc];
@@ -52,7 +54,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
 }
 
 - (void)viewDidUnload
@@ -61,34 +63,84 @@
     self.playerParentView = nil;
     self.image = nil;
     self.movieTitle = nil;
+    [self.imageRequest cancel];
+    self.imageRequest = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL URLWithString:article.urlMedia]];
+    [super viewWillAppear:animated];
+    
+    NSString* url = article.urlMedia;
+    static int cnt = 0;
+    if (cnt++ & 1) {
+        url = @"http://www.etrezen.com/media/videos/massage_cadeau/conseils.mp4"; // DEBUG
+        article.type = ARTICLE_TYPE_VIDEO;
+    } else {
+        article.type = ARTICLE_TYPE_AUDIO;
+        url = @"http://members.dcsi.net.au/stefangr/mp3/Mr.%20Oizo%20-%20Flat%20Beat.mp3";
+    }
+
+    self.moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL URLWithString:url]];
     
     moviePlayer.scalingMode = MPMovieScalingModeAspectFit;
     
+    movieTitle.text = article.titre;
+    
+    if (article.type == ARTICLE_TYPE_AUDIO) {
+        self.imageRequest = [article startImageRequestWithWidth:image.bounds.size.width 
+                                                     withHeight:image.bounds.size.height toDelegate:self];
+    }
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
     // Register for the playback finished notification
     [[NSNotificationCenter defaultCenter]
      addObserver: self
      selector: @selector(mediaPlayerDone:)
      name: MPMoviePlayerPlaybackDidFinishNotification
      object: moviePlayer];
-    
+    [[NSNotificationCenter defaultCenter]
+     addObserver: self
+     selector: @selector(mediaPlayerStateChange:)
+     name: MPMoviePlayerPlaybackStateDidChangeNotification
+     object: moviePlayer];
+    [[NSNotificationCenter defaultCenter]
+     addObserver: self
+     selector: @selector(mediaPlayerExitFullscreen:)
+     name: MPMoviePlayerWillExitFullscreenNotification
+     object: moviePlayer];
+
     [self.playerParentView addSubview:moviePlayer.view];
-    moviePlayer.view.frame = self.playerParentView.bounds;
-
-    [moviePlayer play];
+    if (article.type == ARTICLE_TYPE_AUDIO) {
+        CGRect bounds = self.playerParentView.bounds;
+        moviePlayer.view.frame = CGRectMake(bounds.origin.x, bounds.origin.y + bounds.size.height - AUDIO_HEIGHT,
+                                            bounds.size.width, AUDIO_HEIGHT);
+    } else {
+        moviePlayer.view.frame = self.playerParentView.bounds;
+    }
     
-    movieTitle.text = article.titre;
+    [moviePlayer play];
+}
 
-    self.imageRequest = [article startImageRequestWithWidth:image.bounds.size.width 
-                                            withHeight:image.bounds.size.height toDelegate:self];
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    BOOL fullScreen = UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+    
+    moviePlayer.fullscreen = fullScreen;
+//    [UIApplication sharedApplication].statusBarHidden = fullScreen;
+    
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
+    
     [imageRequest cancel];
     self.imageRequest = nil;
     
@@ -103,6 +155,20 @@
     }
 }
 
+-(void) mediaPlayerExitFullscreen: (NSNotification*) aNotification
+{
+//    MPMoviePlayerController* player = [aNotification object];
+}
+
+-(void) mediaPlayerStateChange: (NSNotification*) aNotification
+{
+    MPMoviePlayerController* player = [aNotification object];
+
+    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
+        [player stop];
+    }
+}
+
 // When the movie is done, release the controller.
 -(void) mediaPlayerDone: (NSNotification*) aNotification
 {
@@ -113,16 +179,51 @@
      name: MPMoviePlayerPlaybackDidFinishNotification
      object: player];
     
+    [[NSNotificationCenter defaultCenter]
+     removeObserver: self
+     name: MPMoviePlayerPlaybackStateDidChangeNotification
+     object: player];
+    
+    
+    [[NSNotificationCenter defaultCenter]
+     removeObserver: self
+     name: MPMoviePlayerWillExitFullscreenNotification
+     object: player];
+    
     // Release the movie instance created in playMovieAtURL:
     [player release];
     
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.navigationController.topViewController == self) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    if (interfaceOrientation == UIInterfaceOrientationPortrait) {
+        return YES;
+    } else {
+        if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
+            return article.type == ARTICLE_TYPE_VIDEO;
+        } else {
+            return NO;
+        }
+    }
+}
+
+@end
+
+@implementation UITabBarController (OrientatingController)
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    if ([self.selectedViewController isKindOfClass:[UINavigationController class]]) {
+        UIViewController* viewController = ((UINavigationController*)(self.selectedViewController)).topViewController;
+        
+        return [viewController shouldAutorotateToInterfaceOrientation:interfaceOrientation];
+    } else {
+        return interfaceOrientation == UIInterfaceOrientationPortrait;
+    }
 }
 
 @end

@@ -10,6 +10,10 @@
 #import "ModelObject.h"
 #import "ASIHTTPRequest.h"
 
+#define ARTICLE_TYPE_TEXT 1
+#define ARTICLE_TYPE_VIDEO 2
+#define ARTICLE_TYPE_AUDIO 3
+
 @interface Article : NSObject <ModelObject> {
     int articleId;
     

@@ -238,17 +238,13 @@
                                                        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [errorView show];
     [errorView release];
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.navigationController.topViewController == self) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void) article:(Article*) article playMediaUrl:(NSString*) url withType:(int)type
 {
-    static int cnt = 0;
-    if (cnt++ & 1) {
-        url = @"http://www.etrezen.com/media/videos/massage_cadeau/conseils.mp4"; // DEBUG
-    } else {
-        url = @"http://members.dcsi.net.au/stefangr/mp3/Mr.%20Oizo%20-%20Flat%20Beat.mp3";
-    }
     MediaPlayer* mediaPlayer = [[MediaPlayer alloc] initWithNibName:@"MediaPlayer" bundle:nil];
     mediaPlayer.article = article;
     [self.navigationController pushViewController:mediaPlayer animated:YES];

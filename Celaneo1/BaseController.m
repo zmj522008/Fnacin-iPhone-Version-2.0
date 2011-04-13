@@ -154,7 +154,7 @@
 
 @implementation UINavigationBar (UINavigationBarCategory)
 - (void)drawRect:(CGRect)rect {
-    UIImage *img	= [UIImage imageNamed: @"nav.png"];
+    UIImage *img	= [UIImage imageNamed: (self.translucent || self.frame.size.width != 320) ? @"nav_nologo.png" : @"nav.png"];
     [img drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     self.tintColor = [UIColor colorWithRed:1.0 green:168/256.0 blue:0.1 alpha:1.0];
 }

@@ -70,7 +70,7 @@
     urlString = @"http://i.imgur.com/VUCyt.jpg"; // DEBUG
     imageRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlString]];
     imageRequest.downloadCache = [ASIDownloadCache sharedCache];
-    imageRequest.delegate = self;
+    imageRequest.delegate = delegate;
     [imageRequest start];
     
     return imageRequest;

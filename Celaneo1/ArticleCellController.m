@@ -54,6 +54,7 @@
     [reactionsText release];
     [favorisButton release];
     [imageLoadingQueue release];
+    [imageRequest cancel];
     [imageRequest release];
     delegate = nil;
     [super dealloc];
@@ -90,6 +91,9 @@
     self.reactionsText = nil;
     self.favorisButton = nil;
     self.detailAccessory = nil;
+    
+    [imageRequest cancel];
+    self.imageRequest = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -130,7 +134,7 @@
     [self.accroche loadHTMLString:article.accroche baseURL:nil];
     [self.accroche loadHTMLString:article.contenu baseURL:nil]; // DEBUG
 
-    imageRequest = [article startImageRequestWithWidth:vignette.bounds.size.width 
+    self.imageRequest = [article startImageRequestWithWidth:vignette.bounds.size.width 
                                             withHeight:vignette.bounds.size.height toDelegate:self];
     
     jaimeText.text = [NSString stringWithFormat:@"j aime (%d)", article.nb_jaime];
