@@ -66,7 +66,7 @@
     ASIHTTPRequest* imageRequest;
     
     NSString* urlString = self.urlImage;
-//    urlString = [urlString stringByAppendingFormat:@"&max_width=%d&max_height=%d", width, height];
+   urlString = [urlString stringByAppendingFormat:@"/%d/%d", width, height];
 //    urlString = @"http://i.imgur.com/VUCyt.jpg"; // DEBUG
     imageRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlString]];
     imageRequest.downloadCache = [ASIDownloadCache sharedCache];
