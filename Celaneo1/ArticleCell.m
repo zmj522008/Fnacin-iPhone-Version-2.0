@@ -73,7 +73,9 @@
     
     [self.accroche loadHTMLString:[@"<style>body { margin: 0; padding: 0; font-size: 12px; }</style>" stringByAppendingString:article.accroche] baseURL:nil];
 
-    self.vignette.image = [UIImage imageNamed:@"loading_list.jpg"];
+    if (self.vignette.image == nil) {
+        self.vignette.image = [UIImage imageNamed:@"loading_list.jpg"];
+    }
     self.imageRequest = [article createImageRequestWithWidth:vignette.bounds.size.width 
                                                  withHeight:vignette.bounds.size.height 
                                                  toDelegate:self];
@@ -110,4 +112,9 @@
     }
 }
 
+- (void) prepareForReuse {
+    [self.imageRequest cancel];
+    self.imageRequest = nil;
+    self.vignette.image = nil;
+}
 @end
