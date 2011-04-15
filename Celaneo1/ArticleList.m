@@ -117,13 +117,29 @@
 
 - (void) updateList:(ServerRequest*)request onlineContent:(BOOL)onlineContent
 {
-    [articles removeObjectsInRange:NSMakeRange(request.limitStart, articles.count - request.limitStart)];
-    if (request.articles.count) {
-        [articles addObjectsFromArray:request.articles];
+    [table beginUpdates];
+    int requestCount = request.articles.count;
+    if (requestCount) {
+        NSMutableArray* reloadRows = [NSMutableArray arrayWithCapacity:requestCount];
+        for (int i = 0; i < requestCount && i < articles.count - request.limitStart; i++) {
+            if (![[request.articles objectAtIndex:i] isEqual:[articles objectAtIndex:i + request.limitStart]]) {
+                [reloadRows addObject:[NSIndexPath indexPathForRow:i + request.limitStart inSection:0]];
+            }
+        }
+        [table reloadRowsAtIndexPaths:reloadRows withRowAnimation:UITableViewRowAnimationNone];
+        NSMutableArray* insertRows = [NSMutableArray arrayWithCapacity:requestCount];
+        for (int i = articles.count - request.limitStart; i < requestCount; i++) {
+            [insertRows addObject:[NSIndexPath indexPathForRow:i + request.limitStart inSection:0]];            
+        }
+        [table insertRowsAtIndexPaths:insertRows withRowAnimation:UITableViewRowAnimationNone];
     }
+    [articles removeObjectsInRange:NSMakeRange(request.limitStart, articles.count - request.limitStart)];
+    [articles addObjectsFromArray:request.articles];
+    
+    [table endUpdates];
+    
     hasMore = [articles count] < request.articleCount;
 //    hasMore = YES; // DEBUG
-    [table reloadData];
     
     if (onlineContent) {
         if (prefere && articles.count == 0 && ![Celaneo1AppDelegate getSingleton].prefereEditDone) {

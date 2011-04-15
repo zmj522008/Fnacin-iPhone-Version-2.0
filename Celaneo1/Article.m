@@ -66,8 +66,8 @@
     ASIHTTPRequest* imageRequest;
     
     NSString* urlString = self.urlImage;
-   urlString = [urlString stringByAppendingFormat:@"/%d/%d", width, height];
-//    urlString = @"http://i.imgur.com/VUCyt.jpg"; // DEBUG
+    urlString = [urlString stringByAppendingFormat:@"/%d/%d", width, height];
+    
     imageRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlString]];
     imageRequest.downloadCache = [ASIDownloadCache sharedCache];
     imageRequest.delegate = delegate;
@@ -75,4 +75,13 @@
     return imageRequest;
 }
 
+- (BOOL) isEqual:(id)object
+{
+    if ([object isKindOfClass:[self class]]) {
+        Article* a = (Article*) object;
+        return articleId == a.articleId && [hash compare:a.hash] == 0;
+    } else {
+        return NO;
+    }
+}
 @end

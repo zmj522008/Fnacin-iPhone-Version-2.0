@@ -41,13 +41,22 @@
     self.prefereUpdateRequest = nil;
 }
 
+- (void) updateDoneButton
+{
+    if (selectedRubriques.count != 0) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButton)];
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+}
+
 - (void) viewDidLoad
 {
     [super viewDidLoad];
     
     selectedRubriques = [[NSMutableIndexSet alloc] init];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButton)];
     self.navigationItem.hidesBackButton = YES;
+    [self updateDoneButton];
 }
 
 - (void)dealloc
@@ -148,6 +157,7 @@
         [selectedRubriques addIndex:rubrique.categoryId];
     }
     [table reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [self updateDoneButton];
 }
 
 @end

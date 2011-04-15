@@ -60,4 +60,6 @@
 
 - (ASIHTTPRequest*)createImageRequestWithWidth:(int) width withHeight:(int)height toDelegate:(id<ASIHTTPRequestDelegate>) delegate;
 
+- (BOOL) isEqual:(id)article;
+
 @end

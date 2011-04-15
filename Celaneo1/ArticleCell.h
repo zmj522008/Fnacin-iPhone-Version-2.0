@@ -11,7 +11,7 @@
 #import "Article.h"
 #import "ASIHTTPRequest.h"
 
-@interface ArticleCell : UITableViewCell <ASIHTTPRequestDelegate> {
+@interface ArticleCell : UITableViewCell <ASIHTTPRequestDelegate, UIWebViewDelegate> {
     IBOutlet UIButton* rubrique;
     IBOutlet UIButton* thematique;
     IBOutlet UILabel* titre;
@@ -25,6 +25,8 @@
     IBOutlet UILabel* reactionsText;
     IBOutlet UIButton* favorisButton;
     IBOutlet UIImageView* detailAccessory;
+    
+    NSString* currentImageUrl;
     
     ASIHTTPRequest* imageRequest;
 }
@@ -43,6 +45,7 @@
 @property (nonatomic, retain) IBOutlet UIImageView *detailAccessory;
 
 @property (nonatomic, retain) ASIHTTPRequest *imageRequest;
+@property (nonatomic, retain) NSString *currentImageUrl;
 
 - (void) updateWithArticle:(Article*) article usingImageLoadingQueue:(NSOperationQueue*)imageLoadingQueue;
 @end

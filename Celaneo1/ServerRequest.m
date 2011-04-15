@@ -470,6 +470,11 @@
     self.article.dateAffichee = value;
 }
 
+- (void) handleElementEnd_date_modification:(NSString*)value
+{
+    self.article.hash = value;
+}
+
 - (void) handleElementEnd_url_media:(NSString*)value
 {
     self.article.urlMedia = value;

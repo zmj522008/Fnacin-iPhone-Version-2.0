@@ -25,6 +25,7 @@
 @synthesize favorisButton;
 @synthesize detailAccessory;
 @synthesize imageRequest;
+@synthesize currentImageUrl;
 
 - (void)dealloc
 {
@@ -42,6 +43,7 @@
     [favorisButton release];
     [imageRequest cancel];
     [imageRequest release];
+    [currentImageUrl release];
     [super dealloc];
 }
 
@@ -49,7 +51,6 @@
 {
     self.titre.text = article.titre;
     
-
     int x = 5;
     
     CGSize rubriqueSize = [article.rubrique sizeWithFont:self.rubrique.titleLabel.font];
@@ -71,15 +72,17 @@
 
     self.date.text = article.dateAffichee;
     
-    [self.accroche loadHTMLString:[@"<style>body { margin: 0; padding: 0; font-size: 12px; }</style>" stringByAppendingString:article.accroche] baseURL:nil];
-
-    if (self.vignette.image == nil) {
-        self.vignette.image = [UIImage imageNamed:@"loading_list.jpg"];
-    }
+    [self.accroche loadHTMLString:[@"<style>body { margin: 0; padding: 0; font: 12px helvetica; }</style>" stringByAppendingString:article.accroche] baseURL:nil];
+    self.accroche.delegate = self;
+    
+    self.vignette.hidden = NO;
     self.imageRequest = [article createImageRequestWithWidth:vignette.bounds.size.width 
                                                  withHeight:vignette.bounds.size.height 
                                                  toDelegate:self];
-    [imageLoadingQueue addOperation:self.imageRequest];
+    if ([[self.imageRequest.url absoluteString] compare:self.currentImageUrl] != 0) {
+        self.vignette.image = [UIImage imageNamed:@"loading_list.jpg"];
+        [imageLoadingQueue addOperation:self.imageRequest];
+    }
     
     jaimeText.text = [NSString stringWithFormat:@"J'aime (%d)", article.nb_jaime];
     BOOL showCommentaires = article.nb_commentaires > 0;
@@ -104,10 +107,16 @@
     }
 }
 
+- (void) webViewDidFinishLoad:(UIWebView *)webView
+{
+    webView.hidden = NO;
+}
+
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
     if (request == imageRequest) {
         self.vignette.image = [UIImage imageWithData:request.responseData];
+        self.currentImageUrl = [request.url absoluteString];
         self.imageRequest = nil;
     }
 }
@@ -115,6 +124,7 @@
 - (void) prepareForReuse {
     [self.imageRequest cancel];
     self.imageRequest = nil;
-    self.vignette.image = nil;
+    self.vignette.hidden = YES;
+    self.accroche.hidden = YES;
 }
 @end

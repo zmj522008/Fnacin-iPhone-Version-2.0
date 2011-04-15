@@ -94,6 +94,7 @@
     if (message == nil) {
         message = @"Erreur de communication..";
     }
+    
     UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:title 
                                                         message:message 
                                                        delegate:nil 
