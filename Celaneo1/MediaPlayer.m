@@ -82,8 +82,8 @@
     if (article.type == ARTICLE_TYPE_AUDIO) {
         self.image.image = [UIImage imageNamed:@"loading_detail.jpg"];
 
-        self.imageRequest = [article createImageRequestWithWidth:image.bounds.size.width 
-                                                     withHeight:image.bounds.size.height toDelegate:self];
+        self.imageRequest = [article createImageRequestForViewSize:self.image.bounds.size];
+        self.imageRequest.delegate = self;
         [self.imageRequest start];
     }
 }

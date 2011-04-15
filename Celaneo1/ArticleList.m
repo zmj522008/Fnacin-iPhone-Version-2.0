@@ -139,7 +139,6 @@
     [table endUpdates];
     
     hasMore = [articles count] < request.articleCount;
-//    hasMore = YES; // DEBUG
     
     if (onlineContent) {
         if (prefere && articles.count == 0 && ![Celaneo1AppDelegate getSingleton].prefereEditDone) {

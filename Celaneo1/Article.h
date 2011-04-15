@@ -58,7 +58,7 @@
 
 + (Article*) articleWithId:(int)id;
 
-- (ASIHTTPRequest*)createImageRequestWithWidth:(int) width withHeight:(int)height toDelegate:(id<ASIHTTPRequestDelegate>) delegate;
+- (ASIHTTPRequest*)createImageRequestForViewSize:(CGSize)size;
 
 - (BOOL) isEqual:(id)article;
 

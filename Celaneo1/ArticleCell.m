@@ -54,7 +54,7 @@
     int x = 5;
     
     CGSize rubriqueSize = [article.rubrique sizeWithFont:self.rubrique.titleLabel.font];
-    rubriqueSize.width += 5;
+    rubriqueSize.width += 10;
     rubriqueSize.height = self.rubrique.frame.size.height;
     self.rubrique.frame = CGRectMake(x, rubrique.frame.origin.y, rubriqueSize.width, rubriqueSize.height);
     self.rubrique.bounds = CGRectMake(0, 0, rubriqueSize.width, rubriqueSize.height);
@@ -76,11 +76,12 @@
     self.accroche.delegate = self;
     
     self.vignette.hidden = NO;
-    self.imageRequest = [article createImageRequestWithWidth:vignette.bounds.size.width 
-                                                 withHeight:vignette.bounds.size.height 
-                                                 toDelegate:self];
+    
+    self.imageRequest = [article createImageRequestForViewSize:self.vignette.bounds.size];
+    
     if ([[self.imageRequest.url absoluteString] compare:self.currentImageUrl] != 0) {
         self.vignette.image = [UIImage imageNamed:@"loading_list.jpg"];
+        self.imageRequest.delegate = self;
         [imageLoadingQueue addOperation:self.imageRequest];
     }
     

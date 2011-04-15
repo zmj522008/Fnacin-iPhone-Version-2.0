@@ -61,8 +61,12 @@
     [super dealloc];
 }
 
-- (ASIHTTPRequest *)createImageRequestWithWidth:(int)width withHeight:(int)height toDelegate:(id<ASIHTTPRequestDelegate>)delegate
+- (ASIHTTPRequest*)createImageRequestForViewSize:(CGSize)size
 {
+    float scale = UIScreen.mainScreen.scale;
+    int width = size.width * scale;
+    int height = size.height * scale;
+    
     ASIHTTPRequest* imageRequest;
     
     NSString* urlString = self.urlImage;
@@ -70,7 +74,6 @@
     
     imageRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlString]];
     imageRequest.downloadCache = [ASIDownloadCache sharedCache];
-    imageRequest.delegate = delegate;
     
     return imageRequest;
 }
