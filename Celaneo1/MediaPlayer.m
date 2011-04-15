@@ -35,6 +35,7 @@
     [playerParentView release];
     [image release];
     [movieTitle release];
+    imageRequest.delegate = nil;
     [imageRequest cancel];
     [imageRequest release];
     
@@ -63,6 +64,7 @@
     self.playerParentView = nil;
     self.image = nil;
     self.movieTitle = nil;
+    imageRequest.delegate = nil;
     [self.imageRequest cancel];
     self.imageRequest = nil;
 }
@@ -81,7 +83,9 @@
     
     if (article.type == ARTICLE_TYPE_AUDIO) {
         self.image.image = [UIImage imageNamed:@"loading_detail.jpg"];
-
+        
+        imageRequest.delegate = nil;
+        [imageRequest cancel];
         self.imageRequest = [article createImageRequestForViewSize:self.image.bounds.size];
         self.imageRequest.delegate = self;
         [self.imageRequest start];
@@ -137,6 +141,7 @@
 {
     [super viewWillDisappear:animated];
     
+    imageRequest.delegate = nil;
     [imageRequest cancel];
     self.imageRequest = nil;
     

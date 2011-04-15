@@ -38,8 +38,8 @@
 
 - (void) dump
 {
-    NSLog(@"Article: %d\nthem %d '%@'\nrubri %d '%@'\ntype %d\ntitre '%@'\ndate %@\nurlMedia '%@'\naccroche '%@'\nurlImage '%@'\nfavoris %d\njaime %d\n commentaires %d\nhash '%@'",
-          articleId, thematiqueId, thematique, rubriqueId, rubrique, type, dateAffichee, urlMedia, accroche, contenu, urlImage, favoris, nb_jaime, nb_commentaires, hash);
+    NSLog(@"Article: %d\nthem %d '%@'\nrubri %d '%@'\ntype %d\ntitre '%@'\ndate %@\nurlMedia '%@'\naccroche '%@'\ncontenu '%@'\nurlImage '%@'\nfavoris %d\njaime %d\n commentaires %d\nhash '%@'",
+          articleId, thematiqueId, thematique, rubriqueId, rubrique, type, titre, dateAffichee, urlMedia, accroche, contenu, urlImage, favoris, nb_jaime, nb_commentaires, hash);
     for(Commentaire* c in commentaires) {
         [c dump];
     }
@@ -74,6 +74,8 @@
     
     imageRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlString]];
     imageRequest.downloadCache = [ASIDownloadCache sharedCache];
+//    imageRequest.downloadCache = nil;
+    imageRequest.cachePolicy = ASIOnlyLoadIfNotCachedCachePolicy;
     
     return imageRequest;
 }

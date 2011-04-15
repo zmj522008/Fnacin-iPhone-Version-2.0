@@ -9,6 +9,8 @@
 #import "ArticleCell.h"
 #import "ASIDownloadCache.h"
 
+#undef DEBUG_IMAGE
+
 @implementation ArticleCell
 
 @synthesize rubrique;
@@ -41,6 +43,7 @@
     [reactionsIcon release];
     [reactionsText release];
     [favorisButton release];
+    imageRequest.delegate = nil;
     [imageRequest cancel];
     [imageRequest release];
     [currentImageUrl release];
@@ -65,7 +68,7 @@
     x += 5; // margin
     
     CGSize thematiqueSize = [article.thematique sizeWithFont:self.thematique.titleLabel.font];
-    thematiqueSize.width += 15;
+    thematiqueSize.width += 5;
     thematiqueSize.height = self.thematique.frame.size.height;
     self.thematique.frame = CGRectMake(x, thematique.frame.origin.y, thematiqueSize.width, thematiqueSize.height);
     [self.thematique setTitle:article.thematique forState:UIControlStateNormal];
@@ -77,6 +80,8 @@
     
     self.vignette.hidden = NO;
     
+    self.imageRequest.delegate = nil;
+    [self.imageRequest cancel];
     self.imageRequest = [article createImageRequestForViewSize:self.vignette.bounds.size];
     
     if ([[self.imageRequest.url absoluteString] compare:self.currentImageUrl] != 0) {
@@ -117,15 +122,44 @@
 {
     if (request == imageRequest) {
         self.vignette.image = [UIImage imageWithData:request.responseData];
+        if ([request.responseData length]) {
+            NSLog(@"image empty: %@", [request.url absoluteURL]);
+        }
+#ifdef DEBUG_IMAGE
+        UILabel* label = [[UILabel alloc] initWithFrame:self.vignette.bounds];
+        [self.vignette addSubview:label];
+        label.text = [NSString stringWithFormat:@"[%d]:%d", request.responseStatusCode,
+                      [request.responseData length]];
+        [label release];
+#endif
+        
         self.currentImageUrl = [request.url absoluteString];
         self.imageRequest = nil;
     }
 }
 
-- (void) prepareForReuse {
-    [self.imageRequest cancel];
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    self.vignette.hidden = NO;
+    self.vignette.image = [UIImage imageNamed:@"loading_list.jpg"];
+#ifdef DEBUG_IMAGE
+    UILabel* label = [[UILabel alloc] initWithFrame:self.vignette.bounds];
+    [self.vignette addSubview:label];
+    label.text = [request.error localizedDescription];
+    NSLog(@"image %@ error: %@", [request.url absoluteString],[request.error localizedDescription]);
+    [label release];
+#endif
+    
     self.imageRequest = nil;
+}
+
+- (void) prepareForReuse {
+//    [self.imageRequest cancel];
+//    self.imageRequest = nil;
     self.vignette.hidden = YES;
+    for (UIView* view in [self.vignette subviews]) {
+        [view removeFromSuperview];
+    }
     self.accroche.hidden = YES;
 }
 @end

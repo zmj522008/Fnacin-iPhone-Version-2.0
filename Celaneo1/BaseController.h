@@ -24,4 +24,7 @@
 
 - (ServerRequest*) createListRequest;
 - (void) updateList:(ServerRequest*)request onlineContent:(BOOL)onlineContent;
+
+- (UITableViewCell *)loadCellFromNib:(NSString *)nibName;
+
 @end

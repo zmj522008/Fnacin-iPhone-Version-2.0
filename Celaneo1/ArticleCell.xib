@@ -133,7 +133,7 @@
 								<string key="IBUIText">yadi yada  yadi ➜ yada yadi yada </string>
 								<object class="NSFont" key="IBUIFont">
 									<string key="NSName">Helvetica</string>
-									<double key="NSSize">17</double>
+									<double key="NSSize">15</double>
 									<int key="NSfFlags">16</int>
 								</object>
 								<object class="NSColor" key="IBUITextColor" id="206567925">
@@ -244,7 +244,7 @@
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">Label</string>
-								<object class="NSFont" key="IBUIFont" id="316391552">
+								<object class="NSFont" key="IBUIFont" id="47190855">
 									<string key="NSName">Helvetica</string>
 									<double key="NSSize">13</double>
 									<int key="NSfFlags">16</int>
@@ -260,7 +260,7 @@
 								<string key="NSFrame">{{307, 60}, {10, 14}}</string>
 								<reference key="NSSuperview" ref="814330155"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="639359790"/>
+								<reference key="NSNextKeyView" ref="849277163"/>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
 									<string key="IBUIAccessibilityLabel"/>
@@ -299,13 +299,13 @@
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">Label</string>
-								<reference key="IBUIFont" ref="316391552"/>
+								<reference key="IBUIFont" ref="47190855"/>
 								<reference key="IBUITextColor" ref="206567925"/>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
 							</object>
-							<object class="IBUILabel" id="639359790">
+							<object class="IBUILabel" id="849277163">
 								<reference key="NSNextResponder" ref="814330155"/>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{5, 106}, {115, 15}}</string>
@@ -322,7 +322,7 @@
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">➜ Lire la video</string>
-								<reference key="IBUIFont" ref="316391552"/>
+								<reference key="IBUIFont" ref="47190855"/>
 								<reference key="IBUITextColor" ref="186976245"/>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
@@ -469,7 +469,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">mediaButton</string>
 						<reference key="source" ref="233113793"/>
-						<reference key="destination" ref="639359790"/>
+						<reference key="destination" ref="849277163"/>
 					</object>
 					<int key="connectionID">57</int>
 				</object>
@@ -507,7 +507,7 @@
 							<reference ref="532366759"/>
 							<reference ref="518935498"/>
 							<reference ref="840353787"/>
-							<reference ref="639359790"/>
+							<reference ref="849277163"/>
 							<reference ref="757064050"/>
 							<reference ref="649327323"/>
 							<reference ref="53517276"/>
@@ -589,8 +589,9 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">56</int>
-						<reference key="object" ref="639359790"/>
+						<reference key="object" ref="849277163"/>
 						<reference key="parent" ref="233113793"/>
+						<string key="objectName">MediaPrompt</string>
 					</object>
 				</object>
 			</object>

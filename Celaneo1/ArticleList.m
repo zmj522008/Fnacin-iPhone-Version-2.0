@@ -10,6 +10,7 @@
 #import "Celaneo1AppDelegate.h"
 #import "MediaPlayer.h"
 #import "PrefereEditController.h"
+#import "ArticleDetail.h"
 
 #define TAG_ITEM_A_LA_UNE 101
 #define TAG_ITEM_PREFERE 102
@@ -117,9 +118,10 @@
 
 - (void) updateList:(ServerRequest*)request onlineContent:(BOOL)onlineContent
 {
-    [table beginUpdates];
     int requestCount = request.articles.count;
-    if (requestCount) {
+    if (requestCount > 0 && requestCount >= articles.count - request.limitStart) {
+        [table beginUpdates];
+        
         NSMutableArray* reloadRows = [NSMutableArray arrayWithCapacity:requestCount];
         for (int i = 0; i < requestCount && i < articles.count - request.limitStart; i++) {
             if (![[request.articles objectAtIndex:i] isEqual:[articles objectAtIndex:i + request.limitStart]]) {
@@ -132,11 +134,14 @@
             [insertRows addObject:[NSIndexPath indexPathForRow:i + request.limitStart inSection:0]];            
         }
         [table insertRowsAtIndexPaths:insertRows withRowAnimation:UITableViewRowAnimationNone];
+        
+        [articles removeObjectsInRange:NSMakeRange(request.limitStart, articles.count - request.limitStart)];
+        [articles addObjectsFromArray:request.articles];
+        [table endUpdates];
+    } else {
+        [table reloadData];
     }
-    [articles removeObjectsInRange:NSMakeRange(request.limitStart, articles.count - request.limitStart)];
-    [articles addObjectsFromArray:request.articles];
     
-    [table endUpdates];
     
     hasMore = [articles count] < request.articleCount;
     
@@ -191,22 +196,6 @@
 }
 #pragma mark table view datasource
 
-- (ArticleCell *)loadCellFromNib:(NSString *)nibName
-{
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:nibName 
-                                                 owner:self options:nil];
-    ArticleCell * cell = nil;
-    for( NSObject *obj in nib )
-    {
-        if( [obj isKindOfClass:[UITableViewCell class]] )
-        {
-            cell = (ArticleCell*)obj;
-            break;
-        }
-    }
-    return cell;
-}
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
@@ -215,7 +204,7 @@
         ArticleCell *cell = (ArticleCell*) [tableView dequeueReusableCellWithIdentifier:CellId];
         
         if (cell == nil) {
-            cell = [self loadCellFromNib:@"ArticleCell"];
+            cell = (ArticleCell*) [self loadCellFromNib:CellId];
             NSAssert2([CellId compare:cell.reuseIdentifier] == 0, @"Cell has invalid identifier, actual: %@, expected: %@", cell.reuseIdentifier, CellId);
         }
         [cell updateWithArticle:[articles objectAtIndex:indexPath.row] usingImageLoadingQueue:self.imageLoadingQueue];
@@ -310,10 +299,15 @@
         [self.navigationController pushViewController:mediaPlayer animated:YES];   
     }
 }
+
 - (IBAction) cellContentClick:(id)sender
 {
-    
+    ArticleDetail* detail = [[ArticleDetail alloc] initWithNibName:@"ArticleDetail" bundle:nil];
+    detail.article = [self articleFromSender:sender];
+    detail.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detail animated:YES];
 }
+
 - (IBAction) cellRubriqueClick:(id)sender
 {
     self.tabBarController.selectedIndex = 3;

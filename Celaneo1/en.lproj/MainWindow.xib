@@ -424,6 +424,7 @@
 								<reference key="NSCustomColorSpace" ref="365169288"/>
 							</object>
 							<reference key="IBUIFont" ref="997580551"/>
+							<bool key="IBUIClearsOnBeginEditing">YES</bool>
 							<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 							<float key="IBUIMinimumFontSize">17</float>
 							<object class="IBUITextInputTraits" key="IBUITextInputTraits">
@@ -432,6 +433,7 @@
 								<bool key="IBUISecureTextEntry">YES</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
+							<int key="IBUIClearButtonMode">1</int>
 						</object>
 						<object class="IBUIButton" id="885794346">
 							<reference key="NSNextResponder" ref="136884479"/>

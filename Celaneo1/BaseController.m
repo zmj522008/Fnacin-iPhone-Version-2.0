@@ -158,6 +158,23 @@
     [onlineRequest release];
     [imageLoadingQueue release];
 }
+
+#pragma mark utility method for table views
+
+- (UITableViewCell *)loadCellFromNib:(NSString *)nibName
+{
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:nibName 
+                                                 owner:self options:nil];
+    
+    for(id obj in nib)
+    {
+        if( [obj isKindOfClass:[UITableViewCell class]] ) {
+            return (UITableViewCell*)obj;
+        }
+    }
+    return nil;
+}
+
 @end
 
 
@@ -166,6 +183,6 @@
     UIImage *img	= [UIImage imageNamed: 
                        self.frame.size.width != 320 ? @"nav_nologo.png" : @"nav.png"];
     [img drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    self.tintColor = [UIColor colorWithRed:1.0 green:168/256.0 blue:0 alpha:0];
+    self.tintColor = [UIColor colorWithRed:204/256.0 green:188/256.0 blue:49/256.0 alpha:0];
 }
 @end
