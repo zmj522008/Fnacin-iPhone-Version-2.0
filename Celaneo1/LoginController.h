@@ -15,6 +15,7 @@
     IBOutlet UITextField* email;
     IBOutlet UITextField* password;
     IBOutlet UIButton* submitButton;
+    IBOutlet UIButton* debugButton;
     
     ServerRequest* request;
 }
@@ -22,11 +23,14 @@
 @property (nonatomic, retain) IBOutlet UITextField *email;
 @property (nonatomic, retain) IBOutlet UITextField *password;
 @property (nonatomic, retain) IBOutlet UIButton *submitButton;
+@property (nonatomic, retain) IBOutlet UIButton *debugButton;
 @property (nonatomic, retain) ServerRequest* request;
 
 - (IBAction) submit;
 - (IBAction) recoverPassword;
 - (IBAction) selectPassword;
 - (IBAction) onChange;
+
+- (IBAction) debugBypassLog;
 
 @end

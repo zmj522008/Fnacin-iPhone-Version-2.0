@@ -105,7 +105,11 @@
     
     // And we check for the need to reauthenticate
     if (delegate.sessionId.length <= 0) {
+#ifdef DEBUG
+        NSLog(@"Debug, no reauth!");
+#else
         delegate.window.rootViewController = delegate.loginController;
+#endif
     }
 }
 
@@ -178,11 +182,22 @@
 @end
 
 
+@implementation UIBarItem (pok)
+- (void)drawRect:(CGRect)rect {
+}
+@end
+
 @implementation UINavigationBar (UINavigationBarCategory)
 - (void)drawRect:(CGRect)rect {
     UIImage *img	= [UIImage imageNamed: 
                        self.frame.size.width != 320 ? @"nav_nologo.png" : @"nav.png"];
     [img drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    self.tintColor = [UIColor colorWithRed:204/256.0 green:188/256.0 blue:49/256.0 alpha:0];
+    self.tintColor = [UIColor colorWithRed:200/256.0 green:200/256.0 blue:200/256.0 alpha:0];
+ 
+    for (UIView* view in self.subviews) {
+//        view.hidden = YES;
+    }
+//    self.topItem.leftBarButtonItem;
+    
 }
 @end

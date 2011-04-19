@@ -19,9 +19,13 @@ enum ArticleDetailSections {
     ArticleDetailSection_count
 };
 
-@interface ArticleDetail : BaseController <UITableViewDataSource, UITableViewDelegate, UIWebViewDelegate> {
+@interface ArticleDetail : BaseController <UITableViewDataSource, UITableViewDelegate, UIWebViewDelegate, UITextViewDelegate> {
     Article* article;
     
+    ServerRequest* commentaireRequest;
+    ServerRequest* favorisRequest;
+    ServerRequest* jaimeRequest;
+
     IBOutlet UITableView* table;
     IBOutlet UIBarButtonItem* jaime;
     IBOutlet UIBarButtonItem* commentaire;
@@ -64,7 +68,12 @@ enum ArticleDetailSections {
 
 - (IBAction) toggleCommentaireView;
 
+- (IBAction) submitCommentaire;
+
 @property (nonatomic, retain) Article *article;
+@property (nonatomic, retain) ServerRequest *commentaireRequest;
+@property (nonatomic, retain) ServerRequest *favorisRequest;
+@property (nonatomic, retain) ServerRequest *jaimeRequest;
 @property (nonatomic, retain) IBOutlet UITableView *table;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *jaime;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *commentaire;

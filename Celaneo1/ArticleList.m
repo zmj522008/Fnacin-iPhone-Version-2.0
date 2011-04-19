@@ -73,7 +73,7 @@
         case TAG_ITEM_DOSSIERS:
             favoris = YES;
             self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] 
-                                                      initWithBarButtonSystemItem:UIBarButtonSystemItemTrash 
+                                                      initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
                                                       target:self action:@selector(showDelete)]; 
              break;
         default:

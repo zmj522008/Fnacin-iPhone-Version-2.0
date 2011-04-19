@@ -102,6 +102,17 @@
     return self;
 }
 
+
+- (id) initSendCommentaire:(NSString *)text withArticleId:(int)articleId
+{
+    [self initWithMethod:@"setfavoris"];
+    if (self != nil) {
+        // TODO!
+        [self setParameter:@"article_id" withIntValue:articleId];
+    }
+    return self;
+}
+
 - (id) initSetPreferences:(NSIndexSet*)indexSet forType:(int)type
 {
     [self initWithMethod:@"setpreference"];

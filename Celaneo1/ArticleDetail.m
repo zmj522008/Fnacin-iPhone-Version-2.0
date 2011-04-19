@@ -28,6 +28,9 @@
 @synthesize commentPrompt;
 @synthesize commentText;
 @synthesize commentSend;
+@synthesize commentaireRequest;
+@synthesize favorisRequest;
+@synthesize jaimeRequest;
 
 - (void)dealloc
 {
@@ -49,6 +52,15 @@
     [commentPrompt release];
     [commentText release];
     [commentSend release];
+    [commentaireRequest cancel];
+    commentaireRequest.delegate = nil;
+    [commentaireRequest release];
+    [favorisRequest cancel];
+    favorisRequest.delegate = nil;
+    [favorisRequest release];
+    [jaimeRequest cancel];
+    jaimeRequest.delegate = nil;
+    [jaimeRequest release];
     [super dealloc];
 }
 
@@ -90,6 +102,9 @@
     self.commentPrompt = nil;
     self.commentText = nil;
     self.commentSend = nil;
+    [commentaireRequest cancel];
+    [jaimeRequest cancel];
+    [favorisRequest cancel];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -365,6 +380,9 @@
 
 - (IBAction) favorisClick
 {
+    self.favorisRequest = [[ServerRequest alloc] initSetFavoris:YES withArticleId:article.articleId];
+    favorisRequest.delegate = self;
+    [favorisRequest start];
     
 }
 
@@ -372,14 +390,46 @@
 {
     if (self.commentText.hidden) {
         self.commentText.hidden = NO;
+        self.commentSend.hidden = NO;
         postCommentaireCellHeight = self.commentText.frame.size.height + self.commentText.frame.origin.y + 5;
     } else {
         self.commentText.hidden = YES;
+        self.commentSend.hidden = YES;
         postCommentaireCellHeight = self.commentPrompt.frame.size.height + self.commentPrompt.frame.origin.y + 15;
     }
     [table beginUpdates];
     [table endUpdates];
     [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:ArticleDetailSection_PostComment] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
+
+#pragma mark commentaire actions
+- (IBAction) submitCommentaire
+{
+    self.commentaireRequest = [[ServerRequest alloc] initSendCommentaire:commentText.text withArticleId:article.articleId];
+    commentaireRequest.delegate = self;
+    [commentaireRequest start];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    // Keyboard button click
+    [self submitCommentaire];
+}
+
+#pragma mark Handle server Response
+
+- (void) serverRequest:(ServerRequest*)request didSucceedWithObject:(id)result
+{
+    if (favorisRequest == request) {
+        NSLog(@"favoris");
+    } else if (jaimeRequest == request) {
+        NSLog(@"jaime");
+    } else if (commentaireRequest == request) {
+        NSLog(@"commentaire");
+    } else {
+        [super serverRequest:request didSucceedWithObject:result];
+    }
+}
+
 
 @end

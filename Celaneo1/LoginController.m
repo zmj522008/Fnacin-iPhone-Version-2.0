@@ -15,6 +15,7 @@
 @synthesize email;
 @synthesize password;
 @synthesize submitButton;
+@synthesize debugButton;
 @synthesize request;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -33,6 +34,8 @@
     [email release];
     [password release];
     [request release];
+    [submitButton release];
+    [debugButton release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,6 +53,9 @@
     [super viewDidLoad];
     
     email.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"loginEmail"];
+#ifdef DEBUG
+    self.debugButton.hidden = NO;
+#endif
 }
 
 - (void)viewDidUnload
@@ -58,6 +64,8 @@
     
     self.email = nil;
     self.password = nil;
+    self.submitButton = nil;
+    self.debugButton = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -97,6 +105,7 @@
     [self goToTabBar];
 }
 
+#pragma mark Button actions
 - (IBAction) recoverPassword
 {
     NSString* launchUrl = @"http://www.google.com";
@@ -106,6 +115,12 @@
 - (IBAction) selectPassword
 {
     [password becomeFirstResponder];
+}
+
+- (IBAction) debugBypassLog
+{
+    Celaneo1AppDelegate* delegate = [Celaneo1AppDelegate getSingleton];
+    delegate.window.rootViewController = delegate.tabBarController;
 }
 
 - (BOOL) isValid

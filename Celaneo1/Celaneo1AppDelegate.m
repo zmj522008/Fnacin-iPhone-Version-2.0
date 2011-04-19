@@ -27,7 +27,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window.rootViewController = self.loginController;
-
+#ifdef DEBUG
+//    self.window.rootViewController = self.tabBarController;
+#endif
     [self.window makeKeyAndVisible];
 
     return YES;

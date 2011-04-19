@@ -82,6 +82,7 @@
 - (id) initSendTokenId;
 - (id) initSetFavoris:(BOOL)favoris withArticleId:(int)articleId;
 - (id) initSetPreferences:(NSIndexSet*)indexSet forType:(int)type;
+- (id) initSendCommentaire:(NSString*)text withArticleId:(int)articleId;
 
 - (void) setParameter:(NSString*) name withValue:(NSString*)value;
 - (void) setParameter:(NSString*) name withIntValue:(int)value;
