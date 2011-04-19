@@ -80,6 +80,8 @@
 		E38D1ECD135CC361000D5FE1 /* but_round_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E38D1EC3135CC361000D5FE1 /* but_round_left@2x.png */; };
 		E38D1ECE135CC361000D5FE1 /* but_round_right.png in Resources */ = {isa = PBXBuildFile; fileRef = E38D1EC4135CC361000D5FE1 /* but_round_right.png */; };
 		E38D1ECF135CC361000D5FE1 /* but_round_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E38D1EC5135CC361000D5FE1 /* but_round_right@2x.png */; };
+		E38D1ED5135D754D000D5FE1 /* CommentaireCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E38D1ED2135D754C000D5FE1 /* CommentaireCell.xib */; };
+		E38D1ED6135D754D000D5FE1 /* CommentaireCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E38D1ED4135D754C000D5FE1 /* CommentaireCell.m */; };
 		E390EC06134C6EAA00B1B705 /* ArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E390EC04134C6EAA00B1B705 /* ArticleCell.m */; };
 		E390EC07134C6EAA00B1B705 /* ArticleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E390EC05134C6EAA00B1B705 /* ArticleCell.xib */; };
 		E3D97E701349C3B300E2C1BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D97E6F1349C3B300E2C1BA /* UIKit.framework */; };
@@ -202,6 +204,9 @@
 		E38D1EC4135CC361000D5FE1 /* but_round_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = but_round_right.png; sourceTree = "<group>"; };
 		E38D1EC5135CC361000D5FE1 /* but_round_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "but_round_right@2x.png"; sourceTree = "<group>"; };
 		E38D1ED1135CC539000D5FE1 /* debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
+		E38D1ED2135D754C000D5FE1 /* CommentaireCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentaireCell.xib; sourceTree = "<group>"; };
+		E38D1ED3135D754C000D5FE1 /* CommentaireCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentaireCell.h; sourceTree = "<group>"; };
+		E38D1ED4135D754C000D5FE1 /* CommentaireCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentaireCell.m; sourceTree = "<group>"; };
 		E390EC04134C6EAA00B1B705 /* ArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCell.m; sourceTree = "<group>"; };
 		E390EC05134C6EAA00B1B705 /* ArticleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleCell.xib; sourceTree = "<group>"; };
 		E3D97E6B1349C3B300E2C1BA /* Celaneo1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Celaneo1.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -398,6 +403,9 @@
 		E3D97E751349C3B300E2C1BA /* Celaneo1 */ = {
 			isa = PBXGroup;
 			children = (
+				E38D1ED2135D754C000D5FE1 /* CommentaireCell.xib */,
+				E38D1ED3135D754C000D5FE1 /* CommentaireCell.h */,
+				E38D1ED4135D754C000D5FE1 /* CommentaireCell.m */,
 				E3455379134F173C004B9D1E /* PrefereEditController.h */,
 				E345537A134F173C004B9D1E /* PrefereEditController.m */,
 				E3455376134F16D4004B9D1E /* PrefereEdit.xib */,
@@ -552,6 +560,7 @@
 				E38D1ECD135CC361000D5FE1 /* but_round_left@2x.png in Resources */,
 				E38D1ECE135CC361000D5FE1 /* but_round_right.png in Resources */,
 				E38D1ECF135CC361000D5FE1 /* but_round_right@2x.png in Resources */,
+				E38D1ED5135D754D000D5FE1 /* CommentaireCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,6 +595,7 @@
 				E345537B134F173C004B9D1E /* PrefereEditController.m in Sources */,
 				E303264913545BCB0012B181 /* MediaPlayer.m in Sources */,
 				E3E69FFA13584FA900827128 /* ArticleDetail.m in Sources */,
+				E38D1ED6135D754D000D5FE1 /* CommentaireCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

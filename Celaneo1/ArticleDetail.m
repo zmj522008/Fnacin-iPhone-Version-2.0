@@ -8,6 +8,7 @@
 
 #import "ArticleDetail.h"
 #import "MediaPlayer.h"
+#import "CommentaireCell.h"
 
 @implementation ArticleDetail
 @synthesize article;
@@ -150,6 +151,20 @@
     return section == ArticleDetailSection_Comments ? article.nb_commentaires : 1;
 }
 
+- (UITableViewCell *)commentaireCell:(int) row
+{
+    static NSString *CellId = @"CommentaireCell";
+    
+    CommentaireCell *cell = (CommentaireCell*) [table dequeueReusableCellWithIdentifier:CellId];
+    
+    if (cell == nil) {
+        cell = (CommentaireCell*) [self loadCellFromNib:CellId];
+        NSAssert2([CellId compare:cell.reuseIdentifier] == 0, @"Cell has invalid identifier, actual: %@, expected: %@", cell.reuseIdentifier, CellId);
+    }
+    [cell updateWithCommentaire:[article.commentaires objectAtIndex:row]];
+    return cell;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
@@ -160,7 +175,7 @@
         case ArticleDetailSection_PostComment:
             return postCommentCell;
         case ArticleDetailSection_Comments:
-            return nil;
+            return [self commentaireCell:indexPath.row];
     }
     return nil;
 }
@@ -248,12 +263,13 @@
         case ArticleDetailSection_PostComment:
             return postCommentaireCellHeight;
         case ArticleDetailSection_Comments:
-            return 0;
+            return 150; // TODO;
     }
     return 0;
 }
 
-- (void) update
+#pragma mark update view with server content
+- (void) updateDetail
 {
     self.titre.text = article.titre;
     
@@ -276,10 +292,6 @@
     self.thematique.frame = CGRectMake(x, thematique.frame.origin.y, thematiqueSize.width, thematiqueSize.height);
     [self.thematique setTitle:article.thematique forState:UIControlStateNormal];
     
-    self.content.frame = CGRectMake(0, 0, self.content.frame.size.width, 1);
-    [self.content loadHTMLString:[@"<style>body { margin: 8px; padding: 0; font: 12px helvetica; }</style>" stringByAppendingString:article.contenu] baseURL:nil];
-    self.content.delegate = self;
-    
     self.vignette.hidden = NO;
     
     self.imageRequest.delegate = nil;
@@ -289,10 +301,6 @@
     self.vignette.image = [UIImage imageNamed:@"loading_detail.jpg"];
     self.imageRequest.delegate = self;
     [self.imageRequest start];
-    
-    
-    jaime.title = [NSString stringWithFormat:@"J'aime (%d)", article.nb_jaime];
-    commentaire.title = [NSString stringWithFormat:@"Réactions (%d)", article.nb_commentaires];
     
     switch (article.type) {
         case ARTICLE_TYPE_TEXT:
@@ -307,6 +315,28 @@
             mediaButton.text = @"➜ Écouter";
             break;
     }
+}
+
+- (void) updateContent
+{
+    self.content.frame = CGRectMake(0, 0, self.content.frame.size.width, 1);
+    [self.content loadHTMLString:[@"<style>body { margin: 8px; padding: 0; font: 12px helvetica; }</style>" stringByAppendingString:article.contenu] baseURL:nil];
+    self.content.delegate = self;
+}
+
+- (void) updateToolbar
+{
+    jaime.title = [NSString stringWithFormat:@"J'aime (%d)", article.nb_jaime];
+    commentaire.title = [NSString stringWithFormat:@"Réactions (%d)", article.nb_commentaires];
+    
+}
+
+- (void) update
+{
+    [self updateDetail];
+    [self updateContent];
+    [self updateToolbar];
+    [self.table reloadData];
 }
 
 #pragma mark web view layout
