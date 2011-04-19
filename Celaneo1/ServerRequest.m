@@ -31,6 +31,8 @@
 @synthesize limitStart;
 @synthesize limitEnd;
 @synthesize articleCount;
+@synthesize nb_jaime;
+@synthesize nb_commentaire;
 
 #pragma mark Request constructors
 - (id) initWithMethod:(NSString*)method
@@ -93,7 +95,8 @@
     return self;  
 }
 
-- (id) initSetFavoris:(BOOL)favoris withArticleId:(int)articleId {
+- (id) initSetFavoris:(BOOL)favoris withArticleId:(int)articleId
+{
     [self initWithMethod:@"setfavoris"];
     if (self != nil) {
         [asiRequest setPostValue:favoris ? @"1" : @"0" forKey:@"type"];
@@ -102,10 +105,19 @@
     return self;
 }
 
+- (id) initJaimeWithArticleId:(int)articleId
+{
+    [self initWithMethod:@"jaime"];
+    if (self != nil) {
+        [self setParameter:@"article_id" withIntValue:articleId];
+    }
+    return self;
+}
+
 
 - (id) initSendCommentaire:(NSString *)text withArticleId:(int)articleId
 {
-    [self initWithMethod:@"setfavoris"];
+    [self initWithMethod:@"commentaire"];
     if (self != nil) {
         [self setParameter:@"article_id" withIntValue:articleId];
     }
@@ -116,6 +128,7 @@
 {
     [self initWithMethod:@"setpreference"];
     static NSString* preferenceName[] = { @"thematique", @"rubrique", @"magasin" };
+
     static NSString* preferenceKey[] = { @"thematique_ids", @"rubrique_ids", @"magasin_ids" };
     [self setParameter:@"type" withValue:preferenceName[type]];
     NSMutableString* indexString = [NSMutableString stringWithCapacity:1];
@@ -130,6 +143,16 @@
     }
     free(indexes);
     [self setParameter:preferenceKey[type] withValue:indexString];
+    return self;
+}
+
+- (id) initGetPreferencesForType:(int)type
+{
+    static NSString* preferenceName[] = { @"thematique", @"rubriques", @"magasins" };
+
+    [self initWithMethod:@"getpreference"];
+    [self setParameter:@"element" withValue:preferenceName[type]];
+
     return self;
 }
 
@@ -461,11 +484,13 @@
 
 - (void) handleElementEnd_nb_jaime:(NSString*)value
 {
+    nb_jaime = [value intValue];
     self.article.nb_jaime = [value intValue];
 }
 
 - (void) handleElementEnd_nb_commentaires:(NSString*)value
 {
+    nb_commentaires = [value intValue];
     self.article.nb_commentaires = [value intValue];
 }
 
@@ -541,6 +566,10 @@
 
 // (void) handleElementEnd_rubrique:(NSString*) value (see above)
 
+- (void) handleElementEnd_prefere:(NSString*)value
+{
+    self.category.prefere = [value intValue] == 1;
+}
 
 #pragma mark lifecycle
 - (void) start

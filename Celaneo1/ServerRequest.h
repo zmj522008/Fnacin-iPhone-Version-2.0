@@ -44,6 +44,9 @@
     int limitEnd;
     int articleCount;
     
+    int nb_jaime;
+    int nb_commentaires;
+
     NSMutableArray* articles;
     NSMutableArray* thematiques;
     NSMutableArray* rubriques;
@@ -72,17 +75,21 @@
 @property (nonatomic, assign) int limitStart;
 @property (nonatomic, assign) int limitEnd;
 @property (nonatomic, assign) int articleCount;
+@property (nonatomic, assign) int nb_jaime;
+@property (nonatomic, assign) int nb_commentaire;
 
 - (id) initAuthentificateWithEmail:(NSString*)email withPassword:(NSString*)password;
 - (id) initArticle;
 
 - (id) initGetThematiques;
 - (id) initGetRubriques;
+- (id) initGetPreferencesForType:(int)type;
 - (id) initGetMagasins;
 - (id) initSendTokenId;
 - (id) initSetFavoris:(BOOL)favoris withArticleId:(int)articleId;
 - (id) initSetPreferences:(NSIndexSet*)indexSet forType:(int)type;
 - (id) initSendCommentaire:(NSString*)text withArticleId:(int)articleId;
+- (id) initJaimeWithArticleId:(int)articleId;
 
 - (void) setParameter:(NSString*) name withValue:(NSString*)value;
 - (void) setParameter:(NSString*) name withIntValue:(int)value;

@@ -14,11 +14,15 @@
     ServerRequest* offlineRequest;
     ServerRequest* onlineRequest;
     NSOperationQueue* imageLoadingQueue;
+
+    BOOL resetCache;
 }
 
 @property (nonatomic, retain) ServerRequest *offlineRequest;
 @property (nonatomic, retain) ServerRequest *onlineRequest;
 @property (nonatomic, readonly) NSOperationQueue *imageLoadingQueue;
+
+@property (nonatomic, assign, getter=isResetCache) BOOL resetCache;
 
 - (void) refresh;
 

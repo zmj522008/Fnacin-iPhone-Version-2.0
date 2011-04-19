@@ -21,8 +21,6 @@
     int thematiqueId;
     int magasinId;
     
-    BOOL resetCache;
-    
     BOOL hasMore;
     
     IBOutlet UITableView* table;
@@ -35,7 +33,6 @@
 @property (nonatomic, assign) int rubriqueId;
 @property (nonatomic, assign) int thematiqueId;
 @property (nonatomic, assign) int magasinId;
-@property (nonatomic, assign, getter=isResetCache) BOOL resetCache;
 
 - (IBAction) cellMediaClick:(id)sender;
 - (IBAction) cellContentClick:(id)sender;

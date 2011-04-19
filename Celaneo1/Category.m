@@ -12,6 +12,7 @@
 @implementation Category
 @synthesize categoryId;
 @synthesize name;
+@synthesize prefere;
 
 - (void) dealloc
 {

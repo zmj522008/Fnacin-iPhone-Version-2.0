@@ -12,8 +12,10 @@
 @interface Category : NSObject <ModelObject> {
     int categoryId;
     NSString* name;
+    BOOL prefere;
 }
 @property (nonatomic, assign) int categoryId;
 @property (nonatomic, retain) NSString *name;
+@property (nonatomic, assign) BOOL prefere;
 
 @end

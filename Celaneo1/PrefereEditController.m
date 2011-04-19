@@ -45,6 +45,8 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    resetCache = YES;
+
     [super viewWillAppear:animated];
         
     NSError *error;
@@ -60,8 +62,10 @@
 {
     if (selectedRubriques.count != 0) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButton)];
+        self.navigationItem.hidesBackButton = YES;
     } else {
         self.navigationItem.rightBarButtonItem = nil;
+        self.navigationItem.hidesBackButton = NO;
     }
 }
 
@@ -91,13 +95,19 @@
     [super updateList:request onlineContent:onlineContent];
     
     self.rubriques = request.rubriques;
-    
+    for (Category* cat in self.rubriques) {
+        if (cat.prefere) {
+            [selectedRubriques addIndex:cat.categoryId];
+        } else {
+            [selectedRubriques removeIndex:cat.categoryId];
+        }
+    }
     [table reloadData];
 }
 
 - (ServerRequest*) createListRequest
 {
-    return [[ServerRequest alloc] initGetRubriques];
+    return [[ServerRequest alloc] initGetPreferencesForType:TYPE_RUBRIQUE];
 }
 
 #pragma mark navigation actions
@@ -116,6 +126,8 @@
 
         ServerRequest* serverRequest = [[ServerRequest alloc] initSetPreferences:selectedRubriques forType:TYPE_RUBRIQUE];
         serverRequest.delegate = self;
+        [self.prefereUpdateRequest cancel];
+        self.prefereUpdateRequest.delegate = nil;
         self.prefereUpdateRequest = serverRequest;
         [serverRequest start];
     }
@@ -126,6 +138,9 @@
     if (request == prefereUpdateRequest) {
         [self.navigationController popViewControllerAnimated:YES];
         self.prefereUpdateRequest = nil;
+        ArticleList* articleList = (ArticleList*) self.navigationController.topViewController;
+        articleList.resetCache = YES;
+        [articleList refresh];
     } else {
         [super serverRequest:request didSucceedWithObject:result];
     }

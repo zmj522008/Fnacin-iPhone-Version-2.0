@@ -21,13 +21,14 @@
 @synthesize offlineRequest;
 @synthesize onlineRequest;
 @synthesize imageLoadingQueue;
+@synthesize resetCache;
 
 #pragma mark UIViewController
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self doOfflineRequest];
+    [self refresh];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -39,7 +40,13 @@
 - (void) refresh {
     [self.offlineRequest cancel];
     [self.onlineRequest cancel];
-    [self doOfflineRequest];
+    self.offlineRequest = nil;
+    self.onlineRequest = nil;
+    if (!self.resetCache) {
+        [self doOfflineRequest];
+    } else {
+        [self doOnlineRequest:YES];
+    }
 }
 
 #pragma mark server handling
@@ -49,6 +56,8 @@
     ServerRequest* request = [self createListRequest];
     NSLog(@"offline Request %@", request);
     if (request) {
+        [self.offlineRequest cancel];
+
         self.offlineRequest = request;
         offlineRequest.delegate = self;
         [offlineRequest enableCacheWithForced:YES];
@@ -63,6 +72,8 @@
     NSLog(@"online Request %d %d", delegate.offline, forced);
     ServerRequest* request = [self createListRequest];
     if (request && (!delegate.offline || forced)) {
+        [self.onlineRequest cancel];
+
         self.onlineRequest = request;
         onlineRequest.delegate = self;
         [onlineRequest enableCacheWithForced:NO];
@@ -182,12 +193,6 @@
     return nil;
 }
 
-@end
-
-
-@implementation UIBarItem (pok)
-- (void)drawRect:(CGRect)rect {
-}
 @end
 
 @implementation UINavigationBar (UINavigationBarCategory)

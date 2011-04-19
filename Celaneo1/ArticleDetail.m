@@ -419,8 +419,11 @@
 #pragma mark toolbar actions
 - (IBAction) jaimeClick
 {
-    
+    self.jaimeRequest = [[ServerRequest alloc] initJaimeWithArticleId:article.articleId];
+    jaimeRequest.delegate = self;
+    [jaimeRequest start];
 }
+
 - (IBAction) commentaireClick
 {
     [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:ArticleDetailSection_PostComment] atScrollPosition:UITableViewScrollPositionTop animated:YES];
@@ -470,10 +473,39 @@
 {
     if (favorisRequest == request) {
         NSLog(@"favoris");
+        
+        
+//        UIGraphicsBeginImageContext(self.view.frame.size);
+//        [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+//        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+        
+//        UIImageView* imageView = [[[UIImageView alloc] initWithImage:image] autorelease];
+//        imageView.alpha = 0.5f;
+//        imageView.backgroundColor = [UIColor greenColor];
+//        [self.view addSubview:imageView];
+
+        //TODO Possibly apply gray bg during request
+        UIView* gray = [[[UIView alloc] initWithFrame:self.view.frame] autorelease];
+        gray.backgroundColor = [UIColor grayColor];
+        gray.alpha = 0.5f;
+        [self.view addSubview:gray];
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.view cache:YES];
+        [gray removeFromSuperview];
+
+        [UIView setAnimationDelay:1.0];
+        [UIView commitAnimations];
     } else if (jaimeRequest == request) {
-        NSLog(@"jaime");
+        if (request.nb_jaime > article.nb_jaime) {
+            article.nb_jaime = request.nb_jaime;
+        }
+        [self updateToolbar];
     } else if (commentaireRequest == request) {
-        NSLog(@"commentaire");
+        if (request.nb_commentaire > article.nb_commentaires) {
+            article.nb_commentaires = request.nb_commentaire;
+        }
+        [self updateToolbar];
     } else {
         [super serverRequest:request didSucceedWithObject:result];
     }
