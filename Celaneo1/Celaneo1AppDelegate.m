@@ -7,9 +7,12 @@
 //
 
 #import "Celaneo1AppDelegate.h"
+#import "GANTracker.h"
 
 @implementation Celaneo1AppDelegate
 
+// Dispatch period in seconds
+static const NSInteger kGANDispatchPeriodSec = 10;
 
 @synthesize window=_window;
 @synthesize tabBarController=_tabBarController;
@@ -32,6 +35,17 @@
 #endif
     [self.window makeKeyAndVisible];
 
+    [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-22831970-1"
+                                           dispatchPeriod:kGANDispatchPeriodSec
+                                                 delegate:nil];
+    
+    NSError *error;
+    
+    if (![[GANTracker sharedTracker] trackPageview:@"/app_entry_point"
+                                         withError:&error]) {
+        // Handle error here
+    }
+    
     return YES;
 }
 
@@ -76,9 +90,11 @@
 
 - (void)dealloc
 {
+    [[GANTracker sharedTracker] stopTracker];
+
     [_window release];
     [_tabBarController release];
-    
+
     [sessionId release];
     [rubriquesNavigation release];
     [super dealloc];

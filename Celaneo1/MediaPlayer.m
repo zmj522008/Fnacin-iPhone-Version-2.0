@@ -6,6 +6,8 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import "GANTracker.h"
+
 #import "MediaPlayer.h"
 
 #define AUDIO_HEIGHT 40.0
@@ -89,6 +91,13 @@
         self.imageRequest = [article createImageRequestForViewSize:self.image.bounds.size];
         self.imageRequest.delegate = self;
         [self.imageRequest start];
+    }
+    
+    NSError *error;
+    
+    if (![[GANTracker sharedTracker] trackPageview:@"mediaPlayer"
+                                         withError:&error]) {
+        // Handle error here
     }
 }
 

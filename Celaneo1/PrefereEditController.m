@@ -6,6 +6,8 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import "GANTracker.h"
+
 #import "PrefereEditController.h"
 #import "ServerRequest.h"
 #import "ArticleList.h"
@@ -39,6 +41,19 @@
     self.table = nil;
     [prefereUpdateRequest cancel];
     self.prefereUpdateRequest = nil;
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+        
+    NSError *error;
+    
+    if (![[GANTracker sharedTracker] trackPageview:@"prefere.edit"
+                                         withError:&error]) {
+        // Handle error here
+    }
+    
 }
 
 - (void) updateDoneButton

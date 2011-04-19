@@ -82,6 +82,8 @@
 		E38D1ECF135CC361000D5FE1 /* but_round_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E38D1EC5135CC361000D5FE1 /* but_round_right@2x.png */; };
 		E38D1ED5135D754D000D5FE1 /* CommentaireCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E38D1ED2135D754C000D5FE1 /* CommentaireCell.xib */; };
 		E38D1ED6135D754D000D5FE1 /* CommentaireCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E38D1ED4135D754C000D5FE1 /* CommentaireCell.m */; };
+		E38D1EDB135DC064000D5FE1 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E38D1ED9135DC064000D5FE1 /* libGoogleAnalytics.a */; };
+		E38D1EDE135DC587000D5FE1 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E38D1EDD135DC586000D5FE1 /* libsqlite3.dylib */; };
 		E390EC06134C6EAA00B1B705 /* ArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E390EC04134C6EAA00B1B705 /* ArticleCell.m */; };
 		E390EC07134C6EAA00B1B705 /* ArticleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E390EC05134C6EAA00B1B705 /* ArticleCell.xib */; };
 		E3D97E701349C3B300E2C1BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D97E6F1349C3B300E2C1BA /* UIKit.framework */; };
@@ -207,6 +209,9 @@
 		E38D1ED2135D754C000D5FE1 /* CommentaireCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentaireCell.xib; sourceTree = "<group>"; };
 		E38D1ED3135D754C000D5FE1 /* CommentaireCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentaireCell.h; sourceTree = "<group>"; };
 		E38D1ED4135D754C000D5FE1 /* CommentaireCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentaireCell.m; sourceTree = "<group>"; };
+		E38D1ED8135DC064000D5FE1 /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GANTracker.h; sourceTree = "<group>"; };
+		E38D1ED9135DC064000D5FE1 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
+		E38D1EDD135DC586000D5FE1 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		E390EC04134C6EAA00B1B705 /* ArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCell.m; sourceTree = "<group>"; };
 		E390EC05134C6EAA00B1B705 /* ArticleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleCell.xib; sourceTree = "<group>"; };
 		E3D97E6B1349C3B300E2C1BA /* Celaneo1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Celaneo1.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -244,6 +249,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E38D1EDE135DC587000D5FE1 /* libsqlite3.dylib in Frameworks */,
 				E3032645135454920012B181 /* MediaPlayer.framework in Frameworks */,
 				E341C879134A3337009BB506 /* libz.dylib in Frameworks */,
 				E341C877134A3308009BB506 /* MobileCoreServices.framework in Frameworks */,
@@ -253,6 +259,7 @@
 				E3D97E701349C3B300E2C1BA /* UIKit.framework in Frameworks */,
 				E3D97E721349C3B300E2C1BA /* Foundation.framework in Frameworks */,
 				E3D97E741349C3B300E2C1BA /* CoreGraphics.framework in Frameworks */,
+				E38D1EDB135DC064000D5FE1 /* libGoogleAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,9 +367,20 @@
 			path = Images;
 			sourceTree = SOURCE_ROOT;
 		};
+		E38D1ED7135DC064000D5FE1 /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				E38D1ED8135DC064000D5FE1 /* GANTracker.h */,
+				E38D1ED9135DC064000D5FE1 /* libGoogleAnalytics.a */,
+			);
+			path = GoogleAnalytics;
+			sourceTree = "<group>";
+		};
 		E3D97E601349C3B300E2C1BA = {
 			isa = PBXGroup;
 			children = (
+				E38D1EDD135DC586000D5FE1 /* libsqlite3.dylib */,
+				E38D1ED7135DC064000D5FE1 /* GoogleAnalytics */,
 				E3032644135454920012B181 /* MediaPlayer.framework */,
 				E34553DA13530C4C004B9D1E /* Default@2x.png */,
 				E34553D813530C44004B9D1E /* Default.png */,
@@ -693,6 +711,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Celaneo1/Celaneo1-Prefix.pch";
 				INFOPLIST_FILE = "Celaneo1/Celaneo1-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/GoogleAnalytics\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -706,6 +728,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Celaneo1/Celaneo1-Prefix.pch";
 				INFOPLIST_FILE = "Celaneo1/Celaneo1-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/GoogleAnalytics\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

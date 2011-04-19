@@ -11,6 +11,7 @@
 #import "MediaPlayer.h"
 #import "PrefereEditController.h"
 #import "ArticleDetail.h"
+#import "GANTracker.h"
 
 #define TAG_ITEM_A_LA_UNE 101
 #define TAG_ITEM_PREFERE 102
@@ -100,6 +101,36 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    int tag = self.navigationController.tabBarItem.tag | self.tabBarItem.tag;
+    NSString* listName;
+    switch (tag) {
+        case TAG_ITEM_A_LA_UNE:
+            listName = @"a_la_une";
+            break;
+        case TAG_ITEM_PREFERE:
+            listName = @"prefere.list";
+            break;
+        case TAG_ITEM_PODCAST:
+            listName = @"podcast";
+            break;
+        case TAG_ITEM_RUBRIQUES:
+            listName = @"rubriques.list";
+            break;
+        case TAG_ITEM_DOSSIERS:
+            listName = @"dossiers";
+            break;
+        default:
+            break;
+    }
+
+    NSError *error;
+    
+    if (![[GANTracker sharedTracker] trackPageview:listName
+                                         withError:&error]) {
+        // Handle error here
+    }
+    
 }
 
 #pragma  mark tab bar button actions

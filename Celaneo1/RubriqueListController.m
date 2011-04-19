@@ -6,6 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import "GANTracker.h"
 #import "RubriqueListController.h"
 #import "ServerRequest.h"
 #import "ArticleList.h"
@@ -45,6 +46,18 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSError *error;
+    
+    if (![[GANTracker sharedTracker] trackPageview:@"rubrique.edit"
+                                         withError:&error]) {
+        // Handle error here
+    }
+    
+}
 
 - (void)dealloc
 {

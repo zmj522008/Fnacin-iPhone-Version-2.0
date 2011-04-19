@@ -6,6 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import "GANTracker.h"
 #import "BaseController.h"
 
 #import "Celaneo1AppDelegate.h"
@@ -122,6 +123,8 @@
     } else if (request == onlineRequest) {
         Celaneo1AppDelegate* delegate = [Celaneo1AppDelegate getSingleton];
         delegate.offline = NO;
+        
+        [[GANTracker sharedTracker] dispatch];
     }
 }
 

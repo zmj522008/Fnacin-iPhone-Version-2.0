@@ -6,6 +6,8 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import "GANTracker.h"
+
 #import "ArticleDetail.h"
 #import "MediaPlayer.h"
 #import "CommentaireCell.h"
@@ -121,6 +123,13 @@
 {
     [super viewWillAppear:animated];
     [self update];
+    
+    NSError *error;
+    
+    if (![[GANTracker sharedTracker] trackPageview:@"article.detail"
+                                         withError:&error]) {
+        // Handle error here
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
