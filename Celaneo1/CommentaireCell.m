@@ -39,6 +39,6 @@
 
 + (float)heightForCommentaire:(Commentaire *)commentaire
 {
-    return [commentaire.contenu sizeWithFont:[UIFont fontWithName:@"helvetica" size:12] forWidth:300 lineBreakMode:UILineBreakModeWordWrap].height;
+    return [commentaire.contenu sizeWithFont:[UIFont fontWithName:@"Helvetica" size:14] forWidth:280 lineBreakMode:UILineBreakModeWordWrap].height + 100;
 }
 @end

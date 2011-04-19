@@ -9,6 +9,7 @@
 #import "ArticleDetail.h"
 #import "MediaPlayer.h"
 #import "CommentaireCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation ArticleDetail
 @synthesize article;
@@ -82,6 +83,10 @@
     detailCellHeight = detailCell.bounds.size.height + (article.type != ARTICLE_TYPE_TEXT ? mediaButton.bounds.size.height + 2 : 0);
     postCommentaireCellHeight = self.commentPrompt.frame.size.height + self.commentPrompt.frame.origin.y + 5;
     contentCellHeight = self.contentCell.bounds.size.height;
+    
+// Comment border radius magic
+    commentText.layer.cornerRadius = 5;
+    commentText.clipsToBounds = YES;
 }
 
 - (void)viewDidUnload
@@ -263,7 +268,7 @@
         case ArticleDetailSection_PostComment:
             return postCommentaireCellHeight;
         case ArticleDetailSection_Comments:
-            return 150; // TODO;
+            return [CommentaireCell heightForCommentaire:[article.commentaires objectAtIndex:indexPath.row]];
     }
     return 0;
 }
