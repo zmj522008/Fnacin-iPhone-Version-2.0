@@ -85,8 +85,12 @@
     contentCellHeight = self.contentCell.bounds.size.height;
     
 // Comment border radius magic
-    commentText.layer.cornerRadius = 5;
-    commentText.clipsToBounds = YES;
+    [commentText.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
+    [commentText.layer setBorderColor: [[UIColor grayColor] CGColor]];
+    [commentText.layer setBorderWidth: 1.0];
+    [commentText.layer setCornerRadius:8.0f];
+    [commentText.layer setMasksToBounds:YES];
+
 }
 
 - (void)viewDidUnload
