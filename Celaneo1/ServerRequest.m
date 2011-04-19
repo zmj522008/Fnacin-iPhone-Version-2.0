@@ -107,7 +107,6 @@
 {
     [self initWithMethod:@"setfavoris"];
     if (self != nil) {
-        // TODO!
         [self setParameter:@"article_id" withIntValue:articleId];
     }
     return self;
@@ -184,7 +183,9 @@
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
     NSError *error = [request error];
- 
+    // Never store errors!!!
+    [[ASIDownloadCache sharedCache] removeCachedDataForRequest:request];
+    
     if (error.domain == NetworkRequestErrorDomain && error.code == ASIRequestCancelledErrorType) {
         NSLog(@"%@ cancelled", self);
     } else {
@@ -211,6 +212,8 @@
         [self dump];
         [delegate serverRequest:self didSucceedWithObject:nil];
     } else {
+        [[ASIDownloadCache sharedCache] removeCachedDataForRequest:asiRequest];
+
         [delegate serverRequest:self didFailWithError:erreur];
     }
 }

@@ -444,6 +444,10 @@ static NSString *permanentCacheFolder = @"PermanentStore";
                     [urlString appendString:key];
                     [urlString appendString:@"="];
                     [urlString appendString:[nv objectForKey:@"value"]];
+                } else {
+#ifdef DEBUG
+                    NSLog(@"Ignore: %@ = %@", key, [nv objectForKey:@"value"]);
+#endif
                 }
             }
         }
