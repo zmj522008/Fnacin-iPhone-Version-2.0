@@ -291,7 +291,7 @@
         
         // Update article list: remove item
         self.resetCache = YES;
-        [self doCreateListRequestWithStartingIndex:0];
+        [self refresh];
         
         [articles removeObjectAtIndex:indexPath.row];
         [table deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
