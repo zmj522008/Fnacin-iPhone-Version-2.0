@@ -98,6 +98,7 @@
         [self doOnlineRequest:YES];
         return;
     }
+    
     Celaneo1AppDelegate* delegate = [Celaneo1AppDelegate getSingleton];
 
     NSString* title;
@@ -133,6 +134,8 @@
 
 - (void) serverRequest:(ServerRequest*)request didSucceedWithObject:(id)result
 {
+    resetCache = NO;
+
     [self updateList:request onlineContent:request == onlineRequest];
     if (request == offlineRequest) {
         [self doOnlineRequest:NO];

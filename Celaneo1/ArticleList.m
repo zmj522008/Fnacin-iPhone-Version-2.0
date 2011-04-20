@@ -210,7 +210,6 @@
     // Disable caching for pagination
     if (resetCache || startIndex > 0) {
         [request resetCache];
-        resetCache = NO;
     }
     return request;
 }
