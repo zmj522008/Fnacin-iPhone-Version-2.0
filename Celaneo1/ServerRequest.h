@@ -39,6 +39,8 @@
     BOOL authentificated;
     BOOL fnac;
     
+    BOOL dirigeant;
+    
     int currentId;
     int limitStart;
     int limitEnd;
@@ -77,6 +79,7 @@
 @property (nonatomic, assign) int articleCount;
 @property (nonatomic, assign) int nb_jaime;
 @property (nonatomic, assign) int nb_commentaire;
+@property (nonatomic, assign) BOOL dirigeant;
 
 - (id) initAuthentificateWithEmail:(NSString*)email withPassword:(NSString*)password;
 - (id) initArticle;
@@ -85,7 +88,7 @@
 - (id) initGetRubriques;
 - (id) initGetPreferencesForType:(int)type;
 - (id) initGetMagasins;
-- (id) initSendTokenId;
+- (id) initSendTokenId:(NSString*)tokenId;
 - (id) initSetFavoris:(BOOL)favoris withArticleId:(int)articleId;
 - (id) initSetPreferences:(NSIndexSet*)indexSet forType:(int)type;
 - (id) initSendCommentaire:(NSString*)text withArticleId:(int)articleId;

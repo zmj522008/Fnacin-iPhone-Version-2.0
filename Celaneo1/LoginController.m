@@ -100,9 +100,17 @@
 
 #pragma mark Handle server Response
 
-- (void) serverRequest:(ServerRequest*)request didSucceedWithObject:(id)result
+- (void) serverRequest:(ServerRequest*)aRequest didSucceedWithObject:(id)result
 {
     [self goToTabBar];
+
+    [Celaneo1AppDelegate getSingleton].dirigeant = aRequest.dirigeant;
+    if (aRequest.dirigeant) {
+#if !TARGET_IPHONE_SIMULATOR
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+         UIRemoteNotificationTypeAlert];
+#endif
+    }
 }
 
 #pragma mark Button actions

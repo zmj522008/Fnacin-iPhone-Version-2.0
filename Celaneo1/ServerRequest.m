@@ -33,6 +33,7 @@
 @synthesize articleCount;
 @synthesize nb_jaime;
 @synthesize nb_commentaire;
+@synthesize dirigeant;
 
 #pragma mark Request constructors
 - (id) initWithMethod:(NSString*)method
@@ -89,9 +90,10 @@
     return self;  
 }
 
-- (id) initSendTokenId
+- (id) initSendTokenId:(NSString*)tokenId
 {
     [self initWithMethod:@"push"];
+    [self setParameter:@"token_id" withValue:tokenId];
     return self;  
 }
 
@@ -335,9 +337,9 @@
     self.articleCount = [nArticles intValue];
 }
 
-- (void) handleElementEnd_dirigeant:(NSString*)dirigeant
+- (void) handleElementEnd_dirigeant:(NSString*)value
 {
-    [Celaneo1AppDelegate getSingleton].dirigeant = [dirigeant intValue] == 1;
+    dirigeant = [value intValue] == 1;
 }
 
 #pragma mark Application XML Parsing - error

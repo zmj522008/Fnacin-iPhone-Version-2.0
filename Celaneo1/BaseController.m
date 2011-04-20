@@ -151,6 +151,17 @@
     return nil;
 }
 
+- (UIButton*) createNavButton:(int) type withTitle:(NSString*) title action:(SEL)action
+{
+    UIButton* navButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)] autorelease];
+
+    [navButton setTitle:title forState:UIControlStateNormal];
+    [navButton setBackgroundImage:[UIImage imageNamed:@"but_back.png"] forState:UIControlStateNormal];
+    [navButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    
+    return navButton;
+}
+
 #pragma mark life cycle
 
 - (void)viewDidAppear:(BOOL)animated
@@ -164,6 +175,7 @@
     imageLoadingQueue = [[NSOperationQueue alloc] init];    
     self.navigationItem.titleView = [[UIView alloc] init];
     self.navigationItem.hidesBackButton = NO;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self createNavButton:0 withTitle:@"pok" action:nil]];
 //    self.navigationController.navigationBar.translucent = YES;
 //    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 }

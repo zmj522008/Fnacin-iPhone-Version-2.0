@@ -88,6 +88,20 @@ static const NSInteger kGANDispatchPeriodSec = 10;
      */
 }
 
+
+#pragma mark -
+#pragma mark Remote notifications
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSLog(@"Did register for remote notifications: %@", deviceToken);
+    ServerRequest* request = [[ServerRequest alloc] initSendTokenId:[deviceToken description]];
+    [request start];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"Fail to register for remote notifications: %@", error);
+}
+
 - (void)dealloc
 {
     [[GANTracker sharedTracker] stopTracker];
