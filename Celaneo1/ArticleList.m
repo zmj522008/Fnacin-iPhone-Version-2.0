@@ -62,8 +62,7 @@
         case TAG_ITEM_PREFERE:
             prefere = YES;
             self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-                                                      initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
-                                                      target:self action:@selector(editPrefere)];
+                                                      initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"editer" action:@selector(editPrefere)]];
             break;
         case TAG_ITEM_PODCAST:
             podcast = YES;
@@ -72,9 +71,8 @@
             break;
         case TAG_ITEM_DOSSIERS:
             favoris = YES;
-            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] 
-                                                      initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
-                                                      target:self action:@selector(showDelete)]; 
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                                      initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"editer" action:@selector(showDelete)]];
              break;
         default:
             break;

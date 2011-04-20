@@ -10,6 +10,9 @@
 
 #import "ServerRequest.h"
 
+#define NAVBUTTON_ARROW_LEFT 0
+#define NAVBUTTON_PLAIN 1
+
 @interface BaseController : UIViewController <ServerRequestDelegate> {    
     ServerRequest* offlineRequest;
     ServerRequest* onlineRequest;
@@ -32,4 +35,7 @@
 - (UITableViewCell *)loadCellFromNib:(NSString *)nibName;
 
 - (NSString*) pageName;
+
+- (UIButton*) navButton:(int) type withTitle:(NSString*) title action:(SEL)action;
+
 @end

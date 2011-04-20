@@ -58,7 +58,8 @@
 - (void) updateDoneButton
 {
     if (selectedRubriques.count != 0) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButton)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                                  initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"ok" action:@selector(doneButton)]];
         self.navigationItem.hidesBackButton = YES;
     } else {
         self.navigationItem.rightBarButtonItem = nil;

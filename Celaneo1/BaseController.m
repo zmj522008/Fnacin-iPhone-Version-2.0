@@ -31,6 +31,10 @@
     
     [[GANTracker sharedTracker] trackPageview:[self pageName] withError:nil];
     [self refresh];
+    
+    if (self.navigationController.viewControllers.count > 1) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self navButton:NAVBUTTON_ARROW_LEFT withTitle:@"retour" action:@selector(back)]];
+    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -153,14 +157,30 @@
     return nil;
 }
 
-- (UIButton*) createNavButton:(int) type withTitle:(NSString*) title action:(SEL)action
+- (UIButton*) navButton:(int) type withTitle:(NSString*) title action:(SEL)action
 {
-    UIButton* navButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)] autorelease];
+    UIFont* font = [UIFont fontWithName:@"Helvetica" size:14.0];
+    int width = [title sizeWithFont:font].width + 20;
+    UIButton* navButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, 30)] autorelease];
 
-    [navButton setTitle:title forState:UIControlStateNormal];
-    [navButton setBackgroundImage:[UIImage imageNamed:@"but_back.png"] forState:UIControlStateNormal];
-    [navButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     
+    UIImage* btnImage;
+    switch (type) {
+        case NAVBUTTON_ARROW_LEFT:
+            btnImage = [UIImage imageNamed:@"btn_left.png"];
+            btnImage = [btnImage stretchableImageWithLeftCapWidth:13 topCapHeight:2];
+            [navButton setTitle:[NSString stringWithFormat:@"  %@", title] forState:UIControlStateNormal];
+            break;
+        case NAVBUTTON_PLAIN:
+        default:
+            btnImage = [UIImage imageNamed:@"btn.png"];
+            btnImage = [btnImage stretchableImageWithLeftCapWidth:3 topCapHeight:2];
+            [navButton setTitle:title forState:UIControlStateNormal];
+            break;
+    }
+    [navButton setBackgroundImage:btnImage forState:UIControlStateNormal];
+    [navButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    navButton.titleLabel.font = font;
     return navButton;
 }
 
@@ -177,9 +197,13 @@
     imageLoadingQueue = [[NSOperationQueue alloc] init];    
     self.navigationItem.titleView = [[UIView alloc] init];
     self.navigationItem.hidesBackButton = NO;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self createNavButton:0 withTitle:@"pok" action:nil]];
 //    self.navigationController.navigationBar.translucent = YES;
 //    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+}
+
+- (void) back
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) dealloc
