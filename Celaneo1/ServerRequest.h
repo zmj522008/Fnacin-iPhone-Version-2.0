@@ -59,6 +59,9 @@
     NSString* erreurDescription;
     int erreurCode;
     NSError* erreur;
+    
+    NSString* prepageContent;
+    BOOL prepageFerme;
 }
 
 @property (nonatomic, retain) ASIFormDataRequest* asiRequest;
@@ -80,6 +83,8 @@
 @property (nonatomic, assign) int nb_jaime;
 @property (nonatomic, assign) int nb_commentaire;
 @property (nonatomic, assign) BOOL dirigeant;
+@property (nonatomic, retain) NSString *prepageContent;
+@property (nonatomic, assign, getter=isPrepageFerme) BOOL prepageFerme;
 
 - (id) initAuthentificateWithEmail:(NSString*)email withPassword:(NSString*)password;
 - (id) initArticle;

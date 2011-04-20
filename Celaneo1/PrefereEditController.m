@@ -59,7 +59,7 @@
 {
     if (selectedRubriques.count != 0) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-                                                  initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"ok" action:@selector(doneButton)]];
+                                                  initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"Ok" action:@selector(doneButton)]];
         self.navigationItem.hidesBackButton = YES;
     } else {
         self.navigationItem.rightBarButtonItem = nil;
@@ -134,11 +134,11 @@
 - (void) serverRequest:(ServerRequest*)request didSucceedWithObject:(id)result
 {
     if (request == prefereUpdateRequest) {
-        [self.navigationController popViewControllerAnimated:YES];
         self.prefereUpdateRequest = nil;
-        ArticleList* articleList = (ArticleList*) self.navigationController.topViewController;
+        ArticleList* articleList = (ArticleList*) [self.navigationController.viewControllers objectAtIndex:0];
         articleList.resetCache = YES;
         [articleList refresh];
+        [self.navigationController popViewControllerAnimated:YES];
     } else {
         [super serverRequest:request didSucceedWithObject:result];
     }

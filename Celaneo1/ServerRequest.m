@@ -34,6 +34,8 @@
 @synthesize nb_jaime;
 @synthesize nb_commentaire;
 @synthesize dirigeant;
+@synthesize prepageContent;
+@synthesize prepageFerme;
 
 #pragma mark Request constructors
 - (id) initWithMethod:(NSString*)method
@@ -267,7 +269,7 @@
     qualifiedName: (NSString*) qName
        attributes: (NSDictionary*) attributeDict
 {
-    if( currentTextString )
+    if (currentTextString) 
     {
         [currentTextString release];
         currentTextString = nil;
@@ -281,9 +283,8 @@
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {
-    SEL sel = NSSelectorFromString( [NSString stringWithFormat:@"handleElementEnd_%@", elementName] );
-    if( [self respondsToSelector:sel] )
-    {
+    SEL sel = NSSelectorFromString([NSString stringWithFormat:@"handleElementEnd_%@", elementName]);
+    if ([self respondsToSelector:sel]) {
         [self performSelector:sel];
     } else {
         SEL sel = NSSelectorFromString( [NSString stringWithFormat:@"handleElementEnd_%@:", elementName] );
@@ -309,6 +310,8 @@
     self.magasin = nil;
     self.erreur = nil;
     self.erreurDescription = nil;
+    
+    self.prepageContent = nil;
     
     fnac = NO;
     authentificated = NO;
@@ -340,6 +343,23 @@
 - (void) handleElementEnd_dirigeant:(NSString*)value
 {
     dirigeant = [value intValue] == 1;
+}
+
+
+- (void) handleElementStart_pre_page:(NSDictionary*) attributes
+{
+    self.prepageFerme = [[attributes objectForKey:@"ferme"] intValue] == 1;
+#ifdef DEBUG
+    self.prepageFerme = NO;
+#endif
+}
+
+- (void) handleElementEnd_pre_page:(NSString*)value
+{
+    self.prepageContent = value;
+#ifdef DEBUG
+//    self.prepageContent = @"<h2>Welcome!</h2><img src='http://i.imgur.com/R94ed.jpg' alt='loading...'></img><p><a href='http://google.com'>Click here to search</a>";
+#endif
 }
 
 #pragma mark Application XML Parsing - error
@@ -606,6 +626,7 @@
     
     [commentaire release];
     [commentaires release];
+    [prepageContent release];
     [super dealloc];
 }
 @end

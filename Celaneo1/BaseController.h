@@ -38,4 +38,5 @@
 
 - (UIButton*) navButton:(int) type withTitle:(NSString*) title action:(SEL)action;
 
+- (void) goToTabBar;
 @end

@@ -33,7 +33,7 @@
     [self refresh];
     
     if (self.navigationController.viewControllers.count > 1) {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self navButton:NAVBUTTON_ARROW_LEFT withTitle:@"retour" action:@selector(back)]];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self navButton:NAVBUTTON_ARROW_LEFT withTitle:@"Retour" action:@selector(back)]];
     }
 }
 
@@ -236,6 +236,12 @@
     return nil;
 }
 
+
+- (void) goToTabBar
+{
+    Celaneo1AppDelegate* delegate = [Celaneo1AppDelegate getSingleton];
+    delegate.window.rootViewController = delegate.tabBarController;    
+}
 @end
 
 @implementation UINavigationBar (UINavigationBarCategory)

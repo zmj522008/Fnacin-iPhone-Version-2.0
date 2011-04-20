@@ -62,7 +62,7 @@
         case TAG_ITEM_PREFERE:
             prefere = YES;
             self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-                                                      initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"editer" action:@selector(editPrefere)]];
+                                                      initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"Editer" action:@selector(editPrefere)]];
             break;
         case TAG_ITEM_PODCAST:
             podcast = YES;
@@ -72,7 +72,7 @@
         case TAG_ITEM_DOSSIERS:
             favoris = YES;
             self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-                                                      initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"editer" action:@selector(showDelete)]];
+                                                      initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"Editer" action:@selector(showDelete)]];
              break;
         default:
             break;
@@ -119,6 +119,12 @@
             break;
     }
     return @"/autre2";
+}
+
+- (void) refresh {
+    [articles removeAllObjects];
+    [table reloadData];
+    [super refresh];
 }
 
 #pragma  mark tab bar button actions

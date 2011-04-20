@@ -9,6 +9,7 @@
 #import "LoginController.h"
 #import "Celaneo1AppDelegate.h"
 #import "ASIHTTPRequest.h"
+#import "Prepage.h"
 
 @implementation LoginController
 
@@ -92,12 +93,6 @@
     [[NSUserDefaults standardUserDefaults] setObject:email.text forKey:@"loginEmail"];
 }
 
-- (void) goToTabBar
-{
-    Celaneo1AppDelegate* delegate = [Celaneo1AppDelegate getSingleton];
-    delegate.window.rootViewController = delegate.tabBarController;    
-}
-
 
 - (NSString*) pageName
 {
@@ -108,7 +103,16 @@
 
 - (void) serverRequest:(ServerRequest*)aRequest didSucceedWithObject:(id)result
 {
-    [self goToTabBar];
+    if (aRequest.prepageContent) {
+        Prepage* prepage = [[Prepage alloc] initWithNibName:@"Prepage" bundle:nil];
+        prepage.ferme = aRequest.prepageFerme;
+        prepage.prepageContent = aRequest.prepageContent;
+        
+        Celaneo1AppDelegate* delegate = [Celaneo1AppDelegate getSingleton];
+        delegate.window.rootViewController = prepage;    
+    } else {
+        [self goToTabBar];
+    }
 
     [Celaneo1AppDelegate getSingleton].dirigeant = aRequest.dirigeant;
     if (aRequest.dirigeant) {

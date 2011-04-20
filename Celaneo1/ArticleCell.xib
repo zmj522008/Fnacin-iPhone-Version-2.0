@@ -147,7 +147,7 @@
 							<object class="IBUIWebView" id="4802805">
 								<reference key="NSNextResponder" ref="814330155"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{127, 40}, {180, 65}}</string>
+								<string key="NSFrame">{{127, 40}, {180, 63}}</string>
 								<reference key="NSSuperview" ref="814330155"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="649327323"/>
@@ -219,7 +219,7 @@
 							<object class="IBUIImageView" id="53517276">
 								<reference key="NSNextResponder" ref="814330155"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{127, 106}, {22, 15}}</string>
+								<string key="NSFrame">{{127, 105}, {22, 15}}</string>
 								<reference key="NSSuperview" ref="814330155"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="177396043"/>
@@ -234,7 +234,7 @@
 							<object class="IBUILabel" id="177396043">
 								<reference key="NSNextResponder" ref="814330155"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{150, 103}, {58, 21}}</string>
+								<string key="NSFrame">{{150, 102}, {58, 21}}</string>
 								<reference key="NSSuperview" ref="814330155"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="181520973"/>
@@ -274,7 +274,7 @@
 							<object class="IBUIImageView" id="181520973">
 								<reference key="NSNextResponder" ref="814330155"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{212, 107}, {22, 15}}</string>
+								<string key="NSFrame">{{212, 106}, {22, 15}}</string>
 								<reference key="NSSuperview" ref="814330155"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="840353787"/>
@@ -289,7 +289,7 @@
 							<object class="IBUILabel" id="840353787">
 								<reference key="NSNextResponder" ref="814330155"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{239, 103}, {68, 21}}</string>
+								<string key="NSFrame">{{239, 102}, {68, 21}}</string>
 								<reference key="NSSuperview" ref="814330155"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
