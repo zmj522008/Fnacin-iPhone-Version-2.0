@@ -95,13 +95,11 @@
         self.imageRequest.delegate = self;
         [self.imageRequest start];
     }
-    
-    NSError *error;
-    
-    if (![[GANTracker sharedTracker] trackPageview:@"mediaPlayer"
-                                         withError:&error]) {
-        // Handle error here
-    }
+}
+
+- (NSString *)pageName
+{
+    return @"/article/media";
 }
 
 - (void) viewDidAppear:(BOOL)animated

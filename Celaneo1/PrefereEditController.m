@@ -48,14 +48,11 @@
     resetCache = YES;
 
     [super viewWillAppear:animated];
-        
-    NSError *error;
-    
-    if (![[GANTracker sharedTracker] trackPageview:@"prefere.edit"
-                                         withError:&error]) {
-        // Handle error here
-    }
-    
+}
+
+- (NSString *)pageName
+{
+    return @"/prefere/edit";
 }
 
 - (void) updateDoneButton

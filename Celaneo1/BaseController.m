@@ -28,6 +28,8 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [[GANTracker sharedTracker] trackPageview:[self pageName] withError:nil];
     [self refresh];
 }
 
@@ -187,6 +189,11 @@
     [offlineRequest release];
     [onlineRequest release];
     [imageLoadingQueue release];
+}
+
+- (NSString*) pageName
+{
+    return @"/autre";
 }
 
 #pragma mark utility method for table views

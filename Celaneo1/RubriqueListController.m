@@ -46,17 +46,9 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (NSString *)pageName
 {
-    [super viewWillAppear:animated];
-    
-    NSError *error;
-    
-    if (![[GANTracker sharedTracker] trackPageview:@"rubrique.edit"
-                                         withError:&error]) {
-        // Handle error here
-    }
-    
+    return @"/rubriques/edit";
 }
 
 - (void)dealloc

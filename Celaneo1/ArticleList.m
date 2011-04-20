@@ -97,39 +97,30 @@
     [super dealloc];
 }
 
-- (void) viewWillAppear:(BOOL)animated
+
+- (NSString*) pageName
 {
-    [super viewWillAppear:animated];
-    
     int tag = self.navigationController.tabBarItem.tag | self.tabBarItem.tag;
-    NSString* listName;
     switch (tag) {
         case TAG_ITEM_A_LA_UNE:
-            listName = @"a_la_une";
+            return @"/a_la_une";
             break;
         case TAG_ITEM_PREFERE:
-            listName = @"prefere.list";
+            return @"/prefere/list";
             break;
         case TAG_ITEM_PODCAST:
-            listName = @"podcast";
+            return @"/podcast";
             break;
         case TAG_ITEM_RUBRIQUES:
-            listName = @"rubriques.list";
+            return @"/rubriques/list";
             break;
         case TAG_ITEM_DOSSIERS:
-            listName = @"dossiers";
+            return @"/dossiers";
             break;
         default:
             break;
     }
-
-    NSError *error;
-    
-    if (![[GANTracker sharedTracker] trackPageview:listName
-                                         withError:&error]) {
-        // Handle error here
-    }
-    
+    return @"/autre2";
 }
 
 #pragma  mark tab bar button actions

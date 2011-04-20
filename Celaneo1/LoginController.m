@@ -98,6 +98,12 @@
     delegate.window.rootViewController = delegate.tabBarController;    
 }
 
+
+- (NSString*) pageName
+{
+    return @"/login";
+}
+
 #pragma mark Handle server Response
 
 - (void) serverRequest:(ServerRequest*)aRequest didSucceedWithObject:(id)result

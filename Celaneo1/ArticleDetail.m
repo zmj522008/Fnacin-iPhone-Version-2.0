@@ -123,13 +123,11 @@
 {
     [super viewWillAppear:animated];
     [self update];
-    
-    NSError *error;
-    
-    if (![[GANTracker sharedTracker] trackPageview:@"article.detail"
-                                         withError:&error]) {
-        // Handle error here
-    }
+}
+
+- (NSString *)pageName
+{
+    return @"/article/detail";
 }
 
 - (void)viewDidAppear:(BOOL)animated

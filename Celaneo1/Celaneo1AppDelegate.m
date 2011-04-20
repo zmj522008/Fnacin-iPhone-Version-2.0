@@ -39,13 +39,6 @@ static const NSInteger kGANDispatchPeriodSec = 10;
                                            dispatchPeriod:kGANDispatchPeriodSec
                                                  delegate:nil];
     
-    NSError *error;
-    
-    if (![[GANTracker sharedTracker] trackPageview:@"/app_entry_point"
-                                         withError:&error]) {
-        // Handle error here
-    }
-    
     return YES;
 }
 

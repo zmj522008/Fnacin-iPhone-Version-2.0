@@ -31,4 +31,5 @@
 
 - (UITableViewCell *)loadCellFromNib:(NSString *)nibName;
 
+- (NSString*) pageName;
 @end
