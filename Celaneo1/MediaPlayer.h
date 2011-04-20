@@ -20,6 +20,7 @@
     IBOutlet UILabel* movieTitle;
     IBOutlet UIView* playerParentView;
     IBOutlet UIImageView* image;
+    IBOutlet UIActivityIndicatorView* activity;
     
     ASIHTTPRequest* imageRequest;
 }
@@ -29,6 +30,7 @@
 @property (nonatomic, retain) IBOutlet UILabel* movieTitle;
 @property (nonatomic, retain) IBOutlet UIView *playerParentView;
 @property (nonatomic, retain) IBOutlet UIImageView *image;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activity;
 
 @property (nonatomic, retain) ASIHTTPRequest* imageRequest;
 

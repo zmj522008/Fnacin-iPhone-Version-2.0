@@ -20,6 +20,7 @@
 @synthesize image;
 @synthesize movieTitle;
 @synthesize imageRequest;
+@synthesize activity;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,6 +41,7 @@
     imageRequest.delegate = nil;
     [imageRequest cancel];
     [imageRequest release];
+    [activity release];
     
     [super dealloc];
 }
@@ -69,6 +71,7 @@
     imageRequest.delegate = nil;
     [self.imageRequest cancel];
     self.imageRequest = nil;
+    self.activity = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -174,6 +177,11 @@
 {
     MPMoviePlayerController* player = [aNotification object];
 
+    if (player.loadState == MPMovieLoadStatePlayable
+        || player.loadState == MPMovieLoadStatePlaythroughOK
+        || player.playbackState == MPMoviePlaybackStatePlaying) {
+        [activity stopAnimating];
+    }
     if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
         [player stop];
     }
