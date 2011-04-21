@@ -316,7 +316,11 @@
 {
     jaime.title = [NSString stringWithFormat:@"J'aime (%d)", article.nb_jaime];
     commentaire.title = [NSString stringWithFormat:@"Réactions (%d)", article.nb_commentaires];
-    
+    if (!article.favoris) {
+        favoris.title = @"Ajout Dossier";
+    } else {
+        favoris.title = @"(Dossiers)";
+    }
 }
 
 - (void) update
@@ -479,6 +483,9 @@
 
         [UIView setAnimationDelay:1.0];
         [UIView commitAnimations];
+        
+        article.favoris = YES;
+        [self updateToolbar];
     } else if (jaimeRequest == request) {
         if (request.nb_jaime > article.nb_jaime) {
             article.nb_jaime = request.nb_jaime;

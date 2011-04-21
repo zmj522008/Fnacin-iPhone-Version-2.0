@@ -442,7 +442,7 @@
 							<object class="IBUIBarButtonItem" id="779273792">
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">ilike.png</string>
+									<string key="NSResourceName">ilike_toolbar.png</string>
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIToolbar" ref="1040292659"/>
@@ -965,7 +965,7 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>comments.png</string>
 				<string>favoris_add.png</string>
-				<string>ilike.png</string>
+				<string>ilike_toolbar.png</string>
 				<string>loading_list.jpg</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
