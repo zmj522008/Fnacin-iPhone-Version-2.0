@@ -52,6 +52,10 @@
 
 - (void) updateWithArticle:(Article*) article usingImageLoadingQueue:(NSOperationQueue*)imageLoadingQueue
 {
+#ifdef DEBUG
+    article.nb_commentaires = 2;
+#endif
+    
     self.titre.text = article.titre;
     
     int x = 5;

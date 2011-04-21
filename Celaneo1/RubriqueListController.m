@@ -83,6 +83,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellId];
     }
     cell.textLabel.text = [[rubriques objectAtIndex:indexPath.row] name];
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
     cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow.png"]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

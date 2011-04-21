@@ -157,6 +157,8 @@
     Category* rubrique  = [rubriques objectAtIndex:indexPath.row];
 
     cell.textLabel.text = rubrique.name;
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
+
     UIView* checkView = [[UIImageView alloc] initWithImage:
                           [UIImage imageNamed:
                            [selectedRubriques containsIndex:rubrique.categoryId] 

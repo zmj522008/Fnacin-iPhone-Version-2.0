@@ -164,7 +164,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section == ArticleDetailSection_Comments ? article.nb_commentaires : 1;
+    return section == ArticleDetailSection_Comments ? [article.commentaires count] : 1;
 }
 
 - (UITableViewCell *)commentaireCell:(int) row
@@ -177,7 +177,9 @@
         cell = (CommentaireCell*) [self loadCellFromNib:CellId];
         NSAssert2([CellId compare:cell.reuseIdentifier] == 0, @"Cell has invalid identifier, actual: %@, expected: %@", cell.reuseIdentifier, CellId);
     }
-    [cell updateWithCommentaire:[article.commentaires objectAtIndex:row]];
+    Commentaire* com = [article.commentaires objectAtIndex:row];
+    [cell updateWithCommentaire:com];
+    cell.frame = CGRectMake(0, 0, cell.frame.size.width, [CommentaireCell heightForCommentaire:com]);
     return cell;
 }
 
@@ -195,36 +197,6 @@
     }
     return nil;
 }
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 
 #pragma mark -
@@ -349,6 +321,19 @@
 
 - (void) update
 {
+#ifdef DEBUG
+    article.nb_commentaires = 2;
+    Commentaire* com1 = [[Commentaire alloc] init];
+    com1.date = @"date1";
+    com1.prenom = @"prenom";
+    com1.contenu = @"Fnac Billetterie : concerts, festivals, théâtre, expositions, sports, parcs... plus de 50 000 événements par an.";
+    Commentaire* com2 = [[Commentaire alloc] init];
+    com2.date = @"date2";
+    com2.prenom = @"prenom";
+    com2.contenu = @"Fnac Billetterie : concerts, festivals, théâtre, expositions, sports, parcs... plus de 50 000 événements par an.";
+
+    article.commentaires = [NSArray arrayWithObjects:com1, com2, nil];
+#endif
     [self updateDetail];
     [self updateContent];
     [self updateToolbar];

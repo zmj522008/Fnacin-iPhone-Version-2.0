@@ -276,6 +276,12 @@
     }
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+    int tag = self.navigationController.tabBarItem.tag | self.tabBarItem.tag;
+    return tag == TAG_ITEM_DOSSIERS;
+}
+
 - (void)tableView:(UITableView *)tv commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     // If row is deleted, remove it from the list.
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -283,12 +289,15 @@
             [[ServerRequest alloc] initSetFavoris:NO withArticleId:[[articles objectAtIndex:indexPath.row] articleId]];
         [changeRequest start];
         
+        // Immediate feedback
+        if ([articles count] > indexPath.row) {
+            [articles removeObjectAtIndex:indexPath.row];
+            [table deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+        
         // Update article list: remove item
         self.resetCache = YES;
         [self refresh];
-        
-        [articles removeObjectAtIndex:indexPath.row];
-        [table deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
