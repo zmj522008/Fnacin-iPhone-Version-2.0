@@ -16,6 +16,7 @@
     IBOutlet UIButton* thematique;
     IBOutlet UILabel* titre;
     IBOutlet UILabel* date;
+    IBOutlet UITextView* accrocheText;
     IBOutlet UIWebView* accroche;
     IBOutlet UIImageView* vignette;
     IBOutlet UILabel* mediaButton;
@@ -35,6 +36,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *titre;
 @property (nonatomic, retain) IBOutlet UILabel *date;
 @property (nonatomic, retain) IBOutlet UIWebView *accroche;
+@property (nonatomic, retain) IBOutlet UITextView *accrocheText;
 @property (nonatomic, retain) IBOutlet UIImageView *vignette;
 @property (nonatomic, retain) IBOutlet UILabel *mediaButton;
 @property (nonatomic, retain) IBOutlet UIImageView *jaimeIcon;

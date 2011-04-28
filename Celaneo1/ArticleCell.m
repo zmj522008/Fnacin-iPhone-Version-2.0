@@ -18,6 +18,7 @@
 @synthesize titre;
 @synthesize date;
 @synthesize accroche;
+@synthesize accrocheText;
 @synthesize vignette;
 @synthesize mediaButton;
 @synthesize jaimeIcon;
@@ -36,6 +37,7 @@
     [titre release];
     [date release];
     [accroche release];
+    [accrocheText release];
     [vignette release];
     [mediaButton release];
     [jaimeIcon release];
@@ -52,7 +54,7 @@
 
 - (void) updateWithArticle:(Article*) article usingImageLoadingQueue:(NSOperationQueue*)imageLoadingQueue
 {
-#ifdef DEBUG
+#ifdef DEBUG__
     article.nb_commentaires = 2;
 #endif
     
@@ -79,7 +81,37 @@
 
     self.date.text = article.dateAffichee;
     
-    [self.accroche loadHTMLString:[@"<style>body { margin: 0; padding: 0; font: 12px helvetica; }</style>" stringByAppendingString:article.accroche] baseURL:nil];
+    self.accroche.hidden = YES;
+    
+    if (article.accroche) {
+        NSMutableString* text = [NSMutableString stringWithCapacity:article.accroche.length];
+        BOOL inEntity = NO;
+        BOOL inTag = NO;
+        for (int i = 0; i < article.accroche.length; i++) {
+            unichar ch = [article.accroche characterAtIndex:i];
+            if (ch == '&') {
+                inEntity = YES;
+            } else if (ch == '<') {
+                inTag = YES;
+            }
+            if (inEntity || inTag) {
+                if (ch == ';') {
+                    [text appendString:@"_"];
+                    inEntity = NO;
+                } else if (ch == '>') {
+                    inTag = NO;
+                }
+            } else {
+                [text appendFormat:@"%c", ch];
+            }
+        }
+        self.accrocheText.text = text;
+        self.accrocheText.contentInset = UIEdgeInsetsMake(-8,-8,0,0);
+
+        [self.accroche loadHTMLString:[@"<style>body { margin: 0; padding: 0; font: 12px helvetica; }</style>" stringByAppendingString:article.accroche] baseURL:nil];
+    } else {
+        self.accroche.hidden = YES;
+    }
     self.accroche.delegate = self;
     
     self.vignette.hidden = NO;
@@ -119,6 +151,7 @@
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
+    self.accrocheText.text = nil;
     webView.hidden = NO;
 }
 

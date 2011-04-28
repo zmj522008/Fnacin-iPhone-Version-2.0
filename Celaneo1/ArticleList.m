@@ -12,6 +12,7 @@
 #import "PrefereEditController.h"
 #import "ArticleDetail.h"
 #import "GANTracker.h"
+#import "NSString+stripTags.h"
 
 #define TAG_ITEM_A_LA_UNE 101
 #define TAG_ITEM_PREFERE 102
@@ -322,14 +323,17 @@
 
 - (IBAction) cellMediaClick:(id)sender
 {
-    Article* article = [self articleFromSender:sender];
-    if (article.type == ARTICLE_TYPE_TEXT) {
-        [self cellContentClick:sender];
+    if (table.editing) {
     } else {
-        MediaPlayer* mediaPlayer = [[MediaPlayer alloc] initWithNibName:@"MediaPlayer" bundle:nil];
-        mediaPlayer.article = article;
-        
-        [self.navigationController pushViewController:mediaPlayer animated:YES];   
+        Article* article = [self articleFromSender:sender];
+        if (article.type == ARTICLE_TYPE_TEXT) {
+            [self cellContentClick:sender];
+        } else {
+            MediaPlayer* mediaPlayer = [[MediaPlayer alloc] initWithNibName:@"MediaPlayer" bundle:nil];
+            mediaPlayer.article = article;
+            
+            [self.navigationController pushViewController:mediaPlayer animated:YES];   
+        }
     }
 }
 

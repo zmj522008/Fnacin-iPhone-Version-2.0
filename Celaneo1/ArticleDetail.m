@@ -325,7 +325,7 @@
 
 - (void) update
 {
-#ifdef DEBUG
+#ifdef DEBUG__
     article.nb_commentaires = 2;
     Commentaire* com1 = [[Commentaire alloc] init];
     com1.date = @"date1";
