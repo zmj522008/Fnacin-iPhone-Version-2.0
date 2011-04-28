@@ -74,9 +74,12 @@
     
     imageRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlString]];
     imageRequest.downloadCache = [ASIDownloadCache sharedCache];
-//    imageRequest.downloadCache = nil;
-    imageRequest.cachePolicy = ASIOnlyLoadIfNotCachedCachePolicy;
+    imageRequest.cachePolicy = ASIOnlyLoadIfNotCachedCachePolicy | ASIFallbackToCacheIfLoadFailsCachePolicy;
+    [imageRequest setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
+    [[ASIDownloadCache sharedCache] setShouldRespectCacheControlHeaders:NO];
     
+    NSLog(@"Cache: %@", [imageRequest.downloadCache pathToCachedResponseDataForRequest:imageRequest]);
+
     return imageRequest;
 }
 

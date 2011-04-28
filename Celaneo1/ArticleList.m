@@ -12,7 +12,6 @@
 #import "PrefereEditController.h"
 #import "ArticleDetail.h"
 #import "GANTracker.h"
-#import "NSString+stripTags.h"
 
 #define TAG_ITEM_A_LA_UNE 101
 #define TAG_ITEM_PREFERE 102

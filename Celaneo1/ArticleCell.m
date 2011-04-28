@@ -7,7 +7,6 @@
 //
 
 #import "ArticleCell.h"
-#import "ASIDownloadCache.h"
 
 #undef DEBUG_IMAGE
 
@@ -159,7 +158,7 @@
 {
     if (request == imageRequest) {
         self.vignette.image = [UIImage imageWithData:request.responseData];
-        if ([request.responseData length]) {
+        if ([request.responseData length] == 0) {
             NSLog(@"image empty: %@", [request.url absoluteURL]);
         }
 #ifdef DEBUG_IMAGE
@@ -183,10 +182,10 @@
     UILabel* label = [[UILabel alloc] initWithFrame:self.vignette.bounds];
     [self.vignette addSubview:label];
     label.text = [request.error localizedDescription];
-    NSLog(@"image %@ error: %@", [request.url absoluteString],[request.error localizedDescription]);
     [label release];
 #endif
-    
+    NSLog(@"image %@ error: %@", [request.url absoluteString],[request.error localizedDescription]);
+
     self.imageRequest = nil;
 }
 

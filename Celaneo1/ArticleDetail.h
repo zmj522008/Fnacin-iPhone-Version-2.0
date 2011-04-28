@@ -35,6 +35,9 @@ enum ArticleDetailSections {
     IBOutlet UITableViewCell* contentCell;
     IBOutlet UITableViewCell* postCommentCell;
     
+    IBOutlet UIActivityIndicatorView* activityIndicator;
+    IBOutlet UIToolbar* toolbar;
+    
 #pragma mark detail cell attributes
     IBOutlet UIButton* rubrique;
     IBOutlet UIButton* thematique;
@@ -91,6 +94,8 @@ enum ArticleDetailSections {
 @property (nonatomic, retain) IBOutlet UILabel *commentPrompt;
 @property (nonatomic, retain) IBOutlet UITextView *commentText;
 @property (nonatomic, retain) IBOutlet UIButton *commentSend;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 
 - (void) update;
 - (void)resizeViewControllerToFitScreen;

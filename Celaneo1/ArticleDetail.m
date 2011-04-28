@@ -35,6 +35,8 @@
 @synthesize commentaireRequest;
 @synthesize favorisRequest;
 @synthesize jaimeRequest;
+@synthesize activityIndicator;
+@synthesize toolbar;
 
 - (void)dealloc
 {
@@ -65,6 +67,8 @@
     [jaimeRequest cancel];
     jaimeRequest.delegate = nil;
     [jaimeRequest release];
+    [activityIndicator release];
+    [toolbar release];
     [super dealloc];
 }
 
@@ -93,6 +97,8 @@
     [commentText.layer setCornerRadius:8.0f];
     [commentText.layer setMasksToBounds:YES];
 
+    activityIndicator.frame = CGRectMake((toolbar.bounds.size.width - 20) / 2, 
+                                         (toolbar.bounds.size.height - 20) / 2, 20, 20);
 }
 
 - (void)viewDidUnload
@@ -113,7 +119,10 @@
     self.content = nil;
     self.commentPrompt = nil;
     self.commentText = nil;
-    self.commentSend = nil;
+    self.commentSend = nil;    
+    self.activityIndicator = nil;
+    self.toolbar = nil;
+
     [commentaireRequest cancel];
     [jaimeRequest cancel];
     [favorisRequest cancel];
@@ -140,6 +149,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    commentText.text = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
@@ -384,10 +394,10 @@
     UILabel* label = [[UILabel alloc] initWithFrame:self.vignette.bounds];
     [self.vignette addSubview:label];
     label.text = [request.error localizedDescription];
-    NSLog(@"image %@ error: %@", [request.url absoluteString],[request.error localizedDescription]);
     [label release];
 #endif
-    
+    NSLog(@"image %@ error: %@", [request.url absoluteString],[request.error localizedDescription]);
+
     self.imageRequest = nil;
 }
 
@@ -406,9 +416,11 @@
 #pragma mark toolbar actions
 - (IBAction) jaimeClick
 {
+    [self.jaimeRequest cancel];
     self.jaimeRequest = [[ServerRequest alloc] initJaimeWithArticleId:article.articleId];
     jaimeRequest.delegate = self;
     [jaimeRequest start];
+    [toolbar addSubview:activityIndicator];
 }
 
 - (IBAction) commentaireClick
@@ -418,10 +430,14 @@
 
 - (IBAction) favorisClick
 {
-    self.favorisRequest = [[ServerRequest alloc] initSetFavoris:YES withArticleId:article.articleId];
-    favorisRequest.delegate = self;
-    [favorisRequest start];
-    
+    if (!article.favoris) {
+        [self.favorisRequest cancel];
+        self.favorisRequest = [[ServerRequest alloc] initSetFavoris:YES withArticleId:article.articleId];
+        favorisRequest.delegate = self;
+        [favorisRequest start];
+        
+        [toolbar addSubview:activityIndicator];
+    }
 }
 
 - (IBAction) toggleCommentaireView
@@ -443,6 +459,7 @@
 #pragma mark commentaire actions
 - (IBAction) submitCommentaire
 {
+    [self.commentaireRequest cancel];
     self.commentaireRequest = [[ServerRequest alloc] initSendCommentaire:commentText.text withArticleId:article.articleId];
     commentaireRequest.delegate = self;
     [commentaireRequest start];
@@ -450,56 +467,71 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-    // Keyboard button click
-    [self submitCommentaire];
+    if ([commentText.text length] > 0) {
+        // Keyboard button click
+        [self submitCommentaire];
+    }
 }
 
+#pragma mark indicator
+
+- (void) hideIndicatorIfNecessary
+{
+    if (favorisRequest == nil && jaimeRequest == nil) {
+        [activityIndicator removeFromSuperview];
+    }
+}
 #pragma mark Handle server Response
 
 - (void) serverRequest:(ServerRequest*)request didSucceedWithObject:(id)result
 {
+    NSString* message;
     if (favorisRequest == request) {
         NSLog(@"favoris");
         
-        
-//        UIGraphicsBeginImageContext(self.view.frame.size);
-//        [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-//        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-//        UIGraphicsEndImageContext();
-        
-//        UIImageView* imageView = [[[UIImageView alloc] initWithImage:image] autorelease];
-//        imageView.alpha = 0.5f;
-//        imageView.backgroundColor = [UIColor greenColor];
-//        [self.view addSubview:imageView];
-
-        //TODO Possibly apply gray bg during request
-        UIView* gray = [[[UIView alloc] initWithFrame:self.view.frame] autorelease];
-        gray.backgroundColor = [UIColor grayColor];
-        gray.alpha = 0.5f;
-        [self.view addSubview:gray];
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.view cache:YES];
-        [gray removeFromSuperview];
-
-        [UIView setAnimationDelay:1.0];
-        [UIView commitAnimations];
-        
         article.favoris = YES;
         [self updateToolbar];
+        self.favorisRequest = nil;
+        message = @"Article ajouté à vos dossiers.";
     } else if (jaimeRequest == request) {
         if (request.nb_jaime > article.nb_jaime) {
             article.nb_jaime = request.nb_jaime;
         }
         [self updateToolbar];
+        self.jaimeRequest = nil;
+        message = @"Article marqué.";
     } else if (commentaireRequest == request) {
         if (request.nb_commentaire > article.nb_commentaires) {
             article.nb_commentaires = request.nb_commentaire;
         }
         [self updateToolbar];
+        self.commentaireRequest = nil;
+        message = @"Commentaire envoyé.";
     } else {
         [super serverRequest:request didSucceedWithObject:result];
     }
+    UIAlertView *feedback = [[UIAlertView alloc] initWithTitle:@"Article" 
+                                                       message:message 
+                                                      delegate:nil 
+                                             cancelButtonTitle:@"OK" 
+                                             otherButtonTitles:nil];
+    [feedback show];
+    [feedback release];
+
+    [self hideIndicatorIfNecessary];
 }
 
+- (void)serverRequest:(ServerRequest *)request didFailWithError:(NSError *)error
+{
+    if (favorisRequest == request) {
+        self.favorisRequest = nil;
+    } else if (jaimeRequest == request) {
+        self.jaimeRequest = nil;
+    } else if (commentaireRequest == request) {
+        self.commentaireRequest = nil;
+    }
+    [self hideIndicatorIfNecessary];
+    [super serverRequest:request didFailWithError:error];
+}
 
 @end

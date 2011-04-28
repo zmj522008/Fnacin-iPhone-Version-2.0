@@ -19,6 +19,7 @@
     NSOperationQueue* imageLoadingQueue;
 
     BOOL resetCache;
+    BOOL errorShown;
 }
 
 @property (nonatomic, retain) ServerRequest *offlineRequest;

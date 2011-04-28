@@ -7,7 +7,6 @@
 //
 
 #import "CommentaireCell.h"
-#import "ASIDownloadCache.h"
 
 #undef DEBUG_IMAGE
 
