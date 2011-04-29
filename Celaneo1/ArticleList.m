@@ -145,24 +145,29 @@
 {
     int requestCount = request.articles.count;
     if (requestCount > 0 && requestCount >= articles.count - request.limitStart) {
-        [table beginUpdates];
-        
-        NSMutableArray* reloadRows = [NSMutableArray arrayWithCapacity:requestCount];
-        for (int i = 0; i < requestCount && i < articles.count - request.limitStart; i++) {
-            if (![[request.articles objectAtIndex:i] isEqual:[articles objectAtIndex:i + request.limitStart]]) {
-                [reloadRows addObject:[NSIndexPath indexPathForRow:i + request.limitStart inSection:0]];
+        if (articles.count > 0) {
+            [table beginUpdates];
+            
+            NSMutableArray* reloadRows = [NSMutableArray arrayWithCapacity:requestCount];
+            for (int i = 0; i < requestCount && i < articles.count - request.limitStart; i++) {
+                if (![[request.articles objectAtIndex:i] isEqual:[articles objectAtIndex:i + request.limitStart]]) {
+                    [reloadRows addObject:[NSIndexPath indexPathForRow:i + request.limitStart inSection:0]];
+                }
             }
+            [table reloadRowsAtIndexPaths:reloadRows withRowAnimation:UITableViewRowAnimationNone];
+            NSMutableArray* insertRows = [NSMutableArray arrayWithCapacity:requestCount];
+            for (int i = articles.count - request.limitStart; i < requestCount; i++) {
+                [insertRows addObject:[NSIndexPath indexPathForRow:i + request.limitStart inSection:0]];            
+            }
+            [table insertRowsAtIndexPaths:insertRows withRowAnimation:UITableViewRowAnimationNone];
+            
+            [articles removeObjectsInRange:NSMakeRange(request.limitStart, articles.count - request.limitStart)];
+            [articles addObjectsFromArray:request.articles];
+            [table endUpdates];
+        } else {
+            [articles addObjectsFromArray:request.articles];
+            [table reloadData];
         }
-        [table reloadRowsAtIndexPaths:reloadRows withRowAnimation:UITableViewRowAnimationNone];
-        NSMutableArray* insertRows = [NSMutableArray arrayWithCapacity:requestCount];
-        for (int i = articles.count - request.limitStart; i < requestCount; i++) {
-            [insertRows addObject:[NSIndexPath indexPathForRow:i + request.limitStart inSection:0]];            
-        }
-        [table insertRowsAtIndexPaths:insertRows withRowAnimation:UITableViewRowAnimationNone];
-        
-        [articles removeObjectsInRange:NSMakeRange(request.limitStart, articles.count - request.limitStart)];
-        [articles addObjectsFromArray:request.articles];
-        [table endUpdates];
     } else {
         [table reloadData];
     }
@@ -276,31 +281,11 @@
     }
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    int tag = self.navigationController.tabBarItem.tag | self.tabBarItem.tag;
-    return tag == TAG_ITEM_DOSSIERS;
+    return YES;
 }
-
-- (void)tableView:(UITableView *)tv commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    // If row is deleted, remove it from the list.
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        ServerRequest* changeRequest = 
-            [[ServerRequest alloc] initSetFavoris:NO withArticleId:[[articles objectAtIndex:indexPath.row] articleId]];
-        [changeRequest start];
-        
-        // Immediate feedback
-        if ([articles count] > indexPath.row) {
-            [articles removeObjectAtIndex:indexPath.row];
-            [table deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        }
-        
-        // Update article list: remove item
-        self.resetCache = YES;
-        [self refresh];
-    }
-}
-
+    
 #pragma mark article cell actions
 
 - (ArticleCell*) articleCell:(id)sender
@@ -323,6 +308,7 @@
 - (IBAction) cellMediaClick:(id)sender
 {
     if (table.editing) {
+        [self cellDeleteClick:sender];
     } else {
         Article* article = [self articleFromSender:sender];
         if (article.type == ARTICLE_TYPE_TEXT) {
@@ -338,39 +324,72 @@
 
 - (IBAction) cellContentClick:(id)sender
 {
-    ArticleDetail* detail = [[ArticleDetail alloc] initWithNibName:@"ArticleDetail" bundle:nil];
-    detail.article = [self articleFromSender:sender];
-    detail.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:detail animated:YES];
+    if (table.editing) {
+        [self cellDeleteClick:sender];
+    } else {
+        ArticleDetail* detail = [[ArticleDetail alloc] initWithNibName:@"ArticleDetail" bundle:nil];
+        detail.article = [self articleFromSender:sender];
+        detail.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detail animated:YES];
+    }
 }
 
 - (IBAction) cellRubriqueClick:(id)sender
 {
-    self.tabBarController.selectedIndex = 3;
-    UINavigationController* rubriqueNavigationController = (UINavigationController*) self.tabBarController.selectedViewController;
-    ArticleList* articleListController;
-    int rId = [self articleFromSender:sender].rubriqueId;
-    if ([rubriqueNavigationController.topViewController isKindOfClass:[ArticleList class]]) {
-        articleListController = (ArticleList*) rubriqueNavigationController.topViewController;
-        articleListController.rubriqueId = rId;
-        [articleListController refresh];
+    if (table.editing) {
+        [self cellDeleteClick:sender];
     } else {
-        articleListController = [[ArticleList alloc] initWithNibName:@"ArticleList" bundle:nil];
-        articleListController.rubriqueId = rId;
-        [rubriqueNavigationController pushViewController:articleListController animated:YES];
+        self.tabBarController.selectedIndex = 3;
+        UINavigationController* rubriqueNavigationController = (UINavigationController*) self.tabBarController.selectedViewController;
+        ArticleList* articleListController;
+        int rId = [self articleFromSender:sender].rubriqueId;
+        if ([rubriqueNavigationController.topViewController isKindOfClass:[ArticleList class]]) {
+            articleListController = (ArticleList*) rubriqueNavigationController.topViewController;
+            articleListController.rubriqueId = rId;
+            [articleListController refresh];
+        } else {
+            articleListController = [[ArticleList alloc] initWithNibName:@"ArticleList" bundle:nil];
+            articleListController.rubriqueId = rId;
+            [rubriqueNavigationController pushViewController:articleListController animated:YES];
+        }
     }
 }
+
 - (IBAction) cellThematiqueClick:(id)sender
 {
-    ArticleList* articleListController = [[ArticleList alloc] initWithNibName:@"ArticleList" bundle:nil];
-    articleListController.thematiqueId = [self articleFromSender:sender].thematiqueId;
-    articleListController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:articleListController animated:YES];
-   
+    if (table.editing) {
+        [self cellDeleteClick:sender];
+    } else {
+        ArticleList* articleListController = [[ArticleList alloc] initWithNibName:@"ArticleList" bundle:nil];
+        articleListController.thematiqueId = [self articleFromSender:sender].thematiqueId;
+        articleListController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:articleListController animated:YES];
+    }   
 }
+
 - (IBAction) cellFavorisClick:(id)sender
 {
     
+}
+
+
+- (IBAction)cellDeleteClick:(id)sender
+{
+    int row = [table indexPathForCell:[self articleCell:sender]].row;
+    
+    ServerRequest* changeRequest = 
+    [[ServerRequest alloc] initSetFavoris:NO withArticleId:[[articles objectAtIndex:row] articleId]];
+    [changeRequest start];
+    
+    // Immediate feedback
+    if ([articles count] > row) {
+        [articles removeObjectAtIndex:row];
+        [table deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    }
+    
+    // Update article list: remove item
+    self.resetCache = YES;
+    [self refresh];
 }
 
 @end

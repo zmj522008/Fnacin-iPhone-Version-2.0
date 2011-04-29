@@ -7,8 +7,13 @@
 //
 
 #import "ArticleCell.h"
+#import "Foundation/NSRange.h"
+#import "NSString+removeTags.h"
 
 #undef DEBUG_IMAGE
+
+#define BASE_ACCROCHE_WIDTH 180
+#define TITRE_WIDTH 302
 
 @implementation ArticleCell
 
@@ -83,28 +88,7 @@
     self.accroche.hidden = YES;
     
     if (article.accroche) {
-        NSMutableString* text = [NSMutableString stringWithCapacity:article.accroche.length];
-        BOOL inEntity = NO;
-        BOOL inTag = NO;
-        for (int i = 0; i < article.accroche.length; i++) {
-            unichar ch = [article.accroche characterAtIndex:i];
-            if (ch == '&') {
-                inEntity = YES;
-            } else if (ch == '<') {
-                inTag = YES;
-            }
-            if (inEntity || inTag) {
-                if (ch == ';') {
-                    [text appendString:@"_"];
-                    inEntity = NO;
-                } else if (ch == '>') {
-                    inTag = NO;
-                }
-            } else {
-                [text appendFormat:@"%c", ch];
-            }
-        }
-        self.accrocheText.text = text;
+        self.accrocheText.text = [NSString stringWithoutTags:article.accroche];
         self.accrocheText.contentInset = UIEdgeInsetsMake(-8,-8,0,0);
 
         [self.accroche loadHTMLString:[@"<style>body { margin: 0; padding: 0; font: 12px helvetica; }</style>" stringByAppendingString:article.accroche] baseURL:nil];
@@ -150,7 +134,7 @@
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
-    self.accrocheText.text = nil;
+//    self.accrocheText.text = nil;
     webView.hidden = NO;
 }
 
@@ -158,9 +142,11 @@
 {
     if (request == imageRequest) {
         self.vignette.image = [UIImage imageWithData:request.responseData];
+#ifdef DEBUG
         if ([request.responseData length] == 0) {
             NSLog(@"image empty: %@", [request.url absoluteURL]);
         }
+#endif
 #ifdef DEBUG_IMAGE
         UILabel* label = [[UILabel alloc] initWithFrame:self.vignette.bounds];
         [self.vignette addSubview:label];
@@ -184,8 +170,9 @@
     label.text = [request.error localizedDescription];
     [label release];
 #endif
+#ifdef DEBUG
     NSLog(@"image %@ error: %@", [request.url absoluteString],[request.error localizedDescription]);
-
+#endif
     self.imageRequest = nil;
 }
 
@@ -197,5 +184,26 @@
         [view removeFromSuperview];
     }
     self.accroche.hidden = YES;
+}
+
+- (void)willTransitionToState:(UITableViewCellStateMask)state
+{
+    CGRect accrocheFrame = accroche.frame;
+    CGRect titreFrame = self.titre.frame;
+    if (state & (UITableViewCellStateShowingDeleteConfirmationMask
+                 | UITableViewCellStateShowingEditControlMask) ) {
+        accrocheFrame.size.width = BASE_ACCROCHE_WIDTH - 20;
+        titreFrame.size.width = TITRE_WIDTH - 20;
+        self.accroche.hidden = YES;
+    } else {
+        accrocheFrame.size.width = BASE_ACCROCHE_WIDTH;
+        titreFrame.size.width = TITRE_WIDTH;
+        self.accroche.hidden = NO;
+    }
+    self.titre.frame = titreFrame;
+    self.accrocheText.contentSize = accrocheFrame.size;
+    self.accrocheText.frame = accrocheFrame;
+    
+    [self.accroche layoutIfNeeded];
 }
 @end

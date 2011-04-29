@@ -371,9 +371,11 @@
 {
     if (request == imageRequest) {
         self.vignette.image = [UIImage imageWithData:request.responseData];
+#ifdef DEBUG
         if ([request.responseData length]) {
             NSLog(@"image empty: %@", [request.url absoluteURL]);
         }
+#endif
 #ifdef DEBUG_IMAGE
         UILabel* label = [[UILabel alloc] initWithFrame:self.vignette.bounds];
         [self.vignette addSubview:label];
@@ -396,8 +398,10 @@
     label.text = [request.error localizedDescription];
     [label release];
 #endif
+#ifdef DEBUG
     NSLog(@"image %@ error: %@", [request.url absoluteString],[request.error localizedDescription]);
-
+#endif
+    
     self.imageRequest = nil;
 }
 
@@ -437,23 +441,40 @@
         [favorisRequest start];
         
         [toolbar addSubview:activityIndicator];
+    } else {
+        UIAlertView *feedback = [[UIAlertView alloc] initWithTitle:@"Article" 
+                                                           message:@"Cet article est déjà dans vos dossiers." 
+                                                          delegate:nil 
+                                                 cancelButtonTitle:@"OK" 
+                                                 otherButtonTitles:nil];
+        [feedback show];
+        [feedback release];
+
     }
 }
 
-- (IBAction) toggleCommentaireView
+
+- (void) commentaireViewChange:(BOOL)visible
 {
-    if (self.commentText.hidden) {
+    if (visible) {
         self.commentText.hidden = NO;
         self.commentSend.hidden = NO;
         postCommentaireCellHeight = self.commentText.frame.size.height + self.commentText.frame.origin.y + 5;
+        [self.commentText becomeFirstResponder];
     } else {
         self.commentText.hidden = YES;
         self.commentSend.hidden = YES;
         postCommentaireCellHeight = self.commentPrompt.frame.size.height + self.commentPrompt.frame.origin.y + 15;
+        [self.commentText resignFirstResponder];
     }
     [table beginUpdates];
     [table endUpdates];
     [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:ArticleDetailSection_PostComment] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+- (IBAction) toggleCommentaireView
+{
+    [self commentaireViewChange:self.commentText.hidden];
 }
 
 #pragma mark commentaire actions
@@ -469,7 +490,7 @@
 {
     if ([commentText.text length] > 0) {
         // Keyboard button click
-        [self submitCommentaire];
+//        [self submitCommentaire];
     }
 }
 
@@ -487,8 +508,6 @@
 {
     NSString* message;
     if (favorisRequest == request) {
-        NSLog(@"favoris");
-        
         article.favoris = YES;
         [self updateToolbar];
         self.favorisRequest = nil;
@@ -507,6 +526,8 @@
         [self updateToolbar];
         self.commentaireRequest = nil;
         message = @"Commentaire envoyé.";
+        [self commentaireViewChange:NO];
+        self.commentText.text = nil;
     } else {
         [super serverRequest:request didSucceedWithObject:result];
     }

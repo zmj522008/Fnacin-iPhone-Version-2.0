@@ -236,7 +236,9 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
     if (erreur == nil && fnac && [[Celaneo1AppDelegate getSingleton].sessionId length] > 0) {
+#ifdef DEBUG
         [self dump];
+#endif
         [delegate serverRequest:self didSucceedWithObject:nil];
     } else {
         [[ASIDownloadCache sharedCache] removeCachedDataForRequest:asiRequest];

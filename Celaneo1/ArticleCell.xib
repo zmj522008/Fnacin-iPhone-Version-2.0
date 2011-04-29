@@ -249,6 +249,10 @@
 								<int key="IBUIContentMode">2</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">ilike.png</string>
+								</object>
 							</object>
 							<object class="IBUILabel" id="177396043">
 								<reference key="NSNextResponder" ref="814330155"/>
@@ -311,6 +315,7 @@
 								<string key="NSFrame">{{236, 102}, {68, 21}}</string>
 								<reference key="NSSuperview" ref="814330155"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -347,11 +352,34 @@
 								<float key="IBUIMinimumFontSize">10</float>
 								<int key="IBUITextAlignment">1</int>
 							</object>
+							<object class="IBUIButton" id="631897731">
+								<reference key="NSNextResponder" ref="814330155"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{-24.5, 0}, {23, 123}}</string>
+								<reference key="NSSuperview" ref="814330155"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="947558141"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<int key="IBUIContentHorizontalAlignment">0</int>
+								<int key="IBUIContentVerticalAlignment">0</int>
+								<reference key="IBUIFont" ref="290176116"/>
+								<reference key="IBUIHighlightedTitleColor" ref="186976245"/>
+								<object class="NSColor" key="IBUINormalTitleColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+								</object>
+								<reference key="IBUINormalTitleShadowColor" ref="942268424"/>
+								<object class="NSCustomResource" key="IBUINormalImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">remove.png</string>
+								</object>
+							</object>
 						</object>
 						<string key="NSFrameSize">{320, 123}</string>
 						<reference key="NSSuperview" ref="233113793"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="947558141"/>
+						<reference key="NSNextKeyView" ref="631897731"/>
 						<reference key="IBUIBackgroundColor" ref="22735632"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -499,6 +527,15 @@
 					</object>
 					<int key="connectionID">59</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">cellDeleteClick:</string>
+						<reference key="source" ref="631897731"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">61</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -539,6 +576,7 @@
 							<reference ref="53517276"/>
 							<reference ref="181520973"/>
 							<reference ref="829229559"/>
+							<reference ref="631897731"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -626,6 +664,12 @@
 						<reference key="parent" ref="233113793"/>
 						<string key="objectName">accrocheText</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">60</int>
+						<reference key="object" ref="631897731"/>
+						<reference key="parent" ref="233113793"/>
+						<string key="objectName">delete</string>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -647,6 +691,7 @@
 					<string>56.IBPluginDependency</string>
 					<string>58.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
+					<string>60.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
@@ -659,6 +704,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>ArticleCell</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -685,7 +731,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">59</int>
+			<int key="maxID">61</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -822,6 +868,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cellContentClick:</string>
+							<string>cellDeleteClick:</string>
 							<string>cellFavorisClick:</string>
 							<string>cellMediaClick:</string>
 							<string>cellRubriqueClick:</string>
@@ -829,6 +876,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -841,6 +889,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cellContentClick:</string>
+							<string>cellDeleteClick:</string>
 							<string>cellFavorisClick:</string>
 							<string>cellMediaClick:</string>
 							<string>cellRubriqueClick:</string>
@@ -850,6 +899,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
 								<string key="name">cellContentClick:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">cellDeleteClick:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -910,13 +963,17 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>arrow.png</string>
 				<string>comments.png</string>
+				<string>ilike.png</string>
 				<string>loading_list.jpg</string>
+				<string>remove.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{10, 14}</string>
 				<string>{21, 19}</string>
+				<string>{30, 30}</string>
 				<string>{115, 65}</string>
+				<string>{23, 23}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">300</string>

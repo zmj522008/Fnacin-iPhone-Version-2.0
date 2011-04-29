@@ -39,5 +39,5 @@
 - (IBAction) cellRubriqueClick:(id)sender;
 - (IBAction) cellThematiqueClick:(id)sender;
 - (IBAction) cellFavorisClick:(id)sender;
-
+- (IBAction) cellDeleteClick:(id)sender;
 @end

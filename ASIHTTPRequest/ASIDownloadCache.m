@@ -453,7 +453,9 @@ static NSString *permanentCacheFolder = @"PermanentStore";
         }
     }
     
+#ifdef DEBUG
     NSLog(@"request hash: %@", urlString);
+#endif
 	const char *cStr = [urlString UTF8String];
 	unsigned char result[16];
 	CC_MD5(cStr, (CC_LONG)strlen(cStr), result);
