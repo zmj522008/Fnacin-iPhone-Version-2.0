@@ -113,7 +113,7 @@
     [[NSNotificationCenter defaultCenter]
      addObserver: self
      selector: @selector(mediaPlayerStateChange:)
-     name: MPMoviePlayerPlaybackStateDidChangeNotification
+     name: MPMoviePlayerLoadStateDidChangeNotification
      object: moviePlayer];
     [[NSNotificationCenter defaultCenter]
      addObserver: self
@@ -176,8 +176,7 @@
     MPMoviePlayerController* player = [aNotification object];
 
     if (player.loadState == MPMovieLoadStatePlayable
-        || player.loadState == MPMovieLoadStatePlaythroughOK
-        || player.playbackState == MPMoviePlaybackStatePlaying) {
+        || player.loadState == MPMovieLoadStatePlaythroughOK) {
         [activity stopAnimating];
     }
     if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
@@ -197,7 +196,7 @@
     
     [[NSNotificationCenter defaultCenter]
      removeObserver: self
-     name: MPMoviePlayerPlaybackStateDidChangeNotification
+     name: MPMoviePlayerLoadStateDidChangeNotification
      object: player];
     
     
