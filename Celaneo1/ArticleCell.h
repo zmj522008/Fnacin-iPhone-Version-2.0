@@ -11,6 +11,12 @@
 #import "Article.h"
 #import "ASIHTTPRequest.h"
 
+@protocol ArticleCellDelegate <NSObject>
+
+- (IBAction)cellDeleteClick:(id)sender;
+
+@end
+
 @interface ArticleCell : UITableViewCell <ASIHTTPRequestDelegate, UIWebViewDelegate> {
     IBOutlet UIButton* rubrique;
     IBOutlet UIButton* thematique;
@@ -30,7 +36,12 @@
     NSString* currentImageUrl;
     
     ASIHTTPRequest* imageRequest;
+    
+    BOOL deleteMode;
+
+    id<ArticleCellDelegate> delegate;
 }
+
 @property (nonatomic, retain) IBOutlet UIButton *rubrique;
 @property (nonatomic, retain) IBOutlet UIButton *thematique;
 @property (nonatomic, retain) IBOutlet UILabel *titre;
@@ -48,6 +59,9 @@
 
 @property (nonatomic, retain) ASIHTTPRequest *imageRequest;
 @property (nonatomic, retain) NSString *currentImageUrl;
+
+@property (nonatomic, retain) id<ArticleCellDelegate> delegate;
+
 
 - (void) updateWithArticle:(Article*) article usingImageLoadingQueue:(NSOperationQueue*)imageLoadingQueue;
 @end

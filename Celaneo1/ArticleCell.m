@@ -33,6 +33,7 @@
 @synthesize detailAccessory;
 @synthesize imageRequest;
 @synthesize currentImageUrl;
+@synthesize delegate;
 
 - (void)dealloc
 {
@@ -53,6 +54,8 @@
     [imageRequest cancel];
     [imageRequest release];
     [currentImageUrl release];
+    [delegate release];
+    
     [super dealloc];
 }
 
@@ -130,12 +133,13 @@
             mediaButton.text = @"➜ Écouter";
             break;
     }
+    
 }
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
 //    self.accrocheText.text = nil;
-    webView.hidden = NO;
+//    webView.hidden = NO;
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request
@@ -184,14 +188,17 @@
         [view removeFromSuperview];
     }
     self.accroche.hidden = YES;
+    self.delegate = nil;
 }
 
 - (void)willTransitionToState:(UITableViewCellStateMask)state
 {
     CGRect accrocheFrame = accroche.frame;
     CGRect titreFrame = self.titre.frame;
-    if (state & (UITableViewCellStateShowingDeleteConfirmationMask
-                 | UITableViewCellStateShowingEditControlMask) ) {
+    
+    deleteMode = (state & (UITableViewCellStateShowingDeleteConfirmationMask
+                           | UITableViewCellStateShowingEditControlMask));
+    if (deleteMode) {
         accrocheFrame.size.width = BASE_ACCROCHE_WIDTH - 20;
         titreFrame.size.width = TITRE_WIDTH - 20;
         self.accroche.hidden = YES;
@@ -205,5 +212,14 @@
     self.accrocheText.frame = accrocheFrame;
     
     [self.accroche layoutIfNeeded];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+
+{
+    if (deleteMode && 
+        [touches count] == 1 && [[[touches objectEnumerator] nextObject] view] == self) {
+        [delegate cellDeleteClick:self];
+    }
 }
 @end

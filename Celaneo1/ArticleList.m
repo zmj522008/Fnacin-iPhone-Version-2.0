@@ -87,6 +87,10 @@
     self.table = nil;
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    table.editing = NO;
+}
 
 - (void)dealloc
 {
@@ -237,6 +241,7 @@
             NSAssert2([CellId compare:cell.reuseIdentifier] == 0, @"Cell has invalid identifier, actual: %@, expected: %@", cell.reuseIdentifier, CellId);
         }
         [cell updateWithArticle:[articles objectAtIndex:indexPath.row] usingImageLoadingQueue:self.imageLoadingQueue];
+        cell.delegate = self;
         return cell;
     } else {
         static NSString *CellId = @"MoreCell";
@@ -285,17 +290,21 @@
 {
     return YES;
 }
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
     
+}
 #pragma mark article cell actions
 
 - (ArticleCell*) articleCell:(id)sender
 {
     UIView* v = sender;
     while (v != nil) {
-        v = v.superview;
         if ([v isKindOfClass:[ArticleCell class]]) {
             return (ArticleCell*) v;
         }
+        v = v.superview;
     }
     return nil;
 }
@@ -384,7 +393,7 @@
     // Immediate feedback
     if ([articles count] > row) {
         [articles removeObjectAtIndex:row];
-        [table deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+        [table deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
     }
     
     // Update article list: remove item

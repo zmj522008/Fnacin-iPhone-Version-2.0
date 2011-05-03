@@ -11,7 +11,7 @@
 #import "ServerRequest.h"
 #import "ArticleCell.h"
 
-@interface ArticleList : BaseController <UITableViewDataSource, UITableViewDelegate> {
+@interface ArticleList : BaseController <UITableViewDataSource, UITableViewDelegate, ArticleCellDelegate> {
     NSMutableArray* articles;
     
     BOOL favoris;

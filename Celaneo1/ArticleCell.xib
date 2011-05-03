@@ -185,7 +185,7 @@
 							<object class="IBUIButton" id="757064050">
 								<reference key="NSNextResponder" ref="814330155"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{0, 43}, {122, 78}}</string>
+								<string key="NSFrame">{{-30, 43}, {152, 78}}</string>
 								<reference key="NSSuperview" ref="814330155"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="621236618"/>
@@ -352,7 +352,7 @@
 								<float key="IBUIMinimumFontSize">10</float>
 								<int key="IBUITextAlignment">1</int>
 							</object>
-							<object class="IBUIButton" id="631897731">
+							<object class="IBUIButton" id="861223805">
 								<reference key="NSNextResponder" ref="814330155"/>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{-24.5, 0}, {23, 123}}</string>
@@ -379,7 +379,7 @@
 						<string key="NSFrameSize">{320, 123}</string>
 						<reference key="NSSuperview" ref="233113793"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="631897731"/>
+						<reference key="NSNextKeyView" ref="861223805"/>
 						<reference key="IBUIBackgroundColor" ref="22735632"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -530,7 +530,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">cellDeleteClick:</string>
-						<reference key="source" ref="631897731"/>
+						<reference key="source" ref="861223805"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -576,7 +576,7 @@
 							<reference ref="53517276"/>
 							<reference ref="181520973"/>
 							<reference ref="829229559"/>
-							<reference ref="631897731"/>
+							<reference ref="861223805"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -666,7 +666,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">60</int>
-						<reference key="object" ref="631897731"/>
+						<reference key="object" ref="861223805"/>
 						<reference key="parent" ref="233113793"/>
 						<string key="objectName">delete</string>
 					</object>
