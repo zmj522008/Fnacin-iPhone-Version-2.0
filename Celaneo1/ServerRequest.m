@@ -11,7 +11,7 @@
 
 #import "ASIDownloadCache.h"
 
-#define SERVER @"http://91.121.68.190:88/"
+#define SERVER @"http://webservice.fnacin.com/"
 
 @implementation ServerRequest
 
