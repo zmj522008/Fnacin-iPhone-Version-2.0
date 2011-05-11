@@ -18,6 +18,11 @@
 @synthesize submitButton;
 @synthesize debugButton;
 @synthesize request;
+@synthesize emailLabel;
+@synthesize passwordLabel;
+@synthesize passwordRecoveryLabel;
+@synthesize forgottenPasswordMode;
+@synthesize connectMode;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,6 +42,11 @@
     [request release];
     [submitButton release];
     [debugButton release];
+    [emailLabel release];
+    [passwordLabel release];
+    [passwordRecoveryLabel release];
+    [forgottenPasswordMode release];
+    [connectMode release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,6 +77,12 @@
     self.password = nil;
     self.submitButton = nil;
     self.debugButton = nil;
+    self.emailLabel = nil;
+    self.passwordLabel = nil;
+    self.passwordRecoveryLabel = nil;
+    self.forgottenPasswordMode = nil;
+    self.connectMode = nil;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -103,6 +119,17 @@
 
 - (void) serverRequest:(ServerRequest*)aRequest didSucceedWithObject:(id)result
 {
+    if (!connectMode.hidden) {
+        UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"mot de passe"                                                             message:@"la procédure à suivre pour réinitialiser le mot de passe vous a été envoyé par email"
+                                                           delegate:nil 
+                                                  cancelButtonTitle:@"Ok" 
+                                                  otherButtonTitles:nil];
+        [errorView setDelegate:self];
+        [errorView show];
+        [errorView release];
+
+        return;
+    }
     if (aRequest.prepageContent) {
         Prepage* prepage = [[Prepage alloc] initWithNibName:@"Prepage" bundle:nil];
         prepage.ferme = aRequest.prepageFerme;
@@ -123,16 +150,55 @@
     }
 }
 
-#pragma mark Button actions
-- (IBAction) recoverPassword
+- (void) serverRequest:(ServerRequest*)aRequest didFailWithError:(NSError*)error
 {
-    NSString* launchUrl = @"http://www.google.com";
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: launchUrl]];
+    if (!connectMode.hidden && aRequest.fnac) {
+        [self serverRequest:aRequest didSucceedWithObject:nil];
+    } else {
+        [super serverRequest:aRequest didFailWithError:error];
+    }
 }
 
-- (IBAction) selectPassword
+- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
 {
+    [self switchToConnectMode];
+    // exit(0);
+}
+
+#pragma mark Button actions
+- (IBAction) switchToRecoverPasswordMode
+{
+    passwordLabel.hidden = YES;
+    passwordRecoveryLabel.hidden = NO;
+    password.hidden = YES;
+    email.returnKeyType = UIReturnKeySend;
+    connectMode.hidden = NO;
+    forgottenPasswordMode.hidden = YES;
+    [email becomeFirstResponder];
+}
+
+- (IBAction) switchToConnectMode
+{
+    passwordLabel.hidden = NO;
+    passwordRecoveryLabel.hidden = YES;
+    password.hidden = NO;
+    connectMode.hidden = YES;
+    forgottenPasswordMode.hidden = NO;
+    email.returnKeyType = UIReturnKeyNext;
     [password becomeFirstResponder];
+}
+
+- (IBAction) emailReturn
+{
+    if (connectMode.hidden) {
+        [password becomeFirstResponder];
+    } else {
+        self.request = [[ServerRequest alloc] initPasswordWithEmail:email.text];
+        request.delegate = self;
+        [request start];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:email.text forKey:@"loginEmail"];
+    }
 }
 
 - (IBAction) debugBypassLog

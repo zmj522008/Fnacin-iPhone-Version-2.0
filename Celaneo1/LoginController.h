@@ -11,12 +11,18 @@
 
 #import "BaseController.h"
 
-@interface LoginController : BaseController {
+@interface LoginController : BaseController <UIAlertViewDelegate> {
     IBOutlet UITextField* email;
     IBOutlet UITextField* password;
     IBOutlet UIButton* submitButton;
     IBOutlet UIButton* debugButton;
-    
+    IBOutlet UIView* emailLabel;
+    IBOutlet UIView* passwordLabel;
+    IBOutlet UIView* passwordRecoveryLabel;
+
+    IBOutlet UIButton* forgottenPasswordMode;
+    IBOutlet UIButton* connectMode;
+
     ServerRequest* request;
 }
 
@@ -26,10 +32,17 @@
 @property (nonatomic, retain) IBOutlet UIButton *debugButton;
 @property (nonatomic, retain) ServerRequest* request;
 
+@property (nonatomic, retain) IBOutlet UIView *emailLabel;
+@property (nonatomic, retain) IBOutlet UIView *passwordLabel;
+@property (nonatomic, retain) IBOutlet UIView *passwordRecoveryLabel;
+@property (nonatomic, retain) IBOutlet UIButton *forgottenPasswordMode;
+@property (nonatomic, retain) IBOutlet UIButton *connectMode;
+
 - (IBAction) submit;
-- (IBAction) recoverPassword;
-- (IBAction) selectPassword;
+- (IBAction) switchToRecoverPasswordMode;
+- (IBAction) emailReturn;
 - (IBAction) onChange;
+- (IBAction) switchToConnectMode;
 
 - (IBAction) debugBypassLog;
 
