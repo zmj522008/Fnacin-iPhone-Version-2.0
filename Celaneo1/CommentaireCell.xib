@@ -54,7 +54,6 @@
 								<string key="NSFrame">{{20, 61}, {280, 10}}</string>
 								<reference key="NSSuperview" ref="814330155"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="412251048">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -77,7 +76,7 @@
 							<object class="IBUILabel" id="921311015">
 								<reference key="NSNextResponder" ref="814330155"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{20, 9}, {42, 21}}</string>
+								<string key="NSFrame">{{20, 9}, {280, 21}}</string>
 								<reference key="NSSuperview" ref="814330155"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1057454630"/>
@@ -98,7 +97,7 @@
 							<object class="IBUILabel" id="1057454630">
 								<reference key="NSNextResponder" ref="814330155"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{20, 32}, {42, 21}}</string>
+								<string key="NSFrame">{{20, 32}, {280, 21}}</string>
 								<reference key="NSSuperview" ref="814330155"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="571740107"/>
@@ -271,6 +270,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cellContentClick:</string>
+							<string>cellDeleteClick:</string>
 							<string>cellFavorisClick:</string>
 							<string>cellMediaClick:</string>
 							<string>cellRubriqueClick:</string>
@@ -278,6 +278,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -290,6 +291,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cellContentClick:</string>
+							<string>cellDeleteClick:</string>
 							<string>cellFavorisClick:</string>
 							<string>cellMediaClick:</string>
 							<string>cellRubriqueClick:</string>
@@ -299,6 +301,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
 								<string key="name">cellContentClick:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">cellDeleteClick:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

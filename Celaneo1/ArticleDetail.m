@@ -165,6 +165,27 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (ServerRequest*) createListRequest
+{
+    ServerRequest* request = [[ServerRequest alloc] initArticle];
+
+    [request setParameter:@"id" withIntValue:article.articleId];
+    [request setParameter:@"commentaire" withIntValue:1];
+
+    return request;
+}
+
+- (void) updateList:(ServerRequest*)request onlineContent:(BOOL)onlineContent
+{
+    for (Article* a in request.articles) {
+        if (a.articleId == article.articleId) {
+            self.article = a;
+            [self update];
+            break;
+        }
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -528,8 +549,11 @@
         message = @"Commentaire envoyé.";
         [self commentaireViewChange:NO];
         self.commentText.text = nil;
+        self.resetCache = YES;
+        [self refresh];
     } else {
         [super serverRequest:request didSucceedWithObject:result];
+        return;
     }
     UIAlertView *feedback = [[UIAlertView alloc] initWithTitle:@"Article" 
                                                        message:message 

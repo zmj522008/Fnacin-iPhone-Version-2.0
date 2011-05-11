@@ -36,6 +36,7 @@
 @synthesize dirigeant;
 @synthesize prepageContent;
 @synthesize prepageFerme;
+@synthesize fnac;
 
 #pragma mark Request constructors
 - (id) initWithMethod:(NSString*)method
@@ -60,8 +61,18 @@
     if (self != nil) {
         [asiRequest setPostValue:email forKey:@"email"];
         [asiRequest setPostValue:password forKey:@"password"];
-//        [asiRequest setPostValue:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] forKey:@"Version"];
+        [asiRequest setPostValue:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] forKey:@"Version"];
+        // server a besoin de ca 04/05/11
         [asiRequest setPostValue:@"I123" forKey:@"version"];
+    }
+    return self;
+}
+
+- (id) initPasswordWithEmail:(NSString*)email
+{
+    [self initWithMethod:@"password"];
+    if (self != nil) {
+        [asiRequest setPostValue:email forKey:@"email"];
     }
     return self;
 }
@@ -69,6 +80,7 @@
 - (id) initArticle
 {
     [self initWithMethod:@"article"];
+    [self setParameter:@"materiel" withValue:@"iphone"];
     if (self != nil) {
     }
     return self;
@@ -111,7 +123,7 @@
 
 - (id) initJaimeWithArticleId:(int)articleId
 {
-    [self initWithMethod:@"jaime"];
+    [self initWithMethod:@"setjaime"];
     if (self != nil) {
         [self setParameter:@"article_id" withIntValue:articleId];
     }
@@ -121,9 +133,10 @@
 
 - (id) initSendCommentaire:(NSString *)text withArticleId:(int)articleId
 {
-    [self initWithMethod:@"commentaire"];
+    [self initWithMethod:@"setcommentaire"];
     if (self != nil) {
         [self setParameter:@"article_id" withIntValue:articleId];
+        [self setParameter:@"commentaire" withValue:text];
     }
     return self;
 }
@@ -514,9 +527,16 @@
 
 - (void) handleElementEnd_nb_commentaires:(NSString*)value
 {
-    nb_commentaires = [value intValue];
+    nb_commentaire = [value intValue];
     self.article.nb_commentaires = [value intValue];
 }
+
+- (void) handleElementEnd_nb_commentaire:(NSString*)value
+{
+    nb_commentaire = [value intValue];
+    self.article.nb_commentaires = [value intValue];
+}
+
 
 - (void) handleElementEnd_titre:(NSString*)value
 {

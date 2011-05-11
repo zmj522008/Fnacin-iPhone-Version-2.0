@@ -47,7 +47,7 @@
     int articleCount;
     
     int nb_jaime;
-    int nb_commentaires;
+    int nb_commentaire;
 
     NSMutableArray* articles;
     NSMutableArray* thematiques;
@@ -85,6 +85,7 @@
 @property (nonatomic, assign) BOOL dirigeant;
 @property (nonatomic, retain) NSString *prepageContent;
 @property (nonatomic, assign, getter=isPrepageFerme) BOOL prepageFerme;
+@property (nonatomic, assign, getter=isFnac) BOOL fnac;
 
 - (id) initAuthentificateWithEmail:(NSString*)email withPassword:(NSString*)password;
 - (id) initArticle;
@@ -98,6 +99,7 @@
 - (id) initSetPreferences:(NSIndexSet*)indexSet forType:(int)type;
 - (id) initSendCommentaire:(NSString*)text withArticleId:(int)articleId;
 - (id) initJaimeWithArticleId:(int)articleId;
+- (id) initPasswordWithEmail:(NSString*)email;
 
 - (void) setParameter:(NSString*) name withValue:(NSString*)value;
 - (void) setParameter:(NSString*) name withIntValue:(int)value;

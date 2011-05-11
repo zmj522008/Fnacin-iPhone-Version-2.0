@@ -10,8 +10,8 @@
 
 #undef DEBUG_IMAGE
 
-#define MARGIN_TEXT 20
-#define CELL_EXTRA 100
+#define MARGIN_TEXT 30
+#define CELL_EXTRA 70
 
 @implementation CommentaireCell
 @synthesize date;
