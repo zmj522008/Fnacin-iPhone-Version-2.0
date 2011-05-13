@@ -607,7 +607,7 @@
 							</object>
 							<reference key="IBUINormalTitleShadowColor" ref="880564110"/>
 						</object>
-						<object class="IBUIActivityIndicatorView" id="151405921">
+						<object class="IBUIActivityIndicatorView" id="349847743">
 							<reference key="NSNextResponder" ref="136884479"/>
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{144, 310}, {37, 37}}</string>
@@ -903,7 +903,7 @@
 							<reference ref="1038018783"/>
 							<reference ref="815308085"/>
 							<reference ref="735958667"/>
-							<reference ref="151405921"/>
+							<reference ref="349847743"/>
 						</object>
 						<reference key="parent" ref="575745275"/>
 						<string key="objectName">LoginView</string>
@@ -1156,7 +1156,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">230</int>
-						<reference key="object" ref="151405921"/>
+						<reference key="object" ref="349847743"/>
 						<reference key="parent" ref="136884479"/>
 						<string key="objectName">Large White Activity Indicator</string>
 					</object>

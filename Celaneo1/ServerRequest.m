@@ -348,11 +348,17 @@
 - (void) handleElementEnd_nb_articles_page:(NSString*)nArticles
 {
     [Celaneo1AppDelegate getSingleton].articlesPerPage = [nArticles intValue];
+#ifdef DEBUG
+    [Celaneo1AppDelegate getSingleton].articlesPerPage = 5;//[nArticles intValue];
+#endif
 }
 
 - (void) handleElementEnd_nb_articles:(NSString*)nArticles
 {
     self.articleCount = [nArticles intValue];
+#ifdef DEBUG
+    self.articleCount = 20;
+#endif
 }
 
 - (void) handleElementEnd_dirigeant:(NSString*)value

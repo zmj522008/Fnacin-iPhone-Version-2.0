@@ -176,9 +176,11 @@
         [table reloadData];
     }
     
-    
+    bool oldHasMore = hasMore;
     hasMore = [articles count] < request.articleCount;
-    
+    if (oldHasMore ^ hasMore) {
+        [table reloadData];
+    }
     if (onlineContent) {
         if (prefere && articles.count == 0 && ![Celaneo1AppDelegate getSingleton].prefereEditDone) {
             [self.navigationController pushViewController:
@@ -256,6 +258,12 @@
         cell.textLabel.font = [UIFont fontWithName:nil size:14];
         cell.textLabel.textAlignment = UITextAlignmentCenter;
         cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"more.jpg"]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        UIActivityIndicatorView* activity = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+        activity.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+        cell.accessoryView = activity;
+        [activity release];
         return cell;
     }
 }
@@ -279,6 +287,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) {
+        [[tableView cellForRowAtIndexPath:indexPath].accessoryView startAnimating];
+
         ServerRequest* request = [self doCreateListRequestWithStartingIndex:articles.count];
         self.onlineRequest = request;
         onlineRequest.delegate = self;

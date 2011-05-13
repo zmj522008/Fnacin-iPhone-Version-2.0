@@ -210,7 +210,7 @@
     }
     Commentaire* com = [article.commentaires objectAtIndex:row];
     [cell updateWithCommentaire:com];
-    cell.frame = CGRectMake(0, 0, cell.frame.size.width, [CommentaireCell heightForCommentaire:com]);
+//    cell.frame = CGRectMake(0, 0, cell.frame.size.width, [CommentaireCell heightForCommentaire:com]);
     return cell;
 }
 
@@ -339,7 +339,9 @@
 - (void) updateContent
 {
     self.content.frame = CGRectMake(0, 0, self.content.frame.size.width, 1);
-    [self.content loadHTMLString:[@"<style>body { margin: 8px; padding: 0; font: 12px helvetica; }</style>" stringByAppendingString:article.contenu] baseURL:nil];
+    if (article.contenu) {
+        [self.content loadHTMLString:[@"<style>body { margin: 8px; padding: 0; font: 12px helvetica; }</style>" stringByAppendingString:article.contenu] baseURL:nil];
+    }
     self.content.delegate = self;
 }
 
