@@ -370,9 +370,6 @@
 - (void) handleElementStart_pre_page:(NSDictionary*) attributes
 {
     self.prepageFerme = [[attributes objectForKey:@"ferme"] intValue] == 1;
-#ifdef DEBUG
-    self.prepageFerme = NO;
-#endif
 }
 
 - (void) handleElementEnd_pre_page:(NSString*)value

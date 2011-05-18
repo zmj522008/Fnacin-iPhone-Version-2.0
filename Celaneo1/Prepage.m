@@ -54,11 +54,15 @@
 {
     [super viewWillAppear:animated];
 
-    if (ferme) {
+    bool debug = NO;
+#ifdef DEBUG
+    debug = YES;
+#endif
+    if (ferme && !debug) {
         self.navigationItem.rightBarButtonItem = nil;
     } else {
         NSLog(@"navItem: %@", self.navigationItem);
-        item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"Continuer" action:@selector(continuerClick)]];
+        item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:debug ? @"DBG Cont" : @"Continuer" action:@selector(continuerClick)]];
     }
     [self.content loadHTMLString:prepageContent baseURL:nil];
 }
