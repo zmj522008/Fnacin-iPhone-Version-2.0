@@ -39,6 +39,8 @@ static const NSInteger kGANDispatchPeriodSec = 10;
                                            dispatchPeriod:kGANDispatchPeriodSec
                                                  delegate:nil];
     
+    [ASIHTTPRequest setDefaultTimeOutSeconds:15];
+
     return YES;
 }
 

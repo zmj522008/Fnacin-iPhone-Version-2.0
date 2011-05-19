@@ -44,6 +44,8 @@
     [super init];
     if (self != nil) {
         self.asiRequest = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:[SERVER stringByAppendingString:method]]];
+        self.asiRequest.numberOfTimesToRetryOnTimeout = 3;
+        
         asiRequest.delegate = self;
         NSString* sessionId = [Celaneo1AppDelegate getSingleton].sessionId;
         if (sessionId != nil) {
@@ -349,7 +351,7 @@
 {
     [Celaneo1AppDelegate getSingleton].articlesPerPage = [nArticles intValue];
 #ifdef DEBUG
-    [Celaneo1AppDelegate getSingleton].articlesPerPage = 5;//[nArticles intValue];
+//    [Celaneo1AppDelegate getSingleton].articlesPerPage = 5;//[nArticles intValue];
 #endif
 }
 
@@ -357,7 +359,7 @@
 {
     self.articleCount = [nArticles intValue];
 #ifdef DEBUG
-    self.articleCount = 20;
+//    self.articleCount = 20;
 #endif
 }
 

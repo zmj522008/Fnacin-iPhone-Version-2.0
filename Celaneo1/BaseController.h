@@ -20,6 +20,7 @@
 
     BOOL resetCache;
     BOOL errorShown;
+    BOOL active;
 }
 
 @property (nonatomic, retain) ServerRequest *offlineRequest;

@@ -36,10 +36,12 @@
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self navButton:NAVBUTTON_ARROW_LEFT withTitle:@"Retour" action:@selector(back)]];
     }
     errorShown = NO;
+    active = YES;
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
+    active = NO;
     [super viewWillDisappear:animated];
     [imageLoadingQueue cancelAllOperations];
 }
@@ -100,7 +102,7 @@
         return;
     }
     
-    if (errorShown) {
+    if (errorShown || !active) {
         return;
     }
     errorShown = YES;
@@ -110,8 +112,10 @@
     NSString* message = [error localizedDescription];
     if ([error.domain compare:@"FNAC"] == 0) {
         title = @"Erreur";
+        message = @"La communication avec le serveur a échoué veuillez réessayer ultérieurement.";
     } else {
         title = @"Communication";
+        message = @"La communication a été interrompue veuillez réessayer ultérieurement.";
 //        message = [message stringByAppendingString:@" - l'application restera en mode hors ligne jusqu'au prochain lancement"];
         delegate.offline = YES;
     }
