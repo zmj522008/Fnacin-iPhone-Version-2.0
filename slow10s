@@ -1,0 +1,3 @@
+sudo ipfw pipe 1 config bw 30Kbit/s delay 10000ms
+sudo ipfw add 1 pipe 1 src-port 80
+sudo ipfw add 2 pipe 1 dst-port 80
