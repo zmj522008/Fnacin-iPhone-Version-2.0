@@ -339,9 +339,16 @@
 - (void) updateContent
 {
     self.content.frame = CGRectMake(0, 0, self.content.frame.size.width, 1);
-    if (article.contenu) {
-        [self.content loadHTMLString:[@"<style>body { margin: 8px; padding: 0; font: 12px helvetica; }</style>" stringByAppendingString:article.contenu] baseURL:nil];
+    NSMutableString* contentString = [NSMutableString stringWithCapacity:100];
+    [contentString appendString:@"<style>body { margin: 8px; padding: 0; font: 12px helvetica; }</style>"];
+    if (article.accroche) {
+        [contentString appendString:article.accroche];
+        [contentString appendString:@"<br/><br/>"];
     }
+    if (article.contenu) {
+        [contentString appendString:article.contenu];
+    }
+    [self.content loadHTMLString:contentString baseURL:nil];
     self.content.delegate = self;
 }
 
