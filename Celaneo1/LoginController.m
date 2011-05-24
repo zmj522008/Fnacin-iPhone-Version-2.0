@@ -15,14 +15,17 @@
 
 @synthesize email;
 @synthesize password;
-@synthesize submitButton;
 @synthesize debugButton;
 @synthesize request;
 @synthesize emailLabel;
 @synthesize passwordLabel;
 @synthesize passwordRecoveryLabel;
-@synthesize forgottenPasswordMode;
-@synthesize connectMode;
+@synthesize entryBackground;
+@synthesize authSubmitButton;
+@synthesize authForgottenPasswordButton;
+@synthesize forgSubmitButton;
+@synthesize forgCancelButton;
+@synthesize sentCancelButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,13 +43,16 @@
     [email release];
     [password release];
     [request release];
-    [submitButton release];
     [debugButton release];
     [emailLabel release];
     [passwordLabel release];
     [passwordRecoveryLabel release];
-    [forgottenPasswordMode release];
-    [connectMode release];
+    [entryBackground release];
+    [authSubmitButton release];
+    [authForgottenPasswordButton release];
+    [forgSubmitButton release];
+    [forgCancelButton release];
+    [sentCancelButton release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,18 +81,21 @@
     
     self.email = nil;
     self.password = nil;
-    self.submitButton = nil;
     self.debugButton = nil;
     self.emailLabel = nil;
     self.passwordLabel = nil;
     self.passwordRecoveryLabel = nil;
-    self.forgottenPasswordMode = nil;
-    self.connectMode = nil;
-
+    self.entryBackground = nil;
+    self.authSubmitButton = nil;
+    self.authForgottenPasswordButton = nil;
+    self.forgSubmitButton = nil;
+    self.forgCancelButton = nil;
+    self.sentCancelButton = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if (email.text.length == 0) {
         [email becomeFirstResponder];
     } else {
@@ -100,16 +109,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (IBAction) submit
-{
-    self.request = [[ServerRequest alloc] initAuthentificateWithEmail:email.text withPassword:password.text];
-    request.delegate = self;
-    [request start];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:email.text forKey:@"loginEmail"];
-}
-
-
 - (NSString*) pageName
 {
     return @"/login";
@@ -119,15 +118,8 @@
 
 - (void) serverRequest:(ServerRequest*)aRequest didSucceedWithObject:(id)result
 {
-    if (!connectMode.hidden) {
-        UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"mot de passe"                                                             message:@"la procédure à suivre pour réinitialiser le mot de passe vous a été envoyé par email"
-                                                           delegate:nil 
-                                                  cancelButtonTitle:@"Ok" 
-                                                  otherButtonTitles:nil];
-        [errorView setDelegate:self];
-        [errorView show];
-        [errorView release];
-
+    if (mode == LoginForgMode) {
+        [self switchToMode:LoginSentMode];
         return;
     }
     if (aRequest.prepageContent) {
@@ -152,52 +144,102 @@
 
 - (void) serverRequest:(ServerRequest*)aRequest didFailWithError:(NSError*)error
 {
-    if (!connectMode.hidden && aRequest.fnac) {
-        [self serverRequest:aRequest didSucceedWithObject:nil];
+    if (error == nil && (
+        mode == LoginForgMode || [Celaneo1AppDelegate getSingleton].sessionId.length > 0)) {
+        [self serverRequest:aRequest didSucceedWithObject:self];
+        return;
+    }   
+    NSString* message;
+    NSString* title;
+
+    if ([error.domain compare:@"FNAC"] == 0) {
+        title = @"Erreur";
+        message = [error localizedDescription];
     } else {
-        [super serverRequest:aRequest didFailWithError:error];
+        title = @"Communication";
+        message = @"La communication a été interrompue veuillez réessayer ultérieurement.";
+        //        message = [message stringByAppendingString:@" - l'application restera en mode hors ligne jusqu'au prochain lancement"];
     }
+    
+    if (message == nil) {
+        message = @"Erreur de communication..";
+    }
+    
+    UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:title 
+                                                        message:message 
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK" 
+                                              otherButtonTitles:nil];
+    [errorView show];
+    [errorView release];
 }
 
 - (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    [self switchToConnectMode];
-    // exit(0);
+//    [self switchToMode:LoginForgMode];
 }
 
 #pragma mark Button actions
-- (IBAction) switchToRecoverPasswordMode
+- (void) switchToMode:(int) m
 {
-    passwordLabel.hidden = YES;
-    passwordRecoveryLabel.hidden = NO;
-    password.hidden = YES;
-    email.returnKeyType = UIReturnKeySend;
-    connectMode.hidden = NO;
-    forgottenPasswordMode.hidden = YES;
-    [email becomeFirstResponder];
+    mode = m;
+    switch (m) {
+        case LoginAuthMode:
+            entryBackground.hidden = NO;
+            passwordRecoveryLabel.hidden = YES;
+            passwordLabel.hidden = NO;
+            password.hidden = NO;
+            email.returnKeyType = UIReturnKeyNext;
+            [password becomeFirstResponder];
+            authForgottenPasswordButton.hidden = NO;
+            authSubmitButton.hidden = NO;
+            forgCancelButton.hidden = YES;
+            forgSubmitButton.hidden = YES;
+            sentCancelButton.hidden = YES;
+            break;
+     
+        case LoginForgMode:
+            entryBackground.hidden = NO;
+            passwordRecoveryLabel.hidden = YES;
+            passwordLabel.hidden = YES;
+            password.hidden = YES;
+            email.returnKeyType = UIReturnKeySend;
+            [email becomeFirstResponder];
+            authForgottenPasswordButton.hidden = YES;
+            authSubmitButton.hidden = YES;
+            forgCancelButton.hidden = NO;
+            forgSubmitButton.hidden = NO;
+            sentCancelButton.hidden = YES;
+            break;
+            
+        case LoginSentMode:
+            passwordRecoveryLabel.hidden = NO;
+            entryBackground.hidden = YES;
+            authForgottenPasswordButton.hidden = YES;
+            authSubmitButton.hidden = YES;
+            forgCancelButton.hidden = YES;
+            forgSubmitButton.hidden = YES;
+            sentCancelButton.hidden = NO;
+            break;
+            
+        default:
+            break;
+    }
 }
 
-- (IBAction) switchToConnectMode
+- (IBAction) passwordReturn
 {
-    passwordLabel.hidden = NO;
-    passwordRecoveryLabel.hidden = YES;
-    password.hidden = NO;
-    connectMode.hidden = YES;
-    forgottenPasswordMode.hidden = NO;
-    email.returnKeyType = UIReturnKeyNext;
-    [password becomeFirstResponder];
+    if (mode == LoginAuthMode) {
+        [self authSubmit];
+    }
 }
 
 - (IBAction) emailReturn
 {
-    if (connectMode.hidden) {
+    if (mode == LoginAuthMode) {
         [password becomeFirstResponder];
     } else {
-        self.request = [[ServerRequest alloc] initPasswordWithEmail:email.text];
-        request.delegate = self;
-        [request start];
-        
-        [[NSUserDefaults standardUserDefaults] setObject:email.text forKey:@"loginEmail"];
+        [self forgSubmit];
     }
 }
 
@@ -225,7 +267,8 @@
 - (void)validateButtons
 {
     BOOL valid = [self isValid];
-    submitButton.enabled = valid;
+//    self.authSubmitButton.enabled = valid;
+//    self.forgSubmitButton.enabled = valid;
 }
 
 - (IBAction) onChange
@@ -233,4 +276,36 @@
     [self validateButtons];
 }
 
+- (IBAction) authSubmit
+{
+    self.request = [[ServerRequest alloc] initAuthentificateWithEmail:email.text withPassword:password.text];
+    request.delegate = self;
+    [request start];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:email.text forKey:@"loginEmail"];
+}
+
+- (IBAction) forgSubmit
+{
+    self.request = [[ServerRequest alloc] initPasswordWithEmail:email.text];
+    request.delegate = self;
+    [request start];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:email.text forKey:@"loginEmail"]; 
+}
+
+- (IBAction) authForgottenPassword
+{
+    [self switchToMode:LoginForgMode];
+}
+
+- (IBAction) forgCancel
+{
+    [self switchToMode:LoginAuthMode];
+}
+
+- (IBAction) sentCancel
+{
+    [self switchToMode:LoginAuthMode];    
+}
 @end
