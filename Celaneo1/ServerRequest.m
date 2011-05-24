@@ -109,6 +109,7 @@
 - (id) initSendTokenId:(NSString*)tokenId
 {
     [self initWithMethod:@"push"];
+    NSLog(@"Sending token id: %@", tokenId);
     [self setParameter:@"token_id" withValue:tokenId];
     return self;  
 }
