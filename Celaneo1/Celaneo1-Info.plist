@@ -16,6 +16,7 @@
 	<array>
 		<string>icon.png</string>
 		<string>icon@2x.png</string>
+		<string>icon_ipad.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.versacom.celaneo.${PRODUCT_NAME:rfc1034identifier}</string>
@@ -37,6 +38,8 @@
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
+	<key>NSMainNibFile~ipad</key>
+	<string>MainWindow-iPad</string>
 	<key>UIApplicationExitsOnSuspend</key>
 	<true/>
 	<key>UISupportedInterfaceOrientations</key>
@@ -44,6 +47,10 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UTExportedTypeDeclarations</key>
 	<array/>

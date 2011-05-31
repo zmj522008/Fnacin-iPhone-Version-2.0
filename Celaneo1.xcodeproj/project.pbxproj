@@ -87,6 +87,11 @@
 		E3A782C2136087D600C7C0F2 /* btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A782C0136087D600C7C0F2 /* btn@2x.png */; };
 		E3A782C51360885D00C7C0F2 /* ilike_toolbar.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A782C31360885D00C7C0F2 /* ilike_toolbar.png */; };
 		E3A782C61360885D00C7C0F2 /* ilike_toolbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A782C41360885D00C7C0F2 /* ilike_toolbar@2x.png */; };
+		E3AFD2B113957F930053E35F /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3AFD2AF13957F930053E35F /* MainWindow-iPad.xib */; };
+		E3AFD2B313957FE60053E35F /* icon_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E3AFD2B213957FE60053E35F /* icon_ipad.png */; };
+		E3AFD2B51395803A0053E35F /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E3AFD2B41395803A0053E35F /* Default-Portrait~ipad.png */; };
+		E3AFD2B7139581610053E35F /* bg_log~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = E3AFD2B6139581610053E35F /* bg_log~iPad.png */; };
+		E3AFD2B9139581F70053E35F /* bg~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = E3AFD2B8139581F70053E35F /* bg~iPad.png */; };
 		E3D97E701349C3B300E2C1BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D97E6F1349C3B300E2C1BA /* UIKit.framework */; };
 		E3D97E721349C3B300E2C1BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D97E711349C3B300E2C1BA /* Foundation.framework */; };
 		E3D97E741349C3B300E2C1BA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D97E731349C3B300E2C1BA /* CoreGraphics.framework */; };
@@ -217,6 +222,11 @@
 		E3A782C0136087D600C7C0F2 /* btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn@2x.png"; sourceTree = "<group>"; };
 		E3A782C31360885D00C7C0F2 /* ilike_toolbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ilike_toolbar.png; sourceTree = "<group>"; };
 		E3A782C41360885D00C7C0F2 /* ilike_toolbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ilike_toolbar@2x.png"; sourceTree = "<group>"; };
+		E3AFD2B013957F930053E35F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "Celaneo1/iPad/en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		E3AFD2B213957FE60053E35F /* icon_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_ipad.png; sourceTree = "<group>"; };
+		E3AFD2B41395803A0053E35F /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		E3AFD2B6139581610053E35F /* bg_log~iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_log~iPad.png"; sourceTree = "<group>"; };
+		E3AFD2B8139581F70053E35F /* bg~iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg~iPad.png"; sourceTree = "<group>"; };
 		E3D97E6B1349C3B300E2C1BA /* fnac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fnac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3D97E6F1349C3B300E2C1BA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E3D97E711349C3B300E2C1BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -317,6 +327,8 @@
 		E3455373134F146E004B9D1E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E3AFD2B8139581F70053E35F /* bg~iPad.png */,
+				E3AFD2B6139581610053E35F /* bg_log~iPad.png */,
 				E36C8226136AC628009C39C7 /* remove.png */,
 				E36C8227136AC628009C39C7 /* remove@2x.png */,
 				E3A782C31360885D00C7C0F2 /* ilike_toolbar.png */,
@@ -333,8 +345,8 @@
 				E303264C1355A6AA0012B181 /* nav_nologo@2x.png */,
 				E34553E013541C11004B9D1E /* nav@2x.png */,
 				E34553E113541C12004B9D1E /* nav.png */,
-				E34553DC13530CD6004B9D1E /* bg.png */,
 				E34553DD13530CD6004B9D1E /* bg@2x.png */,
+				E34553DC13530CD6004B9D1E /* bg.png */,
 				E345537C13530BCF004B9D1E /* alaune_off.png */,
 				E345537D13530BCF004B9D1E /* alaune_off@2x.png */,
 				E345538013530BCF004B9D1E /* arrow.png */,
@@ -377,9 +389,20 @@
 			path = GoogleAnalytics;
 			sourceTree = "<group>";
 		};
+		E3AFD2AE13957F900053E35F /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				E3AFD2AF13957F930053E35F /* MainWindow-iPad.xib */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
 		E3D97E601349C3B300E2C1BA = {
 			isa = PBXGroup;
 			children = (
+				E3AFD2B41395803A0053E35F /* Default-Portrait~ipad.png */,
+				E3AFD2B213957FE60053E35F /* icon_ipad.png */,
+				E3AFD2AE13957F900053E35F /* iPad */,
 				E38D1EDD135DC586000D5FE1 /* libsqlite3.dylib */,
 				E38D1ED7135DC064000D5FE1 /* GoogleAnalytics */,
 				E3032644135454920012B181 /* MediaPlayer.framework */,
@@ -583,6 +606,11 @@
 				E3A782C61360885D00C7C0F2 /* ilike_toolbar@2x.png in Resources */,
 				E36C8228136AC628009C39C7 /* remove.png in Resources */,
 				E36C8229136AC628009C39C7 /* remove@2x.png in Resources */,
+				E3AFD2B113957F930053E35F /* MainWindow-iPad.xib in Resources */,
+				E3AFD2B313957FE60053E35F /* icon_ipad.png in Resources */,
+				E3AFD2B51395803A0053E35F /* Default-Portrait~ipad.png in Resources */,
+				E3AFD2B7139581610053E35F /* bg_log~iPad.png in Resources */,
+				E3AFD2B9139581F70053E35F /* bg~iPad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,6 +660,14 @@
 				E3455377134F16D5004B9D1E /* en */,
 			);
 			name = PrefereEdit.xib;
+			sourceTree = "<group>";
+		};
+		E3AFD2AF13957F930053E35F /* MainWindow-iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E3AFD2B013957F930053E35F /* en */,
+			);
+			name = "MainWindow-iPad.xib";
 			sourceTree = "<group>";
 		};
 		E3D97E781349C3B300E2C1BA /* InfoPlist.strings */ = {
@@ -717,11 +753,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Celaneo1/Celaneo1-Prefix.pch";
 				INFOPLIST_FILE = "Celaneo1/Celaneo1-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GoogleAnalytics\"",
 				);
 				PRODUCT_NAME = "${TARGET_NAME}";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -735,12 +773,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Celaneo1/Celaneo1-Prefix.pch";
 				INFOPLIST_FILE = "Celaneo1/Celaneo1-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GoogleAnalytics\"",
 				);
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

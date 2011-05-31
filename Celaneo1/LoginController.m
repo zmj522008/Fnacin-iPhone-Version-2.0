@@ -266,7 +266,7 @@
 
 - (void)validateButtons
 {
-    BOOL valid = [self isValid];
+ //   BOOL valid = [self isValid];
 //    self.authSubmitButton.enabled = valid;
 //    self.forgSubmitButton.enabled = valid;
 }
