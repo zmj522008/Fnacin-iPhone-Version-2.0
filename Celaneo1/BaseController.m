@@ -112,7 +112,7 @@
     NSString* message = [error localizedDescription];
     if ([error.domain compare:@"FNAC"] == 0) {
         title = @"Erreur";
-        message = @"La communication avec le serveur a échoué veuillez réessayer ultérieurement.";
+        errorShown = NO;
     } else {
         title = @"Communication";
         message = @"La communication a été interrompue veuillez réessayer ultérieurement.";
@@ -236,7 +236,11 @@
 
 - (UITableViewCell *)loadCellFromNib:(NSString *)nibName
 {
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:nibName 
+    NSString* platformizedName = nibName;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        platformizedName = [nibName stringByAppendingString:@"~iPad"];
+    }
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:platformizedName 
                                                  owner:self options:nil];
     
     for(id obj in nib)
