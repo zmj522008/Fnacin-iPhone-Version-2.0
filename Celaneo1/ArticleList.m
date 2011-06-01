@@ -19,6 +19,9 @@
 #define TAG_ITEM_RUBRIQUES 104
 #define TAG_ITEM_DOSSIERS 105
 
+#define FIRST_ROW_IPAD 350
+#define LOAD_MORE 30
+
 @implementation ArticleList
 @synthesize articles;
 @synthesize table;
@@ -234,8 +237,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        static NSString *CellId = @"ArticleCell";
+        NSString *CellId = @"ArticleCell";
         
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+            && indexPath.row == 0) {
+            CellId = @"ArticleCellLarge";
+        }
         ArticleCell *cell = (ArticleCell*) [tableView dequeueReusableCellWithIdentifier:CellId];
         
         if (cell == nil) {
@@ -278,11 +285,19 @@
     return hasMore ? 2 : 1;
 }
 
-#pragma mark table view delegate 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return indexPath.section == 0 ? table.rowHeight : 30;
+{   
+    if (indexPath.section != 0) {
+        return LOAD_MORE;
+    } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+        && indexPath.row == 0) {
+        return FIRST_ROW_IPAD;
+    } else {
+        return tableView.rowHeight;
+    }
 }
+
+#pragma mark table view delegate 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
