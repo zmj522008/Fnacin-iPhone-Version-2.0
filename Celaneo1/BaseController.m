@@ -262,9 +262,14 @@
 
 @implementation UINavigationBar (UINavigationBarCategory)
 - (void)drawRect:(CGRect)rect {
-    UIImage *img	= [UIImage imageNamed: 
-                       self.frame.size.width != 320 ? @"nav_nologo.png" : @"nav.png"];
+    const int portaitWidth = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 768 : 320;
+    UIImage *img	= [UIImage imageNamed:@"nav_nologo.png"];
     [img drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    if (portaitWidth == self.frame.size.width) {
+        UIImage *logo	= [UIImage imageNamed:@"nav.png"];
+        [logo drawInRect:CGRectMake((self.frame.size.width - 320) / 2, 0, 
+                                    320, self.frame.size.height)];
+    }
     self.tintColor = [UIColor colorWithRed:200/256.0 green:200/256.0 blue:200/256.0 alpha:0];
  
     for (UIView* view in self.subviews) {
