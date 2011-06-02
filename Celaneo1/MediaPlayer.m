@@ -167,46 +167,40 @@
 }
 
 -(void) mediaPlayerExitFullscreen: (NSNotification*) aNotification
-{
-//    MPMoviePlayerController* player = [aNotification object];
+{    
+    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
+        [moviePlayer stop];
+    }
 }
 
 -(void) mediaPlayerStateChange: (NSNotification*) aNotification
 {
-    MPMoviePlayerController* player = [aNotification object];
-
-    if (player.loadState == MPMovieLoadStatePlayable
-        || player.loadState == MPMovieLoadStatePlaythroughOK) {
+    if (moviePlayer.loadState == MPMovieLoadStatePlayable
+        || moviePlayer.loadState == MPMovieLoadStatePlaythroughOK) {
         [activity stopAnimating];
-    }
-    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
-        [player stop];
     }
 }
 
 // When the movie is done, release the controller.
 -(void) mediaPlayerDone: (NSNotification*) aNotification
-{
-    MPMoviePlayerController* player = [aNotification object];
-    
+{    
     [[NSNotificationCenter defaultCenter]
      removeObserver: self
      name: MPMoviePlayerPlaybackDidFinishNotification
-     object: player];
+     object: moviePlayer];
     
     [[NSNotificationCenter defaultCenter]
      removeObserver: self
      name: MPMoviePlayerLoadStateDidChangeNotification
-     object: player];
+     object: moviePlayer];
     
     
     [[NSNotificationCenter defaultCenter]
      removeObserver: self
      name: MPMoviePlayerWillExitFullscreenNotification
-     object: player];
+     object: moviePlayer];
     
-    // Release the movie instance created in playMovieAtURL:
-    [player release];
+    self.moviePlayer = nil;
     
     if (self.navigationController.topViewController == self) {
         [self.navigationController popViewControllerAnimated:YES];
