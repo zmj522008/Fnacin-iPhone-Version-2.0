@@ -26,6 +26,7 @@
 @synthesize forgSubmitButton;
 @synthesize forgCancelButton;
 @synthesize sentCancelButton;
+@synthesize activity;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,6 +54,7 @@
     [forgSubmitButton release];
     [forgCancelButton release];
     [sentCancelButton release];
+    [activity release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -91,6 +93,7 @@
     self.forgSubmitButton = nil;
     self.forgCancelButton = nil;
     self.sentCancelButton = nil;
+    self.activity = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -123,7 +126,11 @@
         return;
     }
     if (aRequest.prepageContent) {
-        Prepage* prepage = [[Prepage alloc] initWithNibName:@"Prepage" bundle:nil];
+        NSString* nibName = @"Prepage";
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            nibName = [nibName stringByAppendingString:@"~iPad"];
+        }
+        Prepage* prepage = [[Prepage alloc] initWithNibName:nibName bundle:nil];
         prepage.ferme = aRequest.prepageFerme;
         prepage.prepageContent = aRequest.prepageContent;
         
@@ -140,6 +147,7 @@
          UIRemoteNotificationTypeAlert];
 #endif
     }
+    [activity stopAnimating];
 }
 
 - (void) serverRequest:(ServerRequest*)aRequest didFailWithError:(NSError*)error
@@ -172,11 +180,12 @@
                                               otherButtonTitles:nil];
     [errorView show];
     [errorView release];
+    [activity stopAnimating];
 }
 
 - (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-//    [self switchToMode:LoginForgMode];
+    [self switchToMode:LoginAuthMode];
 }
 
 #pragma mark Button actions
@@ -284,6 +293,7 @@
     [request start];
     
     [[NSUserDefaults standardUserDefaults] setObject:email.text forKey:@"loginEmail"];
+    [activity startAnimating];
 }
 
 - (IBAction) forgSubmit
@@ -294,6 +304,7 @@
     [request start];
     
     [[NSUserDefaults standardUserDefaults] setObject:email.text forKey:@"loginEmail"]; 
+    [activity startAnimating];
 }
 
 - (IBAction) authForgottenPassword

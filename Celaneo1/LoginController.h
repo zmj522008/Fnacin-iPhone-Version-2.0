@@ -40,6 +40,8 @@ enum {
     
     ServerRequest* request;
     
+    IBOutlet UIActivityIndicatorView* activity;
+    
     int mode;
 }
 
@@ -51,6 +53,8 @@ enum {
 @property (nonatomic, retain) IBOutlet UIView *emailLabel;
 @property (nonatomic, retain) IBOutlet UIView *passwordLabel;
 @property (nonatomic, retain) IBOutlet UIView *passwordRecoveryLabel;
+
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView* activity;
 
 @property (nonatomic, retain) IBOutlet UIView *entryBackground;
 @property (nonatomic, retain) IBOutlet UIButton *authSubmitButton;
