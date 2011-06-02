@@ -67,7 +67,7 @@
     
     self.titre.text = article.titre;
     
-    int x = 5;
+    int x = self.rubrique.frame.origin.x;
     
     CGSize rubriqueSize = [article.rubrique sizeWithFont:self.rubrique.titleLabel.font];
     rubriqueSize.width += 10;

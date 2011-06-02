@@ -151,7 +151,7 @@
 								<string key="NSFrame">{{202, 49}, {536, 103}}</string>
 								<reference key="NSSuperview" ref="814330155"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="4802805"/>
+								<reference key="NSNextKeyView" ref="518935498"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="412251048">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -208,10 +208,10 @@
 							<object class="IBUIButton" id="649327323">
 								<reference key="NSNextResponder" ref="814330155"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{263, 131}, {193, 82}}</string>
+								<string key="NSFrame">{{202, 48}, {566, 132}}</string>
 								<reference key="NSSuperview" ref="814330155"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="518935498"/>
+								<reference key="NSNextKeyView" ref="829229559"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -230,7 +230,7 @@
 								<string key="NSFrame">{{5, 48}, {184, 104}}</string>
 								<reference key="NSSuperview" ref="814330155"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="829229559"/>
+								<reference key="NSNextKeyView" ref="4802805"/>
 								<int key="IBUIContentMode">2</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -355,7 +355,7 @@
 							<object class="IBUIButton" id="861223805">
 								<reference key="NSNextResponder" ref="814330155"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{-25, 0}, {23, 123}}</string>
+								<string key="NSFrame">{{-25, 0}, {23, 185}}</string>
 								<reference key="NSSuperview" ref="814330155"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="947558141"/>
@@ -570,13 +570,13 @@
 							<reference ref="861223805"/>
 							<reference ref="947558141"/>
 							<reference ref="518935498"/>
-							<reference ref="649327323"/>
 							<reference ref="4802805"/>
 							<reference ref="53517276"/>
 							<reference ref="177396043"/>
 							<reference ref="181520973"/>
 							<reference ref="840353787"/>
 							<reference ref="829229559"/>
+							<reference ref="649327323"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>

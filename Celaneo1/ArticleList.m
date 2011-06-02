@@ -302,7 +302,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) {
-        [[tableView cellForRowAtIndexPath:indexPath].accessoryView startAnimating];
+        [(UIActivityIndicatorView*) [tableView cellForRowAtIndexPath:indexPath].accessoryView startAnimating];
 
         ServerRequest* request = [self doCreateListRequestWithStartingIndex:articles.count];
         self.onlineRequest = request;
@@ -348,7 +348,12 @@
         if (article.type == ARTICLE_TYPE_TEXT) {
             [self cellContentClick:sender];
         } else {
-            MediaPlayer* mediaPlayer = [[MediaPlayer alloc] initWithNibName:@"MediaPlayer" bundle:nil];
+            NSString* nibName = @"MediaPlayer";
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                nibName = [nibName stringByAppendingString:@"~iPad"];
+            }
+
+            MediaPlayer* mediaPlayer = [[MediaPlayer alloc] initWithNibName:nibName bundle:nil];
             mediaPlayer.article = article;
             
             [self.navigationController pushViewController:mediaPlayer animated:YES];   
@@ -361,7 +366,12 @@
     if (table.editing) {
         [self cellDeleteClick:sender];
     } else {
-        ArticleDetail* detail = [[ArticleDetail alloc] initWithNibName:@"ArticleDetail" bundle:nil];
+        NSString* nibName = @"ArticleDetail";
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            nibName = [nibName stringByAppendingString:@"~iPad"];
+        }
+
+        ArticleDetail* detail = [[ArticleDetail alloc] initWithNibName:nibName bundle:nil];
         detail.article = [self articleFromSender:sender];
         detail.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:detail animated:YES];
@@ -382,7 +392,12 @@
             articleListController.rubriqueId = rId;
             [articleListController refresh];
         } else {
-            articleListController = [[ArticleList alloc] initWithNibName:@"ArticleList" bundle:nil];
+            NSString* nibName = @"ArticleList";
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                nibName = [nibName stringByAppendingString:@"~iPad"];
+            }
+
+            articleListController = [[ArticleList alloc] initWithNibName:nibName bundle:nil];
             articleListController.rubriqueId = rId;
             [rubriqueNavigationController pushViewController:articleListController animated:YES];
         }
@@ -394,7 +409,12 @@
     if (table.editing) {
         [self cellDeleteClick:sender];
     } else {
-        ArticleList* articleListController = [[ArticleList alloc] initWithNibName:@"ArticleList" bundle:nil];
+        NSString* nibName = @"ArticleList";
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            nibName = [nibName stringByAppendingString:@"~iPad"];
+        }
+        
+        ArticleList* articleListController = [[ArticleList alloc] initWithNibName:nibName bundle:nil];
         articleListController.thematiqueId = [self articleFromSender:sender].thematiqueId;
         articleListController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:articleListController animated:YES];

@@ -292,7 +292,7 @@
 {
     self.titre.text = article.titre;
     
-    int x = 5;
+    int x = self.rubrique.frame.origin.x;
     
     CGSize rubriqueSize = [article.rubrique sizeWithFont:self.rubrique.titleLabel.font];
     rubriqueSize.width += 10;
@@ -338,7 +338,7 @@
 
 - (void) updateContent
 {
-    self.content.frame = CGRectMake(0, 0, self.content.frame.size.width, 1);
+    self.content.frame = CGRectMake(self.content.frame.origin.x, 0, self.content.frame.size.width, 1);
     NSMutableString* contentString = [NSMutableString stringWithCapacity:100];
     [contentString appendString:@"<style>body { margin: 8px; padding: 0; font: 12px helvetica; }</style>"];
     if (article.accroche) {
@@ -440,7 +440,12 @@
 - (IBAction) mediaClick
 {
     if (article.type != ARTICLE_TYPE_TEXT) {
-        MediaPlayer* mediaPlayer = [[MediaPlayer alloc] initWithNibName:@"MediaPlayer" bundle:nil];
+        NSString* nibName = @"MediaPlayer";
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            nibName = [nibName stringByAppendingString:@"~iPad"];
+        }
+        
+        MediaPlayer* mediaPlayer = [[MediaPlayer alloc] initWithNibName:nibName bundle:nil];
         mediaPlayer.article = article;
         
         [self.navigationController pushViewController:mediaPlayer animated:YES];   

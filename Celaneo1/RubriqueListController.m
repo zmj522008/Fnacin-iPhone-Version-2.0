@@ -98,7 +98,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ArticleList* controller = [[ArticleList alloc] initWithNibName:@"ArticleList" bundle:nil];
+    NSString* nibName = @"ArticleList";
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        nibName = [nibName stringByAppendingString:@"~iPad"];
+    }
+    
+    ArticleList* controller = [[ArticleList alloc] initWithNibName:nibName bundle:nil];
     controller.rubriqueId = [[rubriques objectAtIndex:indexPath.row] categoryId];
     [self.navigationController pushViewController:controller animated:YES];
 }

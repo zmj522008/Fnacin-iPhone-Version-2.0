@@ -498,10 +498,10 @@
 		E3D97E751349C3B300E2C1BA /* Celaneo1 */ = {
 			isa = PBXGroup;
 			children = (
-				E3AFD2BD139616150053E35F /* CommentaireCell~iPad.xib */,
 				E3AFD2BE139616160053E35F /* en.lproj */,
 				E3AFD2C9139616160053E35F /* iPad */,
 				E38D1ED2135D754C000D5FE1 /* CommentaireCell.xib */,
+				E3AFD2BD139616150053E35F /* CommentaireCell~iPad.xib */,
 				E38D1ED3135D754C000D5FE1 /* CommentaireCell.h */,
 				E38D1ED4135D754C000D5FE1 /* CommentaireCell.m */,
 				E3455379134F173C004B9D1E /* PrefereEditController.h */,

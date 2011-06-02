@@ -81,13 +81,13 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
-				<object class="IBUINavigationController" key="IBUISelectedViewController" id="798717733">
-					<object class="IBUITabBarItem" key="IBUITabBarItem" id="27363851">
-						<int key="IBUITag">101</int>
-						<string key="IBUITitle">A la une</string>
+				<object class="IBUINavigationController" key="IBUISelectedViewController" id="739580799">
+					<object class="IBUITabBarItem" key="IBUITabBarItem" id="662307919">
+						<int key="IBUITag">105</int>
+						<string key="IBUITitle">Dossiers</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">alaune_off.png</string>
+							<string key="NSResourceName">favoris_off.png</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
@@ -99,7 +99,7 @@
 					</object>
 					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					<bool key="IBUIHorizontal">NO</bool>
-					<object class="IBUINavigationBar" key="IBUINavigationBar" id="893620649">
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="1058724241">
 						<nil key="NSNextResponder"/>
 						<int key="NSvFlags">256</int>
 						<string key="NSFrameSize">{0, 0}</string>
@@ -110,13 +110,13 @@
 					</object>
 					<object class="NSMutableArray" key="IBUIViewControllers">
 						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="IBUIViewController" id="144216128">
-							<object class="IBUINavigationItem" key="IBUINavigationItem" id="697787919">
+						<object class="IBUIViewController" id="412211241">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="889671343">
 								<string key="IBUITitle">Retour</string>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
-							<reference key="IBUIParentViewController" ref="798717733"/>
-							<string key="IBUINibName">ArticleList</string>
+							<reference key="IBUIParentViewController" ref="739580799"/>
+							<string key="IBUINibName">ArticleList~iPad</string>
 							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 								<int key="IBUIInterfaceOrientation">1</int>
 								<int key="interfaceOrientation">1</int>
@@ -128,7 +128,51 @@
 				</object>
 				<object class="NSMutableArray" key="IBUIViewControllers">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<reference ref="798717733"/>
+					<object class="IBUINavigationController" id="798717733">
+						<object class="IBUITabBarItem" key="IBUITabBarItem" id="27363851">
+							<int key="IBUITag">101</int>
+							<string key="IBUITitle">A la une</string>
+							<object class="NSCustomResource" key="IBUIImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">alaune_off.png</string>
+							</object>
+							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						</object>
+						<reference key="IBUIParentViewController" ref="1034742383"/>
+						<reference key="IBUISimulatedStatusBarMetrics" ref="31572012"/>
+						<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+							<int key="IBUIInterfaceOrientation">1</int>
+							<int key="interfaceOrientation">1</int>
+						</object>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<bool key="IBUIHorizontal">NO</bool>
+						<object class="IBUINavigationBar" key="IBUINavigationBar" id="893620649">
+							<nil key="NSNextResponder"/>
+							<int key="NSvFlags">256</int>
+							<string key="NSFrameSize">{0, 0}</string>
+							<bool key="IBUIOpaque">NO</bool>
+							<bool key="IBUIClipsSubviews">YES</bool>
+							<bool key="IBUIMultipleTouchEnabled">YES</bool>
+							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						</object>
+						<object class="NSMutableArray" key="IBUIViewControllers">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBUIViewController" id="144216128">
+								<object class="IBUINavigationItem" key="IBUINavigationItem" id="697787919">
+									<string key="IBUITitle">Retour</string>
+									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								</object>
+								<reference key="IBUIParentViewController" ref="798717733"/>
+								<string key="IBUINibName">ArticleList~iPad</string>
+								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+									<int key="IBUIInterfaceOrientation">1</int>
+									<int key="interfaceOrientation">1</int>
+								</object>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<bool key="IBUIHorizontal">NO</bool>
+							</object>
+						</object>
+					</object>
 					<object class="IBUINavigationController" id="57295291">
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="710003679">
 							<int key="IBUITag">102</int>
@@ -165,7 +209,7 @@
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								</object>
 								<reference key="IBUIParentViewController" ref="57295291"/>
-								<string key="IBUINibName">ArticleList</string>
+								<string key="IBUINibName">ArticleList~iPad</string>
 								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 									<int key="IBUIInterfaceOrientation">1</int>
 									<int key="interfaceOrientation">1</int>
@@ -211,7 +255,7 @@
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								</object>
 								<reference key="IBUIParentViewController" ref="602157138"/>
-								<string key="IBUINibName">ArticleList</string>
+								<string key="IBUINibName">ArticleList~iPad</string>
 								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 									<int key="IBUIInterfaceOrientation">1</int>
 									<int key="interfaceOrientation">1</int>
@@ -258,7 +302,7 @@
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								</object>
 								<reference key="IBUIParentViewController" ref="282563352"/>
-								<string key="IBUINibName">RubriqueList</string>
+								<string key="IBUINibName">RubriqueList~iPad</string>
 								<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
 									<bool key="IBUIPrompted">NO</bool>
 								</object>
@@ -271,50 +315,7 @@
 							</object>
 						</object>
 					</object>
-					<object class="IBUINavigationController" id="739580799">
-						<object class="IBUITabBarItem" key="IBUITabBarItem" id="662307919">
-							<int key="IBUITag">105</int>
-							<string key="IBUITitle">Dossiers</string>
-							<object class="NSCustomResource" key="IBUIImage">
-								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">favoris_off.png</string>
-							</object>
-							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						</object>
-						<reference key="IBUIParentViewController" ref="1034742383"/>
-						<reference key="IBUISimulatedStatusBarMetrics" ref="31572012"/>
-						<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
-							<int key="IBUIInterfaceOrientation">1</int>
-							<int key="interfaceOrientation">1</int>
-						</object>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<bool key="IBUIHorizontal">NO</bool>
-						<object class="IBUINavigationBar" key="IBUINavigationBar" id="1058724241">
-							<nil key="NSNextResponder"/>
-							<int key="NSvFlags">256</int>
-							<string key="NSFrameSize">{0, 0}</string>
-							<bool key="IBUIOpaque">NO</bool>
-							<bool key="IBUIClipsSubviews">YES</bool>
-							<bool key="IBUIMultipleTouchEnabled">YES</bool>
-							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						</object>
-						<object class="NSMutableArray" key="IBUIViewControllers">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIViewController" id="412211241">
-								<object class="IBUINavigationItem" key="IBUINavigationItem" id="889671343">
-									<string key="IBUITitle">Retour</string>
-									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								</object>
-								<reference key="IBUIParentViewController" ref="739580799"/>
-								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
-									<int key="IBUIInterfaceOrientation">1</int>
-									<int key="interfaceOrientation">1</int>
-								</object>
-								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<bool key="IBUIHorizontal">NO</bool>
-							</object>
-						</object>
-					</object>
+					<reference ref="739580799"/>
 				</object>
 				<object class="IBUITabBar" key="IBUITabBar" id="795333663">
 					<reference key="NSNextResponder"/>
@@ -360,7 +361,7 @@
 							<bool key="IBUIUserInteractionEnabled">NO</bool>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<string key="IBUIText">Un nouveau mot de passe vous a été envoyé par email</string>
-							<object class="NSFont" key="IBUIFont">
+							<object class="NSFont" key="IBUIFont" id="848890141">
 								<string key="NSName">Helvetica</string>
 								<double key="NSSize">30</double>
 								<int key="NSfFlags">16</int>
@@ -430,7 +431,7 @@
 									<bool key="IBUIUserInteractionEnabled">NO</bool>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<string key="IBUIText">Mot de passe</string>
-									<object class="NSFont" key="IBUIFont" id="668157793">
+									<object class="NSFont" key="IBUIFont" id="224371417">
 										<string key="NSName">Helvetica-Bold</string>
 										<double key="NSSize">36</double>
 										<int key="NSfFlags">16</int>
@@ -455,7 +456,7 @@
 									<bool key="IBUIUserInteractionEnabled">NO</bool>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<string key="IBUIText">Email</string>
-									<reference key="IBUIFont" ref="668157793"/>
+									<reference key="IBUIFont" ref="224371417"/>
 									<reference key="IBUITextColor" ref="873292167"/>
 									<nil key="IBUIHighlightedColor"/>
 									<int key="IBUIBaselineAdjustment">1</int>
@@ -480,11 +481,7 @@
 											<int key="NSID">2</int>
 										</object>
 									</object>
-									<object class="NSFont" key="IBUIFont" id="582805486">
-										<string key="NSName">Helvetica</string>
-										<double key="NSSize">36</double>
-										<int key="NSfFlags">16</int>
-									</object>
+									<reference key="IBUIFont" ref="848890141"/>
 									<bool key="IBUIClearsOnBeginEditing">YES</bool>
 									<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 									<float key="IBUIMinimumFontSize">17</float>
@@ -513,8 +510,7 @@
 										<bytes key="NSWhite">MAA</bytes>
 										<reference key="NSCustomColorSpace" ref="365169288"/>
 									</object>
-									<reference key="IBUIFont" ref="582805486"/>
-									<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
+									<reference key="IBUIFont" ref="848890141"/>
 									<float key="IBUIMinimumFontSize">17</float>
 									<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 										<int key="IBUIKeyboardType">7</int>
@@ -541,7 +537,7 @@
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<int key="IBUIContentHorizontalAlignment">0</int>
 							<int key="IBUIContentVerticalAlignment">0</int>
-							<object class="NSFont" key="IBUIFont" id="472179649">
+							<object class="NSFont" key="IBUIFont" id="685435039">
 								<string key="NSName">Helvetica-Bold</string>
 								<double key="NSSize">24</double>
 								<int key="NSfFlags">16</int>
@@ -561,7 +557,7 @@
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<int key="IBUIContentHorizontalAlignment">0</int>
 							<int key="IBUIContentVerticalAlignment">0</int>
-							<reference key="IBUIFont" ref="472179649"/>
+							<reference key="IBUIFont" ref="685435039"/>
 							<int key="IBUILineBreakMode">0</int>
 							<string key="IBUINormalTitle">Mot de passe oublié?</string>
 							<reference key="IBUIHighlightedTitleColor" ref="151792184"/>
@@ -581,7 +577,7 @@
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<int key="IBUIContentHorizontalAlignment">0</int>
 							<int key="IBUIContentVerticalAlignment">0</int>
-							<reference key="IBUIFont" ref="472179649"/>
+							<reference key="IBUIFont" ref="685435039"/>
 							<int key="IBUILineBreakMode">0</int>
 							<string key="IBUINormalTitle">Annuler</string>
 							<reference key="IBUIHighlightedTitleColor" ref="151792184"/>
@@ -601,7 +597,7 @@
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<int key="IBUIContentHorizontalAlignment">0</int>
 							<int key="IBUIContentVerticalAlignment">0</int>
-							<reference key="IBUIFont" ref="472179649"/>
+							<reference key="IBUIFont" ref="685435039"/>
 							<int key="IBUILineBreakMode">0</int>
 							<string key="IBUINormalTitle">s'authentifier</string>
 							<reference key="IBUIHighlightedTitleColor" ref="151792184"/>
@@ -621,7 +617,7 @@
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<int key="IBUIContentHorizontalAlignment">0</int>
 							<int key="IBUIContentVerticalAlignment">0</int>
-							<reference key="IBUIFont" ref="472179649"/>
+							<reference key="IBUIFont" ref="685435039"/>
 							<int key="IBUILineBreakMode">0</int>
 							<string key="IBUINormalTitle">Valider</string>
 							<reference key="IBUIHighlightedTitleColor" ref="151792184"/>
@@ -922,6 +918,14 @@
 						<int key="IBEventType">20</int>
 					</object>
 					<int key="connectionID">258</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">activity</string>
+						<reference key="source" ref="575745275"/>
+						<reference key="destination" ref="349847743"/>
+					</object>
+					<int key="connectionID">259</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1472,7 +1476,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">258</int>
+			<int key="maxID">259</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
