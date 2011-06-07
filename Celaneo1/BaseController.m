@@ -11,6 +11,16 @@
 
 #import "Celaneo1AppDelegate.h"
 
+// Base Controller for all controllers
+
+// Responsibilities:
+
+// Handle offline(cache) / online requests and requesting on viewWillAppear
+// ImageLoadingQueue to serialize image loading
+// Google Analytics
+// Appearance: nav buttons, nav bar
+// utility method to cell list cell
+
 @interface BaseController()
 
 - (void) doOfflineRequest;
@@ -161,13 +171,23 @@
 
 - (void) updateList:(ServerRequest*)request onlineContent:(BOOL)onlineContent;
 {
-    
+        // code here to update view content with request result
+        // method called twice: once for offline, another time for online
 }
 
 - (ServerRequest*) createListRequest
 {
+        // code here to create a request to update the view content. or nil for no request
     return nil;
 }
+
+- (NSString*) pageName
+{
+        // page name in Google Analytics
+    return @"/autre";
+}
+
+#pragma mark create nice looking navigation buttons
 
 - (UIButton*) navButton:(int) type withTitle:(NSString*) title action:(SEL)action
 {
@@ -225,11 +245,6 @@
     [offlineRequest release];
     [onlineRequest release];
     [imageLoadingQueue release];
-}
-
-- (NSString*) pageName
-{
-    return @"/autre";
 }
 
 #pragma mark utility method for table views

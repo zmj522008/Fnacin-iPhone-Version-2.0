@@ -22,6 +22,8 @@
 #define FIRST_ROW_IPAD 350
 #define LOAD_MORE 30
 
+// Handle all article lists
+
 @implementation ArticleList
 @synthesize articles;
 @synthesize table;
@@ -32,13 +34,6 @@
 @synthesize thematiqueId;
 @synthesize magasinId;
 
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-*/
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
