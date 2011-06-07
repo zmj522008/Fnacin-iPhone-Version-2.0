@@ -107,7 +107,9 @@
     self.imageRequest = [article createImageRequestForViewSize:self.vignette.bounds.size];
     
     if ([[self.imageRequest.url absoluteString] compare:self.currentImageUrl] != 0) {
-        self.vignette.image = [UIImage imageNamed:@"loading_list.jpg"];
+        if (![self.imageRequest.downloadCache canUseCachedDataForRequest:self.imageRequest]) {
+            self.vignette.image = [UIImage imageNamed:@"loading_list.jpg"];
+        }
         self.imageRequest.delegate = self;
         [imageLoadingQueue addOperation:self.imageRequest];
     }
