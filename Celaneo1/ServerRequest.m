@@ -13,6 +13,14 @@
 
 #define SERVER @"http://webservice.fnacin.com/"
 
+//
+// ServerRequest handles server request:
+// - creation with parameters
+// - preparation of asi http requests
+// - application level parsing
+
+// For each request you should create a new object
+
 @implementation ServerRequest
 
 @synthesize asiRequest;
@@ -352,16 +360,13 @@
 {
     [Celaneo1AppDelegate getSingleton].articlesPerPage = [nArticles intValue];
 #ifdef DEBUG
-//    [Celaneo1AppDelegate getSingleton].articlesPerPage = 5;//[nArticles intValue];
+    [Celaneo1AppDelegate getSingleton].articlesPerPage = 5;
 #endif
 }
 
 - (void) handleElementEnd_nb_articles:(NSString*)nArticles
 {
     self.articleCount = [nArticles intValue];
-#ifdef DEBUG
-//    self.articleCount = 20;
-#endif
 }
 
 - (void) handleElementEnd_dirigeant:(NSString*)value
@@ -378,9 +383,6 @@
 - (void) handleElementEnd_pre_page:(NSString*)value
 {
     self.prepageContent = value;
-#ifdef DEBUG
-//    self.prepageContent = @"<h2>Welcome!</h2><img src='http://i.imgur.com/R94ed.jpg' alt='loading...'></img><p><a href='http://google.com'>Click here to search</a>";
-#endif
 }
 
 #pragma mark Application XML Parsing - error
