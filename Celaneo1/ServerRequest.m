@@ -71,9 +71,7 @@
     if (self != nil) {
         [asiRequest setPostValue:email forKey:@"email"];
         [asiRequest setPostValue:password forKey:@"password"];
-        [asiRequest setPostValue:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] forKey:@"Version"];
-        // server a besoin de ca 04/05/11
-        [asiRequest setPostValue:@"I123" forKey:@"version"];
+        [asiRequest setPostValue:[NSString stringWithFormat:@"I%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]] forKey:@"version"];
     }
     return self;
 }
