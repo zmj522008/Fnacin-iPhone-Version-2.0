@@ -107,6 +107,7 @@
 		E3AFD2DC13961A960053E35F /* PrefereEdit~iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3AFD2D913961A960053E35F /* PrefereEdit~iPad.xib */; };
 		E3AFD2DD13961A960053E35F /* RubriqueList~iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3AFD2DA13961A960053E35F /* RubriqueList~iPad.xib */; };
 		E3AFD2DF1396BFBA0053E35F /* ArticleCellLarge~iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3AFD2DE1396BFBA0053E35F /* ArticleCellLarge~iPad.xib */; };
+		E3C084E113AA741000A108D5 /* ArticleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C084E013AA741000A108D5 /* ArticleParser.m */; };
 		E3D97E701349C3B300E2C1BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D97E6F1349C3B300E2C1BA /* UIKit.framework */; };
 		E3D97E721349C3B300E2C1BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D97E711349C3B300E2C1BA /* Foundation.framework */; };
 		E3D97E741349C3B300E2C1BA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D97E731349C3B300E2C1BA /* CoreGraphics.framework */; };
@@ -257,6 +258,8 @@
 		E3AFD2D913961A960053E35F /* PrefereEdit~iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "PrefereEdit~iPad.xib"; sourceTree = "<group>"; };
 		E3AFD2DA13961A960053E35F /* RubriqueList~iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "RubriqueList~iPad.xib"; sourceTree = "<group>"; };
 		E3AFD2DE1396BFBA0053E35F /* ArticleCellLarge~iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ArticleCellLarge~iPad.xib"; sourceTree = "<group>"; };
+		E3C084DF13AA741000A108D5 /* ArticleParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleParser.h; sourceTree = "<group>"; };
+		E3C084E013AA741000A108D5 /* ArticleParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleParser.m; sourceTree = "<group>"; };
 		E3D97E6B1349C3B300E2C1BA /* fnac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fnac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3D97E6F1349C3B300E2C1BA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E3D97E711349C3B300E2C1BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -450,6 +453,66 @@
 			path = iPad;
 			sourceTree = "<group>";
 		};
+		E3C084DB13AA438400A108D5 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				E3455376134F16D4004B9D1E /* PrefereEdit.xib */,
+				E38D1ED2135D754C000D5FE1 /* CommentaireCell.xib */,
+				E3AFD2BD139616150053E35F /* CommentaireCell~iPad.xib */,
+				E38D1ED3135D754C000D5FE1 /* CommentaireCell.h */,
+				E38D1ED4135D754C000D5FE1 /* CommentaireCell.m */,
+				E3455352134C990C004B9D1E /* ArticleCell.h */,
+				E390EC04134C6EAA00B1B705 /* ArticleCell.m */,
+				E390EC05134C6EAA00B1B705 /* ArticleCell.xib */,
+				E3AFD2BA139616080053E35F /* ArticleCell~iPad.xib */,
+				E3AFD2DE1396BFBA0053E35F /* ArticleCellLarge~iPad.xib */,
+				E3D97E8A1349C3B400E2C1BA /* ArticleList.xib */,
+				E3D97E811349C3B300E2C1BA /* MainWindow.xib */,
+				E3D97E8D1349C3B400E2C1BA /* RubriqueList.xib */,
+				E303264813545BCA0012B181 /* MediaPlayer.xib */,
+				E3AFD2CC139616160053E35F /* MediaPlayer~iPad.xib */,
+				E3E69FF913584FA500827128 /* ArticleDetail.xib */,
+				E3AFD2BC139616150053E35F /* ArticleDetail~iPad.xib */,
+				E3A782AC135EE13600C7C0F2 /* Prepage.xib */,
+				E3AFD2CD139616160053E35F /* Prepage~iPad.xib */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		E3C084DD13AA43AE00A108D5 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E3455379134F173C004B9D1E /* PrefereEditController.h */,
+				E345537A134F173C004B9D1E /* PrefereEditController.m */,
+				E3D97E841349C3B300E2C1BA /* ArticleList.h */,
+				E3D97E851349C3B300E2C1BA /* ArticleList.m */,
+				E3D97E871349C3B300E2C1BA /* RubriqueListController.h */,
+				E3D97E881349C3B300E2C1BA /* RubriqueListController.m */,
+				E341C8AF134B3CAD009BB506 /* BaseController.h */,
+				E341C8B0134B3CAD009BB506 /* BaseController.m */,
+				E3D97E951349C56B00E2C1BA /* LoginController.h */,
+				E3D97E961349C56C00E2C1BA /* LoginController.m */,
+				E303264613545BCA0012B181 /* MediaPlayer.h */,
+				E303264713545BCA0012B181 /* MediaPlayer.m */,
+				E3E69FF713584FA000827128 /* ArticleDetail.h */,
+				E3E69FF813584FA200827128 /* ArticleDetail.m */,
+				E3A782AA135EE13500C7C0F2 /* Prepage.h */,
+				E3A782AB135EE13500C7C0F2 /* Prepage.m */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		E3C084DE13AA440600A108D5 /* services */ = {
+			isa = PBXGroup;
+			children = (
+				E341C87A134A35F2009BB506 /* ServerRequest.h */,
+				E341C87B134A35F2009BB506 /* ServerRequest.m */,
+				E3C084DF13AA741000A108D5 /* ArticleParser.h */,
+				E3C084E013AA741000A108D5 /* ArticleParser.m */,
+			);
+			name = services;
+			sourceTree = "<group>";
+		};
 		E3D97E601349C3B300E2C1BA = {
 			isa = PBXGroup;
 			children = (
@@ -498,49 +561,15 @@
 		E3D97E751349C3B300E2C1BA /* Celaneo1 */ = {
 			isa = PBXGroup;
 			children = (
+				E3C084DE13AA440600A108D5 /* services */,
+				E3C084DD13AA43AE00A108D5 /* controllers */,
+				E3C084DB13AA438400A108D5 /* view */,
 				E3AFD2BE139616160053E35F /* en.lproj */,
 				E3AFD2C9139616160053E35F /* iPad */,
-				E38D1ED2135D754C000D5FE1 /* CommentaireCell.xib */,
-				E3AFD2BD139616150053E35F /* CommentaireCell~iPad.xib */,
-				E38D1ED3135D754C000D5FE1 /* CommentaireCell.h */,
-				E38D1ED4135D754C000D5FE1 /* CommentaireCell.m */,
-				E3455379134F173C004B9D1E /* PrefereEditController.h */,
-				E345537A134F173C004B9D1E /* PrefereEditController.m */,
-				E3455376134F16D4004B9D1E /* PrefereEdit.xib */,
 				E3455366134E22F2004B9D1E /* Model */,
 				E3D97E7E1349C3B300E2C1BA /* Celaneo1AppDelegate.h */,
 				E3D97E7F1349C3B300E2C1BA /* Celaneo1AppDelegate.m */,
-				E3D97E811349C3B300E2C1BA /* MainWindow.xib */,
-				E3D97E841349C3B300E2C1BA /* ArticleList.h */,
-				E3D97E851349C3B300E2C1BA /* ArticleList.m */,
-				E3D97E8A1349C3B400E2C1BA /* ArticleList.xib */,
-				E3D97E871349C3B300E2C1BA /* RubriqueListController.h */,
-				E3D97E881349C3B300E2C1BA /* RubriqueListController.m */,
-				E3D97E8D1349C3B400E2C1BA /* RubriqueList.xib */,
 				E3D97E761349C3B300E2C1BA /* Supporting Files */,
-				E341C8AF134B3CAD009BB506 /* BaseController.h */,
-				E341C8B0134B3CAD009BB506 /* BaseController.m */,
-				E3D97E951349C56B00E2C1BA /* LoginController.h */,
-				E3D97E961349C56C00E2C1BA /* LoginController.m */,
-				E341C87A134A35F2009BB506 /* ServerRequest.h */,
-				E341C87B134A35F2009BB506 /* ServerRequest.m */,
-				E3455352134C990C004B9D1E /* ArticleCell.h */,
-				E390EC04134C6EAA00B1B705 /* ArticleCell.m */,
-				E390EC05134C6EAA00B1B705 /* ArticleCell.xib */,
-				E3AFD2BA139616080053E35F /* ArticleCell~iPad.xib */,
-				E3AFD2DE1396BFBA0053E35F /* ArticleCellLarge~iPad.xib */,
-				E303264613545BCA0012B181 /* MediaPlayer.h */,
-				E303264713545BCA0012B181 /* MediaPlayer.m */,
-				E303264813545BCA0012B181 /* MediaPlayer.xib */,
-				E3AFD2CC139616160053E35F /* MediaPlayer~iPad.xib */,
-				E3E69FF713584FA000827128 /* ArticleDetail.h */,
-				E3E69FF813584FA200827128 /* ArticleDetail.m */,
-				E3E69FF913584FA500827128 /* ArticleDetail.xib */,
-				E3AFD2BC139616150053E35F /* ArticleDetail~iPad.xib */,
-				E3A782AA135EE13500C7C0F2 /* Prepage.h */,
-				E3A782AB135EE13500C7C0F2 /* Prepage.m */,
-				E3A782AC135EE13600C7C0F2 /* Prepage.xib */,
-				E3AFD2CD139616160053E35F /* Prepage~iPad.xib */,
 				E36C822B136AD29D009C39C7 /* NSString+removeTags.h */,
 				E36C822C136AD29D009C39C7 /* NSString+removeTags.m */,
 			);
@@ -724,6 +753,7 @@
 				E38D1ED6135D754D000D5FE1 /* CommentaireCell.m in Sources */,
 				E3A782AD135EE13600C7C0F2 /* Prepage.m in Sources */,
 				E36C822D136AD29E009C39C7 /* NSString+removeTags.m in Sources */,
+				E3C084E113AA741000A108D5 /* ArticleParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

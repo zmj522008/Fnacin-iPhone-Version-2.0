@@ -143,16 +143,16 @@
 
 #pragma mark BaseController overrides
 
-- (void) updateList:(ServerRequest*)request onlineContent:(BOOL)onlineContent
+- (void) updateList:(ServerRequest*)request parser:(ArticleParser*)parsed onlineContent:(BOOL)onlineContent
 {
-    int requestCount = request.articles.count;
+    int requestCount = parsed.articles.count;
     if (requestCount > 0 && requestCount >= articles.count - request.limitStart) {
         if (articles.count > 0) {
             [table beginUpdates];
             
             NSMutableArray* reloadRows = [NSMutableArray arrayWithCapacity:requestCount];
             for (int i = 0; i < requestCount && i < articles.count - request.limitStart; i++) {
-                if (![[request.articles objectAtIndex:i] isEqual:[articles objectAtIndex:i + request.limitStart]]) {
+                if (![[parsed.articles objectAtIndex:i] isEqual:[articles objectAtIndex:i + request.limitStart]]) {
                     [reloadRows addObject:[NSIndexPath indexPathForRow:i + request.limitStart inSection:0]];
                 }
             }
@@ -164,10 +164,10 @@
             [table insertRowsAtIndexPaths:insertRows withRowAnimation:UITableViewRowAnimationNone];
             
             [articles removeObjectsInRange:NSMakeRange(request.limitStart, articles.count - request.limitStart)];
-            [articles addObjectsFromArray:request.articles];
+            [articles addObjectsFromArray:parsed.articles];
             [table endUpdates];
         } else {
-            [articles addObjectsFromArray:request.articles];
+            [articles addObjectsFromArray:parsed.articles];
             [table reloadData];
         }
     } else {
@@ -175,7 +175,7 @@
     }
     
     bool oldHasMore = hasMore;
-    hasMore = [articles count] < request.articleCount;
+    hasMore = [articles count] < parsed.articleCount;
     if (oldHasMore ^ hasMore) {
         [table reloadData];
     }

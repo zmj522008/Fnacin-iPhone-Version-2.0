@@ -175,9 +175,9 @@
     return request;
 }
 
-- (void) updateList:(ServerRequest*)request onlineContent:(BOOL)onlineContent
+- (void) updateList:(ServerRequest*)request parser:(ArticleParser*)parsed onlineContent:(BOOL)onlineContent;
 {
-    for (Article* a in request.articles) {
+    for (Article* a in parsed.articles) {
         if (a.articleId == article.articleId) {
             self.article = a;
             [self update];
@@ -541,6 +541,8 @@
 
 - (void) serverRequest:(ServerRequest*)request didSucceedWithObject:(id)result
 {
+    ArticleParser* parsed = request.parser;
+    
     NSString* message;
     if (favorisRequest == request) {
         article.favoris = YES;
@@ -548,15 +550,15 @@
         self.favorisRequest = nil;
         message = @"Article ajouté à vos dossiers.";
     } else if (jaimeRequest == request) {
-        if (request.nb_jaime > article.nb_jaime) {
-            article.nb_jaime = request.nb_jaime;
+        if (parsed.nb_jaime > article.nb_jaime) {
+            article.nb_jaime = parsed.nb_jaime;
         }
         [self updateToolbar];
         self.jaimeRequest = nil;
         message = @"Article marqué.";
     } else if (commentaireRequest == request) {
-        if (request.nb_commentaire > article.nb_commentaires) {
-            article.nb_commentaires = request.nb_commentaire;
+        if (parsed.nb_commentaire > article.nb_commentaires) {
+            article.nb_commentaires = parsed.nb_commentaire;
         }
         [self updateToolbar];
         self.commentaireRequest = nil;

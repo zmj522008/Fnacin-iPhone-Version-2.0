@@ -58,11 +58,9 @@
 
 #pragma mark BaseController overrides
 
-- (void) updateList:(ServerRequest*)request onlineContent:(BOOL)onlineContent
-{
-    [super updateList:request onlineContent:onlineContent];
-    
-    rubriques = request.rubriques;
+- (void) updateList:(ServerRequest*)request parser:(ArticleParser*)parsed onlineContent:(BOOL)onlineContent;
+{    
+    rubriques = parsed.rubriques;
     
     [table reloadData];
 }

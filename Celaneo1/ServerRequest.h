@@ -8,14 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "ASIFormDataRequest.h"
-#import "Article.h"
-#import "Magasin.h"
-#import "Category.h"
-#import "Commentaire.h"
-
-#define TYPE_THEMATIQUE 0
-#define TYPE_RUBRIQUE 1
-#define TYPE_MAGASIN 2
 
 @class ServerRequest;
 
@@ -26,66 +18,34 @@
 
 @end
 
+@protocol ApplicationParser <NSObject>
+
+- (NSError*) endDocument;
+
+@end
+
 @interface ServerRequest : NSObject <ASIHTTPRequestDelegate, NSXMLParserDelegate> {
     ASIFormDataRequest* asiRequest;
     id<ServerRequestDelegate> delegate;
-    
+
+    NSError* erreur;
+   
     NSMutableString* currentTextString;
-    Article* article;
-    Magasin* magasin;
-    Category* category;
-    Commentaire* commentaire;
-    
-    BOOL authentificated;
-    BOOL fnac;
-    
-    BOOL dirigeant;
-    
-    int currentId;
+
     int limitStart;
     int limitEnd;
-    int articleCount;
     
-    int nb_jaime;
-    int nb_commentaire;
-
-    NSMutableArray* articles;
-    NSMutableArray* thematiques;
-    NSMutableArray* rubriques;
-    NSMutableArray* magasins;
-    
-    NSMutableArray* commentaires;
-    
-    NSString* erreurDescription;
-    int erreurCode;
-    NSError* erreur;
-    
-    NSString* prepageContent;
-    BOOL prepageFerme;
+    id<ApplicationParser> parser;
 }
 
 @property (nonatomic, retain) ASIFormDataRequest* asiRequest;
 @property (nonatomic, retain) id<ServerRequestDelegate> delegate;
-@property (nonatomic, retain) NSArray *articles;
-@property (nonatomic, retain) NSArray *thematiques;
-@property (nonatomic, retain) NSArray *rubriques;
-@property (nonatomic, retain) NSArray *magasins;
-@property (nonatomic, retain) Article *article;
-@property (nonatomic, retain) Magasin *magasin;
-@property (nonatomic, retain) Category *category;
 @property (nonatomic, retain) NSError *erreur;
-@property (nonatomic, retain) NSString *erreurDescription;
-@property (nonatomic, retain) Commentaire *commentaire;
-@property (nonatomic, retain) NSMutableArray *commentaires;
+
 @property (nonatomic, assign) int limitStart;
 @property (nonatomic, assign) int limitEnd;
-@property (nonatomic, assign) int articleCount;
-@property (nonatomic, assign) int nb_jaime;
-@property (nonatomic, assign) int nb_commentaire;
-@property (nonatomic, assign) BOOL dirigeant;
-@property (nonatomic, retain) NSString *prepageContent;
-@property (nonatomic, assign, getter=isPrepageFerme) BOOL prepageFerme;
-@property (nonatomic, assign, getter=isFnac) BOOL fnac;
+
+@property (nonatomic, retain) id<ApplicationParser> parser;
 
 - (id) initAuthentificateWithEmail:(NSString*)email withPassword:(NSString*)password;
 - (id) initArticle;

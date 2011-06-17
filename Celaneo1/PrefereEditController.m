@@ -88,11 +88,9 @@
 
 #pragma mark BaseController overrides
 
-- (void) updateList:(ServerRequest*)request onlineContent:(BOOL)onlineContent
-{
-    [super updateList:request onlineContent:onlineContent];
-    
-    self.rubriques = request.rubriques;
+- (void) updateList:(ServerRequest*)request parser:(ArticleParser*)parsed onlineContent:(BOOL)onlineContent;
+{    
+    self.rubriques = parsed.rubriques;
     for (Category* cat in self.rubriques) {
         if (cat.prefere) {
             [selectedRubriques addIndex:cat.categoryId];

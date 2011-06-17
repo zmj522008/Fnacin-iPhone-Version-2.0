@@ -9,6 +9,7 @@
 #import <UIKit/UIViewController.h>
 
 #import "ServerRequest.h"
+#import "ArticleParser.h"
 
 #define NAVBUTTON_ARROW_LEFT 0
 #define NAVBUTTON_PLAIN 1
@@ -32,7 +33,7 @@
 - (void) refresh;
 
 - (ServerRequest*) createListRequest;
-- (void) updateList:(ServerRequest*)request onlineContent:(BOOL)onlineContent;
+- (void) updateList:(ServerRequest*)request parser:(ArticleParser*)parsed onlineContent:(BOOL)onlineContent;
 
 - (UITableViewCell *)loadCellFromNib:(NSString *)nibName;
 

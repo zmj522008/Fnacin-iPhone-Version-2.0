@@ -25,26 +25,12 @@
 
 @synthesize asiRequest;
 @synthesize delegate;
-@synthesize articles;
-@synthesize thematiques;
-@synthesize rubriques;
-@synthesize magasins;
-@synthesize article;
-@synthesize magasin;
-@synthesize category;
 @synthesize erreur;
-@synthesize erreurDescription;
-@synthesize commentaire;
-@synthesize commentaires;
+
 @synthesize limitStart;
 @synthesize limitEnd;
-@synthesize articleCount;
-@synthesize nb_jaime;
-@synthesize nb_commentaire;
-@synthesize dirigeant;
-@synthesize prepageContent;
-@synthesize prepageFerme;
-@synthesize fnac;
+
+@synthesize parser;
 
 #pragma mark Request constructors
 - (id) initWithMethod:(NSString*)method
@@ -61,6 +47,7 @@
         }
         self.limitEnd = -1;
         self.limitStart = -1;
+        self.parser = [[[ArticleParser alloc] init] autorelease];
     }
     return self;
 }
@@ -220,12 +207,12 @@
     } else {
         NSLog(@"%@\n%@", request.url, request.responseString);
         
-        NSXMLParser* parser = [[NSXMLParser alloc] initWithData:responseData];
-        [parser setShouldProcessNamespaces:NO];
-        [parser setShouldReportNamespacePrefixes:NO];
-        [parser setShouldResolveExternalEntities:NO];
-        parser.delegate = self;
-        [parser parse];
+        NSXMLParser* xmlParser = [[NSXMLParser alloc] initWithData:responseData];
+        [xmlParser setShouldProcessNamespaces:NO];
+        [xmlParser setShouldReportNamespacePrefixes:NO];
+        [xmlParser setShouldResolveExternalEntities:NO];
+        xmlParser.delegate = self;
+        [xmlParser parse];
     }
 }
 
@@ -245,27 +232,15 @@
 
 #pragma mark Generic XML Parsing
 
-- (void) dump
+- (void)parserDidEndDocument:(NSXMLParser *)xmlParser
 {
-    for (NSString* arg in [NSArray arrayWithObjects:@"rubriques", @"thematiques", @"articles", @"magasins", nil]) {
-        NSArray* lst = [self performSelector:NSSelectorFromString(arg)];
-        NSLog(@"%@ (%d):", arg, [lst count]);
-        for (id<ModelObject> c in lst) {
-            [c dump];
-        }
-    }
-}
-- (void)parserDidEndDocument:(NSXMLParser *)parser
-{
-    if (erreur == nil && fnac && [[Celaneo1AppDelegate getSingleton].sessionId length] > 0) {
-#ifdef DEBUG
-        [self dump];
-#endif
-        [delegate serverRequest:self didSucceedWithObject:nil];
+    NSError* parsedError = [parser endDocument];
+    if (erreur == nil && parsedError == nil) {
+        [delegate serverRequest:self didSucceedWithObject:nil];        
     } else {
         [[ASIDownloadCache sharedCache] removeCachedDataForRequest:asiRequest];
 
-        [delegate serverRequest:self didFailWithError:erreur];
+        [delegate serverRequest:self didFailWithError:erreur ? erreur : parsedError];
     }
 }
 
@@ -287,7 +262,7 @@
     }
 }
 
--(void)    parser: (NSXMLParser*) parser
+-(void)    parser: (NSXMLParser*) xmlParser
   didStartElement: (NSString*) elementName
      namespaceURI: (NSString*) namespaceURI
     qualifiedName: (NSString*) qName
@@ -299,326 +274,26 @@
         currentTextString = nil;
     }
     SEL sel = NSSelectorFromString( [NSString stringWithFormat:@"handleElementStart_%@:", elementName] );
-    if( [self respondsToSelector:sel] )
+    if( [parser respondsToSelector:sel] )
     {
-        [self performSelector:sel withObject: attributeDict];
+        [parser performSelector:sel withObject: attributeDict];
     }
 }
 
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
+- (void)parser:(NSXMLParser *)xmlParser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {
     SEL sel = NSSelectorFromString([NSString stringWithFormat:@"handleElementEnd_%@", elementName]);
-    if ([self respondsToSelector:sel]) {
-        [self performSelector:sel];
+    if ([parser respondsToSelector:sel]) {
+        [parser performSelector:sel];
     } else {
         SEL sel = NSSelectorFromString( [NSString stringWithFormat:@"handleElementEnd_%@:", elementName] );
 
-        if( [self respondsToSelector:sel] )
+        if( [parser respondsToSelector:sel] )
         {
-            [self performSelector:sel withObject: [currentTextString stringByTrimmingCharactersInSet:
+            [parser performSelector:sel withObject: [currentTextString stringByTrimmingCharactersInSet:
                                                    [NSCharacterSet whitespaceAndNewlineCharacterSet]]];
         }
     }
-}
-
-#pragma mark Application XML Parsing
-
-- (void) resetParsing
-{
-    self.articles = nil;
-    self.magasins = nil;
-    self.rubriques = nil;
-    self.thematiques = nil;
-    
-    self.article = nil;
-    self.magasin = nil;
-    self.erreur = nil;
-    self.erreurDescription = nil;
-    
-    self.prepageContent = nil;
-    
-    fnac = NO;
-    authentificated = NO;
-}
-
-#pragma mark Application XML Parsing - authentification
-
-- (void) handleElementStart_fnac:(NSDictionary*)dic
-{
-    fnac = YES;
-}
-
-- (void) handleElementEnd_session_id:(NSString*)sessionId
-{
-    [Celaneo1AppDelegate getSingleton].sessionId = sessionId;
-    authentificated = sessionId != nil;
-}
-
-- (void) handleElementEnd_nb_articles_page:(NSString*)nArticles
-{
-    [Celaneo1AppDelegate getSingleton].articlesPerPage = [nArticles intValue];
-#ifdef DEBUG
-    [Celaneo1AppDelegate getSingleton].articlesPerPage = 5;
-#endif
-}
-
-- (void) handleElementEnd_nb_articles:(NSString*)nArticles
-{
-    self.articleCount = [nArticles intValue];
-}
-
-- (void) handleElementEnd_dirigeant:(NSString*)value
-{
-    dirigeant = [value intValue] == 1;
-}
-
-
-- (void) handleElementStart_pre_page:(NSDictionary*) attributes
-{
-    self.prepageFerme = [[attributes objectForKey:@"ferme"] intValue] == 1;
-}
-
-- (void) handleElementEnd_pre_page:(NSString*)value
-{
-    self.prepageContent = value;
-}
-
-#pragma mark Application XML Parsing - error
-
-- (void) handleElementEnd_code:(NSString*)value
-{
-    erreurCode = [value intValue];
-}
-
-- (void) handleElementEnd_message:(NSString*)value
-{
-    erreurDescription = value;
-}
-
-- (void) handleElementEnd_reauthentification:(NSString*)value
-{
-    if ([value intValue] == 1) {
-        [Celaneo1AppDelegate getSingleton].sessionId = nil;
-    }
-}
-
-- (void) handleElementEnd_erreur
-{
-    erreur = [NSError errorWithDomain:@"FNAC" code:erreurCode userInfo:
-              [NSDictionary dictionaryWithObject:erreurDescription forKey:NSLocalizedDescriptionKey]];
-}
-
-#pragma mark Application XML Parsing - articles
-
-- (void) handleElementStart_articles:(NSDictionary*) attributes
-{
-    self.articles = [NSMutableArray arrayWithCapacity:20];
-}
-
-- (void) handleElementStart_article:(NSDictionary*) attributes
-{
-    self.article = [Article articleWithId:[[attributes objectForKey:@"id"] intValue]];
-}
-
-- (void) handleElementStart_commentaires:(NSDictionary*) attributes
-{
-    self.commentaires = [NSMutableArray arrayWithCapacity:1];
-}
-
-- (void) handleElementEnd_commentaires
-{
-    self.article.commentaires = commentaires;
-    self.commentaires = nil;
-}
-
-- (void) handleElementStart_commentaire:(NSDictionary*) attributes
-{
-    self.commentaire = [Commentaire commentaireWithId:[[attributes objectForKey:@"id"] intValue]];
-}
-
-- (void) handleElementEnd_commentaire
-{
-    [self.commentaires addObject:commentaire];
-    self.commentaire = nil;
-}
-
-- (void) handleElementEnd_prenom:(NSString*)value
-{
-    self.commentaire.prenom = value;
-}
-
-- (void) handleElementEnd_date_depot:(NSString*)value
-{
-    self.commentaire.date = value;
-}
-
-- (void) handleElementEnd_article
-{
-    if (self.article != nil) {
-        [articles addObject:article];
-
-        self.article = nil;
-    }
-}
-
-- (void) handleElementStart_thematique:(NSDictionary*) attributes
-{
-    if (self.article != nil) {
-        self.article.thematiqueId = [[attributes objectForKey:@"id"] intValue];
-    } else {
-        category = [[Category alloc] init];
-        category.categoryId = [[attributes objectForKey:@"id"] intValue];
-    }
-}
-
-- (void) handleElementEnd_thematique:(NSString*)value
-{
-    if (self.article != nil) {
-        self.article.thematique = value;
-    } else {	
-        self.category.name = value;
-        [thematiques addObject:category];
-    }
-}
-
-- (void) handleElementStart_rubrique_libelle:(NSDictionary*) attributes
-{
-    // WORKAROUND
-
-    if (self.article != nil) {
-        self.article.rubriqueId = [[attributes objectForKey:@"id"] intValue];
-    } else {
-        category = [[Category alloc] init];
-        category.categoryId = [[attributes objectForKey:@"id"] intValue];
-    }
-}
-
-- (void) handleElementStart_rubrique:(NSDictionary*) attributes
-{
-    if (self.article != nil) {
-        self.article.rubriqueId = [[attributes objectForKey:@"id"] intValue];
-    } else {
-        category = [[Category alloc] init];
-        category.categoryId = [[attributes objectForKey:@"id"] intValue];
-    }
-}
-
-- (void) handleElementEnd_rubrique_libelle:(NSString*)value
-{
-    // WORKAROUND
-    
-    if (self.article != nil) {
-        self.article.rubrique = value;
-    } else {
-        self.category.name = value;
-        [rubriques addObject:category];
-    }
-}
-
-- (void) handleElementEnd_rubrique:(NSString*)value
-{
-    if (self.article != nil) {
-        self.article.rubrique = value;
-    } else {
-        self.category.name = value;
-        [rubriques addObject:category];
-    }
-}
-
-- (void) handleElementEnd_nb_jaime:(NSString*)value
-{
-    nb_jaime = [value intValue];
-    self.article.nb_jaime = [value intValue];
-}
-
-- (void) handleElementEnd_nb_commentaires:(NSString*)value
-{
-    nb_commentaire = [value intValue];
-    self.article.nb_commentaires = [value intValue];
-}
-
-- (void) handleElementEnd_nb_commentaire:(NSString*)value
-{
-    nb_commentaire = [value intValue];
-    self.article.nb_commentaires = [value intValue];
-}
-
-
-- (void) handleElementEnd_titre:(NSString*)value
-{
-    self.article.titre = value;
-}
-
-- (void) handleElementStart_type:(NSDictionary*) attributes
-{
-    self.article.type = [[attributes objectForKey:@"id"] intValue];
-}
-
-- (void) handleElementEnd_date_affichee:(NSString*)value
-{
-    self.article.dateAffichee = value;
-}
-
-- (void) handleElementEnd_date_modification:(NSString*)value
-{
-    self.article.hash = value;
-}
-
-- (void) handleElementEnd_url_media:(NSString*)value
-{
-    self.article.urlMedia = value;
-}
-
-- (void) handleElementEnd_accroche:(NSString*)value
-{
-    self.article.accroche = value;
-}
-
-- (void) handleElementEnd_contenu:(NSString*)value
-{
-    if (self.commentaire) {
-        self.commentaire.contenu = value;
-    } else {
-        self.article.contenu = value;
-    }
-}
-
-- (void) handleElementEnd_url_image:(NSString*)value
-{
-    self.article.urlImage = value;
-}
-
-- (void) handleElementEnd_favoris:(NSString*)value
-{
-    self.article.favoris = [value intValue] == 1;
-}
-
-#pragma mark Application XML Parsing - thematiques
-
-- (void) handleElementStart_thematiques:(NSDictionary*) attributes
-{
-    self.thematiques = [NSMutableArray arrayWithCapacity:20];
-}
-
-// (void) handleElementStart_thematique:(NSDictionary*) attributes (see above)
-
-
-// (void) handleElementEnd_thematique:(NSString*) value (see above)
-
-#pragma mark Application XML Parsing - rubriques
-
-- (void) handleElementStart_rubriques:(NSDictionary*) attributes
-{
-    self.rubriques = [NSMutableArray arrayWithCapacity:20];
-}
-
-// (void) handleElementStart_rubrique:(NSDictionary*) attributes (see above)
-
-// (void) handleElementEnd_rubrique:(NSString*) value (see above)
-
-- (void) handleElementEnd_prefere:(NSString*)value
-{
-    self.category.prefere = [value intValue] == 1;
 }
 
 #pragma mark lifecycle
@@ -639,22 +314,12 @@
     [asiRequest clearDelegatesAndCancel];
 }
 
+
 - (void) dealloc
 {
     [self cancel];
+    [parser release];
     [asiRequest release];
-    
-    [articles release];
-    [thematiques release];
-    [rubriques release];
-    [magasins release];
-    
-    [article release];
-    [magasin release];
-    
-    [commentaire release];
-    [commentaires release];
-    [prepageContent release];
     [super dealloc];
 }
 @end

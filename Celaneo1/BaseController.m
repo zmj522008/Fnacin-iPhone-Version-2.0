@@ -155,7 +155,7 @@
 {
     resetCache = NO;
 
-    [self updateList:request onlineContent:request == onlineRequest];
+    [self updateList:request parser:request.parser onlineContent:request == onlineRequest];
     if (request == offlineRequest) {
         [self doOnlineRequest:NO];
         return;
@@ -169,7 +169,7 @@
 
 #pragma mark BaseController overrides
 
-- (void) updateList:(ServerRequest*)request onlineContent:(BOOL)onlineContent;
+- (void) updateList:(ServerRequest*)request parser:(ArticleParser*)parsed onlineContent:(BOOL)onlineContent;
 {
         // code here to update view content with request result
         // method called twice: once for offline, another time for online

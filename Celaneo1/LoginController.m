@@ -119,20 +119,20 @@
 
 #pragma mark Handle server Response
 
-- (void) serverRequest:(ServerRequest*)aRequest didSucceedWithObject:(id)result
+- (void) updateList:(ServerRequest*)request parser:(ArticleParser*)parsed onlineContent:(BOOL)onlineContent;
 {
     if (mode == LoginForgMode) {
         [self switchToMode:LoginSentMode];
         return;
     }
-    if (aRequest.prepageContent) {
+    if (parsed.prepageContent) {
         NSString* nibName = @"Prepage";
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             nibName = [nibName stringByAppendingString:@"~iPad"];
         }
         Prepage* prepage = [[Prepage alloc] initWithNibName:nibName bundle:nil];
-        prepage.ferme = aRequest.prepageFerme;
-        prepage.prepageContent = aRequest.prepageContent;
+        prepage.ferme = parsed.prepageFerme;
+        prepage.prepageContent = parsed.prepageContent;
         
         Celaneo1AppDelegate* delegate = [Celaneo1AppDelegate getSingleton];
         delegate.window.rootViewController = prepage;    
@@ -140,8 +140,8 @@
         [self goToTabBar];
     }
 
-    [Celaneo1AppDelegate getSingleton].dirigeant = aRequest.dirigeant;
-    if (aRequest.dirigeant) {
+    [Celaneo1AppDelegate getSingleton].dirigeant = parsed.dirigeant;
+    if (parsed.dirigeant) {
 #if !TARGET_IPHONE_SIMULATOR
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
          UIRemoteNotificationTypeAlert];
