@@ -44,9 +44,10 @@
         if (sessionId != nil) {
             [request setParameter:@"session_id" withValue:sessionId];
         }
-        self.limitEnd = -1;
-        self.limitStart = -1;
-        request.parser = self;
+        SaxMethodParser* saxParser = [[[SaxMethodParser alloc] init] autorelease];
+        request.xmlParserDelegate = saxParser;
+        saxParser.serverRequest = request;
+        saxParser.parser = self;
     }
     
     ASIDownloadCache* cache = [ASIDownloadCache sharedCache];
@@ -192,16 +193,6 @@
         for (id<ModelObject> c in lst) {
             [c dump];
         }
-    }
-}
-
-- (void) serverRequestSetDefaultParameters:(ServerRequest*)request
-{
-    if (limitStart >= 0) {
-        [request setParameter:@"limit_start" withIntValue:limitStart];
-    }
-    if (limitEnd >= 0) {
-        [request setParameter:@"limit_end" withIntValue:limitEnd];
     }
 }
 
@@ -465,7 +456,7 @@
 
 - (NSError*) endDocument
 {
-    if (erreurCode == 0 && erreurDescription == nil && fnac && [[Celaneo1AppDelegate getSingleton].sessionId length] > 0) {
+    if (erreurCode == 0 && erreurDescription == nil && fnac) {
 #ifdef DEBUG
         [self dump];
 #endif

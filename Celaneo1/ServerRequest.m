@@ -23,9 +23,11 @@
 
 @synthesize asiRequest;
 @synthesize delegate;
+
 @synthesize erreur;
 
-@synthesize parser;
+@synthesize xmlParserDelegate;
+@synthesize result;
 
 #pragma mark constructor
 - (id) initWithUrl:(NSString*)url
@@ -78,98 +80,39 @@
         [xmlParser setShouldProcessNamespaces:NO];
         [xmlParser setShouldReportNamespacePrefixes:NO];
         [xmlParser setShouldResolveExternalEntities:NO];
-        xmlParser.delegate = self;
+        xmlParser.delegate = xmlParserDelegate;
         [xmlParser parse];
+        
+        if (erreur == nil) {
+            [delegate serverRequest:self didSucceedWithObject:result];        
+        } else {
+            [self requestFailed:request];
+        }
     }
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
-    NSError *error = [request error];
+    NSError *requestError = [request error];
     // Never store errors!!!
     [[ASIDownloadCache sharedCache] removeCachedDataForRequest:request];
     
-    if (error.domain == NetworkRequestErrorDomain && error.code == ASIRequestCancelledErrorType) {
+    if (requestError.domain == NetworkRequestErrorDomain && requestError.code == ASIRequestCancelledErrorType) {
         NSLog(@"%@ cancelled", self);
     } else {
-        NSLog(@"serverRequest error :%@", error);
-        [delegate serverRequest:self didFailWithError:error];
-    }
-}
-
-#pragma mark Generic XML Parsing
-
-- (void)parserDidEndDocument:(NSXMLParser *)xmlParser
-{
-    NSError* parsedError = [parser endDocument];
-    if (erreur == nil && parsedError == nil) {
-        [delegate serverRequest:self didSucceedWithObject:nil];        
-    } else {
-        // Never store errors!!!
-
-        [[ASIDownloadCache sharedCache] removeCachedDataForRequest:asiRequest];
-
-        [delegate serverRequest:self didFailWithError:erreur ? erreur : parsedError];
-    }
-}
-
-- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
-{
-    [delegate serverRequest:self didFailWithError:parseError];
-}
-
--(void)     parser: (NSXMLParser*) parser 
-   foundCharacters: (NSString*) string 
-{    
-    if( string && [string length] > 0 )
-    {
-        if( !currentTextString )
-        {
-            currentTextString = [[NSMutableString alloc] initWithCapacity:4];
-        }
-        [currentTextString appendString:string];
-    }
-}
-
--(void)    parser: (NSXMLParser*) xmlParser
-  didStartElement: (NSString*) elementName
-     namespaceURI: (NSString*) namespaceURI
-    qualifiedName: (NSString*) qName
-       attributes: (NSDictionary*) attributeDict
-{
-    if (currentTextString) 
-    {
-        [currentTextString release];
-        currentTextString = nil;
-    }
-    SEL sel = NSSelectorFromString( [NSString stringWithFormat:@"handleElementStart_%@:", elementName] );
-    if( [parser respondsToSelector:sel] )
-    {
-        [parser performSelector:sel withObject: attributeDict];
-    }
-}
-
-- (void)parser:(NSXMLParser *)xmlParser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
-{
-    SEL sel = NSSelectorFromString([NSString stringWithFormat:@"handleElementEnd_%@", elementName]);
-    if ([parser respondsToSelector:sel]) {
-        [parser performSelector:sel];
-    } else {
-        SEL sel = NSSelectorFromString( [NSString stringWithFormat:@"handleElementEnd_%@:", elementName] );
-
-        if( [parser respondsToSelector:sel] )
-        {
-            [parser performSelector:sel withObject: [currentTextString stringByTrimmingCharactersInSet:
-                                                   [NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+        NSLog(@"serverRequest error :%@, app error: %@", requestError, erreur);
+        if (requestError) {
+            [delegate serverRequest:self didFailWithError:requestError];
+        } else {
+            [delegate serverRequest:self didFailWithError:erreur];
         }
     }
 }
+
 
 #pragma mark lifecycle
 - (void) start
 {
-    [parser serverRequestSetDefaultParameters:self];
-
     [asiRequest startAsynchronous];
 }
 
@@ -182,8 +125,11 @@
 - (void) dealloc
 {
     [self cancel];
-    [parser release];
     [asiRequest release];
+    [erreur release];
+    [xmlParserDelegate release];
+    [result release];
+    
     [super dealloc];
 }
 @end

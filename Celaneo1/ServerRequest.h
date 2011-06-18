@@ -18,32 +18,22 @@
 
 @end
 
-@protocol ApplicationParser <NSObject>
-
-- (NSError*) endDocument;
-- (void) serverRequestSetDefaultParameters:(ServerRequest*)request;
-
-@end
-
-@interface ServerRequest : NSObject <ASIHTTPRequestDelegate, NSXMLParserDelegate> {
+@interface ServerRequest : NSObject <ASIHTTPRequestDelegate> {
     ASIFormDataRequest* asiRequest;
     id<ServerRequestDelegate> delegate;
 
+    id result;
     NSError* erreur;
-   
-    NSMutableString* currentTextString;
-
-    int limitStart;
-    int limitEnd;
-    
-    id<ApplicationParser> parser;
+    id<NSXMLParserDelegate> xmlParserDelegate;
 }
 
 @property (nonatomic, retain) ASIFormDataRequest* asiRequest;
 @property (nonatomic, retain) id<ServerRequestDelegate> delegate;
-@property (nonatomic, retain) NSError *erreur;
 
-@property (nonatomic, retain) id<ApplicationParser> parser;
+@property (nonatomic, retain) NSError *erreur;
+@property (nonatomic, retain) id<NSXMLParserDelegate> xmlParserDelegate;
+
+@property (nonatomic, retain) id result;
 
 - (id) initWithUrl:(NSString*)url;
 

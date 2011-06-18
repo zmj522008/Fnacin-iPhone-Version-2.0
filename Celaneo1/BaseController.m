@@ -155,9 +155,10 @@
 
 - (void) serverRequest:(ServerRequest*)request didSucceedWithObject:(id)result
 {
+    ArticleParser* parser = (ArticleParser*) result;
     resetCache = NO;
 
-    [self updateList:request parser:request.parser onlineContent:request == onlineRequest];
+    [self updateList:request parser:parser onlineContent:request == onlineRequest];
     if (request == offlineRequest) {
         [self doOnlineRequest:NO];
         return;

@@ -189,7 +189,8 @@
 
 - (ServerRequest*) doCreateListRequestWithStartingIndex:(int)startIndex
 {
-    ServerRequest* request = [[ArticleParser alloc] getRequestArticle];
+    ArticleParser* parser = [[[ArticleParser alloc] init] autorelease];
+    ServerRequest* request = [parser getRequestArticle];
     
     if (favoris) {
         [request setParameter:@"favoris" withValue:@"1"];
@@ -213,10 +214,11 @@
     if (articlesPerPage == 0) {
         articlesPerPage = 13;
     }
-    ArticleParser* parser = (ArticleParser*) request.parser;
     parser.limitStart = startIndex;
-    parser.limitEnd = startIndex + articlesPerPage;
-
+    parser.limitEnd = startIndex + articlesPerPage;    
+    [request setParameter:@"limit_start" withIntValue:parser.limitStart];
+    [request setParameter:@"limit_end" withIntValue:parser.limitEnd];
+    
     // Disable caching for pagination
     if (resetCache || startIndex > 0) {
         [request resetCache];

@@ -152,11 +152,6 @@
 
 - (void) serverRequest:(ServerRequest*)aRequest didFailWithError:(NSError*)error
 {
-    if (error == nil && (
-        mode == LoginForgMode || [Celaneo1AppDelegate getSingleton].sessionId.length > 0)) {
-        [self serverRequest:aRequest didSucceedWithObject:self];
-        return;
-    }   
     NSString* message;
     NSString* title;
 

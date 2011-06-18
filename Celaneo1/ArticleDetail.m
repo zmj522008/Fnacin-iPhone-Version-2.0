@@ -556,7 +556,7 @@
 
 - (void) serverRequest:(ServerRequest*)request didSucceedWithObject:(id)result
 {
-    ArticleParser* parsed = request.parser;
+    ArticleParser* parsed = (ArticleParser*) result;
     
     NSString* message;
     if (favorisRequest == request) {

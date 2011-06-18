@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "SaxMethodParser.h"
 #import "ServerRequest.h"
 
 #import "BaseParser.h"
