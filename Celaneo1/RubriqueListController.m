@@ -67,7 +67,7 @@
 
 - (ServerRequest*) createListRequest
 {
-    return [[ServerRequest alloc] initGetRubriques];
+    return [[ArticleParser alloc] getRequestGetRubriques];
 }
 
 #pragma mark table view datasource

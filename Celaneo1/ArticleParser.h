@@ -44,6 +44,9 @@
     
     NSString* prepageContent;
     BOOL prepageFerme;
+    
+    int limitStart;
+    int limitEnd;
 }
 @property (nonatomic, retain) NSArray *articles;
 @property (nonatomic, retain) NSArray *thematiques;
@@ -60,5 +63,24 @@
 @property (nonatomic, assign) BOOL dirigeant;
 @property (nonatomic, retain) NSString *prepageContent;
 @property (nonatomic, assign, getter=isPrepageFerme) BOOL prepageFerme;
+
+
+@property (nonatomic, assign) int limitStart;
+@property (nonatomic, assign) int limitEnd;
+
+
+- (ServerRequest*) getRequestAuthentificateWithEmail:(NSString*)email withPassword:(NSString*)password;
+- (ServerRequest*) getRequestArticle;
+
+- (ServerRequest*) getRequestGetThematiques;
+- (ServerRequest*) getRequestGetRubriques;
+- (ServerRequest*) getRequestGetPreferencesForType:(int)type;
+- (ServerRequest*) getRequestGetMagasins;
+- (ServerRequest*) getRequestSendTokenId:(NSString*)tokenId;
+- (ServerRequest*) getRequestSetFavoris:(BOOL)favoris withArticleId:(int)articleId;
+- (ServerRequest*) getRequestSetPreferences:(NSIndexSet*)indexSet forType:(int)type;
+- (ServerRequest*) getRequestSendCommentaire:(NSString*)text withArticleId:(int)articleId;
+- (ServerRequest*) getRequestJaimeWithArticleId:(int)articleId;
+- (ServerRequest*) getRequestPasswordWithEmail:(NSString*)email;
 
 @end

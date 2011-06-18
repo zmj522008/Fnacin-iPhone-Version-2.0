@@ -89,7 +89,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSLog(@"Did register for remote notifications: %@", deviceToken);
-    ServerRequest* request = [[ServerRequest alloc] initSendTokenId:[deviceToken description]];
+    ServerRequest* request = [[ArticleParser alloc] getRequestSendTokenId:[deviceToken description]];
     [request start];
 }
 

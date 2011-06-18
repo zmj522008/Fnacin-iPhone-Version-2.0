@@ -21,6 +21,7 @@
 @protocol ApplicationParser <NSObject>
 
 - (NSError*) endDocument;
+- (void) serverRequestSetDefaultParameters:(ServerRequest*)request;
 
 @end
 
@@ -42,24 +43,9 @@
 @property (nonatomic, retain) id<ServerRequestDelegate> delegate;
 @property (nonatomic, retain) NSError *erreur;
 
-@property (nonatomic, assign) int limitStart;
-@property (nonatomic, assign) int limitEnd;
-
 @property (nonatomic, retain) id<ApplicationParser> parser;
 
-- (id) initAuthentificateWithEmail:(NSString*)email withPassword:(NSString*)password;
-- (id) initArticle;
-
-- (id) initGetThematiques;
-- (id) initGetRubriques;
-- (id) initGetPreferencesForType:(int)type;
-- (id) initGetMagasins;
-- (id) initSendTokenId:(NSString*)tokenId;
-- (id) initSetFavoris:(BOOL)favoris withArticleId:(int)articleId;
-- (id) initSetPreferences:(NSIndexSet*)indexSet forType:(int)type;
-- (id) initSendCommentaire:(NSString*)text withArticleId:(int)articleId;
-- (id) initJaimeWithArticleId:(int)articleId;
-- (id) initPasswordWithEmail:(NSString*)email;
+- (id) initWithUrl:(NSString*)url;
 
 - (void) setParameter:(NSString*) name withValue:(NSString*)value;
 - (void) setParameter:(NSString*) name withIntValue:(int)value;

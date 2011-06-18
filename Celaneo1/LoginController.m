@@ -288,7 +288,7 @@
 - (IBAction) authSubmit
 {
     [self.request cancel];
-    self.request = [[ServerRequest alloc] initAuthentificateWithEmail:email.text withPassword:password.text];
+    self.request = [[ArticleParser alloc] getRequestAuthentificateWithEmail:email.text withPassword:password.text];
     request.delegate = self;
     [request start];
     
@@ -299,7 +299,7 @@
 - (IBAction) forgSubmit
 {
     [self.request cancel];
-    self.request = [[ServerRequest alloc] initPasswordWithEmail:email.text];
+    self.request = [[ArticleParser alloc] getRequestPasswordWithEmail:email.text];
     request.delegate = self;
     [request start];
     

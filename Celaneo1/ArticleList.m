@@ -146,24 +146,24 @@
 - (void) updateList:(ServerRequest*)request parser:(ArticleParser*)parsed onlineContent:(BOOL)onlineContent
 {
     int requestCount = parsed.articles.count;
-    if (requestCount > 0 && requestCount >= articles.count - request.limitStart) {
+    if (requestCount > 0 && requestCount >= articles.count - parsed.limitStart) {
         if (articles.count > 0) {
             [table beginUpdates];
             
             NSMutableArray* reloadRows = [NSMutableArray arrayWithCapacity:requestCount];
-            for (int i = 0; i < requestCount && i < articles.count - request.limitStart; i++) {
-                if (![[parsed.articles objectAtIndex:i] isEqual:[articles objectAtIndex:i + request.limitStart]]) {
-                    [reloadRows addObject:[NSIndexPath indexPathForRow:i + request.limitStart inSection:0]];
+            for (int i = 0; i < requestCount && i < articles.count - parsed.limitStart; i++) {
+                if (![[parsed.articles objectAtIndex:i] isEqual:[articles objectAtIndex:i + parsed.limitStart]]) {
+                    [reloadRows addObject:[NSIndexPath indexPathForRow:i + parsed.limitStart inSection:0]];
                 }
             }
             [table reloadRowsAtIndexPaths:reloadRows withRowAnimation:UITableViewRowAnimationNone];
             NSMutableArray* insertRows = [NSMutableArray arrayWithCapacity:requestCount];
-            for (int i = articles.count - request.limitStart; i < requestCount; i++) {
-                [insertRows addObject:[NSIndexPath indexPathForRow:i + request.limitStart inSection:0]];            
+            for (int i = articles.count - parsed.limitStart; i < requestCount; i++) {
+                [insertRows addObject:[NSIndexPath indexPathForRow:i + parsed.limitStart inSection:0]];            
             }
             [table insertRowsAtIndexPaths:insertRows withRowAnimation:UITableViewRowAnimationNone];
             
-            [articles removeObjectsInRange:NSMakeRange(request.limitStart, articles.count - request.limitStart)];
+            [articles removeObjectsInRange:NSMakeRange(parsed.limitStart, articles.count - parsed.limitStart)];
             [articles addObjectsFromArray:parsed.articles];
             [table endUpdates];
         } else {
@@ -189,7 +189,7 @@
 
 - (ServerRequest*) doCreateListRequestWithStartingIndex:(int)startIndex
 {
-    ServerRequest* request = [[ServerRequest alloc] initArticle];
+    ServerRequest* request = [[ArticleParser alloc] getRequestArticle];
     
     if (favoris) {
         [request setParameter:@"favoris" withValue:@"1"];
@@ -213,8 +213,9 @@
     if (articlesPerPage == 0) {
         articlesPerPage = 13;
     }
-    request.limitStart = startIndex;
-    request.limitEnd = startIndex + articlesPerPage;
+    ArticleParser* parser = (ArticleParser*) request.parser;
+    parser.limitStart = startIndex;
+    parser.limitEnd = startIndex + articlesPerPage;
 
     // Disable caching for pagination
     if (resetCache || startIndex > 0) {
@@ -427,7 +428,7 @@
     int row = [table indexPathForCell:[self articleCell:sender]].row;
     
     ServerRequest* changeRequest = 
-    [[ServerRequest alloc] initSetFavoris:NO withArticleId:[[articles objectAtIndex:row] articleId]];
+    [[ArticleParser alloc] getRequestSetFavoris:NO withArticleId:[[articles objectAtIndex:row] articleId]];
     [changeRequest start];
     
     // Immediate feedback

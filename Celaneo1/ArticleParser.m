@@ -9,6 +9,10 @@
 #import "ArticleParser.h"
 #import "Celaneo1AppDelegate.h"
 
+#import "ServerRequest.h"
+#import "ASIDownloadCache.h"
+
+#define SERVER @"http://webservice.fnacin.com/"
 
 @implementation ArticleParser
 @synthesize articles;
@@ -26,6 +30,142 @@
 @synthesize dirigeant;
 @synthesize prepageContent;
 @synthesize prepageFerme;
+
+@synthesize limitStart, limitEnd;
+
+#pragma mark Request constructors
+
+- (id) getServerRequest:(NSString*)method
+{
+    NSString* url = [SERVER stringByAppendingString:method];
+    ServerRequest* request = [[ServerRequest alloc] initWithUrl:url];
+    if (request != nil) {
+        NSString* sessionId = [Celaneo1AppDelegate getSingleton].sessionId;
+        if (sessionId != nil) {
+            [request setParameter:@"session_id" withValue:sessionId];
+        }
+        self.limitEnd = -1;
+        self.limitStart = -1;
+        request.parser = self;
+    }
+    
+    ASIDownloadCache* cache = [ASIDownloadCache sharedCache];
+    [cache addIgnoredPostKey:@"session_id"]; // TODO This could be moved to sth called once per session
+
+    return request;
+}
+
+- (ServerRequest*) getRequestAuthentificateWithEmail:(NSString*)email withPassword:(NSString*)password
+{
+    ServerRequest* request = [self getServerRequest:@"authentification"];
+    if (self != nil) {
+        [request setParameter:@"email" withValue:email];
+        [request setParameter:@"password" withValue:password];
+        [request setParameter:@"version" withValue:[NSString stringWithFormat:@"I%@", 
+                                                    [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
+    }
+    return request;
+}
+
+- (ServerRequest*) getRequestPasswordWithEmail:(NSString*)email
+{
+    ServerRequest* request = [self getServerRequest:@"password"];
+    if (self != nil) {
+        [request setParameter:@"email" withValue:email];
+    }
+    return request;
+}
+
+- (ServerRequest*) getRequestArticle
+{
+    ServerRequest* request = [self getServerRequest:@"article"];
+    [request setParameter:@"materiel" withValue:@"iphone"];
+    if (self != nil) {
+    }
+    return request;
+}
+
+- (ServerRequest*) getRequestGetThematiques
+{
+    ServerRequest* request = [self getServerRequest:@"thematique"];
+    return request;
+}
+
+- (ServerRequest*) getRequestGetRubriques
+{
+    ServerRequest* request = [self getServerRequest:@"rubrique"];
+    return request;  
+}
+
+- (ServerRequest*) getRequestGetMagasins
+{
+    ServerRequest* request = [self getServerRequest:@"magasin"];
+    return request;  
+}
+
+- (ServerRequest*) getRequestSendTokenId:(NSString*)tokenId
+{
+    ServerRequest* request = [self getServerRequest:@"push"];
+    NSLog(@"Sending token id: %@", tokenId);
+    [request setParameter:@"token_id" withValue:tokenId];
+    return request;  
+}
+
+- (ServerRequest*) getRequestSetFavoris:(BOOL)favoris withArticleId:(int)articleId
+{
+    ServerRequest* request = [self getServerRequest:@"setfavoris"];
+        [request setParameter:@"type" withValue:favoris ? @"1" : @"0"];
+        [request setParameter:@"article_id" withIntValue:articleId];
+    return request;
+}
+
+- (ServerRequest*) getRequestJaimeWithArticleId:(int)articleId
+{
+    ServerRequest* request = [self getServerRequest:@"setjaime"];
+        [request setParameter:@"article_id" withIntValue:articleId];
+    return request;
+}
+
+
+- (ServerRequest*) getRequestSendCommentaire:(NSString *)text withArticleId:(int)articleId
+{
+    ServerRequest* request = [self getServerRequest:@"setcommentaire"];
+        [request setParameter:@"article_id" withIntValue:articleId];
+        [request setParameter:@"commentaire" withValue:text];
+    return request;
+}
+
+- (ServerRequest*) getRequestSetPreferences:(NSIndexSet*)indexSet forType:(int)type
+{
+    ServerRequest* request = [self getServerRequest:@"setpreference"];
+    static NSString* preferenceName[] = { @"thematique", @"rubrique", @"magasin" };
+    
+    static NSString* preferenceKey[] = { @"thematique_ids", @"rubrique_ids", @"magasin_ids" };
+    [request setParameter:@"type" withValue:preferenceName[type]];
+    NSMutableString* indexString = [NSMutableString stringWithCapacity:1];
+    int count = indexSet.count;
+    NSUInteger* indexes = (NSUInteger*) malloc(sizeof(NSUInteger) * count);
+    [indexSet getIndexes:indexes maxCount:count inIndexRange:nil];
+    for (int i = 0; i < count; i++) {
+        [indexString appendFormat:@"%d", indexes[i]];
+        if (i < count - 1) {
+            [indexString appendString:@","];
+        }
+    }
+    free(indexes);
+    [request setParameter:preferenceKey[type] withValue:indexString];
+    return request;
+}
+
+- (ServerRequest*) getRequestGetPreferencesForType:(int)type
+{
+    static NSString* preferenceName[] = { @"thematique", @"rubriques", @"magasins" };
+    
+    ServerRequest* request = [self getServerRequest:@"getpreference"];
+    [request setParameter:@"element" withValue:preferenceName[type]];
+    
+    return request;
+}
 
 #pragma mark Application XML Parsing
 
@@ -52,6 +192,16 @@
         for (id<ModelObject> c in lst) {
             [c dump];
         }
+    }
+}
+
+- (void) serverRequestSetDefaultParameters:(ServerRequest*)request
+{
+    if (limitStart >= 0) {
+        [request setParameter:@"limit_start" withIntValue:limitStart];
+    }
+    if (limitEnd >= 0) {
+        [request setParameter:@"limit_end" withIntValue:limitEnd];
     }
 }
 

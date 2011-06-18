@@ -167,7 +167,7 @@
 
 - (ServerRequest*) createListRequest
 {
-    ServerRequest* request = [[ServerRequest alloc] initArticle];
+    ServerRequest* request = [[ArticleParser alloc] getRequestArticle];
 
     [request setParameter:@"id" withIntValue:article.articleId];
     [request setParameter:@"commentaire" withIntValue:1];
@@ -456,7 +456,7 @@
 - (IBAction) jaimeClick
 {
     [self.jaimeRequest cancel];
-    self.jaimeRequest = [[ServerRequest alloc] initJaimeWithArticleId:article.articleId];
+    self.jaimeRequest = [[ArticleParser alloc] getRequestJaimeWithArticleId:article.articleId];
     jaimeRequest.delegate = self;
     [jaimeRequest start];
     [toolbar addSubview:activityIndicator];
@@ -471,7 +471,7 @@
 {
     if (!article.favoris) {
         [self.favorisRequest cancel];
-        self.favorisRequest = [[ServerRequest alloc] initSetFavoris:YES withArticleId:article.articleId];
+        self.favorisRequest = [[ArticleParser alloc] getRequestSetFavoris:YES withArticleId:article.articleId];
         favorisRequest.delegate = self;
         [favorisRequest start];
         
@@ -516,7 +516,7 @@
 - (IBAction) submitCommentaire
 {
     [self.commentaireRequest cancel];
-    self.commentaireRequest = [[ServerRequest alloc] initSendCommentaire:commentText.text withArticleId:article.articleId];
+    self.commentaireRequest = [[ArticleParser alloc] getRequestSendCommentaire:commentText.text withArticleId:article.articleId];
     commentaireRequest.delegate = self;
     [commentaireRequest start];
 }

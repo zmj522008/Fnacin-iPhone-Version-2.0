@@ -103,7 +103,7 @@
 
 - (ServerRequest*) createListRequest
 {
-    return [[ServerRequest alloc] initGetPreferencesForType:TYPE_RUBRIQUE];
+    return [[ArticleParser alloc] getRequestGetPreferencesForType:TYPE_RUBRIQUE];
 }
 
 #pragma mark navigation actions
@@ -120,7 +120,7 @@
     } else {
         [Celaneo1AppDelegate getSingleton].prefereEditDone = YES;
 
-        ServerRequest* serverRequest = [[ServerRequest alloc] initSetPreferences:selectedRubriques forType:TYPE_RUBRIQUE];
+        ServerRequest* serverRequest = [[ArticleParser alloc] getRequestSetPreferences:selectedRubriques forType:TYPE_RUBRIQUE];
         serverRequest.delegate = self;
         [self.prefereUpdateRequest cancel];
         self.prefereUpdateRequest.delegate = nil;

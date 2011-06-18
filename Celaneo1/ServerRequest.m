@@ -11,8 +11,6 @@
 
 #import "ASIDownloadCache.h"
 
-#define SERVER @"http://webservice.fnacin.com/"
-
 //
 // ServerRequest handles server request:
 // - creation with parameters
@@ -27,145 +25,15 @@
 @synthesize delegate;
 @synthesize erreur;
 
-@synthesize limitStart;
-@synthesize limitEnd;
-
 @synthesize parser;
 
-#pragma mark Request constructors
-- (id) initWithMethod:(NSString*)method
+#pragma mark constructor
+- (id) initWithUrl:(NSString*)url
 {
     [super init];
-    if (self != nil) {
-        self.asiRequest = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:[SERVER stringByAppendingString:method]]];
-        self.asiRequest.numberOfTimesToRetryOnTimeout = 3;
-        
-        asiRequest.delegate = self;
-        NSString* sessionId = [Celaneo1AppDelegate getSingleton].sessionId;
-        if (sessionId != nil) {
-            [asiRequest setPostValue:sessionId forKey:@"session_id"];
-        }
-        self.limitEnd = -1;
-        self.limitStart = -1;
-        self.parser = [[[ArticleParser alloc] init] autorelease];
-    }
-    return self;
-}
-
-- (id) initAuthentificateWithEmail:(NSString*)email withPassword:(NSString*)password
-{
-    [self initWithMethod:@"authentification"];
-    if (self != nil) {
-        [asiRequest setPostValue:email forKey:@"email"];
-        [asiRequest setPostValue:password forKey:@"password"];
-        [asiRequest setPostValue:[NSString stringWithFormat:@"I%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]] forKey:@"version"];
-    }
-    return self;
-}
-
-- (id) initPasswordWithEmail:(NSString*)email
-{
-    [self initWithMethod:@"password"];
-    if (self != nil) {
-        [asiRequest setPostValue:email forKey:@"email"];
-    }
-    return self;
-}
-
-- (id) initArticle
-{
-    [self initWithMethod:@"article"];
-    [self setParameter:@"materiel" withValue:@"iphone"];
-    if (self != nil) {
-    }
-    return self;
-}
-
-- (id) initGetThematiques
-{
-    [self initWithMethod:@"thematique"];
-    return self;
-}
-
-- (id) initGetRubriques
-{
-    [self initWithMethod:@"rubrique"];
-    return self;  
-}
-
-- (id) initGetMagasins
-{
-    [self initWithMethod:@"magasin"];
-    return self;  
-}
-
-- (id) initSendTokenId:(NSString*)tokenId
-{
-    [self initWithMethod:@"push"];
-    NSLog(@"Sending token id: %@", tokenId);
-    [self setParameter:@"token_id" withValue:tokenId];
-    return self;  
-}
-
-- (id) initSetFavoris:(BOOL)favoris withArticleId:(int)articleId
-{
-    [self initWithMethod:@"setfavoris"];
-    if (self != nil) {
-        [asiRequest setPostValue:favoris ? @"1" : @"0" forKey:@"type"];
-        [self setParameter:@"article_id" withIntValue:articleId];
-    }
-    return self;
-}
-
-- (id) initJaimeWithArticleId:(int)articleId
-{
-    [self initWithMethod:@"setjaime"];
-    if (self != nil) {
-        [self setParameter:@"article_id" withIntValue:articleId];
-    }
-    return self;
-}
-
-
-- (id) initSendCommentaire:(NSString *)text withArticleId:(int)articleId
-{
-    [self initWithMethod:@"setcommentaire"];
-    if (self != nil) {
-        [self setParameter:@"article_id" withIntValue:articleId];
-        [self setParameter:@"commentaire" withValue:text];
-    }
-    return self;
-}
-
-- (id) initSetPreferences:(NSIndexSet*)indexSet forType:(int)type
-{
-    [self initWithMethod:@"setpreference"];
-    static NSString* preferenceName[] = { @"thematique", @"rubrique", @"magasin" };
-
-    static NSString* preferenceKey[] = { @"thematique_ids", @"rubrique_ids", @"magasin_ids" };
-    [self setParameter:@"type" withValue:preferenceName[type]];
-    NSMutableString* indexString = [NSMutableString stringWithCapacity:1];
-    int count = indexSet.count;
-    NSUInteger* indexes = (NSUInteger*) malloc(sizeof(NSUInteger) * count);
-    [indexSet getIndexes:indexes maxCount:count inIndexRange:nil];
-    for (int i = 0; i < count; i++) {
-        [indexString appendFormat:@"%d", indexes[i]];
-        if (i < count - 1) {
-            [indexString appendString:@","];
-        }
-    }
-    free(indexes);
-    [self setParameter:preferenceKey[type] withValue:indexString];
-    return self;
-}
-
-- (id) initGetPreferencesForType:(int)type
-{
-    static NSString* preferenceName[] = { @"thematique", @"rubriques", @"magasins" };
-
-    [self initWithMethod:@"getpreference"];
-    [self setParameter:@"element" withValue:preferenceName[type]];
-
+    self.asiRequest = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:url]];
+    self.asiRequest.numberOfTimesToRetryOnTimeout = 3;
+    asiRequest.delegate = self;
     return self;
 }
 
@@ -182,10 +50,9 @@
 #pragma mark configuration
 
 - (void) enableCacheWithForced:(BOOL)forced
-{
+{    
     ASIDownloadCache* cache = [ASIDownloadCache sharedCache];
-    [cache addIgnoredPostKey:@"session_id"]; // TODO This could be moved to sth called once per session
-    
+
     [asiRequest setDownloadCache:cache];
     [asiRequest setCachePolicy:forced ? ASIDontLoadCachePolicy : ASIDoNotReadFromCacheCachePolicy];
     [asiRequest setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
@@ -301,12 +168,7 @@
 #pragma mark lifecycle
 - (void) start
 {
-    if (limitStart >= 0) {
-        [self setParameter:@"limit_start" withIntValue:limitStart];
-    }
-    if (limitEnd >= 0) {
-        [self setParameter:@"limit_end" withIntValue:limitEnd];
-    }
+    [parser serverRequestSetDefaultParameters:self];
 
     [asiRequest startAsynchronous];
 }
