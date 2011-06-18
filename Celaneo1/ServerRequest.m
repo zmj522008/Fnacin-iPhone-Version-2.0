@@ -238,6 +238,8 @@
     if (erreur == nil && parsedError == nil) {
         [delegate serverRequest:self didSucceedWithObject:nil];        
     } else {
+        // Never store errors!!!
+
         [[ASIDownloadCache sharedCache] removeCachedDataForRequest:asiRequest];
 
         [delegate serverRequest:self didFailWithError:erreur ? erreur : parsedError];

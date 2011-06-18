@@ -18,7 +18,6 @@
 @synthesize article;
 @synthesize magasin;
 @synthesize category;
-@synthesize erreurDescription;
 @synthesize commentaire;
 @synthesize commentaires;
 @synthesize articleCount;
@@ -27,7 +26,6 @@
 @synthesize dirigeant;
 @synthesize prepageContent;
 @synthesize prepageFerme;
-@synthesize fnac;
 
 #pragma mark Application XML Parsing
 
@@ -40,11 +38,10 @@
     
     self.article = nil;
     self.magasin = nil;
-    self.erreurDescription = nil;
     
     self.prepageContent = nil;
     
-    fnac = NO;
+    [super resetParsing];
 }
 
 - (void) dump
@@ -59,12 +56,6 @@
 }
 
 #pragma mark Application XML Parsing - authentification
-
-- (void) handleElementStart_fnac:(NSDictionary*)dic
-{
-    fnac = YES;
-}
-
 - (void) handleElementEnd_session_id:(NSString*)sessionId
 {
     [Celaneo1AppDelegate getSingleton].sessionId = sessionId;
@@ -97,29 +88,6 @@
 - (void) handleElementEnd_pre_page:(NSString*)value
 {
     self.prepageContent = value;
-}
-
-#pragma mark Application XML Parsing - error
-
-- (void) handleElementEnd_code:(NSString*)value
-{
-    erreurCode = [value intValue];
-}
-
-- (void) handleElementEnd_message:(NSString*)value
-{
-    erreurDescription = value;
-}
-
-- (void) handleElementEnd_reauthentification:(NSString*)value
-{
-    if ([value intValue] == 1) {
-        [Celaneo1AppDelegate getSingleton].sessionId = nil;
-    }
-}
-
-- (void) handleElementEnd_erreur
-{
 }
 
 #pragma mark Application XML Parsing - articles

@@ -108,6 +108,7 @@
 		E3AFD2DD13961A960053E35F /* RubriqueList~iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3AFD2DA13961A960053E35F /* RubriqueList~iPad.xib */; };
 		E3AFD2DF1396BFBA0053E35F /* ArticleCellLarge~iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3AFD2DE1396BFBA0053E35F /* ArticleCellLarge~iPad.xib */; };
 		E3C084E113AA741000A108D5 /* ArticleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C084E013AA741000A108D5 /* ArticleParser.m */; };
+		E3C084E413AB1B6F00A108D5 /* BaseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C084E313AB1B6F00A108D5 /* BaseParser.m */; };
 		E3D97E701349C3B300E2C1BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D97E6F1349C3B300E2C1BA /* UIKit.framework */; };
 		E3D97E721349C3B300E2C1BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D97E711349C3B300E2C1BA /* Foundation.framework */; };
 		E3D97E741349C3B300E2C1BA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D97E731349C3B300E2C1BA /* CoreGraphics.framework */; };
@@ -260,6 +261,8 @@
 		E3AFD2DE1396BFBA0053E35F /* ArticleCellLarge~iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ArticleCellLarge~iPad.xib"; sourceTree = "<group>"; };
 		E3C084DF13AA741000A108D5 /* ArticleParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleParser.h; sourceTree = "<group>"; };
 		E3C084E013AA741000A108D5 /* ArticleParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleParser.m; sourceTree = "<group>"; };
+		E3C084E213AB1B6F00A108D5 /* BaseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseParser.h; sourceTree = "<group>"; };
+		E3C084E313AB1B6F00A108D5 /* BaseParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseParser.m; sourceTree = "<group>"; };
 		E3D97E6B1349C3B300E2C1BA /* fnac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fnac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3D97E6F1349C3B300E2C1BA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E3D97E711349C3B300E2C1BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -509,6 +512,8 @@
 				E341C87B134A35F2009BB506 /* ServerRequest.m */,
 				E3C084DF13AA741000A108D5 /* ArticleParser.h */,
 				E3C084E013AA741000A108D5 /* ArticleParser.m */,
+				E3C084E213AB1B6F00A108D5 /* BaseParser.h */,
+				E3C084E313AB1B6F00A108D5 /* BaseParser.m */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -754,6 +759,7 @@
 				E3A782AD135EE13600C7C0F2 /* Prepage.m in Sources */,
 				E36C822D136AD29E009C39C7 /* NSString+removeTags.m in Sources */,
 				E3C084E113AA741000A108D5 /* ArticleParser.m in Sources */,
+				E3C084E413AB1B6F00A108D5 /* BaseParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

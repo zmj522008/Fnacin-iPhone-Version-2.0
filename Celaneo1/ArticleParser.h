@@ -10,6 +10,8 @@
 
 #import "ServerRequest.h"
 
+#import "BaseParser.h"
+
 #import "Article.h"
 #import "Magasin.h"
 #import "Category.h"
@@ -19,13 +21,11 @@
 #define TYPE_RUBRIQUE 1
 #define TYPE_MAGASIN 2
 
-@interface ArticleParser : NSObject <ApplicationParser> {
+@interface ArticleParser : BaseParser <ApplicationParser> {
     Article* article;
     Magasin* magasin;
     Category* category;
     Commentaire* commentaire;
-    
-    BOOL fnac;
     
     BOOL dirigeant;
     
@@ -42,9 +42,6 @@
     
     NSMutableArray* commentaires;
     
-    NSString* erreurDescription;
-    int erreurCode;
-    
     NSString* prepageContent;
     BOOL prepageFerme;
 }
@@ -55,15 +52,13 @@
 @property (nonatomic, retain) Article *article;
 @property (nonatomic, retain) Magasin *magasin;
 @property (nonatomic, retain) Category *category;
-@property (nonatomic, retain) NSString *erreurDescription;
-@property (nonatomic, retain) Commentaire *commentaire;
 @property (nonatomic, retain) NSMutableArray *commentaires;
 @property (nonatomic, assign) int articleCount;
 @property (nonatomic, assign) int nb_jaime;
+@property (nonatomic, retain) Commentaire *commentaire;
 @property (nonatomic, assign) int nb_commentaire;
 @property (nonatomic, assign) BOOL dirigeant;
 @property (nonatomic, retain) NSString *prepageContent;
 @property (nonatomic, assign, getter=isPrepageFerme) BOOL prepageFerme;
-@property (nonatomic, assign, getter=isFnac) BOOL fnac;
 
 @end
