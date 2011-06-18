@@ -28,6 +28,7 @@
 @synthesize nb_jaime;
 @synthesize nb_commentaires;
 @synthesize hash;
+@synthesize urlFnacCom;
 
 + (Article*) articleWithId:(int)articleId
 {
@@ -38,8 +39,8 @@
 
 - (void) dump
 {
-    NSLog(@"Article: %d\nthem %d '%@'\nrubri %d '%@'\ntype %d\ntitre '%@'\ndate %@\nurlMedia '%@'\naccroche '%@'\ncontenu '%@'\nurlImage '%@'\nfavoris %d\njaime %d\n commentaires %d\nhash '%@'",
-          articleId, thematiqueId, thematique, rubriqueId, rubrique, type, titre, dateAffichee, urlMedia, accroche, contenu, urlImage, favoris, nb_jaime, nb_commentaires, hash);
+    NSLog(@"Article: %d\nthem %d '%@'\nrubri %d '%@'\ntype %d\ntitre '%@'\ndate %@\nurlMedia '%@'\naccroche '%@'\ncontenu '%@'\nurlImage '%@'\nfavoris %d\njaime %d\n commentaires %d\nfnaccom %@\nhash '%@'",
+          articleId, thematiqueId, thematique, rubriqueId, rubrique, type, titre, dateAffichee, urlMedia, accroche, contenu, urlImage, favoris, nb_jaime, nb_commentaires, urlFnacCom, hash);
     for(Commentaire* c in commentaires) {
         [c dump];
     }
@@ -57,6 +58,7 @@
     [urlImage release];
     [commentaires release];
     [hash release];
+    [urlFnacCom release];
     
     [super dealloc];
 }

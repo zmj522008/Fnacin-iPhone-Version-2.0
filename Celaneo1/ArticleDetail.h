@@ -14,6 +14,7 @@
 enum ArticleDetailSections {
     ArticleDetailSection_Details,
     ArticleDetailSection_Content,
+    ArticleDetailSection_FnacCom,
     ArticleDetailSection_PostComment,
     ArticleDetailSection_Comments,
     ArticleDetailSection_count
@@ -34,6 +35,7 @@ enum ArticleDetailSections {
     IBOutlet UITableViewCell* detailCell;
     IBOutlet UITableViewCell* contentCell;
     IBOutlet UITableViewCell* postCommentCell;
+    IBOutlet UITableViewCell* fnaccomCell;
     
     IBOutlet UIActivityIndicatorView* activityIndicator;
     IBOutlet UIToolbar* toolbar;
@@ -72,6 +74,7 @@ enum ArticleDetailSections {
 - (IBAction) toggleCommentaireView;
 
 - (IBAction) submitCommentaire;
+- (IBAction) fnaccomClick;
 
 @property (nonatomic, retain) Article *article;
 @property (nonatomic, retain) ServerRequest *commentaireRequest;
@@ -84,6 +87,7 @@ enum ArticleDetailSections {
 @property (nonatomic, retain) IBOutlet UITableViewCell *detailCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell *contentCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell *postCommentCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell *fnaccomCell;
 @property (nonatomic, retain) IBOutlet UIButton *rubrique;
 @property (nonatomic, retain) IBOutlet UIButton *thematique;
 @property (nonatomic, retain) IBOutlet UILabel *titre;
@@ -98,5 +102,5 @@ enum ArticleDetailSections {
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 
 - (void) update;
-- (void)resizeViewControllerToFitScreen;
+- (void) resizeViewControllerToFitScreen;
 @end

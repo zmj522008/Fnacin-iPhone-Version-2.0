@@ -29,6 +29,7 @@
     NSString* accroche;
     NSString* contenu;
     NSString* urlImage;
+    NSString* urlFnacCom;
     BOOL favoris;
     
     NSArray* commentaires;
@@ -55,6 +56,7 @@
 @property (nonatomic, assign) int nb_jaime;
 @property (nonatomic, assign) int nb_commentaires;
 @property (nonatomic, retain) NSString *hash;
+@property (nonatomic, retain) NSString *urlFnacCom;
 
 + (Article*) articleWithId:(int)id;
 

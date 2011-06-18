@@ -37,6 +37,7 @@
 @synthesize jaimeRequest;
 @synthesize activityIndicator;
 @synthesize toolbar;
+@synthesize fnaccomCell;
 
 - (void)dealloc
 {
@@ -69,6 +70,8 @@
     [jaimeRequest release];
     [activityIndicator release];
     [toolbar release];
+    [fnaccomCell release];
+    
     [super dealloc];
 }
 
@@ -122,7 +125,8 @@
     self.commentSend = nil;    
     self.activityIndicator = nil;
     self.toolbar = nil;
-
+    self.fnaccomCell = nil;
+    
     [commentaireRequest cancel];
     [jaimeRequest cancel];
     [favorisRequest cancel];
@@ -221,6 +225,8 @@
             return detailCell;
         case ArticleDetailSection_Content:
             return contentCell;
+        case ArticleDetailSection_FnacCom:
+            return fnaccomCell;
         case ArticleDetailSection_PostComment:
             return postCommentCell;
         case ArticleDetailSection_Comments:
@@ -279,6 +285,8 @@
             return detailCellHeight;
         case ArticleDetailSection_Content:
             return contentCellHeight;
+        case ArticleDetailSection_FnacCom:
+            return article.urlFnacCom.length > 0 ? fnaccomCell.bounds.size.height : 0;
         case ArticleDetailSection_PostComment:
             return postCommentaireCellHeight;
         case ArticleDetailSection_Comments:
@@ -334,6 +342,8 @@
             mediaButton.text = @"➜ Écouter";
             break;
     }
+    
+    self.fnaccomCell.hidden = article.urlFnacCom.length <= 0;
 }
 
 - (void) updateContent
@@ -452,6 +462,12 @@
     }
 }
 
+- (IBAction)fnaccomClick
+{
+    NSLog(@"Opening fnaccom link: %@", article.urlFnacCom);
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:article.urlFnacCom]];
+}
+
 #pragma mark toolbar actions
 - (IBAction) jaimeClick
 {
@@ -487,7 +503,6 @@
 
     }
 }
-
 
 - (void) commentaireViewChange:(BOOL)visible
 {

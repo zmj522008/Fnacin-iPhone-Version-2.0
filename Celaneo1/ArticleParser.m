@@ -379,6 +379,11 @@
 - (void) handleElementEnd_titre:(NSString*)value
 {
     self.article.titre = value;
+#ifdef DEBUG
+    if (article.articleId & 1) {
+        self.article.urlFnacCom = [NSString stringWithFormat:@"http://www.bing.com/search?q=%d", article.articleId];
+    }
+#endif
 }
 
 - (void) handleElementStart_type:(NSDictionary*) attributes
@@ -399,6 +404,11 @@
 - (void) handleElementEnd_url_media:(NSString*)value
 {
     self.article.urlMedia = value;
+}
+
+- (void) handleElementEnd_url_fnaccom:(NSString*)value
+{
+    self.article.urlFnacCom = value;
 }
 
 - (void) handleElementEnd_accroche:(NSString*)value
