@@ -39,7 +39,9 @@
 {
     [super viewWillAppear:animated];
     
-    [[GANTracker sharedTracker] trackPageview:[self pageName] withError:nil];
+    NSString* pageName = [self pageName];
+    NSLog(@"GA: %@", pageName);
+    [[GANTracker sharedTracker] trackPageview:pageName withError:nil];
     [self refresh];
     
     if (self.navigationController.viewControllers.count > 1) {

@@ -99,7 +99,7 @@
 
 - (NSString *)pageName
 {
-    return @"/article/media";
+    return [@"/article/media/" stringByAppendingString:article.titre];
 }
 
 - (void) viewDidAppear:(BOOL)animated

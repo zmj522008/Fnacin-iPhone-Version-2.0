@@ -140,7 +140,7 @@
 
 - (NSString *)pageName
 {
-    return @"/article/detail";
+    return [@"/article/detail/" stringByAppendingString:article.titre];
 }
 
 - (void)viewDidAppear:(BOOL)animated
