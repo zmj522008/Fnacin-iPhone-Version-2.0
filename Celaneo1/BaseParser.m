@@ -12,19 +12,10 @@
 
 @implementation BaseParser
 @synthesize erreurDescription;
-@synthesize fnac;
 
 - (void) resetParsing
 {
     self.erreurDescription = nil;
-    fnac = NO;
-}
-
-#pragma mark parsing
-
-- (void) handleElementStart_fnac:(NSDictionary*)dic
-{
-    fnac = YES;
 }
 
 #pragma mark Application XML Parsing - error

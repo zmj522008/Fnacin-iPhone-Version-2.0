@@ -35,7 +35,7 @@
     {
         if( !currentTextString )
         {
-            currentTextString = [[NSMutableString alloc] initWithCapacity:4];
+            self.currentTextString = [[NSMutableString alloc] init];
         }
         [currentTextString appendString:string];
     }
@@ -47,10 +47,9 @@
     qualifiedName: (NSString*) qName
        attributes: (NSDictionary*) attributeDict
 {
-    if (currentTextString) 
+    if (self.currentTextString) 
     {
-        [currentTextString release];
-        currentTextString = nil;
+        self.currentTextString = nil;
     }
     SEL sel = NSSelectorFromString( [NSString stringWithFormat:@"handleElementStart_%@:", elementName] );
     if( [parser respondsToSelector:sel] )

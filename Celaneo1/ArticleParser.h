@@ -23,6 +23,8 @@
 #define TYPE_MAGASIN 2
 
 @interface ArticleParser : BaseParser <ApplicationParser> {
+    BOOL fnac;
+    
     Article* article;
     Magasin* magasin;
     Category* category;
@@ -49,6 +51,8 @@
     int limitStart;
     int limitEnd;
 }
+@property (nonatomic, assign, getter=isFnac) BOOL fnac;
+
 @property (nonatomic, retain) NSArray *articles;
 @property (nonatomic, retain) NSArray *thematiques;
 @property (nonatomic, retain) NSArray *rubriques;

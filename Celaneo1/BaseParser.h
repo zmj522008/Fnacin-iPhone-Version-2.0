@@ -10,13 +10,10 @@
 
 
 @interface BaseParser : NSObject {
-    BOOL fnac;
-
     NSString* erreurDescription;
     int erreurCode;
 }
 
-@property (nonatomic, assign, getter=isFnac) BOOL fnac;
 @property (nonatomic, retain) NSString *erreurDescription;
 
 - (void) resetParsing;

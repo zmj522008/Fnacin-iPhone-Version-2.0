@@ -15,6 +15,7 @@
 #define SERVER @"http://webservice.fnacin.com/"
 
 @implementation ArticleParser
+@synthesize fnac;
 @synthesize articles;
 @synthesize thematiques;
 @synthesize rubriques;
@@ -182,6 +183,7 @@
     
     self.prepageContent = nil;
     
+    self.fnac = NO;
     [super resetParsing];
 }
 
@@ -197,6 +199,12 @@
 }
 
 #pragma mark Application XML Parsing - authentification
+
+- (void) handleElementStart_fnac:(NSDictionary*)dic
+{
+    fnac = YES;
+}
+
 - (void) handleElementEnd_session_id:(NSString*)sessionId
 {
     [Celaneo1AppDelegate getSingleton].sessionId = sessionId;

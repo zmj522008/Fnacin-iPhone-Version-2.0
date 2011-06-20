@@ -6,10 +6,16 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import "BaseItem.h"
+#import "Shop.h"
+#import "Shops.h"
+
 #import "LoginController.h"
 #import "Celaneo1AppDelegate.h"
 #import "ASIHTTPRequest.h"
 #import "Prepage.h"
+
+#import "SaxModelParser.h"
 
 @implementation LoginController
 
