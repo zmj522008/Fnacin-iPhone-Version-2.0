@@ -107,6 +107,9 @@
 		E3AFD2DC13961A960053E35F /* PrefereEdit~iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3AFD2D913961A960053E35F /* PrefereEdit~iPad.xib */; };
 		E3AFD2DD13961A960053E35F /* RubriqueList~iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3AFD2DA13961A960053E35F /* RubriqueList~iPad.xib */; };
 		E3AFD2DF1396BFBA0053E35F /* ArticleCellLarge~iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3AFD2DE1396BFBA0053E35F /* ArticleCellLarge~iPad.xib */; };
+		E3B8831D13AF931400AD545F /* AnnuaireModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B8831C13AF931400AD545F /* AnnuaireModel.m */; };
+		E3B8832213AF9E7D00AD545F /* CollateAndSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B8832113AF9E7D00AD545F /* CollateAndSearch.m */; };
+		E3B8832513B0CBAF00AD545F /* Personne.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B8832413B0CBAF00AD545F /* Personne.m */; };
 		E3C084E113AA741000A108D5 /* ArticleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C084E013AA741000A108D5 /* ArticleParser.m */; };
 		E3C084E413AB1B6F00A108D5 /* BaseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C084E313AB1B6F00A108D5 /* BaseParser.m */; };
 		E3C084F713AC8CCD00A108D5 /* SaxMethodParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C084F613AC8CCC00A108D5 /* SaxMethodParser.m */; };
@@ -135,6 +138,8 @@
 		E3E69FDC1355F40B00827128 /* more@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3E69FDA1355F40B00827128 /* more@2x.jpg */; };
 		E3E69FFA13584FA900827128 /* ArticleDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E69FF813584FA200827128 /* ArticleDetail.m */; };
 		E3E69FFB13584FA900827128 /* ArticleDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3E69FF913584FA500827128 /* ArticleDetail.xib */; };
+		E3F987DD13AF8C3700BD5C20 /* Annuaire.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F987DB13AF8C3700BD5C20 /* Annuaire.m */; };
+		E3F987DE13AF8C3700BD5C20 /* Annuaire.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3F987DC13AF8C3700BD5C20 /* Annuaire.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -265,6 +270,12 @@
 		E3AFD2D913961A960053E35F /* PrefereEdit~iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "PrefereEdit~iPad.xib"; sourceTree = "<group>"; };
 		E3AFD2DA13961A960053E35F /* RubriqueList~iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "RubriqueList~iPad.xib"; sourceTree = "<group>"; };
 		E3AFD2DE1396BFBA0053E35F /* ArticleCellLarge~iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ArticleCellLarge~iPad.xib"; sourceTree = "<group>"; };
+		E3B8831B13AF931400AD545F /* AnnuaireModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnuaireModel.h; sourceTree = "<group>"; };
+		E3B8831C13AF931400AD545F /* AnnuaireModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnuaireModel.m; sourceTree = "<group>"; };
+		E3B8832013AF9E7C00AD545F /* CollateAndSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollateAndSearch.h; sourceTree = "<group>"; };
+		E3B8832113AF9E7D00AD545F /* CollateAndSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollateAndSearch.m; sourceTree = "<group>"; };
+		E3B8832313B0CBAE00AD545F /* Personne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Personne.h; sourceTree = "<group>"; };
+		E3B8832413B0CBAF00AD545F /* Personne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Personne.m; sourceTree = "<group>"; };
 		E3C084DF13AA741000A108D5 /* ArticleParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleParser.h; sourceTree = "<group>"; };
 		E3C084E013AA741000A108D5 /* ArticleParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleParser.m; sourceTree = "<group>"; };
 		E3C084E213AB1B6F00A108D5 /* BaseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseParser.h; sourceTree = "<group>"; };
@@ -308,6 +319,9 @@
 		E3E69FF713584FA000827128 /* ArticleDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleDetail.h; sourceTree = "<group>"; };
 		E3E69FF813584FA200827128 /* ArticleDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleDetail.m; sourceTree = "<group>"; };
 		E3E69FF913584FA500827128 /* ArticleDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleDetail.xib; sourceTree = "<group>"; };
+		E3F987DA13AF8C3700BD5C20 /* Annuaire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Annuaire.h; sourceTree = "<group>"; };
+		E3F987DB13AF8C3700BD5C20 /* Annuaire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Annuaire.m; sourceTree = "<group>"; };
+		E3F987DC13AF8C3700BD5C20 /* Annuaire.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Annuaire.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -473,6 +487,22 @@
 			path = iPad;
 			sourceTree = "<group>";
 		};
+		E3B8831613AF92D000AD545F /* annuaire */ = {
+			isa = PBXGroup;
+			children = (
+				E3F987DA13AF8C3700BD5C20 /* Annuaire.h */,
+				E3F987DB13AF8C3700BD5C20 /* Annuaire.m */,
+				E3B8831B13AF931400AD545F /* AnnuaireModel.h */,
+				E3B8831C13AF931400AD545F /* AnnuaireModel.m */,
+				E3F987DC13AF8C3700BD5C20 /* Annuaire.xib */,
+				E3B8832013AF9E7C00AD545F /* CollateAndSearch.h */,
+				E3B8832113AF9E7D00AD545F /* CollateAndSearch.m */,
+				E3B8832313B0CBAE00AD545F /* Personne.h */,
+				E3B8832413B0CBAF00AD545F /* Personne.m */,
+			);
+			name = annuaire;
+			sourceTree = "<group>";
+		};
 		E3C084DB13AA438400A108D5 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -610,6 +640,7 @@
 		E3D97E751349C3B300E2C1BA /* Celaneo1 */ = {
 			isa = PBXGroup;
 			children = (
+				E3B8831613AF92D000AD545F /* annuaire */,
 				E3C084DE13AA440600A108D5 /* services */,
 				E3C084DD13AA43AE00A108D5 /* controllers */,
 				E3C084DB13AA438400A108D5 /* view */,
@@ -766,6 +797,7 @@
 				E3AFD2DD13961A960053E35F /* RubriqueList~iPad.xib in Resources */,
 				E3AFD2DF1396BFBA0053E35F /* ArticleCellLarge~iPad.xib in Resources */,
 				E3C0850713AF1BD600A108D5 /* t_modelparser.xml in Resources */,
+				E3F987DE13AF8C3700BD5C20 /* Annuaire.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -810,6 +842,10 @@
 				E3C084FE13ADD4B900A108D5 /* BaseItem.m in Sources */,
 				E3C0850113ADF1E800A108D5 /* Shops.m in Sources */,
 				E3C0850413ADF1F800A108D5 /* Shop.m in Sources */,
+				E3F987DD13AF8C3700BD5C20 /* Annuaire.m in Sources */,
+				E3B8831D13AF931400AD545F /* AnnuaireModel.m in Sources */,
+				E3B8832213AF9E7D00AD545F /* CollateAndSearch.m in Sources */,
+				E3B8832513B0CBAF00AD545F /* Personne.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

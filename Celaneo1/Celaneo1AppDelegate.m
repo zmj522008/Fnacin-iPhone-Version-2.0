@@ -8,6 +8,7 @@
 
 #import "Celaneo1AppDelegate.h"
 #import "GANTracker.h"
+#import "Annuaire.h"
 
 @implementation Celaneo1AppDelegate
 
@@ -28,11 +29,9 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 @synthesize rubriquesNavigation;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    self.window.rootViewController = self.loginController;
-#ifdef DEBUG
-//    self.window.rootViewController = self.tabBarController;
-#endif
+{  
+    Annuaire* annuaire = [[Annuaire alloc] initWithNibName:@"Annuaire" bundle:nil];
+    self.window.rootViewController = annuaire;
     [self.window makeKeyAndVisible];
 
     [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-22831970-1"
