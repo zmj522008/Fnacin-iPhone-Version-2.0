@@ -1259,13 +1259,16 @@
         p.nom = [NSString stringWithString:str];
         
         str = [NSMutableString stringWithCapacity:1];
+        NSMutableString* str2 = [NSMutableString stringWithCapacity:1];
         for (int j = 0; j < 10; j++) {
             if (j > 0 && (j & 1) == 0) {
                 [str appendString:@" "];
             }
             [str appendFormat:@"%01d", rand() % 10];
+            [str2 appendFormat:@"%01d", rand() % 10];
         }
         p.telephone = [NSString stringWithString:str];
+        p.phoneDigits = [NSString stringWithString:str2];
         [a addObject:p];
         [p release];
     }
@@ -1323,12 +1326,17 @@
         dataSource = [data objectAtIndex:indexPath.section];
     }
     Personne* p = [dataSource objectAtIndex:indexPath.row];
-    cell.textLabel.text = [p.prenom stringByAppendingFormat:@" %@", p.nom];
     if (filtered) {
         // TODO...
     }
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
-    cell.detailTextLabel.text = p.telephone;
+    if (phoneShown) {
+        cell.textLabel.text = p.phoneDigits;
+        cell.detailTextLabel.text = [p.prenom stringByAppendingFormat:@" %@", p.nom];
+    } else {
+        cell.detailTextLabel.text = nil;
+        cell.textLabel.text = [p.prenom stringByAppendingFormat:@" %@", p.nom];
+    }
     return cell;
 }
 
@@ -1400,23 +1408,48 @@
     }
 }
 
+
+- (void) filterTelephone:(NSArray*)source to:(NSMutableArray*)result with:(NSString*)searchTerm
+{
+    for (Personne* p in source) {
+        if ([p.phoneDigits rangeOfString:searchTerm].location != NSNotFound) {
+            [result addObject:p];
+        }
+    }
+}
+
 - (void) setFilter:(NSString*)f
 {
     NSString* searchTerm = [f uppercaseString];
     if (f == nil || f.length == 0) {
         self.filteredData = nil;
+        phoneShown = NO;
     } else {
+        NSCharacterSet* numberCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789 +()"];
+        BOOL phoneSearch = ([searchTerm rangeOfCharacterFromSet:numberCharSet].length > 0);
+        phoneShown = phoneSearch;
+
         NSMutableArray* result = [NSMutableArray arrayWithCapacity:1];
-        if (filter == nil || [searchTerm rangeOfString:filter].location == NSNotFound) {
-            for (NSArray* array in data) {
-                [self filterStartingWith:array to:result with:searchTerm];
-            }
-            for (NSArray* array in data) {
-                [self filterContainsAfterFirstChar:array to:result with:searchTerm];
+        if (1 || filter == nil || [searchTerm rangeOfString:filter].location == NSNotFound) {
+            if (phoneShown) {
+                for (NSArray* array in data) {
+                    [self filterTelephone:array to:result with:searchTerm];
+                }
+            } else {
+                for (NSArray* array in data) {
+                    [self filterStartingWith:array to:result with:searchTerm];
+                }
+                for (NSArray* array in data) {
+                    [self filterContainsAfterFirstChar:array to:result with:searchTerm];
+                }
             }
         } else {
-            [self filterStartingWith:filteredData to:result with:searchTerm];
-            [self filterContainsAfterFirstChar:filteredData to:result with:searchTerm];
+            if (phoneShown) {
+                [self filterTelephone:filteredData to:result with:searchTerm];
+            } else {
+                [self filterStartingWith:filteredData to:result with:searchTerm];
+                [self filterContainsAfterFirstChar:filteredData to:result with:searchTerm];
+            }
         }
         self.filteredData = result;
     }

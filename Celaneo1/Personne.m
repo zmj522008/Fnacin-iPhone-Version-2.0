@@ -13,6 +13,7 @@
 @synthesize nom;
 @synthesize prenom;
 @synthesize telephone;
+@synthesize phoneDigits;
 
 - (int)compare:(Personne*)p
 {
@@ -22,11 +23,14 @@
     }
     return r;
 }
+
 - (void)dealloc
 {
     [nom release];
     [prenom release];
     [telephone release];
+    [phoneDigits release];
+    
     [super dealloc];
 }
 @end

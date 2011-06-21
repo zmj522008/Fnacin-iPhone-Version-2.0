@@ -13,9 +13,11 @@
     NSString* nom;
     NSString* prenom;
     NSString* telephone;
+    NSString* phoneDigits;
 }
 @property (nonatomic, retain) NSString *nom;
 @property (nonatomic, retain) NSString *prenom;
 @property (nonatomic, retain) NSString *telephone;
+@property (nonatomic, retain) NSString *phoneDigits;
 
 @end

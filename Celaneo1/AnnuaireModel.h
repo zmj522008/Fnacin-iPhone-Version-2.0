@@ -15,6 +15,7 @@
     NSString* filter;
     BOOL filtered;
     BOOL indexShown;
+    BOOL phoneShown;
 }
 
 @property (nonatomic, assign) BOOL filtered;
