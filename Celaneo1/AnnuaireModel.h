@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "AnnuaireDB.h"
 
 @interface AnnuaireModel : NSObject <UITableViewDataSource> {
     NSArray* data;
@@ -16,6 +17,8 @@
     BOOL filtered;
     BOOL indexShown;
     BOOL phoneShown;
+    
+    AnnuaireDB* db; // TODO Move that to the app
 }
 
 @property (nonatomic, assign) BOOL filtered;

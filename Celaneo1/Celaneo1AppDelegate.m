@@ -28,10 +28,16 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 
 @synthesize rubriquesNavigation;
 
+#define DEBUG_ANNUAIRE
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {  
+    self.window.rootViewController = self.loginController;
+
+#ifdef DEBUG_ANNUAIRE
     Annuaire* annuaire = [[Annuaire alloc] initWithNibName:@"Annuaire" bundle:nil];
     self.window.rootViewController = annuaire;
+#endif
+
     [self.window makeKeyAndVisible];
 
     [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-22831970-1"

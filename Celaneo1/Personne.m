@@ -10,6 +10,8 @@
 
 
 @implementation Personne
+@synthesize sId;
+
 @synthesize nom;
 @synthesize prenom;
 @synthesize telephone;
@@ -22,6 +24,16 @@
         [prenom localizedCaseInsensitiveCompare:p.prenom];
     }
     return r;
+}
+
+- (void)dump
+{
+    NSLog(@"P: %@ %@,T:%@", nom, prenom, telephone);
+}
+
+- (NSString*) phoneDigits
+{
+    return phoneDigits;
 }
 
 - (void)dealloc

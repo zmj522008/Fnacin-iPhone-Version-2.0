@@ -130,6 +130,8 @@
 		E3D97E8C1349C3B400E2C1BA /* ArticleList.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3D97E8A1349C3B400E2C1BA /* ArticleList.xib */; };
 		E3D97E8F1349C3B400E2C1BA /* RubriqueList.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3D97E8D1349C3B400E2C1BA /* RubriqueList.xib */; };
 		E3D97E981349C56C00E2C1BA /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D97E961349C56C00E2C1BA /* LoginController.m */; };
+		E3E086F613B48BC400062D03 /* AnnuaireSync.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E086F513B48BC400062D03 /* AnnuaireSync.m */; };
+		E3E086F913B4AE3D00062D03 /* AnnuaireDB.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E086F813B4AE3D00062D03 /* AnnuaireDB.m */; };
 		E3E69FD51355E9B700827128 /* loading_detail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3E69FD11355E9B700827128 /* loading_detail.jpg */; };
 		E3E69FD61355E9B700827128 /* loading_detail@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3E69FD21355E9B700827128 /* loading_detail@2x.jpg */; };
 		E3E69FD71355E9B700827128 /* loading_list.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3E69FD31355E9B700827128 /* loading_list.jpg */; };
@@ -310,6 +312,10 @@
 		E3D97E8E1349C3B400E2C1BA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RubriqueList.xib; sourceTree = "<group>"; };
 		E3D97E951349C56B00E2C1BA /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		E3D97E961349C56C00E2C1BA /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
+		E3E086F413B48BC400062D03 /* AnnuaireSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnuaireSync.h; sourceTree = "<group>"; };
+		E3E086F513B48BC400062D03 /* AnnuaireSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnuaireSync.m; sourceTree = "<group>"; };
+		E3E086F713B4AE3C00062D03 /* AnnuaireDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnuaireDB.h; sourceTree = "<group>"; };
+		E3E086F813B4AE3D00062D03 /* AnnuaireDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnuaireDB.m; sourceTree = "<group>"; };
 		E3E69FD11355E9B700827128 /* loading_detail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = loading_detail.jpg; sourceTree = "<group>"; };
 		E3E69FD21355E9B700827128 /* loading_detail@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "loading_detail@2x.jpg"; sourceTree = "<group>"; };
 		E3E69FD31355E9B700827128 /* loading_list.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = loading_list.jpg; sourceTree = "<group>"; };
@@ -499,6 +505,10 @@
 				E3B8832113AF9E7D00AD545F /* CollateAndSearch.m */,
 				E3B8832313B0CBAE00AD545F /* Personne.h */,
 				E3B8832413B0CBAF00AD545F /* Personne.m */,
+				E3E086F413B48BC400062D03 /* AnnuaireSync.h */,
+				E3E086F513B48BC400062D03 /* AnnuaireSync.m */,
+				E3E086F713B4AE3C00062D03 /* AnnuaireDB.h */,
+				E3E086F813B4AE3D00062D03 /* AnnuaireDB.m */,
 			);
 			name = annuaire;
 			sourceTree = "<group>";
@@ -568,14 +578,14 @@
 		E3C084FB13ADD49B00A108D5 /* SaxModel */ = {
 			isa = PBXGroup;
 			children = (
-				E3C084F813AC996E00A108D5 /* SaxModelParser.h */,
-				E3C084F913AC996F00A108D5 /* SaxModelParser.m */,
-				E3C084FC13ADD4B900A108D5 /* BaseItem.h */,
-				E3C084FD13ADD4B900A108D5 /* BaseItem.m */,
 				E3C084FF13ADF1E800A108D5 /* Shops.h */,
 				E3C0850013ADF1E800A108D5 /* Shops.m */,
 				E3C0850213ADF1F700A108D5 /* Shop.h */,
 				E3C0850313ADF1F700A108D5 /* Shop.m */,
+				E3C084F813AC996E00A108D5 /* SaxModelParser.h */,
+				E3C084F913AC996F00A108D5 /* SaxModelParser.m */,
+				E3C084FC13ADD4B900A108D5 /* BaseItem.h */,
+				E3C084FD13ADD4B900A108D5 /* BaseItem.m */,
 				E3C0850613AF1BD500A108D5 /* t_modelparser.xml */,
 			);
 			name = SaxModel;
@@ -846,6 +856,8 @@
 				E3B8831D13AF931400AD545F /* AnnuaireModel.m in Sources */,
 				E3B8832213AF9E7D00AD545F /* CollateAndSearch.m in Sources */,
 				E3B8832513B0CBAF00AD545F /* Personne.m in Sources */,
+				E3E086F613B48BC400062D03 /* AnnuaireSync.m in Sources */,
+				E3E086F913B4AE3D00062D03 /* AnnuaireDB.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

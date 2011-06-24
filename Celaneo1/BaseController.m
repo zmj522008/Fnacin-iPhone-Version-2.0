@@ -273,8 +273,10 @@
 
 - (void) goToTabBar
 {
-    Celaneo1AppDelegate* delegate = [Celaneo1AppDelegate getSingleton];
-    delegate.window.rootViewController = delegate.tabBarController;    
+    [[[AnnuaireSync alloc] init] doSync];
+    
+//    Celaneo1AppDelegate* delegate = [Celaneo1AppDelegate getSingleton];
+//    delegate.window.rootViewController = delegate.tabBarController;    
 }
 @end
 

@@ -24,6 +24,13 @@
 
 - (id) init
 {
+    db = [[AnnuaireDB alloc] initWithDBName:@"db"];
+    data = [[self partitionObjects:[db getPersonnes]  collationStringSelector:@selector(nom)] retain];
+    return self;
+} 
+
+- (void) createObjects
+{
     NSArray* prenoms = [NSArray arrayWithObjects:@"ABE", 
                         @"ABEL", 
                         @"ABRAHAM", 
@@ -1275,8 +1282,6 @@
     
     NSArray* objects = [a sortedArrayUsingSelector:@selector(compare:)];
     data = [[self partitionObjects:objects collationStringSelector:@selector(nom)] retain];
-    
-    return self;
 }
 
 

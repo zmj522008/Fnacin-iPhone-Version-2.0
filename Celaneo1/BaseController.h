@@ -11,6 +11,8 @@
 #import "ServerRequest.h"
 #import "ArticleParser.h"
 
+#import "AnnuaireSync.h"
+
 #define NAVBUTTON_ARROW_LEFT 0
 #define NAVBUTTON_PLAIN 1
 
