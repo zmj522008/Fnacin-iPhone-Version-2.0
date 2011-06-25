@@ -14,7 +14,11 @@
 
 @interface AnnuaireDB : NSObject {
     sqlite3* database;
+    
+    BOOL synchronized;
 }
+@property (assign) BOOL synchronized;
+
 - (id) initWithDBName:(NSString*)dbName;
 
 - (NSArray*) getPersonnesShort;
@@ -28,4 +32,9 @@
 
 - (int) getPersonneCount;
 
+
+- (void)add:(Personne*)p;
+- (void)update:(Personne*)p;
+- (void)remove:(int)sId;
+- (void)removeAll;
 @end

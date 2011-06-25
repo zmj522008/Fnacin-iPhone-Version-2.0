@@ -26,14 +26,25 @@
     return r;
 }
 
+- (void) doAddPhoneDigits:(NSString*) phone To:(NSMutableString*) target {
+    for (int i = 0; i < phone.length; i++) {
+        char c = (char) [phone characterAtIndex:i];
+        if (c >= '0' && c <= '9') {
+            [target appendFormat:@"%c", c];
+        }
+    }
+    [target appendString:@" "];
+}
+
+- (void) genPhoneDigits
+{
+    NSMutableString* digits = [NSMutableString stringWithCapacity:10];
+    [self doAddPhoneDigits:telephone To:digits];
+}
+
 - (void)dump
 {
     NSLog(@"P: %@ %@,T:%@", nom, prenom, telephone);
-}
-
-- (NSString*) phoneDigits
-{
-    return phoneDigits;
 }
 
 - (void)dealloc

@@ -8,6 +8,7 @@
 
 #import "Annuaire.h"
 
+#import "Celaneo1AppDelegate.h"
 
 @implementation Annuaire
 
@@ -26,6 +27,11 @@
 
 - (void)dealloc
 {
+    [model release];
+    [table release];
+    [searchBar release];
+    [searchOverlay release];
+    
     [super dealloc];
 }
 
@@ -43,7 +49,7 @@
 {
     [super viewDidLoad];
     
-    model = [[AnnuaireModel alloc] init];
+    self.model = [Celaneo1AppDelegate getSingleton].annuaireModel;
     model.indexShown = YES;
     table.dataSource = model;
     table.canCancelContentTouches = YES;
@@ -52,8 +58,10 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+
+    self.model = nil;
+    self.searchOverlay = nil;
+    self.searchBar = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -10,6 +10,7 @@
 #import "BaseController.h"
 
 #import "Celaneo1AppDelegate.h"
+#import "AnnuaireDB.h"
 
 // Base Controller for all controllers
 
@@ -273,10 +274,14 @@
 
 - (void) goToTabBar
 {
-    [[[AnnuaireSync alloc] init] doSync];
+    Celaneo1AppDelegate* delegate = [Celaneo1AppDelegate getSingleton];
+
+    if (!delegate.annuaireDb.synchronized) {
+        delegate.annuaireDb.synchronized = YES;
+        [[[AnnuaireSync alloc] init] startSync];
+    }
     
-//    Celaneo1AppDelegate* delegate = [Celaneo1AppDelegate getSingleton];
-//    delegate.window.rootViewController = delegate.tabBarController;    
+    delegate.window.rootViewController = delegate.tabBarController;    
 }
 @end
 

@@ -17,13 +17,11 @@
     BOOL filtered;
     BOOL indexShown;
     BOOL phoneShown;
-    
-    AnnuaireDB* db; // TODO Move that to the app
 }
 
 @property (nonatomic, assign) BOOL filtered;
 @property (nonatomic, assign) BOOL indexShown;
 
 - (void) setFilter:(NSString*)f;
-
+- (void) fetchData;
 @end

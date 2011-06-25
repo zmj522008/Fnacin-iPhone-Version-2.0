@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "LoginController.h"
 
+@class AnnuaireDB;
+@class AnnuaireModel;
+
 @interface Celaneo1AppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     IBOutlet LoginController* loginController;
     
@@ -20,7 +23,12 @@
     BOOL prefereEditDone;
     
     IBOutlet UINavigationController* rubriquesNavigation;
+    
+    AnnuaireDB* annuaireDb;
+    AnnuaireModel* annuaireModel;
 }
+
+@property (nonatomic, retain) AnnuaireModel* annuaireModel;
 
 @property (nonatomic, retain) NSString *sessionId;
 @property (nonatomic, assign, getter=isDirigeant) BOOL dirigeant;
@@ -33,6 +41,8 @@
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, retain) IBOutlet LoginController *loginController;
 @property (nonatomic, retain) IBOutlet UINavigationController *rubriquesNavigation;
+
+@property (nonatomic, retain) AnnuaireDB* annuaireDb;
 
 + (Celaneo1AppDelegate*) getSingleton;
 

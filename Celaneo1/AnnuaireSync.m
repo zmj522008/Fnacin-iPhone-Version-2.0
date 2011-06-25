@@ -7,6 +7,9 @@
 //
 
 #import "AnnuaireSync.h"
+#import "AnnuaireDB.h"
+#import "AnnuaireModel.h"
+
 #import "Celaneo1AppDelegate.h"
 #import "ASIDownloadCache.h"
 
@@ -16,7 +19,6 @@
 @synthesize parser;
 @synthesize list;
 @synthesize personne;
-@synthesize dateMaj;
 
 - (void) createRequest
 {
@@ -28,6 +30,22 @@
             [request setParameter:@"session_id" withValue:sessionId];
         }
         [request setParameter:@"retour" withValue:@"data"];
+        AnnuaireDB* db = [Celaneo1AppDelegate getSingleton].annuaireDb;
+        NSString* date = [db getDataDate];
+        //        date = @"2011-06-13 18:13:07"; // Modif + suppression
+        //        date = @"2011-06-13 19:13:07"; // Modif + suppression
+        // 
+        if (date != nil && date.length > 0) {
+            [request setParameter:@"date_derniere_maj" withValue:date];
+            
+#ifdef DEBUG
+//            [db createObjects];
+//            [[Celaneo1AppDelegate getSingleton].annuaireModel fetchData];
+#endif
+        } else {
+            // We need to clear up the data base in this case
+            [db removeAll];
+        }
         SaxMethodParser* saxParser = [[[SaxMethodParser alloc] init] autorelease];
         request.xmlParserDelegate = saxParser;
         saxParser.serverRequest = request;
@@ -39,7 +57,7 @@
     [cache addIgnoredPostKey:@"session_id"]; // TODO This could be moved to sth called once per session
 }
 
-- (void) doSync
+- (void) startSync
 {
     [self createRequest];
     
@@ -54,7 +72,23 @@
 #pragma mark parse server results
 - (void) handleElementStart_fnac:(NSDictionary*)dic
 {
-    
+    AnnuaireDB* db = [Celaneo1AppDelegate getSingleton].annuaireDb;
+    [db startTransaction];
+}
+
+- (void) handleElementEnd_fnac
+{
+    AnnuaireDB* db = [Celaneo1AppDelegate getSingleton].annuaireDb;
+    [db endTransaction];
+    int count = [db getPersonneCount];
+    if (count != nTotal) {
+        NSLog(@"Count: DB: %d nb_personnes_total: %d. Mark DB as dirty", count, nTotal);
+        // Remove the modification date to restart the server
+        [db setDataDate:@""];
+    }
+    if (nModif > 0) {
+        [[Celaneo1AppDelegate getSingleton].annuaireModel fetchData];
+    }
 }
 
 - (void) handleElementStart_ajout:(NSDictionary*)dic
@@ -74,7 +108,8 @@
 
 - (void) handleElementEnd_date_maj:(NSString*)d
 {
-    self.dateMaj = d;
+    AnnuaireDB* db = [Celaneo1AppDelegate getSingleton].annuaireDb;
+    [db setDataDate:d];
 }
 
 - (void) handleElementEnd_nb_personnes_a_modifier:(NSString*)n
@@ -90,6 +125,7 @@
 - (void) handleElementStart_personne:(NSDictionary*)dic
 {
     self.personne = [[Personne alloc] init];
+    personne.sId = [[dic objectForKey:@"id"] intValue];
 }
 
 - (void) handleElementEnd_tel_fixe:(NSString*)s
@@ -109,12 +145,18 @@
 
 - (void) handleElementEnd_personne:(NSString*)d
 {
+    AnnuaireDB* db = [Celaneo1AppDelegate getSingleton].annuaireDb;
     switch (mode) {
         case MethodAdd:
-            
+            [db add:personne];
+            break;
+        case MethodRemove:
+            [db remove:personne.sId];
+            break;
+        case MethodUpdate:
+            [db update:personne];
+            break;
     }
 }
-
-
 
 @end

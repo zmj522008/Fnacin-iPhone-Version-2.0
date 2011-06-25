@@ -9,6 +9,7 @@
 #import "Celaneo1AppDelegate.h"
 #import "GANTracker.h"
 #import "Annuaire.h"
+#import "AnnuaireModel.h"
 
 @implementation Celaneo1AppDelegate
 
@@ -28,7 +29,10 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 
 @synthesize rubriquesNavigation;
 
-#define DEBUG_ANNUAIRE
+@synthesize annuaireDb;
+@synthesize annuaireModel;
+
+//#define DEBUG_ANNUAIRE
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {  
     self.window.rootViewController = self.loginController;
@@ -46,9 +50,23 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     
     [ASIHTTPRequest setDefaultTimeOutSeconds:15];
 
+    // Setup Annuaire
+    self.annuaireModel = [[AnnuaireModel alloc] init];
+    self.annuaireDb = [[AnnuaireDB alloc] initWithDBName:@"db"];
+    
+    NSThread* modelUpdateThread = [[NSThread alloc] initWithTarget:self selector:@selector(doAnnuaireUpdate) object:nil];
+    [modelUpdateThread start];
+
     return YES;
 }
 
+- (void) doAnnuaireUpdate
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];  
+    
+    [annuaireModel fetchData];
+    [pool release];
+}
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     /*
@@ -111,6 +129,10 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 
     [sessionId release];
     [rubriquesNavigation release];
+    
+    [annuaireDb release];
+    [annuaireModel release];
+    
     [super dealloc];
 }
 

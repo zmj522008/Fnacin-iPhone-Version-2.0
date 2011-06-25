@@ -23,4 +23,5 @@
 @property (nonatomic, retain) NSString *phoneDigits;
 
 - (void) dump;
+- (void) genPhoneDigits;
 @end
