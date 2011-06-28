@@ -72,6 +72,25 @@
     return sections;
 }
 
+- (Personne*) personneAtIndexPath:(NSIndexPath*)indexPath
+{
+    NSArray* dataSource;
+    if (filtered) {
+        dataSource = filteredData;
+    } else {
+        dataSource = [data objectAtIndex:indexPath.section];
+    }
+    Personne* p = [dataSource objectAtIndex:indexPath.row];
+    return p;
+}
+
+- (Personne*) detailPersonneAtIndexPath:(NSIndexPath*)indexPath
+{
+    Personne* p = [self personneAtIndexPath:indexPath];
+    AnnuaireDB* db = [Celaneo1AppDelegate getSingleton].annuaireDb;
+    return [db getPersonneFull:p.sId];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellId = @"RubriqueCell";
@@ -80,24 +99,24 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellId];
     }
-    NSArray* dataSource;
-    if (filtered) {
-        dataSource = filteredData;
-    } else {
-        dataSource = [data objectAtIndex:indexPath.section];
-    }
-    Personne* p = [dataSource objectAtIndex:indexPath.row];
-    if (filtered) {
-        // TODO...
-    }
+    Personne* p = [self personneAtIndexPath:indexPath];
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
     if (phoneShown) {
-        cell.textLabel.text = p.phoneDigits;
+        int idx = 0;
+        for (NSString* s in [p.phoneDigits componentsSeparatedByString:@" "]) {
+            if ([s rangeOfString:filter].location != NSNotFound) {
+                cell.textLabel.text = [[p.telephones objectAtIndex:idx] phone];
+                break;
+            }
+            idx++;
+        }
         cell.detailTextLabel.text = [p.prenom stringByAppendingFormat:@" %@", p.nom];
     } else {
         cell.detailTextLabel.text = nil;
         cell.textLabel.text = [p.prenom stringByAppendingFormat:@" %@", p.nom];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     return cell;
 }
 
@@ -153,7 +172,7 @@
 - (void) filterStartingWith:(NSArray*)source to:(NSMutableArray*)result with:(NSString*)searchTerm
 {
     for (Personne* p in source) {
-        if ([p.nom hasPrefix:searchTerm] || [p.prenom hasPrefix:searchTerm]) {
+        if ([[p.nom uppercaseString] hasPrefix:searchTerm] || [[p.prenom uppercaseString] hasPrefix:searchTerm]) {
             [result addObject:p];
         }
     }
@@ -162,8 +181,8 @@
 - (void) filterContainsAfterFirstChar:(NSArray*)source to:(NSMutableArray*)result with:(NSString*)searchTerm
 {
     for (Personne* p in source) {
-        if ([[p.nom substringFromIndex:1] rangeOfString:searchTerm].location != NSNotFound
-            || [[p.prenom substringFromIndex:1] rangeOfString:searchTerm].location != NSNotFound) {
+        if ([[[p.nom uppercaseString] substringFromIndex:1] rangeOfString:searchTerm].location != NSNotFound
+            || [[[p.prenom uppercaseString] substringFromIndex:1] rangeOfString:searchTerm].location != NSNotFound) {
             [result addObject:p];
         }
     }

@@ -22,6 +22,8 @@
 @property (nonatomic, assign) BOOL filtered;
 @property (nonatomic, assign) BOOL indexShown;
 
+- (Personne*) detailPersonneAtIndexPath:(NSIndexPath*)indexPath;
+
 - (void) setFilter:(NSString*)f;
 - (void) fetchData;
 @end

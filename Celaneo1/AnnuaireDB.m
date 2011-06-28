@@ -39,7 +39,26 @@
 - (void) createIfNotExist
 {
     sqlite3_exec(database,
-                 "CREATE TABLE IF NOT EXISTS Personnes (ID INTEGER PRIMARY KEY, NOM TEXT, PRENOM TEXT, TELEPHONE TEXT, PHONEDIGITS TEXT)",
+                 "CREATE TABLE IF NOT EXISTS Personnes (ID INTEGER PRIMARY KEY,\
+                 civilite TEXT,\
+                 nom TEXT,\
+                 prenom TEXT,\
+                 telephone_fixe TEXT,\
+                 telephone_interne TEXT,\
+                 telephone_mobile TEXT,\
+                 telephone_fax TEXT,\
+                 email TEXT,\
+                 num_bureau TEXT,\
+                 fonction TEXT,\
+                 site TEXT,\
+                 adresse TEXT,\
+                 codepostal TEXT,\
+                 commentaire TEXT,\
+                 site_nom TEXT,\
+                 site_pays TEXT,\
+                 site_region TEXT,\
+                 phoneDigits TEXT)",
+
                  NULL, NULL, NULL);
     sqlite3_exec(database,
                  "CREATE TABLE IF NOT EXISTS Dates (ID INTEGER PRIMARY KEY, DATE TEXT)",
@@ -47,19 +66,26 @@
     NSLog(@"Error: %s", sqlite3_errmsg(database));
 }
 
-#define SET(field, col) { NSString* v = [[NSString alloc] initWithUTF8String:(char*) sqlite3_column_text(statement, col)]; p.field = v; [v release]; }
+#define SET(field, col) { char* str = (char*) sqlite3_column_text(statement, col); NSString* v = strcmp(str, "(null)") == 0 ? nil : [[NSString alloc] initWithUTF8String:str]; p.field = v; [v release]; }
+
 - (NSArray*) getPersonnesShort
 {
     sqlite3_stmt *statement;
-    sqlite3_prepare_v2(database, "SELECT nom, prenom, telephone, phonedigits FROM Personnes ORDER BY nom ASC", -1, &statement, nil);
+    sqlite3_prepare_v2(database, "SELECT * FROM Personnes ORDER BY nom ASC", -1, &statement, nil);
     
     NSMutableArray* list = [NSMutableArray arrayWithCapacity:1];
     while (sqlite3_step(statement) == SQLITE_ROW) {
         Personne* p = [[Personne alloc] init];
-        SET(nom, 0);
-        SET(prenom, 1);
-        SET(telephone, 2);
-        SET(phoneDigits, 3);
+        p.sId = sqlite3_column_int(statement, 0);
+        SET(civilite, 1);
+        SET(nom, 2);
+        SET(prenom, 3);
+        SET(telephone_fixe, 4);
+        SET(telephone_interne, 5);
+        SET(telephone_mobile, 6);
+        SET(telephone_fax, 7);
+        SET(phoneDigits, 18);
+
         [list addObject:p];
         [p release];
     }
@@ -72,14 +98,30 @@
 - (Personne*) getPersonneFull:(int)serverId
 {
     sqlite3_stmt *statement;
-    sqlite3_prepare_v2(database, [[NSString stringWithFormat:@"SELECT nom, prenom, telephone FROM Personnes WHERE ID == %d", serverId] UTF8String], -1, &statement, nil);
+    sqlite3_prepare_v2(database, [[NSString stringWithFormat:@"SELECT * FROM Personnes WHERE ID == %d", serverId] UTF8String], -1, &statement, nil);
     
     Personne* p;
     if (sqlite3_step(statement) == SQLITE_ROW) {
         p = [[[Personne alloc] init] autorelease];
-        SET(nom, 0);
-        SET(prenom, 1);
-        SET(telephone, 2);
+        p.sId = sqlite3_column_int(statement, 0);
+        SET(civilite, 1);
+        SET(nom, 2);
+        SET(prenom, 3);
+        SET(telephone_fixe, 4);
+        SET(telephone_interne, 5);
+        SET(telephone_mobile, 6);
+        SET(telephone_fax, 7);
+        SET(email, 8);
+        SET(num_bureau, 9);
+        SET(fonction, 10);
+        SET(site, 11);
+        SET(adresse, 12);
+        SET(codepostal, 13);
+        SET(commentaire, 14);
+        SET(site_nom, 15);
+        SET(site_pays, 16);
+        SET(site_region, 17);
+        SET(phoneDigits, 18);
     } else {
         p = nil;
     }
@@ -143,33 +185,66 @@
     }
 }
 
-- (void)add:(Personne*)p
+#define C(s) (s.length ? s : @"")
+- (int)add:(Personne*)p
 {
     [p genPhoneDigits];
     int r = sqlite3_exec(database,
-                 [[NSString stringWithFormat:@"INSERT INTO Personnes (ID, NOM, PRENOM, TELEPHONE, PHONEDIGITS) VALUES (%d, '%@', '%@', '%@', '%@')",
-                   p.sId, p.nom, p.prenom, p.telephone, p.phoneDigits] UTF8String],
+                 [[NSString stringWithFormat:@"REPLACE INTO Personnes (ID,\
+                   civilite,\
+                   nom,\
+                   prenom,\
+                   telephone_fixe,\
+                   telephone_interne,\
+                   telephone_mobile,\
+                   telephone_fax,\
+                   email,\
+                   num_bureau,\
+                   fonction,\
+                   site,\
+                   adresse,\
+                   codepostal,\
+                   commentaire,\
+                   site_nom,\
+                   site_pays,\
+                   site_region,\
+                   phoneDigits)\
+                   VALUES (%d, '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')",
+                   p.sId, 
+                   C(p.civilite),
+                   C(p.nom),
+                   C(p.prenom),
+                   C(p.telephone_fixe),
+                   C(p.telephone_interne),
+                   C(p.telephone_mobile),
+                   C(p.telephone_fax),
+                   C(p.email),
+                   C(p.num_bureau),
+                   C(p.fonction),
+                   C(p.site),
+                   C(p.adresse),
+                   C(p.codepostal),
+                   C(p.commentaire),
+                   C(p.site_nom),
+                   C(p.site_pays),
+                   C(p.site_region),
+                   C(p.phoneDigits)
+                   ] UTF8String],
                  NULL, NULL, NULL);
     if (r != SQLITE_OK) {
         NSLog(@"Error in add: %d %s", r, sqlite3_errmsg(database));
     }
+    return r;
 }
 
 
-- (void)update:(Personne*)p
+- (int)update:(Personne*)p
 {
-    [p genPhoneDigits];
-    int r = sqlite3_exec(database,
-                 [[NSString stringWithFormat:@"REPLACE INTO Personnes (ID, NOM, PRENOM, TELEPHONE, PHONEDIGITS) VALUES (%d, '%@', '%@', '%@', '%@')",
-                   p.sId, p.nom, p.prenom, p.telephone, p.phoneDigits] UTF8String],
-                 NULL, NULL, NULL);
-    if (r != SQLITE_OK) {
-        NSLog(@"Error in update: %d %s", r, sqlite3_errmsg(database));
-    }
+    return [self add:p];
 }
 
 
-- (void)remove:(int)sId
+- (int)remove:(int)sId
 {
     int r = sqlite3_exec(database,
                  [[NSString stringWithFormat:@"DELETE FROM Personnes WHERE ID = %d", sId] UTF8String],
@@ -177,6 +252,7 @@
     if (r != SQLITE_OK) {
         NSLog(@"Error in remove: %d %s", r, sqlite3_errmsg(database));
     }
+    return r;
 }
 
 - (void)removeAll
@@ -217,7 +293,7 @@
             [str appendFormat:@"%01d", rand() % 10];
             [str2 appendFormat:@"%01d", rand() % 10];
         }
-        p.telephone = [NSString stringWithString:str];
+        p.telephone_fixe = [NSString stringWithString:str];
         p.phoneDigits = [NSString stringWithString:str2];
         
         p.sId = 100000 + i;

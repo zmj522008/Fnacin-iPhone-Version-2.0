@@ -9,6 +9,7 @@
 #import "Annuaire.h"
 
 #import "Celaneo1AppDelegate.h"
+#import "annuaireDetail.h"
 
 @implementation Annuaire
 
@@ -64,6 +65,11 @@
     self.searchBar = nil;
 }
 
+- (NSString *)pageName
+{
+    return @"annuaire/list";
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
@@ -106,6 +112,17 @@
 #pragma mark table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Personne* p = [model detailPersonneAtIndexPath:indexPath];
+    
+    NSString* nibName = @"annuaireDetail";
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+//        nibName = [nibName stringByAppendingString:@"~iPad"];
+    }
+    
+    annuaireDetail* controller = [[annuaireDetail alloc] initWithNibName:nibName bundle:nil];
+    controller.personne = p;
+    [model tableView:table cellForRowAtIndexPath:indexPath].highlighted = NO;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

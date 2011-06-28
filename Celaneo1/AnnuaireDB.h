@@ -33,8 +33,8 @@
 - (int) getPersonneCount;
 
 
-- (void)add:(Personne*)p;
-- (void)update:(Personne*)p;
-- (void)remove:(int)sId;
+- (int)add:(Personne*)p;
+- (int)update:(Personne*)p;
+- (int)remove:(int)sId;
 - (void)removeAll;
 @end

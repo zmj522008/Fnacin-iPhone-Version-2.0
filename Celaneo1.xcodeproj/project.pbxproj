@@ -12,6 +12,8 @@
 		E303264A13545BCB0012B181 /* MediaPlayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = E303264813545BCA0012B181 /* MediaPlayer.xib */; };
 		E303264D1355A6AB0012B181 /* nav_nologo.png in Resources */ = {isa = PBXBuildFile; fileRef = E303264B1355A6A90012B181 /* nav_nologo.png */; };
 		E303264E1355A6AB0012B181 /* nav_nologo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E303264C1355A6AA0012B181 /* nav_nologo@2x.png */; };
+		E328DE2213B9BED20041EC20 /* annuaireDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = E328DE2013B9BED20041EC20 /* annuaireDetail.m */; };
+		E328DE2313B9BED20041EC20 /* annuaireDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = E328DE2113B9BED20041EC20 /* annuaireDetail.xib */; };
 		E341C865134A31F9009BB506 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = E341C852134A31F9009BB506 /* ASIAuthenticationDialog.m */; };
 		E341C866134A31F9009BB506 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = E341C855134A31F9009BB506 /* ASIDataCompressor.m */; };
 		E341C867134A31F9009BB506 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = E341C857134A31F9009BB506 /* ASIDataDecompressor.m */; };
@@ -152,6 +154,9 @@
 		E303264813545BCA0012B181 /* MediaPlayer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MediaPlayer.xib; sourceTree = "<group>"; };
 		E303264B1355A6A90012B181 /* nav_nologo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_nologo.png; sourceTree = "<group>"; };
 		E303264C1355A6AA0012B181 /* nav_nologo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_nologo@2x.png"; sourceTree = "<group>"; };
+		E328DE1F13B9BED20041EC20 /* annuaireDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = annuaireDetail.h; sourceTree = "<group>"; };
+		E328DE2013B9BED20041EC20 /* annuaireDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = annuaireDetail.m; sourceTree = "<group>"; };
+		E328DE2113B9BED20041EC20 /* annuaireDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = annuaireDetail.xib; sourceTree = "<group>"; };
 		E341C851134A31F9009BB506 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		E341C852134A31F9009BB506 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		E341C853134A31F9009BB506 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ASICacheDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -500,9 +505,9 @@
 			children = (
 				E3F987DA13AF8C3700BD5C20 /* Annuaire.h */,
 				E3F987DB13AF8C3700BD5C20 /* Annuaire.m */,
+				E3F987DC13AF8C3700BD5C20 /* Annuaire.xib */,
 				E3B8831B13AF931400AD545F /* AnnuaireModel.h */,
 				E3B8831C13AF931400AD545F /* AnnuaireModel.m */,
-				E3F987DC13AF8C3700BD5C20 /* Annuaire.xib */,
 				E3B8832013AF9E7C00AD545F /* CollateAndSearch.h */,
 				E3B8832113AF9E7D00AD545F /* CollateAndSearch.m */,
 				E3B8832313B0CBAE00AD545F /* Personne.h */,
@@ -511,6 +516,9 @@
 				E3E086F513B48BC400062D03 /* AnnuaireSync.m */,
 				E3E086F713B4AE3C00062D03 /* AnnuaireDB.h */,
 				E3E086F813B4AE3D00062D03 /* AnnuaireDB.m */,
+				E328DE1F13B9BED20041EC20 /* annuaireDetail.h */,
+				E328DE2013B9BED20041EC20 /* annuaireDetail.m */,
+				E328DE2113B9BED20041EC20 /* annuaireDetail.xib */,
 			);
 			name = annuaire;
 			sourceTree = "<group>";
@@ -812,6 +820,7 @@
 				E3C0850713AF1BD600A108D5 /* t_modelparser.xml in Resources */,
 				E3F987DE13AF8C3700BD5C20 /* Annuaire.xib in Resources */,
 				E3E086FB13B5B0DB00062D03 /* lst in Resources */,
+				E328DE2313B9BED20041EC20 /* annuaireDetail.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -862,6 +871,7 @@
 				E3B8832513B0CBAF00AD545F /* Personne.m in Sources */,
 				E3E086F613B48BC400062D03 /* AnnuaireSync.m in Sources */,
 				E3E086F913B4AE3D00062D03 /* AnnuaireDB.m in Sources */,
+				E328DE2213B9BED20041EC20 /* annuaireDetail.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

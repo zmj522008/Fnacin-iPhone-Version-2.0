@@ -52,7 +52,7 @@
         saxParser.parser = self;
         self.parser = saxParser;
     }
-    
+    dirty = NO;
     ASIDownloadCache* cache = [ASIDownloadCache sharedCache];
     [cache addIgnoredPostKey:@"session_id"]; // TODO This could be moved to sth called once per session
 }
@@ -81,7 +81,7 @@
     AnnuaireDB* db = [Celaneo1AppDelegate getSingleton].annuaireDb;
     [db endTransaction];
     int count = [db getPersonneCount];
-    if (count != nTotal) {
+    if (dirty || count != nTotal) {
         NSLog(@"Count: DB: %d nb_personnes_total: %d. Mark DB as dirty", count, nTotal);
         // Remove the modification date to restart the server
         [db setDataDate:@""];
@@ -130,7 +130,7 @@
 
 - (void) handleElementEnd_tel_fixe:(NSString*)s
 {
-    self.personne.telephone = s;
+    self.personne.telephone_fixe = s;
 }
 
 - (void) handleElementEnd_prenom:(NSString*)s
@@ -146,16 +146,21 @@
 - (void) handleElementEnd_personne:(NSString*)d
 {
     AnnuaireDB* db = [Celaneo1AppDelegate getSingleton].annuaireDb;
+    int r;
     switch (mode) {
         case MethodAdd:
-            [db add:personne];
+            [personne genPhoneDigits];
+            r = [db add:personne];
             break;
         case MethodRemove:
-            [db remove:personne.sId];
+            r = [db remove:personne.sId];
             break;
         case MethodUpdate:
-            [db update:personne];
+            r = [db update:personne];
             break;
+    }
+    if (r != SQLITE_OK) {
+        dirty = YES;
     }
 }
 

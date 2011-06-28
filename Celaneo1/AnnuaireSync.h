@@ -24,6 +24,7 @@
     Personne* personne;
     int nModif;
     int nTotal;
+    BOOL dirty;
 }
 
 @property (nonatomic, retain) SaxMethodParser *parser;

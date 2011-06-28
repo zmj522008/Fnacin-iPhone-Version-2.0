@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #import "AnnuaireModel.h"
+#import "BaseController.h"
 
-@interface Annuaire : UIViewController <UITableViewDelegate, UISearchBarDelegate> {
+@interface Annuaire : BaseController <UITableViewDelegate, UISearchBarDelegate> {
     IBOutlet UITableView* table;
     AnnuaireModel* model;
     
