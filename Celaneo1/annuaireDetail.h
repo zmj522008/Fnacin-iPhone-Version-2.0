@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Personne.h"
 
-@interface annuaireDetail : UITableViewController {
+#import "BaseController.h"
+
+@interface annuaireDetail : BaseController <UITableViewDataSource, UITableViewDelegate> {
     Personne* personne;
 }
 @property (nonatomic, retain) Personne* personne;

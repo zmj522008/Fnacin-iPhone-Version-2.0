@@ -1,5 +1,5 @@
 //
-//  Shop.h
+//  Shops.h
 //  Celaneo1
 //
 //  Created by Sebastien Chauvin on 6/19/11.
@@ -10,7 +10,7 @@
 
 #import "BaseItem.h"
 
-@interface Shop : BaseItem {
+@interface Magasins : BaseItem {
     
 }
 

@@ -36,6 +36,13 @@
 
 #pragma mark UIViewController
 
+- (void) updateLeftBarNavigationButton
+{
+    if (self.navigationController.viewControllers.count > 1) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self navButton:NAVBUTTON_ARROW_LEFT withTitle:@"Retour" action:@selector(back)]];
+    }
+}
+
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -44,10 +51,7 @@
     NSLog(@"GA: %@", pageName);
     [[GANTracker sharedTracker] trackPageview:pageName withError:nil];
     [self refresh];
-    
-    if (self.navigationController.viewControllers.count > 1) {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self navButton:NAVBUTTON_ARROW_LEFT withTitle:@"Retour" action:@selector(back)]];
-    }
+    [self updateLeftBarNavigationButton];
     errorShown = NO;
     active = YES;
 }

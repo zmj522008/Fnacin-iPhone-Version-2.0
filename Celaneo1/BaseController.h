@@ -44,4 +44,5 @@
 - (UIButton*) navButton:(int) type withTitle:(NSString*) title action:(SEL)action;
 
 - (void) goToTabBar;
+- (void) updateLeftBarNavigationButton;
 @end

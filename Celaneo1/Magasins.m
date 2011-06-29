@@ -6,15 +6,15 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "Shops.h"
+#import "Magasins.h"
 
 
-@implementation Shops
+@implementation Magasins
 
 - (id) init
 {
     [super init];
-    self.validAttributes = [NSArray arrayWithObjects:@"count", nil];
+    self.validAttributes = nil;
     return self;
 }
 @end

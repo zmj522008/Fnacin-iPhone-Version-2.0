@@ -37,6 +37,8 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 {  
     self.window.rootViewController = self.loginController;
 
+    self.tabBarController.moreNavigationController.delegate = self;
+    
 #ifdef DEBUG_ANNUAIRE
     Annuaire* annuaire = [[Annuaire alloc] initWithNibName:@"Annuaire" bundle:nil];
     self.window.rootViewController = annuaire;
@@ -58,6 +60,17 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     [modelUpdateThread start];
 
     return YES;
+}
+
+- (void)navigationController:(UINavigationController *)navigationController
+      willShowViewController:(UIViewController *)viewController
+                    animated:(BOOL)animated {
+    
+    UINavigationBar *morenavbar = navigationController.navigationBar;
+    UINavigationItem *morenavitem = morenavbar.topItem;
+    /* We don't need Edit button in More screen. */
+    morenavitem.rightBarButtonItem = nil;
+    morenavitem.title = nil;
 }
 
 - (void) doAnnuaireUpdate

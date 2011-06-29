@@ -1,16 +1,21 @@
 //
-//  Magasin.h
+//  Shop.h
 //  Celaneo1
 //
-//  Created by Sebastien Chauvin on 4/5/11.
+//  Created by Sebastien Chauvin on 6/19/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import <MapKit/MapKit.h>
 #import <Foundation/Foundation.h>
-#import "ModelObject.h"
+#import "CoreLocation/CLLocation.h"
 
-@interface Magasin : NSObject <ModelObject> {
+#import "BaseItem.h"
+
+@interface Magasin : BaseItem <MKAnnotation> {
     
 }
+
+- (CLLocationCoordinate2D) coordinate;
 
 @end
