@@ -54,6 +54,7 @@
     model.indexShown = YES;
     table.dataSource = model;
     table.canCancelContentTouches = YES;
+    [table setSectionIndexMinimumDisplayRowCount:10];
 }
 
 - (void)viewDidUnload
@@ -63,6 +64,17 @@
     self.model = nil;
     self.searchOverlay = nil;
     self.searchBar = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable) name:AnnuaireModelDataStatusChange object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (NSString *)pageName
@@ -130,5 +142,10 @@
     [searchBar resignFirstResponder];
     searchOverlay.hidden = YES;
     
+}
+
+- (void) refreshTable
+{
+    [table reloadData];
 }
 @end

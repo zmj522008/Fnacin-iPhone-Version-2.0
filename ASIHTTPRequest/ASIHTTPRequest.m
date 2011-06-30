@@ -247,6 +247,7 @@ static NSOperationQueue *sharedQueue = nil;
 @property (retain, nonatomic) NSMutableData *PACFileData;
 
 @property (assign, nonatomic, setter=setSynchronous:) BOOL isSynchronous;
+
 @end
 
 
@@ -1932,7 +1933,7 @@ static NSOperationQueue *sharedQueue = nil;
 	if ([self error] || [self mainRequest]) {
 		return;
 	}
-	if ([self isPACFileRequest]) {
+	if ([self isPACFileRequest] || requestFinishedOnASIThread) {
 		[self reportFinished];
 	} else {
 		[self performSelectorOnMainThread:@selector(reportFinished) withObject:nil waitUntilDone:[NSThread isMainThread]];
@@ -4778,4 +4779,5 @@ static NSOperationQueue *sharedQueue = nil;
 @synthesize PACFileData;
 
 @synthesize isSynchronous;
+@synthesize requestFinishedOnASIThread;
 @end

@@ -74,8 +74,11 @@
     if (responseData == nil) {
         [self requestFailed:request];
     } else {
-        NSLog(@"%@\n%@", request.url, request.responseString);
-        
+#ifdef DEBUG
+        if (responseData.length < 1000) {
+            NSLog(@"%@\n%@", request.url, request.responseString);
+        }
+#endif
         NSXMLParser* xmlParser = [[NSXMLParser alloc] initWithData:responseData];
         [xmlParser setShouldProcessNamespaces:NO];
         [xmlParser setShouldReportNamespacePrefixes:NO];

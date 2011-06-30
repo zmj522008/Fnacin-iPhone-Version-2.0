@@ -48,6 +48,10 @@
         }
         SaxMethodParser* saxParser = [[[SaxMethodParser alloc] init] autorelease];
         request.xmlParserDelegate = saxParser;
+        request.delegate = self;
+        request.asiRequest.numberOfTimesToRetryOnTimeout = 5;
+        request.asiRequest.timeOutSeconds = 30;
+        request.asiRequest.requestFinishedOnASIThread = YES;
         saxParser.serverRequest = request;
         saxParser.parser = self;
         self.parser = saxParser;
@@ -59,6 +63,7 @@
 
 - (void) startSync
 {
+    [Celaneo1AppDelegate getSingleton].annuaireModel.syncing = YES;
     [self createRequest];
     
     [self.parser.serverRequest start];
@@ -67,6 +72,16 @@
 - (NSError *)endDocument
 {
     return nil;
+}
+
+- (void)serverRequest:(ServerRequest *)request didFailWithError:(NSError *)error
+{
+    [Celaneo1AppDelegate getSingleton].annuaireModel.syncing = NO;
+}
+
+- (void)serverRequest:(ServerRequest *)request didSucceedWithObject:(id)result
+{
+    [Celaneo1AppDelegate getSingleton].annuaireModel.syncing = NO;
 }
 
 #pragma mark parse server results

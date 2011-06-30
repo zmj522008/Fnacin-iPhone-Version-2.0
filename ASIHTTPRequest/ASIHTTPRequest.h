@@ -494,6 +494,8 @@ typedef void (^ASIDataBlock)(NSData *data);
 	// Set to YES in startSynchronous. Currently used by proxy detection to download PAC files synchronously when appropriate
 	BOOL isSynchronous;
 
+    BOOL requestFinishedOnASIThread;
+    
 	#if NS_BLOCKS_AVAILABLE
 	//block to execute when request starts
 	ASIBasicBlock startedBlock;
@@ -985,5 +987,5 @@ typedef void (^ASIDataBlock)(NSData *data);
 #endif
 @property (retain) ASIDataDecompressor *dataDecompressor;
 @property (assign) BOOL shouldWaitToInflateCompressedResponses;
-
+@property (assign) BOOL requestFinishedOnASIThread;
 @end

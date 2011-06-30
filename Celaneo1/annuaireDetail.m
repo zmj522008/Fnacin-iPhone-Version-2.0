@@ -81,6 +81,11 @@ enum {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (NSString *)pageName
+{
+    return @"annuaire/detail";
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

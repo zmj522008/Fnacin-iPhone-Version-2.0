@@ -32,17 +32,12 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 @synthesize annuaireDb;
 @synthesize annuaireModel;
 
-//#define DEBUG_ANNUAIRE
+#define DEBUG_ANNUAIRE
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {  
     self.window.rootViewController = self.loginController;
 
     self.tabBarController.moreNavigationController.delegate = self;
-    
-#ifdef DEBUG_ANNUAIRE
-    Annuaire* annuaire = [[Annuaire alloc] initWithNibName:@"Annuaire" bundle:nil];
-    self.window.rootViewController = annuaire;
-#endif
 
     [self.window makeKeyAndVisible];
 
@@ -58,7 +53,13 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     
     NSThread* modelUpdateThread = [[NSThread alloc] initWithTarget:self selector:@selector(doAnnuaireUpdate) object:nil];
     [modelUpdateThread start];
-
+    
+    
+#ifdef DEBUG_ANNUAIRE
+    Annuaire* annuaire = [[Annuaire alloc] initWithNibName:@"Annuaire" bundle:nil];
+    self.window.rootViewController = annuaire;
+#endif
+    
     return YES;
 }
 
@@ -80,6 +81,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     [annuaireModel fetchData];
     [pool release];
 }
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     /*

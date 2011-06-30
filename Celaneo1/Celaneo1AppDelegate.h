@@ -12,7 +12,7 @@
 @class AnnuaireDB;
 @class AnnuaireModel;
 
-@interface Celaneo1AppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate, UINavigationBarDelegate> {
+@interface Celaneo1AppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate, UINavigationBarDelegate, UINavigationControllerDelegate> {
     IBOutlet LoginController* loginController;
     
     NSString* sessionId;

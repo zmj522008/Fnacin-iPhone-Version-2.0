@@ -12,7 +12,7 @@
 
 #import "Personne.h"
 
-@interface AnnuaireSync : NSObject <ApplicationParser> {
+@interface AnnuaireSync : NSObject <ApplicationParser, ServerRequestDelegate> {
     enum {
         MethodAdd,
         MethodRemove,
