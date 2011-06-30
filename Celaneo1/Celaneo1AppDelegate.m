@@ -32,7 +32,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 @synthesize annuaireDb;
 @synthesize annuaireModel;
 
-#define DEBUG_ANNUAIRE
+//#define DEBUG_ANNUAIRE
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {  
     self.window.rootViewController = self.loginController;
