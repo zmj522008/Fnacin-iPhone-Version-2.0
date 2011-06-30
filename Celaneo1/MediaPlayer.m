@@ -99,7 +99,7 @@
 
 - (NSString *)pageName
 {
-    return [@"/article/media/" stringByAppendingString:article.titre];
+    return @"INTRAFNAC - MEDIA";
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -127,8 +127,10 @@
         moviePlayer.view.frame = 
             CGRectMake(bounds.origin.x, bounds.origin.y + bounds.size.height - AUDIO_HEIGHT,
                        bounds.size.width, AUDIO_HEIGHT);
+        [[GANTracker sharedTracker] trackEvent:@"INTRAFNAC" action:@"SON" label:article.titre value:nil withError:nil];
     } else {
         moviePlayer.view.frame = self.playerParentView.bounds;
+        [[GANTracker sharedTracker] trackEvent:@"INTRAFNAC" action:@"VIDEO" label:article.titre value:nil withError:nil];
     }
     
     [moviePlayer play];

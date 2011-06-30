@@ -6,6 +6,8 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import "GANTracker.h"
+
 #import "Annuaire.h"
 
 #import "Celaneo1AppDelegate.h"
@@ -79,7 +81,7 @@
 
 - (NSString *)pageName
 {
-    return @"annuaire/list";
+    return @"INTRAFNAC - ANNUAIRE";
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -124,6 +126,8 @@
 #pragma mark table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [[GANTracker sharedTracker] trackEvent:@"INTRAFNAC" action:@"ANNUAIRE" label:nil value:nil withError:nil];
+
     Personne* p = [model detailPersonneAtIndexPath:indexPath];
     
     NSString* nibName = @"annuaireDetail";

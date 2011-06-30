@@ -116,7 +116,7 @@
 
 - (NSString*) pageName
 {
-    return @"/login";
+    return @"INTRAFNAC - LOGIN";
 }
 
 #pragma mark Handle server Response

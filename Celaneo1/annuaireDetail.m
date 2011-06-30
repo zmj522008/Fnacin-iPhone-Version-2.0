@@ -84,7 +84,7 @@ enum {
 
 - (NSString *)pageName
 {
-    return @"annuaire/detail";
+    return @"INTRAFNAC - ANNUAIRE - DETAIL";
 }
 
 #pragma mark - Table view data source

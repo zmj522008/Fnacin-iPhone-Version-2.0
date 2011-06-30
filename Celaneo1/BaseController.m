@@ -192,7 +192,7 @@
 - (NSString*) pageName
 {
         // page name in Google Analytics
-    return @"/autre";
+    return @"INTRAFNAC";
 }
 
 #pragma mark create nice looking navigation buttons

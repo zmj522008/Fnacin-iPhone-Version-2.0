@@ -48,7 +48,7 @@
 
 - (NSString *)pageName
 {
-    return @"/rubriques/edit";
+    return @"INTRAFNAC - RUBRIQUE";
 }
 
 - (void)dealloc
@@ -96,11 +96,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [[GANTracker sharedTracker] trackEvent:@"INTRAFNAC" action:@"RUBRIQUE" label:[[rubriques objectAtIndex:indexPath.row] name] value:nil withError:nil];
+
     NSString* nibName = @"ArticleList";
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         nibName = [nibName stringByAppendingString:@"~iPad"];
     }
-    
+
     ArticleList* controller = [[ArticleList alloc] initWithNibName:nibName bundle:nil];
     controller.rubriqueId = [[rubriques objectAtIndex:indexPath.row] categoryId];
     [self.navigationController pushViewController:controller animated:YES];

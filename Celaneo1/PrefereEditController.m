@@ -52,7 +52,7 @@
 
 - (NSString *)pageName
 {
-    return @"/prefere/edit";
+    return @"INTRAFNAC - PREFERENCE - EDITION";
 }
 
 - (void) updateDoneButton

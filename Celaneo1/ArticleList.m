@@ -103,19 +103,19 @@
     int tag = self.navigationController.tabBarItem.tag | self.tabBarItem.tag;
     switch (tag) {
         case TAG_ITEM_A_LA_UNE:
-            return @"/a_la_une";
+            return @"INTRAFNAC - HOME";
             break;
         case TAG_ITEM_PREFERE:
-            return @"/prefere/list";
+            return @"INTRAFNAC - PREFERE";
             break;
         case TAG_ITEM_PODCAST:
-            return @"/podcast";
+            return @"INTRAFNAC - PODCAST";
             break;
         case TAG_ITEM_RUBRIQUES:
-            return @"/rubriques/list";
+            return @"INTRAFNAC - RUBRIQUE";
             break;
         case TAG_ITEM_DOSSIERS:
-            return @"/dossiers";
+            return @"INTRAFNAC - DOSSIERS";
             break;
         default:
             break;
@@ -371,6 +371,7 @@
     if (table.editing) {
         [self cellDeleteClick:sender];
     } else {
+        
         NSString* nibName = @"ArticleDetail";
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             nibName = [nibName stringByAppendingString:@"~iPad"];

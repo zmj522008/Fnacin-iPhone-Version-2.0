@@ -7,6 +7,7 @@
 //
 
 #import <MapKit/MapKit.h>
+#import "GANTracker.h"
 
 #import "ShopMapController.h"
 #import "Magasin.h"
@@ -82,6 +83,12 @@
 {
     [super viewWillAppear:animated];
 }
+
+- (NSString *)pageName
+{
+    return @"INTRAFNAC - MAGASIN";
+}
+
 #pragma mark server request
 
 - (void) serverRequest:(ServerRequest*)request didSucceedWithObject:(id)result
@@ -130,6 +137,8 @@
 
 - (void) updateShopDetailWithShop:(Magasin*) s
 {
+    [[GANTracker sharedTracker] trackEvent:@"INTRAFNAC" action:@"MAGASIN" label:[s nom] value:nil withError:nil];
+
     self.shop = s;
     
     NSMutableString* content = [NSMutableString stringWithCapacity:1000];
