@@ -14,7 +14,6 @@
 		E303264E1355A6AB0012B181 /* nav_nologo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E303264C1355A6AA0012B181 /* nav_nologo@2x.png */; };
 		E327FF8E13BB236B00616437 /* ShopMap.xib in Resources */ = {isa = PBXBuildFile; fileRef = E327FF8B13BB236B00616437 /* ShopMap.xib */; };
 		E327FF8F13BB236B00616437 /* ShopMapController.m in Sources */ = {isa = PBXBuildFile; fileRef = E327FF8D13BB236B00616437 /* ShopMapController.m */; };
-		E327FF9213BB23B300616437 /* ShopMap~iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E327FF9113BB23B300616437 /* ShopMap~iPad.xib */; };
 		E328DE2213B9BED20041EC20 /* annuaireDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = E328DE2013B9BED20041EC20 /* annuaireDetail.m */; };
 		E328DE2313B9BED20041EC20 /* annuaireDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = E328DE2113B9BED20041EC20 /* annuaireDetail.xib */; };
 		E341C865134A31F9009BB506 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = E341C852134A31F9009BB506 /* ASIAuthenticationDialog.m */; };
@@ -79,6 +78,7 @@
 		E36C822D136AD29E009C39C7 /* NSString+removeTags.m in Sources */ = {isa = PBXBuildFile; fileRef = E36C822C136AD29D009C39C7 /* NSString+removeTags.m */; };
 		E38B884F13BB614400B1D6A4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E38B884E13BB614400B1D6A4 /* CoreLocation.framework */; };
 		E38B885213BB61E500B1D6A4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E38B885113BB61E500B1D6A4 /* MapKit.framework */; };
+		E38B885C13BCD5D600B1D6A4 /* ShopMap~iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E38B885B13BCD5D500B1D6A4 /* ShopMap~iPad.xib */; };
 		E38D1ED5135D754D000D5FE1 /* CommentaireCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E38D1ED2135D754C000D5FE1 /* CommentaireCell.xib */; };
 		E38D1ED6135D754D000D5FE1 /* CommentaireCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E38D1ED4135D754C000D5FE1 /* CommentaireCell.m */; };
 		E38D1EDB135DC064000D5FE1 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E38D1ED9135DC064000D5FE1 /* libGoogleAnalytics.a */; };
@@ -161,7 +161,6 @@
 		E327FF8B13BB236B00616437 /* ShopMap.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopMap.xib; sourceTree = "<group>"; };
 		E327FF8C13BB236B00616437 /* ShopMapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopMapController.h; sourceTree = "<group>"; };
 		E327FF8D13BB236B00616437 /* ShopMapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopMapController.m; sourceTree = "<group>"; };
-		E327FF9113BB23B300616437 /* ShopMap~iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ShopMap~iPad.xib"; sourceTree = "<group>"; };
 		E328DE1F13B9BED20041EC20 /* annuaireDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = annuaireDetail.h; sourceTree = "<group>"; };
 		E328DE2013B9BED20041EC20 /* annuaireDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = annuaireDetail.m; sourceTree = "<group>"; };
 		E328DE2113B9BED20041EC20 /* annuaireDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = annuaireDetail.xib; sourceTree = "<group>"; };
@@ -249,6 +248,7 @@
 		E36C822C136AD29D009C39C7 /* NSString+removeTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+removeTags.m"; sourceTree = "<group>"; };
 		E38B884E13BB614400B1D6A4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E38B885113BB61E500B1D6A4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		E38B885B13BCD5D500B1D6A4 /* ShopMap~iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ShopMap~iPad.xib"; sourceTree = "<group>"; };
 		E38D1ED2135D754C000D5FE1 /* CommentaireCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentaireCell.xib; sourceTree = "<group>"; };
 		E38D1ED3135D754C000D5FE1 /* CommentaireCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentaireCell.h; sourceTree = "<group>"; };
 		E38D1ED4135D754C000D5FE1 /* CommentaireCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentaireCell.m; sourceTree = "<group>"; };
@@ -304,7 +304,7 @@
 		E3C084FD13ADD4B900A108D5 /* BaseItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseItem.m; sourceTree = "<group>"; };
 		E3C084FF13ADF1E800A108D5 /* Magasins.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Magasins.h; sourceTree = "<group>"; };
 		E3C0850013ADF1E800A108D5 /* Magasins.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Magasins.m; sourceTree = "<group>"; };
-		E3C0850213ADF1F700A108D5 /* Magasin.h */ = {isa = PBXFileReference; fileEncoding = 4; path = Magasin.h; sourceTree = "<group>"; };
+		E3C0850213ADF1F700A108D5 /* Magasin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Magasin.h; sourceTree = "<group>"; };
 		E3C0850313ADF1F700A108D5 /* Magasin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Magasin.m; sourceTree = "<group>"; };
 		E3C0850613AF1BD500A108D5 /* t_modelparser.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = t_modelparser.xml; sourceTree = "<group>"; };
 		E3D97E6B1349C3B300E2C1BA /* fnac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fnac.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -377,7 +377,7 @@
 				E3C0850213ADF1F700A108D5 /* Magasin.h */,
 				E3C0850313ADF1F700A108D5 /* Magasin.m */,
 				E327FF8B13BB236B00616437 /* ShopMap.xib */,
-				E327FF9113BB23B300616437 /* ShopMap~iPad.xib */,
+				E38B885B13BCD5D500B1D6A4 /* ShopMap~iPad.xib */,
 				E327FF8C13BB236B00616437 /* ShopMapController.h */,
 				E327FF8D13BB236B00616437 /* ShopMapController.m */,
 			);
@@ -844,7 +844,7 @@
 				E3E086FB13B5B0DB00062D03 /* lst in Resources */,
 				E328DE2313B9BED20041EC20 /* annuaireDetail.xib in Resources */,
 				E327FF8E13BB236B00616437 /* ShopMap.xib in Resources */,
-				E327FF9213BB23B300616437 /* ShopMap~iPad.xib in Resources */,
+				E38B885C13BCD5D600B1D6A4 /* ShopMap~iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

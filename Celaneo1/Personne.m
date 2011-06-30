@@ -54,6 +54,7 @@
 @synthesize site_pays;
 @synthesize site_region;
 @synthesize phoneDigits;
+@synthesize ville;
 
 - (int)compare:(Personne*)p
 {
@@ -129,6 +130,7 @@
     [site_pays release];
     [site_region release];
     [phoneDigits release];
+    [ville release];
     
     [super dealloc];
 }

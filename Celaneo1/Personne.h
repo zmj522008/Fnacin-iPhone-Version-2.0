@@ -57,7 +57,8 @@
     NSString* site_nom;
     NSString* site_pays;
     NSString* site_region;
-
+    NSString* ville;
+    
     NSString* phoneDigits;
 }
 @property (assign) int sId;
@@ -79,6 +80,7 @@
 @property (nonatomic, retain) NSString *site_pays;
 @property (nonatomic, retain) NSString *site_region;
 @property (nonatomic, retain) NSString *phoneDigits;
+@property (nonatomic, retain) NSString *ville;
 
 - (void) dump;
 - (void) genPhoneDigits;

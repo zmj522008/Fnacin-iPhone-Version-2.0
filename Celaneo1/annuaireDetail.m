@@ -10,6 +10,7 @@
 
 
 enum {
+    sectionFonction,
     sectionPhones,
     sectionEmail,
     sectionAddress,
@@ -96,6 +97,9 @@ enum {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     switch (section) {
+        case sectionFonction:
+            return personne.fonction.length > 0 ? 1 : 0;
+            
         case sectionPhones:
             return [personne.telephones count];
 
@@ -133,9 +137,25 @@ enum {
             cell.textLabel.text = pv.key;
         }
             break;
+        case sectionFonction:
+            cell.detailTextLabel.text = @"fonction";
+            cell.textLabel.text = personne.fonction;
+            break;
+        case sectionComment:
+            cell.detailTextLabel.text = @"commentaires";
+            cell.textLabel.text = personne.commentaire;
+            break;
+        case sectionEmail:
+            cell.detailTextLabel.text = @"email";
+            cell.textLabel.text = personne.email;
+            break;
         case sectionAddress:
             cell.detailTextLabel.text = @"adresse";
-            cell.textLabel.text = personne.adresse;
+            cell.textLabel.text = [NSString stringWithFormat:@"%@\n%@ %@", personne.adresse, personne.codepostal, personne.ville];
+            break;
+        case sectionSite:
+            cell.detailTextLabel.text = @"site";
+            cell.textLabel.text = personne.site;
             break;
     }
     
