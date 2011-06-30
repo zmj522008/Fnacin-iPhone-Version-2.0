@@ -123,7 +123,14 @@
     return @"/autre2";
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    hasMore = NO;
+    [super viewWillAppear:animated];
+}
+
 - (void) refresh {
+    hasMore = NO;
     [articles removeAllObjects];
     [table reloadData];
     [super refresh];
