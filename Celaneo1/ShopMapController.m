@@ -142,7 +142,7 @@
     }
 
     if ([[s email] length] > 0) {
-        [content appendFormat:@"<p>email: <a href='mailto://%@'>$@</a></p>", [s email], [s email]];
+        [content appendFormat:@"<p>email: <a href='mailto://%@'>%@</a></p>", [s email], [s email]];
     }
     if ([[s billeterie] length] > 0) {
         [content appendFormat:@"<p>%@</p>", [s billeterie]];
@@ -211,6 +211,11 @@
     }
 }
 
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
+{
+    
+}
+
 #pragma mark UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -221,10 +226,15 @@
 #pragma mark changeLayout
 - (void) switchToMap
 {
-    mapView.hidden = NO;
-    table.hidden = YES;
-    details.hidden = YES;
-    mapView.frame = self.view.bounds;
+    if (table.hidden || mapView.hidden) {
+        mapView.hidden = NO;
+        table.hidden = YES;
+        details.hidden = YES;
+        mapView.frame = self.view.bounds;
+
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                                  initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"Liste" action:@selector(switchToList)]];
+    }
     
     MKCoordinateRegion newRegion;
 
@@ -238,32 +248,37 @@
         [mapView setRegion:newRegion animated:YES];
     }
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-                                              initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"Liste" action:@selector(switchToList)]];
 }
 
 - (void) switchToDetail
 {
-    mapView.hidden = NO;
-    table.hidden = YES;
-    details.hidden = NO;
-    mapView.frame = CGRectMake(0, 0, mapView.frame.size.width, details.frame.origin.y);
+    if (table.hidden || mapView.hidden) {
+        mapView.hidden = NO;
+        table.hidden = YES;
+        details.hidden = NO;
+        mapView.frame = CGRectMake(0, 0, mapView.frame.size.width, details.frame.origin.y);
     
-    self.navigationItem.rightBarButtonItem = nil;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+        self.navigationItem.rightBarButtonItem = nil;
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithCustomView:[self navButton:NAVBUTTON_ARROW_LEFT withTitle:@"Liste" action:@selector(switchToList)]];
+    }
 }
 
 - (void) switchToList
 {
     self.shop = nil;
     
-    mapView.hidden = YES;
-    table.hidden = NO;
-    details.hidden = YES;
+    if (table.hidden || mapView.hidden) {
+        mapView.hidden = YES;
+        table.hidden = NO;
+        details.hidden = YES;
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"Carte" action:@selector(switchToMap)]];
-    [self updateLeftBarNavigationButton];
+        [self updateLeftBarNavigationButton];
+    } else {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                                  initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"Près de moi" action:@selector(switchToMap)]];
+    }
 }
 @end
