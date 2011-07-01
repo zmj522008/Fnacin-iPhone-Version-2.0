@@ -208,13 +208,13 @@
     switch (type) {
         case NAVBUTTON_ARROW_LEFT:
             btnImage = [UIImage imageNamed:@"btn_left.png"];
-            btnImage = [btnImage stretchableImageWithLeftCapWidth:13 topCapHeight:2];
+            btnImage = [btnImage stretchableImageWithLeftCapWidth:13 topCapHeight:5];
             [navButton setTitle:[NSString stringWithFormat:@"  %@", title] forState:UIControlStateNormal];
             break;
         case NAVBUTTON_PLAIN:
         default:
             btnImage = [UIImage imageNamed:@"btn.png"];
-            btnImage = [btnImage stretchableImageWithLeftCapWidth:3 topCapHeight:2];
+            btnImage = [btnImage stretchableImageWithLeftCapWidth:10 topCapHeight:5];
             [navButton setTitle:title forState:UIControlStateNormal];
             break;
     }
