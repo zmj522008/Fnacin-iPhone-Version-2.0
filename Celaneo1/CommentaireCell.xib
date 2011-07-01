@@ -15,6 +15,7 @@
 			<string>IBUITextView</string>
 			<string>IBUITableViewCell</string>
 			<string>IBUILabel</string>
+			<string>IBUIView</string>
 			<string>IBProxyObject</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -54,6 +55,7 @@
 								<string key="NSFrame">{{20, 61}, {280, 10}}</string>
 								<reference key="NSSuperview" ref="814330155"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="412251048">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -117,11 +119,24 @@
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
 							</object>
+							<object class="IBUIView" id="731088930">
+								<reference key="NSNextResponder" ref="814330155"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{30, 1.5}, {260, 1}}</string>
+								<reference key="NSSuperview" ref="814330155"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="921311015"/>
+								<object class="NSColor" key="IBUIBackgroundColor">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MC44NjQ5NjM1MDM2AA</bytes>
+								</object>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							</object>
 						</object>
 						<string key="NSFrameSize">{320, 80}</string>
 						<reference key="NSSuperview" ref="233113793"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="921311015"/>
+						<reference key="NSNextKeyView" ref="731088930"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -201,6 +216,7 @@
 							<reference ref="921311015"/>
 							<reference ref="571740107"/>
 							<reference ref="1057454630"/>
+							<reference ref="731088930"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -221,6 +237,12 @@
 						<reference key="parent" ref="233113793"/>
 						<string key="objectName">date</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">66</int>
+						<reference key="object" ref="731088930"/>
+						<reference key="parent" ref="233113793"/>
+						<string key="objectName">separator</string>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -234,12 +256,14 @@
 					<string>58.IBPluginDependency</string>
 					<string>59.IBPluginDependency</string>
 					<string>60.IBPluginDependency</string>
+					<string>66.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>ArticleList</string>
 					<string>UIResponder</string>
 					<string>CommentaireCell</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -258,7 +282,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">65</int>
+			<int key="maxID">66</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
