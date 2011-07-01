@@ -20,7 +20,7 @@
 #define TAG_ITEM_DOSSIERS 105
 
 #define FIRST_ROW_IPAD 350
-#define LOAD_MORE 30
+#define LOAD_MORE_HEIGHT 60
 
 // Handle all article lists
 
@@ -293,7 +293,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {   
     if (indexPath.section != 0) {
-        return LOAD_MORE;
+        return LOAD_MORE_HEIGHT;
     } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
         && indexPath.row == 0) {
         return FIRST_ROW_IPAD;
