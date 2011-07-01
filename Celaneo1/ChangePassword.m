@@ -70,6 +70,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     password1.text = @"";
     password2.text = @"";
     [self textChange:password1];
