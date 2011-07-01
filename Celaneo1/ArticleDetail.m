@@ -29,10 +29,11 @@
 @synthesize mediaButton;
 @synthesize imageRequest;
 @synthesize content;
-@synthesize commentPrompt;
+@synthesize commentToggle;
 @synthesize commentCount;
 @synthesize commentText;
 @synthesize commentSend;
+@synthesize commentCancel;
 @synthesize commentaireRequest;
 @synthesize favorisRequest;
 @synthesize jaimeRequest;
@@ -57,10 +58,11 @@
     [mediaButton release];
     [imageRequest release];
     [content release];
-    [commentPrompt release];
+    [commentToggle release];
     [commentCount release];
     [commentText release];
     [commentSend release];
+    [commentCancel release];
     [commentaireRequest cancel];
     commentaireRequest.delegate = nil;
     [commentaireRequest release];
@@ -92,7 +94,7 @@
     [super viewDidLoad];
     
     detailCellHeight = detailCell.bounds.size.height + (article.type != ARTICLE_TYPE_TEXT ? mediaButton.bounds.size.height + 2 : 0);
-    postCommentaireCellHeight = self.commentPrompt.frame.size.height + self.commentCount.frame.origin.y + 5;
+    postCommentaireCellHeight = self.commentCount.frame.size.height + self.commentCount.frame.origin.y + 5;
     contentCellHeight = self.contentCell.bounds.size.height;
     
 // Comment border radius magic
@@ -104,6 +106,11 @@
 
     activityIndicator.frame = CGRectMake((toolbar.bounds.size.width - 20) / 2, 
                                          (toolbar.bounds.size.height - 20) / 2, 20, 20);
+    
+    UIImage* buttonBack = [[UIImage imageNamed:@"btn.png"] stretchableImageWithLeftCapWidth:10 topCapHeight:5];
+    [commentSend setBackgroundImage:buttonBack forState:UIControlStateNormal];
+    [commentToggle setBackgroundImage:buttonBack forState:UIControlStateNormal];
+    [commentCancel setBackgroundImage:buttonBack forState:UIControlStateNormal];
 }
 
 - (void)viewDidUnload
@@ -122,10 +129,11 @@
     self.vignette = nil;
     self.mediaButton = nil;
     self.content = nil;
-    self.commentPrompt = nil;
+    self.commentToggle = nil;
     self.commentCount = nil;
     self.commentText = nil;
-    self.commentSend = nil;    
+    self.commentSend = nil;  
+    self.commentCancel = nil;
     self.activityIndicator = nil;
     self.toolbar = nil;
     self.fnaccomCell = nil;
@@ -506,12 +514,19 @@
     if (visible) {
         self.commentText.hidden = NO;
         self.commentSend.hidden = NO;
+        self.commentCancel.hidden = NO;
+        self.commentCount.hidden = YES;
+        self.commentToggle.hidden = YES;
         postCommentaireCellHeight = self.commentText.frame.size.height + self.commentText.frame.origin.y + 5;
         [self.commentText becomeFirstResponder];
     } else {
         self.commentText.hidden = YES;
         self.commentSend.hidden = YES;
-        postCommentaireCellHeight = self.commentPrompt.frame.size.height + self.commentCount.frame.origin.y + 15;
+        self.commentToggle.hidden = NO;
+        self.commentCancel.hidden = YES;
+        BOOL hasCommentaires = article.commentaires.count > 0;
+        commentCount.hidden = !hasCommentaires;
+        postCommentaireCellHeight = self.commentCount.frame.size.height + self.commentCount.frame.origin.y + 15;
         [self.commentText resignFirstResponder];
     }
     [table beginUpdates];
