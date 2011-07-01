@@ -81,11 +81,11 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
-				<object class="IBUINavigationController" key="IBUISelectedViewController" id="807851468">
-					<object class="IBUITabBarItem" key="IBUITabBarItem" id="668046550">
+				<object class="IBUINavigationController" key="IBUISelectedViewController" id="648609020">
+					<object class="IBUITabBarItem" key="IBUITabBarItem" id="546484495">
 						<int key="IBUITag">107</int>
 						<string key="IBUITitle">Magasins</string>
-						<object class="NSCustomResource" key="IBUIImage" id="869768678">
+						<object class="NSCustomResource" key="IBUIImage" id="286886225">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">remove.png</string>
 						</object>
@@ -101,7 +101,7 @@
 					</object>
 					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					<bool key="IBUIHorizontal">NO</bool>
-					<object class="IBUINavigationBar" key="IBUINavigationBar" id="21712897">
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="218094114">
 						<nil key="NSNextResponder"/>
 						<int key="NSvFlags">256</int>
 						<string key="NSFrameSize">{0, 0}</string>
@@ -112,12 +112,12 @@
 					</object>
 					<object class="NSMutableArray" key="IBUIViewControllers">
 						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="IBUIViewController" id="1008124934">
-							<object class="IBUINavigationItem" key="IBUINavigationItem" id="184483486">
+						<object class="IBUIViewController" id="647207044">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="193448713">
 								<string key="IBUITitle">Retour</string>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
-							<reference key="IBUIParentViewController" ref="807851468"/>
+							<reference key="IBUIParentViewController" ref="648609020"/>
 							<string key="IBUINibName">ShopMap~iPad</string>
 							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 								<int key="IBUIInterfaceOrientation">1</int>
@@ -352,7 +352,7 @@
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="646928580">
 							<int key="IBUITag">106</int>
 							<string key="IBUITitle">Annuaire</string>
-							<reference key="IBUIImage" ref="869768678"/>
+							<reference key="IBUIImage" ref="286886225"/>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						</object>
 						<object class="IBUINavigationItem" key="IBUINavigationItem" id="486768816">
@@ -395,7 +395,7 @@
 							</object>
 						</object>
 					</object>
-					<reference ref="807851468"/>
+					<reference ref="648609020"/>
 				</object>
 				<object class="IBUITabBar" key="IBUITabBar" id="795333663">
 					<reference key="NSNextResponder"/>
@@ -413,7 +413,7 @@
 			</object>
 			<object class="IBUIViewController" id="575745275">
 				<object class="IBUIView" key="IBUIView" id="136884479">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">274</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -433,7 +433,7 @@
 						<object class="IBUILabel" id="735958667">
 							<reference key="NSNextResponder" ref="136884479"/>
 							<int key="NSvFlags">-2147483356</int>
-							<string key="NSFrame">{{200, 350}, {450, 100}}</string>
+							<string key="NSFrame">{{84, 325}, {600, 150}}</string>
 							<reference key="NSSuperview" ref="136884479"/>
 							<reference key="NSNextKeyView" ref="885794346"/>
 							<bool key="IBUIOpaque">NO</bool>
@@ -441,7 +441,7 @@
 							<int key="IBUIContentMode">7</int>
 							<bool key="IBUIUserInteractionEnabled">NO</bool>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-							<string key="IBUIText">Un nouveau mot de passe vous a été envoyé par email</string>
+							<string key="IBUIText">Un mail vous a été envoyé. Veuillez suivre les instructions pour choisir un nouveau mot de passe.</string>
 							<object class="NSFont" key="IBUIFont" id="848890141">
 								<string key="NSName">Helvetica</string>
 								<double key="NSSize">30</double>
@@ -454,7 +454,7 @@
 							<nil key="IBUIHighlightedColor"/>
 							<int key="IBUIBaselineAdjustment">1</int>
 							<float key="IBUIMinimumFontSize">10</float>
-							<int key="IBUINumberOfLines">2</int>
+							<int key="IBUINumberOfLines">3</int>
 						</object>
 						<object class="IBUIView" id="542512899">
 							<reference key="NSNextResponder" ref="136884479"/>
@@ -747,6 +747,7 @@
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{369, 860}, {37, 37}}</string>
 							<reference key="NSSuperview" ref="136884479"/>
+							<reference key="NSNextKeyView"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<bool key="IBUIHidesWhenStopped">NO</bool>
@@ -755,6 +756,7 @@
 						</object>
 					</object>
 					<string key="NSFrame">{{0, 20}, {768, 1004}}</string>
+					<reference key="NSSuperview"/>
 					<reference key="NSNextKeyView" ref="15808556"/>
 					<reference key="IBUIBackgroundColor" ref="151792184"/>
 					<reference key="IBUISimulatedStatusBarMetrics" ref="31572012"/>
@@ -1047,7 +1049,7 @@
 							<reference ref="602157138"/>
 							<reference ref="739580799"/>
 							<reference ref="644073090"/>
-							<reference ref="807851468"/>
+							<reference ref="648609020"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -1399,38 +1401,38 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">272</int>
-						<reference key="object" ref="807851468"/>
+						<reference key="object" ref="648609020"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="668046550"/>
-							<reference ref="1008124934"/>
-							<reference ref="21712897"/>
+							<reference ref="546484495"/>
+							<reference ref="647207044"/>
+							<reference ref="218094114"/>
 						</object>
 						<reference key="parent" ref="1034742383"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">274</int>
-						<reference key="object" ref="668046550"/>
-						<reference key="parent" ref="807851468"/>
+						<reference key="object" ref="546484495"/>
+						<reference key="parent" ref="648609020"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">275</int>
-						<reference key="object" ref="1008124934"/>
+						<reference key="object" ref="647207044"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="184483486"/>
+							<reference ref="193448713"/>
 						</object>
-						<reference key="parent" ref="807851468"/>
+						<reference key="parent" ref="648609020"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">276</int>
-						<reference key="object" ref="21712897"/>
-						<reference key="parent" ref="807851468"/>
+						<reference key="object" ref="218094114"/>
+						<reference key="parent" ref="648609020"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">277</int>
-						<reference key="object" ref="184483486"/>
-						<reference key="parent" ref="1008124934"/>
+						<reference key="object" ref="193448713"/>
+						<reference key="parent" ref="647207044"/>
 					</object>
 				</object>
 			</object>
