@@ -57,7 +57,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     
 #ifdef DEBUG_ANNUAIRE
     Annuaire* annuaire = [[Annuaire alloc] initWithNibName:@"Annuaire" bundle:nil];
-    self.window.rootViewController = annuaire;
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:annuaire];
 #endif
     
     return YES;
