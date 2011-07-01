@@ -82,6 +82,8 @@
 		E360B19813BDABB9004A9E94 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E360B18E13BDABB9004A9E94 /* MainWindow-iPad.xib */; };
 		E360B19913BDABB9004A9E94 /* PrefereEdit~iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E360B19013BDABB9004A9E94 /* PrefereEdit~iPad.xib */; };
 		E360B19A13BDABB9004A9E94 /* RubriqueList~iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E360B19113BDABB9004A9E94 /* RubriqueList~iPad.xib */; };
+		E360B19E13BDBF12004A9E94 /* ChangePassword.m in Sources */ = {isa = PBXBuildFile; fileRef = E360B19C13BDBF11004A9E94 /* ChangePassword.m */; };
+		E360B19F13BDBF12004A9E94 /* ChangePassword.xib in Resources */ = {isa = PBXBuildFile; fileRef = E360B19D13BDBF12004A9E94 /* ChangePassword.xib */; };
 		E36C8228136AC628009C39C7 /* remove.png in Resources */ = {isa = PBXBuildFile; fileRef = E36C8226136AC628009C39C7 /* remove.png */; };
 		E36C8229136AC628009C39C7 /* remove@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E36C8227136AC628009C39C7 /* remove@2x.png */; };
 		E36C822D136AD29E009C39C7 /* NSString+removeTags.m in Sources */ = {isa = PBXBuildFile; fileRef = E36C822C136AD29D009C39C7 /* NSString+removeTags.m */; };
@@ -248,6 +250,9 @@
 		E360B18F13BDABB9004A9E94 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = "fr.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		E360B19013BDABB9004A9E94 /* PrefereEdit~iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "PrefereEdit~iPad.xib"; sourceTree = "<group>"; };
 		E360B19113BDABB9004A9E94 /* RubriqueList~iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "RubriqueList~iPad.xib"; sourceTree = "<group>"; };
+		E360B19B13BDBF11004A9E94 /* ChangePassword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePassword.h; sourceTree = "<group>"; };
+		E360B19C13BDBF11004A9E94 /* ChangePassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePassword.m; sourceTree = "<group>"; };
+		E360B19D13BDBF12004A9E94 /* ChangePassword.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePassword.xib; sourceTree = "<group>"; };
 		E36C8226136AC628009C39C7 /* remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remove.png; sourceTree = "<group>"; };
 		E36C8227136AC628009C39C7 /* remove@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "remove@2x.png"; sourceTree = "<group>"; };
 		E36C822B136AD29D009C39C7 /* NSString+removeTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+removeTags.h"; sourceTree = "<group>"; };
@@ -584,6 +589,9 @@
 				E3E69FF813584FA200827128 /* ArticleDetail.m */,
 				E3A782AA135EE13500C7C0F2 /* Prepage.h */,
 				E3A782AB135EE13500C7C0F2 /* Prepage.m */,
+				E360B19B13BDBF11004A9E94 /* ChangePassword.h */,
+				E360B19C13BDBF11004A9E94 /* ChangePassword.m */,
+				E360B19D13BDBF12004A9E94 /* ChangePassword.xib */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -834,6 +842,7 @@
 				E360B19813BDABB9004A9E94 /* MainWindow-iPad.xib in Resources */,
 				E360B19913BDABB9004A9E94 /* PrefereEdit~iPad.xib in Resources */,
 				E360B19A13BDABB9004A9E94 /* RubriqueList~iPad.xib in Resources */,
+				E360B19F13BDBF12004A9E94 /* ChangePassword.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -885,6 +894,7 @@
 				E3E086F913B4AE3D00062D03 /* AnnuaireDB.m in Sources */,
 				E328DE2213B9BED20041EC20 /* annuaireDetail.m in Sources */,
 				E327FF8F13BB236B00616437 /* ShopMapController.m in Sources */,
+				E360B19E13BDBF12004A9E94 /* ChangePassword.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

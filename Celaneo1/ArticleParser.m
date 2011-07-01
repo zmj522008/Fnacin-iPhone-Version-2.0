@@ -69,6 +69,15 @@
     return request;
 }
 
+- (ServerRequest*) getSetPassword:(NSString*)password
+{
+    ServerRequest* request = [self getServerRequest:@"setpassword"];
+    if (self != nil) {
+        [request setParameter:@"password" withValue:password];
+    }
+    return request;
+}
+
 - (ServerRequest*) getRequestPasswordWithEmail:(NSString*)email
 {
     ServerRequest* request = [self getServerRequest:@"password"];

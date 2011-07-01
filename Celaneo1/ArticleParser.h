@@ -75,8 +75,8 @@
 
 
 - (ServerRequest*) getRequestAuthentificateWithEmail:(NSString*)email withPassword:(NSString*)password;
+- (ServerRequest*) getSetPassword:(NSString*)password;
 - (ServerRequest*) getRequestArticle;
-
 - (ServerRequest*) getRequestGetThematiques;
 - (ServerRequest*) getRequestGetRubriques;
 - (ServerRequest*) getRequestGetPreferencesForType:(int)type;

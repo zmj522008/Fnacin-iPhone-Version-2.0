@@ -59,7 +59,6 @@
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{768, 1024}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -81,11 +80,11 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
-				<object class="IBUINavigationController" key="IBUISelectedViewController" id="648609020">
-					<object class="IBUITabBarItem" key="IBUITabBarItem" id="546484495">
-						<int key="IBUITag">107</int>
-						<string key="IBUITitle">Magasins</string>
-						<object class="NSCustomResource" key="IBUIImage" id="286886225">
+				<object class="IBUINavigationController" key="IBUISelectedViewController" id="62154822">
+					<object class="IBUITabBarItem" key="IBUITabBarItem" id="986529670">
+						<int key="IBUITag">108</int>
+						<string key="IBUITitle">Mot de passe</string>
+						<object class="NSCustomResource" key="IBUIImage" id="909442535">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">remove.png</string>
 						</object>
@@ -101,7 +100,7 @@
 					</object>
 					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					<bool key="IBUIHorizontal">NO</bool>
-					<object class="IBUINavigationBar" key="IBUINavigationBar" id="218094114">
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="70804572">
 						<nil key="NSNextResponder"/>
 						<int key="NSvFlags">256</int>
 						<string key="NSFrameSize">{0, 0}</string>
@@ -112,13 +111,12 @@
 					</object>
 					<object class="NSMutableArray" key="IBUIViewControllers">
 						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="IBUIViewController" id="647207044">
-							<object class="IBUINavigationItem" key="IBUINavigationItem" id="193448713">
+						<object class="IBUIViewController" id="999635746">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="561284511">
 								<string key="IBUITitle">Retour</string>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
-							<reference key="IBUIParentViewController" ref="648609020"/>
-							<string key="IBUINibName">ShopMap~iPad</string>
+							<reference key="IBUIParentViewController" ref="62154822"/>
 							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 								<int key="IBUIInterfaceOrientation">1</int>
 								<int key="interfaceOrientation">1</int>
@@ -352,7 +350,7 @@
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="646928580">
 							<int key="IBUITag">106</int>
 							<string key="IBUITitle">Annuaire</string>
-							<reference key="IBUIImage" ref="286886225"/>
+							<reference key="IBUIImage" ref="909442535"/>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						</object>
 						<object class="IBUINavigationItem" key="IBUINavigationItem" id="486768816">
@@ -395,14 +393,57 @@
 							</object>
 						</object>
 					</object>
-					<reference ref="648609020"/>
+					<object class="IBUINavigationController" id="648609020">
+						<object class="IBUITabBarItem" key="IBUITabBarItem" id="546484495">
+							<int key="IBUITag">107</int>
+							<string key="IBUITitle">Magasins</string>
+							<reference key="IBUIImage" ref="909442535"/>
+							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						</object>
+						<reference key="IBUIParentViewController" ref="1034742383"/>
+						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+							<int key="IBUIStatusBarStyle">2</int>
+						</object>
+						<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+							<int key="IBUIInterfaceOrientation">1</int>
+							<int key="interfaceOrientation">1</int>
+						</object>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<bool key="IBUIHorizontal">NO</bool>
+						<object class="IBUINavigationBar" key="IBUINavigationBar" id="218094114">
+							<nil key="NSNextResponder"/>
+							<int key="NSvFlags">256</int>
+							<string key="NSFrameSize">{0, 0}</string>
+							<bool key="IBUIOpaque">NO</bool>
+							<bool key="IBUIClipsSubviews">YES</bool>
+							<bool key="IBUIMultipleTouchEnabled">YES</bool>
+							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						</object>
+						<object class="NSMutableArray" key="IBUIViewControllers">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBUIViewController" id="647207044">
+								<object class="IBUINavigationItem" key="IBUINavigationItem" id="193448713">
+									<string key="IBUITitle">Retour</string>
+									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								</object>
+								<reference key="IBUIParentViewController" ref="648609020"/>
+								<string key="IBUINibName">ShopMap~iPad</string>
+								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+									<int key="IBUIInterfaceOrientation">1</int>
+									<int key="interfaceOrientation">1</int>
+								</object>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<bool key="IBUIHorizontal">NO</bool>
+							</object>
+						</object>
+					</object>
+					<reference ref="62154822"/>
 				</object>
 				<object class="IBUITabBar" key="IBUITabBar" id="795333663">
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">266</int>
 					<string key="NSFrame">{{0, 975}, {768, 49}}</string>
 					<reference key="NSSuperview"/>
-					<reference key="NSNextKeyView"/>
 					<object class="NSColor" key="IBUIBackgroundColor" id="2431546">
 						<int key="NSColorSpace">3</int>
 						<bytes key="NSWhite">MCAwAA</bytes>
@@ -413,7 +454,7 @@
 			</object>
 			<object class="IBUIViewController" id="575745275">
 				<object class="IBUIView" key="IBUIView" id="136884479">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">274</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -747,7 +788,6 @@
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{369, 860}, {37, 37}}</string>
 							<reference key="NSSuperview" ref="136884479"/>
-							<reference key="NSNextKeyView"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<bool key="IBUIHidesWhenStopped">NO</bool>
@@ -756,7 +796,6 @@
 						</object>
 					</object>
 					<string key="NSFrame">{{0, 20}, {768, 1004}}</string>
-					<reference key="NSSuperview"/>
 					<reference key="NSNextKeyView" ref="15808556"/>
 					<reference key="IBUIBackgroundColor" ref="151792184"/>
 					<reference key="IBUISimulatedStatusBarMetrics" ref="31572012"/>
@@ -1050,6 +1089,7 @@
 							<reference ref="739580799"/>
 							<reference ref="644073090"/>
 							<reference ref="648609020"/>
+							<reference ref="62154822"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -1434,6 +1474,42 @@
 						<reference key="object" ref="193448713"/>
 						<reference key="parent" ref="647207044"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">278</int>
+						<reference key="object" ref="62154822"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="986529670"/>
+							<reference ref="999635746"/>
+							<reference ref="70804572"/>
+						</object>
+						<reference key="parent" ref="1034742383"/>
+						<string key="objectName">Navigation Controller - Annuaire</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">279</int>
+						<reference key="object" ref="986529670"/>
+						<reference key="parent" ref="62154822"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">280</int>
+						<reference key="object" ref="999635746"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="561284511"/>
+						</object>
+						<reference key="parent" ref="62154822"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">281</int>
+						<reference key="object" ref="70804572"/>
+						<reference key="parent" ref="62154822"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">282</int>
+						<reference key="object" ref="561284511"/>
+						<reference key="parent" ref="999635746"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1512,6 +1588,11 @@
 					<string>275.CustomClassName</string>
 					<string>275.IBPluginDependency</string>
 					<string>276.IBPluginDependency</string>
+					<string>278.IBPluginDependency</string>
+					<string>279.IBPluginDependency</string>
+					<string>280.CustomClassName</string>
+					<string>280.IBPluginDependency</string>
+					<string>281.IBPluginDependency</string>
 					<string>3.CustomClassName</string>
 					<string>3.IBPluginDependency</string>
 				</object>
@@ -1620,6 +1701,11 @@
 					<string>ShopMapController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>ChangePassword</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>Celaneo1AppDelegate</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
@@ -1636,7 +1722,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">277</int>
+			<int key="maxID">282</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
