@@ -7,7 +7,7 @@
 //
 
 #import "annuaireDetail.h"
-
+#import "AddressBook/AddressBook.h"
 
 enum {
     sectionFonction,
@@ -59,6 +59,8 @@ enum {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"➜ Contacts" action:@selector(saveInContacts)]];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -188,6 +190,97 @@ enum {
     }
     if (url) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }
+}
+
+#pragma mark contacts
+- (void) saveInContacts
+{
+    ABRecordRef aRecord = ABPersonCreate(); 
+	CFErrorRef  error = NULL; 
+	ABRecordSetValue(aRecord, kABPersonFirstNameProperty, 
+					 personne.prenom, &error); 
+	ABRecordSetValue(aRecord, kABPersonLastNameProperty, 
+					 personne.nom, &error); 
+    if (personne.fonction.length > 0) {
+        ABRecordSetValue(aRecord, kABPersonJobTitleProperty,
+                         personne.fonction, &error); 
+    }
+    ABMultiValueRef phones = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+    if (personne.telephone_fax.length > 0) {
+        ABMultiValueAddValueAndLabel(phones, personne.telephone_fax, kABPersonPhoneWorkFAXLabel, nil);    
+    }
+    if (personne.telephone_fixe.length > 0) {
+        ABMultiValueAddValueAndLabel(phones, personne.telephone_fixe, kABPersonPhoneMainLabel, nil);    
+    }
+    if (personne.telephone_interne.length > 0) {
+        ABMultiValueAddValueAndLabel(phones, personne.telephone_interne, kABPersonPhonePagerLabel, nil);    
+    }
+    if (personne.telephone_mobile.length > 0) {
+        ABMultiValueAddValueAndLabel(phones, personne.telephone_mobile, kABPersonPhoneMobileLabel, nil);    
+    }
+	ABRecordSetValue(aRecord, kABPersonPhoneProperty, phones, &error);
+    if (personne.email.length > 0) {
+        ABRecordSetValue(aRecord, kABPersonEmailProperty, personne.email, &error);
+    }
+    if (personne.site_nom.length > 0) {
+        ABRecordSetValue(aRecord, kABPersonOrganizationProperty, personne.site_nom, &error);
+    }
+    CFRelease(phones);
+    
+	if (error != NULL) { 		
+		NSLog(@"error while creating.. %@", error);
+	} 
+	ABAddressBookRef addressBook; 
+	addressBook = ABAddressBookCreate(); 
+	
+	BOOL isAdded = ABAddressBookAddRecord (
+                                           addressBook,
+                                           aRecord,
+                                           &error
+                                           );	
+	if(isAdded){
+		NSLog(@"added..");
+	}
+	if (error != NULL) {
+		NSLog(@"ABAddressBookAddRecord %@", error);
+	} 
+//	error = NULL;
+	
+	BOOL isSaved = ABAddressBookSave (
+                                      addressBook,
+                                      &error
+                                      );
+	
+	if(isSaved){
+		
+		NSLog(@"saved..");
+	}
+	
+	if (error != NULL) {
+		NSLog(@"ABAddressBookSave %@", error);
+	} 
+	
+	CFRelease(aRecord); 
+	CFRelease(addressBook);
+    
+    if (error) {
+        UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Ajout"
+                                                            message:@"Cette personne ne peut pas etre ajoute a vos contacts" 
+                                                           delegate:nil 
+                                                  cancelButtonTitle:@"OK" 
+                                                  otherButtonTitles:nil];
+        [errorView show];
+        [errorView release];
+    } else {
+        UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Ajout"
+                                                            message:[NSString stringWithFormat:@"%@ %@ a été ajouté à vos contacts", personne.prenom, personne.nom]
+                                                           delegate:nil 
+                                                  cancelButtonTitle:@"OK" 
+                                                  otherButtonTitles:nil];
+        [errorView show];
+        [errorView release];
+        self.navigationItem.rightBarButtonItem = nil;
     }
 }
 @end
