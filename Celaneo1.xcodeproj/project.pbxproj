@@ -16,6 +16,12 @@
 		E327FF8F13BB236B00616437 /* ShopMapController.m in Sources */ = {isa = PBXBuildFile; fileRef = E327FF8D13BB236B00616437 /* ShopMapController.m */; };
 		E328DE2213B9BED20041EC20 /* annuaireDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = E328DE2013B9BED20041EC20 /* annuaireDetail.m */; };
 		E328DE2313B9BED20041EC20 /* annuaireDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = E328DE2113B9BED20041EC20 /* annuaireDetail.xib */; };
+		E335240313BE12D100970B87 /* annuaire.png in Resources */ = {isa = PBXBuildFile; fileRef = E33523FF13BE12D100970B87 /* annuaire.png */; };
+		E335240413BE12D100970B87 /* annuaire@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E335240013BE12D100970B87 /* annuaire@2x.png */; };
+		E335240513BE12D100970B87 /* epingle.png in Resources */ = {isa = PBXBuildFile; fileRef = E335240113BE12D100970B87 /* epingle.png */; };
+		E335240613BE12D100970B87 /* epingle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E335240213BE12D100970B87 /* epingle@2x.png */; };
+		E335240913BE12DA00970B87 /* password.png in Resources */ = {isa = PBXBuildFile; fileRef = E335240713BE12DA00970B87 /* password.png */; };
+		E335240A13BE12DA00970B87 /* password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E335240813BE12DA00970B87 /* password@2x.png */; };
 		E341C865134A31F9009BB506 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = E341C852134A31F9009BB506 /* ASIAuthenticationDialog.m */; };
 		E341C866134A31F9009BB506 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = E341C855134A31F9009BB506 /* ASIDataCompressor.m */; };
 		E341C867134A31F9009BB506 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = E341C857134A31F9009BB506 /* ASIDataDecompressor.m */; };
@@ -163,6 +169,12 @@
 		E328DE1F13B9BED20041EC20 /* annuaireDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = annuaireDetail.h; sourceTree = "<group>"; };
 		E328DE2013B9BED20041EC20 /* annuaireDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = annuaireDetail.m; sourceTree = "<group>"; };
 		E328DE2113B9BED20041EC20 /* annuaireDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = annuaireDetail.xib; sourceTree = "<group>"; };
+		E33523FF13BE12D100970B87 /* annuaire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = annuaire.png; sourceTree = "<group>"; };
+		E335240013BE12D100970B87 /* annuaire@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "annuaire@2x.png"; sourceTree = "<group>"; };
+		E335240113BE12D100970B87 /* epingle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = epingle.png; sourceTree = "<group>"; };
+		E335240213BE12D100970B87 /* epingle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "epingle@2x.png"; sourceTree = "<group>"; };
+		E335240713BE12DA00970B87 /* password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = password.png; sourceTree = "<group>"; };
+		E335240813BE12DA00970B87 /* password@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "password@2x.png"; sourceTree = "<group>"; };
 		E341C851134A31F9009BB506 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		E341C852134A31F9009BB506 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		E341C853134A31F9009BB506 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ASICacheDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -430,6 +442,12 @@
 		E3455373134F146E004B9D1E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E335240713BE12DA00970B87 /* password.png */,
+				E335240813BE12DA00970B87 /* password@2x.png */,
+				E33523FF13BE12D100970B87 /* annuaire.png */,
+				E335240013BE12D100970B87 /* annuaire@2x.png */,
+				E335240113BE12D100970B87 /* epingle.png */,
+				E335240213BE12D100970B87 /* epingle@2x.png */,
 				E3AFD2B8139581F70053E35F /* bg~iPad.png */,
 				E3AFD2B6139581610053E35F /* bg_log~iPad.png */,
 				E36C8226136AC628009C39C7 /* remove.png */,
@@ -843,6 +861,12 @@
 				E360B19913BDABB9004A9E94 /* PrefereEdit~iPad.xib in Resources */,
 				E360B19A13BDABB9004A9E94 /* RubriqueList~iPad.xib in Resources */,
 				E360B19F13BDBF12004A9E94 /* ChangePassword.xib in Resources */,
+				E335240313BE12D100970B87 /* annuaire.png in Resources */,
+				E335240413BE12D100970B87 /* annuaire@2x.png in Resources */,
+				E335240513BE12D100970B87 /* epingle.png in Resources */,
+				E335240613BE12D100970B87 /* epingle@2x.png in Resources */,
+				E335240913BE12DA00970B87 /* password.png in Resources */,
+				E335240A13BE12DA00970B87 /* password@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
