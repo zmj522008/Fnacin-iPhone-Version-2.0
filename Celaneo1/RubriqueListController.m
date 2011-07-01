@@ -15,6 +15,8 @@
 
 @implementation RubriqueListController
 
+@synthesize rubriques;
+
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -60,7 +62,7 @@
 
 - (void) updateList:(ServerRequest*)request parser:(ArticleParser*)parsed onlineContent:(BOOL)onlineContent;
 {    
-    rubriques = parsed.rubriques;
+    self.rubriques = [parsed.rubriques sortedArrayUsingSelector:@selector(compare:)];
     
     [table reloadData];
 }

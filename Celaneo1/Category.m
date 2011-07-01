@@ -26,4 +26,9 @@
     NSLog(@"category %d \'%@\'", categoryId, name);
 }
 
+- (int) compare:(Category*)other
+{
+    return [name compare:other.name options:NSCaseInsensitiveSearch];
+}
+
 @end

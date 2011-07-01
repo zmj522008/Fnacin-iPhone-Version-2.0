@@ -90,7 +90,7 @@
 
 - (void) updateList:(ServerRequest*)request parser:(ArticleParser*)parsed onlineContent:(BOOL)onlineContent;
 {    
-    self.rubriques = parsed.rubriques;
+    self.rubriques = [parsed.rubriques sortedArrayUsingSelector:@selector(compare:)];
     for (Category* cat in self.rubriques) {
         if (cat.prefere) {
             [selectedRubriques addIndex:cat.categoryId];

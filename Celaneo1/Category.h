@@ -18,4 +18,5 @@
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, assign) BOOL prefere;
 
+- (int) compare:(Category*)other;
 @end

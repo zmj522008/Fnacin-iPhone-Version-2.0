@@ -73,6 +73,7 @@
 		E34553DF13530CD6004B9D1E /* bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E34553DD13530CD6004B9D1E /* bg@2x.png */; };
 		E34553E213541C13004B9D1E /* nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E34553E013541C11004B9D1E /* nav@2x.png */; };
 		E34553E313541C13004B9D1E /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = E34553E113541C12004B9D1E /* nav.png */; };
+		E360B17F13BD9EA4004A9E94 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E360B17E13BD9EA4004A9E94 /* AddressBook.framework */; };
 		E36C8228136AC628009C39C7 /* remove.png in Resources */ = {isa = PBXBuildFile; fileRef = E36C8226136AC628009C39C7 /* remove.png */; };
 		E36C8229136AC628009C39C7 /* remove@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E36C8227136AC628009C39C7 /* remove@2x.png */; };
 		E36C822D136AD29E009C39C7 /* NSString+removeTags.m in Sources */ = {isa = PBXBuildFile; fileRef = E36C822C136AD29D009C39C7 /* NSString+removeTags.m */; };
@@ -242,6 +243,7 @@
 		E34553DD13530CD6004B9D1E /* bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg@2x.png"; sourceTree = "<group>"; };
 		E34553E013541C11004B9D1E /* nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@2x.png"; sourceTree = "<group>"; };
 		E34553E113541C12004B9D1E /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
+		E360B17E13BD9EA4004A9E94 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		E36C8226136AC628009C39C7 /* remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remove.png; sourceTree = "<group>"; };
 		E36C8227136AC628009C39C7 /* remove@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "remove@2x.png"; sourceTree = "<group>"; };
 		E36C822B136AD29D009C39C7 /* NSString+removeTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+removeTags.h"; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E360B17F13BD9EA4004A9E94 /* AddressBook.framework in Frameworks */,
 				E38B885213BB61E500B1D6A4 /* MapKit.framework in Frameworks */,
 				E38B884F13BB614400B1D6A4 /* CoreLocation.framework in Frameworks */,
 				E38D1EDE135DC587000D5FE1 /* libsqlite3.dylib in Frameworks */,
@@ -634,6 +637,7 @@
 		E3D97E601349C3B300E2C1BA = {
 			isa = PBXGroup;
 			children = (
+				E360B17E13BD9EA4004A9E94 /* AddressBook.framework */,
 				E38B885113BB61E500B1D6A4 /* MapKit.framework */,
 				E38B884E13BB614400B1D6A4 /* CoreLocation.framework */,
 				E3AFD2B41395803A0053E35F /* Default-Portrait~ipad.png */,

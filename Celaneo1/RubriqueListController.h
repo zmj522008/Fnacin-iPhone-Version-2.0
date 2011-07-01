@@ -14,5 +14,6 @@
     
     IBOutlet UITableView* table;
 }
+@property (nonatomic, retain) NSArray* rubriques;
 
 @end
