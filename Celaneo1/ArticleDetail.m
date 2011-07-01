@@ -30,6 +30,7 @@
 @synthesize imageRequest;
 @synthesize content;
 @synthesize commentPrompt;
+@synthesize commentCount;
 @synthesize commentText;
 @synthesize commentSend;
 @synthesize commentaireRequest;
@@ -57,6 +58,7 @@
     [imageRequest release];
     [content release];
     [commentPrompt release];
+    [commentCount release];
     [commentText release];
     [commentSend release];
     [commentaireRequest cancel];
@@ -90,7 +92,7 @@
     [super viewDidLoad];
     
     detailCellHeight = detailCell.bounds.size.height + (article.type != ARTICLE_TYPE_TEXT ? mediaButton.bounds.size.height + 2 : 0);
-    postCommentaireCellHeight = self.commentPrompt.frame.size.height + self.commentPrompt.frame.origin.y + 5;
+    postCommentaireCellHeight = self.commentPrompt.frame.size.height + self.commentCount.frame.origin.y + 5;
     contentCellHeight = self.contentCell.bounds.size.height;
     
 // Comment border radius magic
@@ -121,6 +123,7 @@
     self.mediaButton = nil;
     self.content = nil;
     self.commentPrompt = nil;
+    self.commentCount = nil;
     self.commentText = nil;
     self.commentSend = nil;    
     self.activityIndicator = nil;
@@ -377,22 +380,14 @@
 
 - (void) update
 {
-#ifdef DEBUG__
-    article.nb_commentaires = 2;
-    Commentaire* com1 = [[Commentaire alloc] init];
-    com1.date = @"date1";
-    com1.prenom = @"prenom";
-    com1.contenu = @"Fnac Billetterie : concerts, festivals, théâtre, expositions, sports, parcs... plus de 50 000 événements par an.";
-    Commentaire* com2 = [[Commentaire alloc] init];
-    com2.date = @"date2";
-    com2.prenom = @"prenom";
-    com2.contenu = @"Fnac Billetterie : concerts, festivals, théâtre, expositions, sports, parcs... plus de 50 000 événements par an.";
-
-    article.commentaires = [NSArray arrayWithObjects:com1, com2, nil];
-#endif
     [self updateDetail];
     [self updateContent];
     [self updateToolbar];
+    BOOL hasCommentaires = article.commentaires.count > 0;
+    commentCount.hidden = !hasCommentaires;
+    if (hasCommentaires) {
+        commentCount.text = [NSString stringWithFormat:@"(%d commentaires actuellement)", article.commentaires.count];
+    }
     [self.table reloadData];
 }
 
@@ -516,7 +511,7 @@
     } else {
         self.commentText.hidden = YES;
         self.commentSend.hidden = YES;
-        postCommentaireCellHeight = self.commentPrompt.frame.size.height + self.commentPrompt.frame.origin.y + 15;
+        postCommentaireCellHeight = self.commentPrompt.frame.size.height + self.commentCount.frame.origin.y + 15;
         [self.commentText resignFirstResponder];
     }
     [table beginUpdates];

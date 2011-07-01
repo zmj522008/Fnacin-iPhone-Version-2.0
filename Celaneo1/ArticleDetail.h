@@ -56,6 +56,7 @@ enum ArticleDetailSections {
     IBOutlet UILabel* commentPrompt;
     IBOutlet UITextView* commentText;
     IBOutlet UIButton* commentSend;
+    IBOutlet UILabel* commentCount;
     
     float detailCellHeight;
     float contentCellHeight;
@@ -96,6 +97,7 @@ enum ArticleDetailSections {
 @property (nonatomic, retain) ASIHTTPRequest *imageRequest;
 @property (nonatomic, retain) IBOutlet UIWebView *content;
 @property (nonatomic, retain) IBOutlet UILabel *commentPrompt;
+@property (nonatomic, retain) IBOutlet UILabel *commentCount;
 @property (nonatomic, retain) IBOutlet UITextView *commentText;
 @property (nonatomic, retain) IBOutlet UIButton *commentSend;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
