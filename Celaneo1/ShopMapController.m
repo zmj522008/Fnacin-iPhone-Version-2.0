@@ -60,8 +60,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self switchToList];
-    [self mapCenterOnUser];
 }
 
 - (void) viewDidUnload
@@ -82,6 +80,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self switchToList];
+    [self mapCenterOnUser];
 }
 
 - (NSString *)pageName
