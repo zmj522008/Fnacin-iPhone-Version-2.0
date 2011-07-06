@@ -56,6 +56,29 @@
 @synthesize phoneDigits;
 @synthesize ville;
 
+- (void) test
+{
+    self.civilite = @"M";
+    self.nom = @"Bob";
+    self.prenom = @"Dylan";
+    self.telephone_fixe = @"01 02 03 04 05F";
+    self.telephone_interne = @"01 02 03 04 05I";
+    self.telephone_mobile = @"01 02 03 04 05M";
+    self.telephone_fax = @"01 02 03 04 05F";
+    self.email = @"bob.dylan@fnac.com";
+    self.num_bureau = @"007";
+    self.fonction = @"Singer in singing department";
+    self.site = @"site";
+    self.adresse = @"22, addresse de bob";
+    self.codepostal = @"77777";
+    self.commentaire = @"bob is a singer who was a very happy singer. He did sing songs while thinking about singing.";
+    self.site_nom = @"site nom";
+    self.site_pays = @"site pays";
+    self.site_region = @"site region";
+    self.ville = @"ville de dylan";
+    [self genPhoneDigits];
+}
+
 - (int)compare:(Personne*)p
 {
     int r = [nom localizedCaseInsensitiveCompare:p.nom];

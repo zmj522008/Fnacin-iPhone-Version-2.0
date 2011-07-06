@@ -84,6 +84,7 @@
 
 - (void) dump;
 - (void) genPhoneDigits;
+- (void) test;
 
 - (NSArray*) telephones;
 @end

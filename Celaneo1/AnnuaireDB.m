@@ -125,7 +125,9 @@
     } else {
         p = nil;
     }
-    
+#ifdef DEBUG
+    [p test];
+#endif
     sqlite3_finalize(statement);
     
     return p;

@@ -140,24 +140,28 @@ enum {
         }
             break;
         case sectionFonction:
-            cell.detailTextLabel.text = @"fonction";
-            cell.textLabel.text = personne.fonction;
+            cell.textLabel.text = @"fonction";
+            cell.detailTextLabel.text = personne.fonction;
             break;
         case sectionComment:
-            cell.detailTextLabel.text = @"commentaires";
-            cell.textLabel.text = personne.commentaire;
+            cell.textLabel.text = @"commentaires";
+            cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
+            cell.detailTextLabel.numberOfLines = 0;
+            cell.detailTextLabel.text = personne.commentaire;
             break;
         case sectionEmail:
-            cell.detailTextLabel.text = @"email";
-            cell.textLabel.text = personne.email;
+            cell.textLabel.text = @"email";
+            cell.detailTextLabel.text = personne.email;
             break;
         case sectionAddress:
-            cell.detailTextLabel.text = @"adresse";
-            cell.textLabel.text = [NSString stringWithFormat:@"%@\n%@ %@", personne.adresse, personne.codepostal, personne.ville];
+            cell.textLabel.text = @"adresse";
+            cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
+            cell.detailTextLabel.numberOfLines = 0;
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n%@ %@", personne.adresse, personne.codepostal, personne.ville];
             break;
         case sectionSite:
-            cell.detailTextLabel.text = @"site";
-            cell.textLabel.text = personne.site;
+            cell.textLabel.text = @"site";
+            cell.detailTextLabel.text = personne.site;
             break;
     }
     
