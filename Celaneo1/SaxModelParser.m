@@ -86,6 +86,9 @@
         id element = [[elementClass alloc] init];
         for (NSString* key in [attributeDict keyEnumerator]) {
             [element setModelAttribute:key WithValue:[attributeDict valueForKey:key]];
+#ifdef DEBUG
+            NSLog(@"%@ = %@", key, key);
+#endif
         }
         if (itemStack.count == 0) {
             serverRequest.result = element;
@@ -101,6 +104,10 @@
 - (void)parser:(NSXMLParser *)xmlParser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {
     if (![[xmlStack lastObject] isKindOfClass:[BaseItem class]]) {
+#ifdef DEBUG
+        NSLog(@"%@ = %@", elementName, self.textString);
+#endif
+
         [self.topItem setModelAttribute:elementName 
                               WithValue:self.textString];
     } else {
