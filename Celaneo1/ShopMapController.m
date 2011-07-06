@@ -73,8 +73,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-	return YES;
+	return UIInterfaceOrientationIsPortrait(interfaceOrientation);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -137,6 +136,9 @@
 
 - (void) updateShopDetailWithShop:(Magasin*) s
 {
+#ifdef DEBUG
+    [s dump];
+#endif
     [[GANTracker sharedTracker] trackEvent:@"INTRAFNAC" action:@"MAGASIN" label:[s nom] value:nil withError:nil];
 
     self.shop = s;
