@@ -133,7 +133,6 @@
 		E3C084FE13ADD4B900A108D5 /* BaseItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C084FD13ADD4B900A108D5 /* BaseItem.m */; };
 		E3C0850113ADF1E800A108D5 /* Magasins.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C0850013ADF1E800A108D5 /* Magasins.m */; };
 		E3C0850413ADF1F800A108D5 /* Magasin.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C0850313ADF1F700A108D5 /* Magasin.m */; };
-		E3C0850713AF1BD600A108D5 /* t_modelparser.xml in Resources */ = {isa = PBXBuildFile; fileRef = E3C0850613AF1BD500A108D5 /* t_modelparser.xml */; };
 		E3D97E701349C3B300E2C1BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D97E6F1349C3B300E2C1BA /* UIKit.framework */; };
 		E3D97E721349C3B300E2C1BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D97E711349C3B300E2C1BA /* Foundation.framework */; };
 		E3D97E741349C3B300E2C1BA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D97E731349C3B300E2C1BA /* CoreGraphics.framework */; };
@@ -322,7 +321,6 @@
 		E3C0850013ADF1E800A108D5 /* Magasins.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Magasins.m; sourceTree = "<group>"; };
 		E3C0850213ADF1F700A108D5 /* Magasin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Magasin.h; sourceTree = "<group>"; };
 		E3C0850313ADF1F700A108D5 /* Magasin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Magasin.m; sourceTree = "<group>"; };
-		E3C0850613AF1BD500A108D5 /* t_modelparser.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = t_modelparser.xml; sourceTree = "<group>"; };
 		E3D97E6B1349C3B300E2C1BA /* fnac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fnac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3D97E6F1349C3B300E2C1BA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E3D97E711349C3B300E2C1BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -634,7 +632,6 @@
 				E3C084F913AC996F00A108D5 /* SaxModelParser.m */,
 				E3C084FC13ADD4B900A108D5 /* BaseItem.h */,
 				E3C084FD13ADD4B900A108D5 /* BaseItem.m */,
-				E3C0850613AF1BD500A108D5 /* t_modelparser.xml */,
 			);
 			name = SaxModel;
 			sourceTree = "<group>";
@@ -846,7 +843,6 @@
 				E3AFD2DC13961A960053E35F /* PrefereEdit~iPad.xib in Resources */,
 				E3AFD2DD13961A960053E35F /* RubriqueList~iPad.xib in Resources */,
 				E3AFD2DF1396BFBA0053E35F /* ArticleCellLarge~iPad.xib in Resources */,
-				E3C0850713AF1BD600A108D5 /* t_modelparser.xml in Resources */,
 				E3F987DE13AF8C3700BD5C20 /* Annuaire.xib in Resources */,
 				E328DE2313B9BED20041EC20 /* annuaireDetail.xib in Resources */,
 				E327FF8E13BB236B00616437 /* ShopMap.xib in Resources */,
