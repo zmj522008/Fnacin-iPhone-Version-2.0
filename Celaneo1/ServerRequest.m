@@ -75,8 +75,11 @@
         [self requestFailed:request];
     } else {
 #ifdef DEBUG
-        if (responseData.length < 1000) {
+        if (responseData.length < 10000000) {
             NSLog(@"%@\n%@", request.url, request.responseString);
+        } else {
+            void* data = [[responseData subdataWithRange:NSMakeRange(800000, 1000000)] bytes];// to remove
+            NSLog(@"%@ : %d", request.url, responseData.length);
         }
 #endif
         NSXMLParser* xmlParser = [[NSXMLParser alloc] initWithData:responseData];

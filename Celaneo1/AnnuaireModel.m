@@ -60,6 +60,12 @@ NSString *const AnnuaireModelDataStatusChange = @"AnnuaireModelDataStatusChange"
 
         NSLog(@"Done Updating Model... (%d)", dataCount);
         fetching = NO;
+        // Redo the search
+        NSString* filter = [self.currentFilter retain];
+        self.currentFilter = nil;
+        NSLog(@"Restarting search for: %@", filter);
+        [self setFilter:filter];
+        [filter release];
         [self postStatusChange];
     }
 }

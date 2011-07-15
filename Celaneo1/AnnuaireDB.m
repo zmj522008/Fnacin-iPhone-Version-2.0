@@ -53,6 +53,7 @@
                  site TEXT,\
                  adresse TEXT,\
                  codepostal TEXT,\
+                 ville TEXT,\
                  commentaire TEXT,\
                  site_nom TEXT,\
                  site_pays TEXT,\
@@ -117,11 +118,12 @@
         SET(site, 11);
         SET(adresse, 12);
         SET(codepostal, 13);
-        SET(commentaire, 14);
-        SET(site_nom, 15);
-        SET(site_pays, 16);
-        SET(site_region, 17);
-        SET(phoneDigits, 18);
+        SET(ville, 14);
+        SET(commentaire, 15);
+        SET(site_nom, 16);
+        SET(site_pays, 17);
+        SET(site_region, 18);
+        SET(phoneDigits, 19);
     } else {
         p = nil;
     }
@@ -187,51 +189,54 @@
     }
 }
 
-#define C(s) (s.length ? s : @"")
+#define C(s) (s.length ? [s stringByReplacingOccurrencesOfString:@"'" withString:@"''"] : @"")
 - (int)add:(Personne*)p
 {
     [p genPhoneDigits];
+    NSString* queryString = [NSString stringWithFormat:@"REPLACE INTO Personnes (ID,\
+                             civilite,\
+                             nom,\
+                             prenom,\
+                             telephone_fixe,\
+                             telephone_interne,\
+                             telephone_mobile,\
+                             telephone_fax,\
+                             email,\
+                             num_bureau,\
+                             fonction,\
+                             site,\
+                             adresse,\
+                             codepostal,\
+                             ville,\
+                             commentaire,\
+                             site_nom,\
+                             site_pays,\
+                             site_region,\
+                             phoneDigits)\
+                             VALUES (%d, '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')",
+                             p.sId, 
+                             C(p.civilite),
+                             C(p.nom),
+                             C(p.prenom),
+                             C(p.telephone_fixe),
+                             C(p.telephone_interne),
+                             C(p.telephone_mobile),
+                             C(p.telephone_fax),
+                             C(p.email),
+                             C(p.num_bureau),
+                             C(p.fonction),
+                             C(p.site),
+                             C(p.adresse),
+                             C(p.codepostal),
+                             C(p.ville),
+                             C(p.commentaire),
+                             C(p.site_nom),
+                             C(p.site_pays),
+                             C(p.site_region),
+                             C(p.phoneDigits)
+                             ];
     int r = sqlite3_exec(database,
-                 [[NSString stringWithFormat:@"REPLACE INTO Personnes (ID,\
-                   civilite,\
-                   nom,\
-                   prenom,\
-                   telephone_fixe,\
-                   telephone_interne,\
-                   telephone_mobile,\
-                   telephone_fax,\
-                   email,\
-                   num_bureau,\
-                   fonction,\
-                   site,\
-                   adresse,\
-                   codepostal,\
-                   commentaire,\
-                   site_nom,\
-                   site_pays,\
-                   site_region,\
-                   phoneDigits)\
-                   VALUES (%d, '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')",
-                   p.sId, 
-                   C(p.civilite),
-                   C(p.nom),
-                   C(p.prenom),
-                   C(p.telephone_fixe),
-                   C(p.telephone_interne),
-                   C(p.telephone_mobile),
-                   C(p.telephone_fax),
-                   C(p.email),
-                   C(p.num_bureau),
-                   C(p.fonction),
-                   C(p.site),
-                   C(p.adresse),
-                   C(p.codepostal),
-                   C(p.commentaire),
-                   C(p.site_nom),
-                   C(p.site_pays),
-                   C(p.site_region),
-                   C(p.phoneDigits)
-                   ] UTF8String],
+                 [queryString UTF8String],
                  NULL, NULL, NULL);
     if (r != SQLITE_OK) {
         NSLog(@"Error in add: %d %s", r, sqlite3_errmsg(database));

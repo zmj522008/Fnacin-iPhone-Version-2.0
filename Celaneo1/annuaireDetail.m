@@ -123,6 +123,28 @@ enum {
     return 0;
 }
 
+- (NSString*) textDetail:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case sectionPhones: {
+            PhoneValue* pv = [personne.telephones objectAtIndex:indexPath.row];
+            return pv.phone;
+        }
+        case sectionFonction:
+            return personne.fonction;
+        case sectionComment:
+            return personne.commentaire;
+        case sectionEmail:
+            return personne.email;
+        case sectionAddress:
+            return [NSString stringWithFormat:@"%@\n%@ %@", personne.adresse, personne.codepostal, personne.ville];
+        case sectionSite:
+           return personne.site;
+        default:
+            return nil;
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
@@ -130,41 +152,33 @@ enum {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+        cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
+        cell.detailTextLabel.numberOfLines = 0;
     }
     cell.selectionStyle = UITableViewCellSeparatorStyleNone;
     switch (indexPath.section) {
         case sectionPhones: {
             PhoneValue* pv = [personne.telephones objectAtIndex:indexPath.row];
-            cell.detailTextLabel.text = pv.phone;
             cell.textLabel.text = pv.key;
         }
             break;
         case sectionFonction:
             cell.textLabel.text = @"fonction";
-            cell.detailTextLabel.text = personne.fonction;
             break;
         case sectionComment:
-            cell.textLabel.text = @"commentaires";
-            cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
-            cell.detailTextLabel.numberOfLines = 0;
-            cell.detailTextLabel.text = personne.commentaire;
+            cell.textLabel.text = @"notes";
             break;
         case sectionEmail:
             cell.textLabel.text = @"email";
-            cell.detailTextLabel.text = personne.email;
             break;
         case sectionAddress:
             cell.textLabel.text = @"adresse";
-            cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
-            cell.detailTextLabel.numberOfLines = 0;
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n%@ %@", personne.adresse, personne.codepostal, personne.ville];
             break;
         case sectionSite:
             cell.textLabel.text = @"site";
-            cell.detailTextLabel.text = personne.site;
             break;
     }
-    
+    cell.detailTextLabel.text = [self textDetail:indexPath];
     return cell;
 }
 
@@ -195,6 +209,15 @@ enum {
     if (url) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString* text = [self textDetail:indexPath];
+    float width = tableView.bounds.size.width - 150;
+    CGSize bound = CGSizeMake(width, CGFLOAT_MAX);
+    float h = [text sizeWithFont:[UIFont fontWithName:@"Helvetica" size:14] constrainedToSize:bound lineBreakMode:UILineBreakModeWordWrap].height;
+    return h + 30;
 }
 
 #pragma mark contacts

@@ -143,9 +143,10 @@
     personne.sId = [[dic objectForKey:@"id"] intValue];
 }
 
-- (void) handleElementEnd_tel_fixe:(NSString*)s
+
+- (void) handleElementEnd_civilite:(NSString*)s
 {
-    self.personne.telephone_fixe = s;
+    self.personne.civilite = s;
 }
 
 - (void) handleElementEnd_prenom:(NSString*)s
@@ -156,6 +157,81 @@
 - (void) handleElementEnd_nom:(NSString*)s
 {
     self.personne.nom = s;
+}
+
+- (void) handleElementEnd_tel_fixe:(NSString*)s
+{
+    self.personne.telephone_fixe = s;
+}
+
+- (void) handleElementEnd_tel_interne:(NSString*)s
+{
+    self.personne.telephone_interne = s;
+}
+
+- (void) handleElementEnd_tel_mobile:(NSString*)s
+{
+    self.personne.telephone_mobile = s;
+}
+
+- (void) handleElementEnd_fax:(NSString*)s
+{
+    self.personne.telephone_fax = s;
+}
+
+- (void) handleElementEnd_email:(NSString*)s
+{
+    self.personne.email = s;
+}
+
+- (void) handleElementEnd_num_bureau:(NSString*)s
+{
+    self.personne.num_bureau = s;
+}
+
+- (void) handleElementEnd_fonction:(NSString*)s
+{
+    self.personne.fonction = s;
+}
+
+- (void) handleElementEnd_site:(NSString*)s
+{
+    self.personne.site = s;
+}
+
+- (void) handleElementEnd_adresse:(NSString*)s
+{
+    self.personne.adresse = s;
+}
+
+- (void) handleElementEnd_ville:(NSString*)s
+{
+    self.personne.ville = s;
+}
+
+- (void) handleElementEnd_cp:(NSString*)s
+{
+    self.personne.codepostal = s;
+}
+
+- (void) handleElementEnd_commentaire:(NSString*)s
+{
+    self.personne.commentaire = s;
+}
+
+- (void) handleElementEnd_site_nom:(NSString*)s
+{
+    self.personne.site_nom = s;
+}
+
+- (void) handleElementEnd_site_pays:(NSString*)s
+{
+    self.personne.site_pays = s;
+}
+
+- (void) handleElementEnd_site_region:(NSString*)s
+{
+    self.personne.site_region = s;
 }
 
 - (void) handleElementEnd_personne:(NSString*)d

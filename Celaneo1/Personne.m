@@ -58,6 +58,7 @@
 
 - (void) test
 {
+#if 0
     self.civilite = @"M";
     self.nom = @"Bob";
     self.prenom = @"Dylan";
@@ -76,6 +77,7 @@
     self.site_pays = @"site pays";
     self.site_region = @"site region";
     self.ville = @"ville de dylan";
+#endif
     [self genPhoneDigits];
 }
 
@@ -118,17 +120,17 @@
 - (NSArray*) telephones
 {
     NSMutableArray* r = [NSMutableArray arrayWithCapacity:1];
-    if (telephone_fax.length > 0) {
-        [r addObject:[PhoneValue phoneValueWithKey:@"fax" phone:telephone_fax]];        
-    }
     if (telephone_fixe.length > 0) {
         [r addObject:[PhoneValue phoneValueWithKey:@"fixe" phone:telephone_fixe]];        
+    }
+    if (telephone_mobile.length > 0) {
+        [r addObject:[PhoneValue phoneValueWithKey:@"mobile" phone:telephone_mobile]];        
     }
     if (telephone_interne.length > 0) {
         [r addObject:[PhoneValue phoneValueWithKey:@"interne" phone:telephone_interne]];        
     }
-    if (telephone_mobile.length > 0) {
-        [r addObject:[PhoneValue phoneValueWithKey:@"mobile" phone:telephone_mobile]];        
+    if (telephone_fax.length > 0) {
+        [r addObject:[PhoneValue phoneValueWithKey:@"fax" phone:telephone_fax]];        
     }
     return r;
 }

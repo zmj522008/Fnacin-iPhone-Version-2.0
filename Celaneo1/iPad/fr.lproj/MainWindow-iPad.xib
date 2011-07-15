@@ -110,13 +110,13 @@
 					</object>
 					<object class="NSArray" key="IBUIViewControllers">
 						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="IBUIViewController" id="253387134">
-							<object class="IBUINavigationItem" key="IBUINavigationItem" id="1038166196">
+						<object class="IBUIViewController" id="986217577">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="124683553">
 								<string key="IBUITitle">Retour</string>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
 							<reference key="IBUIParentViewController" ref="739580799"/>
-							<string key="IBUINibName">ArticleList</string>
+							<string key="IBUINibName">ArticleList~iPad</string>
 							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 								<int key="IBUIInterfaceOrientation">1</int>
 								<int key="interfaceOrientation">1</int>
@@ -1326,7 +1326,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="1058724241"/>
 							<reference ref="662307919"/>
-							<reference ref="253387134"/>
+							<reference ref="986217577"/>
 						</object>
 						<reference key="parent" ref="1034742383"/>
 					</object>
@@ -1535,17 +1535,17 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">283</int>
-						<reference key="object" ref="253387134"/>
+						<reference key="object" ref="986217577"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="1038166196"/>
+							<reference ref="124683553"/>
 						</object>
 						<reference key="parent" ref="739580799"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">284</int>
-						<reference key="object" ref="1038166196"/>
-						<reference key="parent" ref="253387134"/>
+						<reference key="object" ref="124683553"/>
+						<reference key="parent" ref="986217577"/>
 					</object>
 				</object>
 			</object>
