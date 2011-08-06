@@ -122,6 +122,11 @@
     [asiRequest startAsynchronous];
 }
 
+- (void) startSynchronous
+{
+    [asiRequest startSynchronous];
+}
+
 - (void) cancel
 {
     [asiRequest clearDelegatesAndCancel];

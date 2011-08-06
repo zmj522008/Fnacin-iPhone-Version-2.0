@@ -46,6 +46,7 @@
 - (void) resetCache;
 
 - (void) start;
+- (void) startSynchronous;
 
 - (void) cancel;
 @end
