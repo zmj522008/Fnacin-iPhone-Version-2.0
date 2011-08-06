@@ -19,6 +19,8 @@
 @synthesize parser;
 @synthesize list;
 @synthesize personne;
+@synthesize endDate;
+@synthesize personPool;
 
 - (void) createRequest
 {
@@ -66,7 +68,16 @@
     [Celaneo1AppDelegate getSingleton].annuaireModel.syncing = YES;
     [self createRequest];
     
-    [self.parser.serverRequest start];
+    [NSThread detachNewThreadSelector:@selector(doStartSync) toTarget:self withObject:nil];
+}
+
+- (void) doStartSync
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // Top-level pool
+
+    [self.parser.serverRequest startSynchronous];
+    
+    [pool release];
 }
 
 - (NSError *)endDocument
@@ -88,6 +99,7 @@
 - (void) handleElementStart_fnac:(NSDictionary*)dic
 {
     AnnuaireDB* db = [Celaneo1AppDelegate getSingleton].annuaireDb;
+    [db setDataDate:@""]; // DB is dirty unless we end successfully
     [db startTransaction];
 }
 
@@ -97,9 +109,9 @@
     [db endTransaction];
     int count = [db getPersonneCount];
     if (dirty || count != nTotal) {
-        NSLog(@"Count: DB: %d nb_personnes_total: %d. Mark DB as dirty", count, nTotal);
-        // Remove the modification date to restart the server
-        [db setDataDate:@""];
+        NSLog(@"Count: DB: %d nb_personnes_total: %d. Leave DB as dirty", count, nTotal);
+    } else {
+        [db setDataDate:endDate];
     }
     if (nModif > 0) {
         [[Celaneo1AppDelegate getSingleton].annuaireModel fetchData];
@@ -123,8 +135,7 @@
 
 - (void) handleElementEnd_date_maj:(NSString*)d
 {
-    AnnuaireDB* db = [Celaneo1AppDelegate getSingleton].annuaireDb;
-    [db setDataDate:d];
+    self.endDate = d;
 }
 
 - (void) handleElementEnd_nb_personnes_a_modifier:(NSString*)n
@@ -139,6 +150,7 @@
 
 - (void) handleElementStart_personne:(NSDictionary*)dic
 {
+    self.personPool = [[NSAutoreleasePool alloc] init];
     self.personne = [[Personne alloc] init];
     personne.sId = [[dic objectForKey:@"id"] intValue];
 }
@@ -253,6 +265,8 @@
     if (r != SQLITE_OK) {
         dirty = YES;
     }
+    [self.personPool release];
+    self.personPool = nil;
 }
 
 @end

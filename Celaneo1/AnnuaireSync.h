@@ -25,11 +25,16 @@
     int nModif;
     int nTotal;
     BOOL dirty;
+    
+    NSString* endDate;
+    NSAutoreleasePool* personPool;
 }
 
 @property (nonatomic, retain) SaxMethodParser *parser;
 @property (nonatomic, retain) NSArray *list;
 @property (nonatomic, retain) Personne *personne;
+@property (nonatomic, retain) NSString* endDate;
+@property (nonatomic, assign) NSAutoreleasePool* personPool;
 
 - (void) startSync;
 @end
