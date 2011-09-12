@@ -223,8 +223,12 @@ enum {
 #pragma mark contacts
 - (void) saveInContacts
 {
+    CFErrorRef  error = NULL;
+    
+	ABAddressBookRef addressBook = ABAddressBookCreate(); 
     ABRecordRef aRecord = ABPersonCreate(); 
-	CFErrorRef  error = NULL; 
+    
+	
 	ABRecordSetValue(aRecord, kABPersonFirstNameProperty, 
 					 personne.prenom, &error); 
 	ABRecordSetValue(aRecord, kABPersonLastNameProperty, 
@@ -247,28 +251,28 @@ enum {
         ABMultiValueAddValueAndLabel(phones, personne.telephone_mobile, kABPersonPhoneMobileLabel, nil);    
     }
 	ABRecordSetValue(aRecord, kABPersonPhoneProperty, phones, &error);
+    
+    ABMultiValueRef emails = ABMultiValueCreateMutable(kABMultiStringPropertyType);
     if (personne.email.length > 0) {
-        ABRecordSetValue(aRecord, kABPersonEmailProperty, personne.email, &error);
+        ABMultiValueAddValueAndLabel(emails, personne.email, kABWorkLabel, nil);    
+        ABRecordSetValue(aRecord, kABPersonEmailProperty, emails, &error);
     }
+    
     if (personne.site_nom.length > 0) {
         ABRecordSetValue(aRecord, kABPersonOrganizationProperty, personne.site_nom, &error);
     }
-    CFRelease(phones);
     
 	if (error != NULL) { 		
 		NSLog(@"error while creating.. %@", error);
 	} 
-	ABAddressBookRef addressBook; 
-	addressBook = ABAddressBookCreate(); 
 	
 	BOOL isAdded = ABAddressBookAddRecord (
                                            addressBook,
                                            aRecord,
                                            &error
                                            );	
-	if(isAdded){
-		NSLog(@"added..");
-	}
+    NSLog(@"added: %d", isAdded);
+
 	if (error != NULL) {
 		NSLog(@"ABAddressBookAddRecord %@", error);
 	} 
@@ -279,10 +283,7 @@ enum {
                                       &error
                                       );
 	
-	if(isSaved){
-		
-		NSLog(@"saved..");
-	}
+    NSLog(@"saved: %d", isSaved);
 	
 	if (error != NULL) {
 		NSLog(@"ABAddressBookSave %@", error);
@@ -290,6 +291,8 @@ enum {
 	
 	CFRelease(aRecord); 
 	CFRelease(addressBook);
+    CFRelease(phones);
+    CFRelease(emails);
     
     if (error) {
         UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Ajout"
