@@ -84,10 +84,7 @@
 		E360B19413BDABB9004A9E94 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E360B18613BDABB9004A9E94 /* MainWindow.xib */; };
 		E360B19513BDABB9004A9E94 /* PrefereEdit.xib in Resources */ = {isa = PBXBuildFile; fileRef = E360B18813BDABB9004A9E94 /* PrefereEdit.xib */; };
 		E360B19613BDABB9004A9E94 /* RubriqueList.xib in Resources */ = {isa = PBXBuildFile; fileRef = E360B18A13BDABB9004A9E94 /* RubriqueList.xib */; };
-		E360B19713BDABB9004A9E94 /* ArticleList~iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E360B18D13BDABB9004A9E94 /* ArticleList~iPad.xib */; };
 		E360B19813BDABB9004A9E94 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E360B18E13BDABB9004A9E94 /* MainWindow-iPad.xib */; };
-		E360B19913BDABB9004A9E94 /* PrefereEdit~iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E360B19013BDABB9004A9E94 /* PrefereEdit~iPad.xib */; };
-		E360B19A13BDABB9004A9E94 /* RubriqueList~iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E360B19113BDABB9004A9E94 /* RubriqueList~iPad.xib */; };
 		E360B19E13BDBF12004A9E94 /* ChangePassword.m in Sources */ = {isa = PBXBuildFile; fileRef = E360B19C13BDBF11004A9E94 /* ChangePassword.m */; };
 		E360B19F13BDBF12004A9E94 /* ChangePassword.xib in Resources */ = {isa = PBXBuildFile; fileRef = E360B19D13BDBF12004A9E94 /* ChangePassword.xib */; };
 		E36C8228136AC628009C39C7 /* remove.png in Resources */ = {isa = PBXBuildFile; fileRef = E36C8226136AC628009C39C7 /* remove.png */; };
@@ -750,6 +747,9 @@
 /* Begin PBXProject section */
 		E3D97E621349C3B300E2C1BA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0410;
+			};
 			buildConfigurationList = E3D97E651349C3B300E2C1BA /* Build configuration list for PBXProject "Celaneo1" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -852,10 +852,7 @@
 				E360B19413BDABB9004A9E94 /* MainWindow.xib in Resources */,
 				E360B19513BDABB9004A9E94 /* PrefereEdit.xib in Resources */,
 				E360B19613BDABB9004A9E94 /* RubriqueList.xib in Resources */,
-				E360B19713BDABB9004A9E94 /* ArticleList~iPad.xib in Resources */,
 				E360B19813BDABB9004A9E94 /* MainWindow-iPad.xib in Resources */,
-				E360B19913BDABB9004A9E94 /* PrefereEdit~iPad.xib in Resources */,
-				E360B19A13BDABB9004A9E94 /* RubriqueList~iPad.xib in Resources */,
 				E360B19F13BDBF12004A9E94 /* ChangePassword.xib in Resources */,
 				E335240313BE12D100970B87 /* annuaire.png in Resources */,
 				E335240413BE12D100970B87 /* annuaire@2x.png in Resources */,
