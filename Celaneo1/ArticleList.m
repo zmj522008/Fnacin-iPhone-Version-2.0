@@ -53,6 +53,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+} 
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    
     int tag = self.navigationController.tabBarItem.tag | self.tabBarItem.tag;
     switch (tag) {
         case TAG_ITEM_A_LA_UNE:
@@ -67,6 +72,7 @@
             break;
         case TAG_ITEM_RUBRIQUES:
             break;
+        case 0: // Work around for tabBarItem.tag not set properly ...
         case TAG_ITEM_DOSSIERS:
             favoris = YES;
             self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
@@ -76,6 +82,10 @@
             break;
     }
     self.articles = [NSMutableArray arrayWithCapacity:20];
+    
+    hasMore = NO;
+    
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidUnload
@@ -114,6 +124,7 @@
         case TAG_ITEM_RUBRIQUES:
             return @"INTRAFNAC - RUBRIQUE";
             break;
+        case 0: // Work around for tabBarItem.tag not set properly ...
         case TAG_ITEM_DOSSIERS:
             return @"INTRAFNAC - DOSSIERS";
             break;
@@ -121,12 +132,6 @@
             break;
     }
     return @"/autre2";
-}
-
-- (void) viewWillAppear:(BOOL)animated
-{
-    hasMore = NO;
-    [super viewWillAppear:animated];
 }
 
 - (void) refresh {
@@ -242,21 +247,37 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        NSString *CellId = @"ArticleCell";
-        
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
-            && indexPath.row == 0) {
-            CellId = @"ArticleCellLarge";
+        if (favoris && articles.count == 0) {
+            static NSString *CellId = @"InfoCell";
+            
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellId];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellId];
+            }
+            cell.textLabel.text = @"Ajoutez des articles dans vos dossiers en cliquant \"Ajout Dossier\" sur une page Article.";
+            cell.textLabel.font = [UIFont fontWithName:nil size:13];
+            cell.textLabel.numberOfLines = 0;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+            return cell;
+
+        } else {
+            NSString *CellId = @"ArticleCell";
+            
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+                && indexPath.row == 0) {
+                CellId = @"ArticleCellLarge";
+            }
+            ArticleCell *cell = (ArticleCell*) [tableView dequeueReusableCellWithIdentifier:CellId];
+            
+            if (cell == nil) {
+                cell = (ArticleCell*) [self loadCellFromNib:CellId];
+                NSAssert2([CellId compare:cell.reuseIdentifier] == 0, @"Cell has invalid identifier, actual: %@, expected: %@", cell.reuseIdentifier, CellId);
+            }
+            [cell updateWithArticle:[articles objectAtIndex:indexPath.row] usingImageLoadingQueue:self.imageLoadingQueue];
+            cell.delegate = self;
+            return cell;
         }
-        ArticleCell *cell = (ArticleCell*) [tableView dequeueReusableCellWithIdentifier:CellId];
-        
-        if (cell == nil) {
-            cell = (ArticleCell*) [self loadCellFromNib:CellId];
-            NSAssert2([CellId compare:cell.reuseIdentifier] == 0, @"Cell has invalid identifier, actual: %@, expected: %@", cell.reuseIdentifier, CellId);
-        }
-        [cell updateWithArticle:[articles objectAtIndex:indexPath.row] usingImageLoadingQueue:self.imageLoadingQueue];
-        cell.delegate = self;
-        return cell;
     } else {
         static NSString *CellId = @"MoreCell";
         
@@ -282,7 +303,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section == 0 ? articles.count : 1;
+    if (section == 0) {
+        if (favoris && articles.count == 0) {
+            return 1;
+        }
+        return articles.count;
+    } else {
+        return 1;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
