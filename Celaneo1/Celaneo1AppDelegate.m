@@ -41,7 +41,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 
     [self.window makeKeyAndVisible];
 
-    [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-22831970-1"
+    [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-22324743-4"
                                            dispatchPeriod:kGANDispatchPeriodSec
                                                  delegate:nil];
     
