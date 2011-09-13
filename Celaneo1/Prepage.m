@@ -65,6 +65,7 @@
         item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:ferme ? @"DBG Cont" : @"Continuer" action:@selector(continuerClick)]];
     }
     [self.content loadHTMLString:prepageContent baseURL:nil];
+    self.content.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -73,6 +74,17 @@
     self.content = nil;
     self.continuer = nil;    
     self.item = nil;
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSLog(@"request: %@", request.URL);
+    if (request.URL != nil && ![request.URL.description isEqualToString:@"about:blank"]) {
+        [[UIApplication sharedApplication] openURL:request.URL];
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseController.h"
 
-@interface Prepage : BaseController {
+@interface Prepage : BaseController <UIWebViewDelegate> {
     IBOutlet UIWebView* content;
     IBOutlet UIButton* continuer;
     IBOutlet UINavigationItem* item;
