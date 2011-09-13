@@ -74,8 +74,9 @@
     if (responseData == nil) {
         [self requestFailed:request];
     } else {
+        NSLog(@"requestFinished: %d bytes", responseData.length);
 #ifdef DEBUG
-        if (responseData.length < 10000000) {
+        if (responseData.length < 100000) {
             NSLog(@"%@\n%@", request.url, request.responseString);
         } else {
             void* data = [[responseData subdataWithRange:NSMakeRange(800000, 1000000)] bytes];// to remove
@@ -106,7 +107,7 @@
     if (requestError.domain == NetworkRequestErrorDomain && requestError.code == ASIRequestCancelledErrorType) {
         NSLog(@"%@ cancelled", self);
     } else {
-        NSLog(@"serverRequest error :%@, app error: %@", requestError, erreur);
+        NSLog(@"serverRequest %@ error :%@, app error: %@", self.asiRequest.url, requestError, erreur);
         if (requestError) {
             [delegate serverRequest:self didFailWithError:requestError];
         } else {
