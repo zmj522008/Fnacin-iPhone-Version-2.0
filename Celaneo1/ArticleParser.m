@@ -60,30 +60,26 @@
 - (ServerRequest*) getRequestAuthentificateWithEmail:(NSString*)email withPassword:(NSString*)password
 {
     ServerRequest* request = [self getServerRequest:@"authentification"];
-    if (self != nil) {
         [request setParameter:@"email" withValue:email];
         [request setParameter:@"password" withValue:password];
         [request setParameter:@"version" withValue:[NSString stringWithFormat:@"I%@", 
                                                     [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
-    }
+
     return request;
 }
 
 - (ServerRequest*) getSetPassword:(NSString*)password
 {
     ServerRequest* request = [self getServerRequest:@"setpassword"];
-    if (self != nil) {
         [request setParameter:@"password" withValue:password];
-    }
+
     return request;
 }
 
 - (ServerRequest*) getRequestPasswordWithEmail:(NSString*)email
 {
     ServerRequest* request = [self getServerRequest:@"password"];
-    if (self != nil) {
         [request setParameter:@"email" withValue:email];
-    }
     return request;
 }
 
@@ -91,8 +87,6 @@
 {
     ServerRequest* request = [self getServerRequest:@"article"];
     [request setParameter:@"materiel" withValue:@"iphone"];
-    if (self != nil) {
-    }
     return request;
 }
 
