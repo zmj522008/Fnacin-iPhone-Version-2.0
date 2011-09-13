@@ -59,6 +59,7 @@
         self.parser = saxParser;
     }
     dirty = NO;
+    nChanges = 0;
     ASIDownloadCache* cache = [ASIDownloadCache sharedCache];
     [cache addIgnoredPostKey:@"session_id"]; // TODO This could be moved to sth called once per session
 }
@@ -75,6 +76,12 @@
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // Top-level pool
 
+    AnnuaireDB* db = [Celaneo1AppDelegate getSingleton].annuaireDb;
+
+    if ([db getPersonneCount] == 0) {
+        // Try to recover from db errors
+        [db resetDB];
+    }
     [self.parser.serverRequest startSynchronous];
     
     [pool release];
@@ -88,6 +95,7 @@
 - (void)serverRequest:(ServerRequest *)request didFailWithError:(NSError *)error
 {
     [Celaneo1AppDelegate getSingleton].annuaireModel.syncing = NO;
+    
 }
 
 - (void)serverRequest:(ServerRequest *)request didSucceedWithObject:(id)result
@@ -113,7 +121,7 @@
     } else {
         [db setDataDate:endDate];
     }
-    if (nModif > 0) {
+    if (nChanges) {
         [[Celaneo1AppDelegate getSingleton].annuaireModel fetchData];
     }
 }
@@ -262,6 +270,7 @@
             r = [db update:personne];
             break;
     }
+    nChanges++;
     if (r != SQLITE_OK) {
         dirty = YES;
     }

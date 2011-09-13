@@ -25,6 +25,7 @@
     int nModif;
     int nTotal;
     BOOL dirty;
+    int nChanges;
     
     NSString* endDate;
     NSAutoreleasePool* personPool;

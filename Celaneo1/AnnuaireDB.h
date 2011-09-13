@@ -37,4 +37,7 @@
 - (int)update:(Personne*)p;
 - (int)remove:(int)sId;
 - (void)removeAll;
+
+- (void) resetDB;
+
 @end
