@@ -111,7 +111,7 @@
 {
     if ([selectedRubriques count] == 0) {
         UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Préféré" 
-                                                            message:@"Veuillez sélectionner au moins une rubrique"
+                                                            message:@"Veuillez sélectionner au moins une thématique"
                                                            delegate:nil 
                                                   cancelButtonTitle:@"OK" 
                                                   otherButtonTitles:nil];

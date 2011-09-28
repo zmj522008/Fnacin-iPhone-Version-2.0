@@ -276,12 +276,14 @@ NSString *const AnnuaireModelDataStatusChange = @"AnnuaireModelDataStatusChange"
     }
 }
 
-- (void) filterContainsAfterFirstChar:(NSArray*)source to:(NSMutableArray*)result with:(NSString*)searchTerm
+- (void) filterContains:(NSArray*)source to:(NSMutableArray*)result with:(NSString*)searchTerm
 {
     for (Personne* p in source) {
-        if ([[[p.nom uppercaseString] substringFromIndex:1] rangeOfString:searchTerm].location != NSNotFound
-            || [[[p.prenom uppercaseString] substringFromIndex:1] rangeOfString:searchTerm].location != NSNotFound) {
-            [result addObject:p];
+        if ([[p.nom uppercaseString] rangeOfString:searchTerm].location != NSNotFound
+            || [[p.prenom uppercaseString] rangeOfString:searchTerm].location != NSNotFound) {
+            if (![result containsObject:p]) {
+                [result addObject:p];
+            }
         }
     }
 }
@@ -299,7 +301,7 @@ NSString *const AnnuaireModelDataStatusChange = @"AnnuaireModelDataStatusChange"
 - (void) setFilter:(NSString*)f
 {
     NSString* searchTerm = [f uppercaseString];
-    if (f == nil || f.length == 0) {
+    if (f.length == 0) {
         self.filteredData = nil;
         phoneShown = NO;
     } else {
@@ -318,15 +320,14 @@ NSString *const AnnuaireModelDataStatusChange = @"AnnuaireModelDataStatusChange"
                     [self filterStartingWith:array to:result with:searchTerm];
                 }
                 for (NSArray* array in data) {
-                    [self filterContainsAfterFirstChar:array to:result with:searchTerm];
+                    [self filterContains:array to:result with:searchTerm];
                 }
             }
         } else {
             if (phoneShown) {
                 [self filterTelephone:filteredData to:result with:searchTerm];
             } else {
-                [self filterStartingWith:filteredData to:result with:searchTerm];
-                [self filterContainsAfterFirstChar:filteredData to:result with:searchTerm];
+                [self filterContains:filteredData to:result with:searchTerm];
             }
         }
         self.filteredData = result;

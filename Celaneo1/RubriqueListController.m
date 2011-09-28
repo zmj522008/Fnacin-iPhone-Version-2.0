@@ -50,7 +50,7 @@
 
 - (NSString *)pageName
 {
-    return @"INTRAFNAC - RUBRIQUE";
+    return @"INTRAFNAC - THEMATIQUE";
 }
 
 - (void)dealloc
@@ -98,7 +98,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [[GANTracker sharedTracker] trackEvent:@"INTRAFNAC" action:@"RUBRIQUE" label:[[rubriques objectAtIndex:indexPath.row] name] value:nil withError:nil];
+    [[GANTracker sharedTracker] trackEvent:@"INTRAFNAC" action:@"THEMATIQUE" label:[[rubriques objectAtIndex:indexPath.row] name] value:nil withError:nil];
 
     NSString* nibName = @"ArticleList";
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {

@@ -122,7 +122,7 @@
             return @"INTRAFNAC - PODCAST";
             break;
         case TAG_ITEM_RUBRIQUES:
-            return @"INTRAFNAC - RUBRIQUE";
+            return @"INTRAFNAC - THEMATIQUE";
             break;
         case 0: // Work around for tabBarItem.tag not set properly ...
         case TAG_ITEM_DOSSIERS:
