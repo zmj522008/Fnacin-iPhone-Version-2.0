@@ -301,9 +301,11 @@
         case ArticleDetailSection_FnacCom:
             return article.urlFnacCom.length > 0 ? fnaccomCell.bounds.size.height : 0;
         case ArticleDetailSection_PostComment:
-            return postCommentaireCellHeight;
+            return 0; // No Comment 08/01/2012
+//            return postCommentaireCellHeight;
         case ArticleDetailSection_Comments:
-            return [CommentaireCell heightForCommentaire:[article.commentaires objectAtIndex:indexPath.row]];
+            return 0;
+//            return [CommentaireCell heightForCommentaire:[article.commentaires objectAtIndex:indexPath.row]];
     }
     return 0;
 }
@@ -392,6 +394,7 @@
     [self updateContent];
     [self updateToolbar];
     BOOL hasCommentaires = article.commentaires.count > 0;
+    hasCommentaires = NO; // No comments 08/01/2012
     commentCount.hidden = !hasCommentaires;
     if (hasCommentaires) {
         commentCount.text = [NSString stringWithFormat:@"(%d commentaires actuellement)", article.commentaires.count];

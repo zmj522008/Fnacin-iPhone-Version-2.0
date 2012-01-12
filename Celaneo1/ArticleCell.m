@@ -116,6 +116,7 @@
     
     jaimeText.text = [NSString stringWithFormat:@"J'aime (%d)", article.nb_jaime];
     BOOL showCommentaires = article.nb_commentaires > 0;
+    showCommentaires = NO; // Comments disabled! 08/01/2012
     reactionsText.hidden = !showCommentaires;
     reactionsIcon.hidden = !showCommentaires;
     if (showCommentaires) {
