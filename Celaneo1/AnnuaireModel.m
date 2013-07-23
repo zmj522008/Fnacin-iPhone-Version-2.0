@@ -269,20 +269,60 @@ NSString *const AnnuaireModelDataStatusChange = @"AnnuaireModelDataStatusChange"
 #pragma mark filter
 - (void) filterStartingWith:(NSArray*)source to:(NSMutableArray*)result with:(NSString*)searchTerm
 {
+    listItems = [searchTerm componentsSeparatedByString:@" "];
+
+    NSString *var0;
+    NSString *var1;
+
+    
     for (Personne* p in source) {
-        if ([[p.nom uppercaseString] hasPrefix:searchTerm] || [[p.prenom uppercaseString] hasPrefix:searchTerm]) {
-            [result addObject:p];
+        var0 = listItems[0];
+        if (listItems.count > 1)
+        var1 = listItems[1];
+        
+        if ((listItems.count == 1) || ((listItems.count > 1 ) && (var1.length == 0)))
+        {
+            if ([[p.nom uppercaseString] hasPrefix:var0] || [[p.prenom uppercaseString] hasPrefix:var0]) {
+                [result addObject:p];
+            }
+        }
+        else
+        {
+            if (([[p.nom uppercaseString] hasPrefix:var0] && [[p.prenom uppercaseString] hasPrefix:var1]) ||
+                ([[p.nom uppercaseString] hasPrefix:var1] && [[p.prenom uppercaseString] hasPrefix:var0])) {
+                [result addObject:p];
+            }
         }
     }
 }
 
 - (void) filterContains:(NSArray*)source to:(NSMutableArray*)result with:(NSString*)searchTerm
 {
+    listItems = [searchTerm componentsSeparatedByString:@" "];
+    NSString *var0;
+    NSString *var1;
+    
     for (Personne* p in source) {
-        if ([[p.nom uppercaseString] rangeOfString:searchTerm].location != NSNotFound
-            || [[p.prenom uppercaseString] rangeOfString:searchTerm].location != NSNotFound) {
-            if (![result containsObject:p]) {
-                [result addObject:p];
+        var0 = listItems[0];
+        if (listItems.count > 1)
+            var1 = listItems[1];
+        if ((listItems.count == 1) || ((listItems.count > 1 ) && (var1.length == 0)))
+        {
+            if ([[p.nom uppercaseString] rangeOfString:var0].location != NSNotFound
+                || [[p.prenom uppercaseString] rangeOfString:var0].location != NSNotFound) {
+                if (![result containsObject:p]) {
+                    [result addObject:p];
+                }
+            }
+        }
+        else
+        {
+            if (([[p.nom uppercaseString] rangeOfString:var1].location != NSNotFound
+                 && [[p.prenom uppercaseString] rangeOfString:var1].location != NSNotFound) ||
+                ([[p.nom uppercaseString] rangeOfString:var1].location != NSNotFound && [[p.prenom uppercaseString] rangeOfString:var0].location != NSNotFound)) {
+                if (![result containsObject:p]) {
+                    [result addObject:p];
+                }
             }
         }
     }
@@ -305,10 +345,10 @@ NSString *const AnnuaireModelDataStatusChange = @"AnnuaireModelDataStatusChange"
         self.filteredData = nil;
         phoneShown = NO;
     } else {
-        NSCharacterSet* numberCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789 +()"];
+        NSCharacterSet* numberCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789+()"];
         BOOL phoneSearch = ([searchTerm rangeOfCharacterFromSet:numberCharSet].length > 0);
         phoneShown = phoneSearch;
-
+        
         NSMutableArray* result = [NSMutableArray arrayWithCapacity:1];
         if (currentFilter.length == 0 || [searchTerm rangeOfString:currentFilter].location != 0) {
             if (phoneShown) {
@@ -319,11 +359,12 @@ NSString *const AnnuaireModelDataStatusChange = @"AnnuaireModelDataStatusChange"
                 for (NSArray* array in data) {
                     [self filterStartingWith:array to:result with:searchTerm];
                 }
-                for (NSArray* array in data) {
+               /* for (NSArray* array in data) {
                     [self filterContains:array to:result with:searchTerm];
-                }
+                }*/
             }
-        } else {
+        }
+        else {
             if (phoneShown) {
                 [self filterTelephone:filteredData to:result with:searchTerm];
             } else {

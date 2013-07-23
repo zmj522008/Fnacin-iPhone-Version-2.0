@@ -93,6 +93,7 @@
 #pragma mark Search bar delegate
 - (void)searchBarCancelButtonClicked:(UISearchBar *)s
 {
+    NSLog(@"searchBarCancelButtonClicked");
     s.text = nil;
     [s resignFirstResponder];
     [self searchBar:s textDidChange:nil];
@@ -102,6 +103,8 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)s
 {
+    NSLog(@"searchBarTextDidBeginEditing");
+
     model.indexShown = NO;
     searchOverlay.hidden = s.text.length > 0;
     [table reloadData];
@@ -110,12 +113,16 @@
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)s
 {
+    NSLog(@"searchBarTextDidEndEditing");
+
     model.indexShown = s.text.length == 0;
     [table reloadData];
 }
 
 - (void)searchBar:(UISearchBar *)s textDidChange:(NSString *)searchText
 {
+    NSLog(@"textDidChange");
+
     searchOverlay.hidden = searchText.length > 0;
     model.filtered = searchText.length > 0;
     
@@ -135,6 +142,7 @@
 //        nibName = [nibName stringByAppendingString:@"~iPad"];
     }
     
+    NSLog(@"cell clicked");
     annuaireDetail* controller = [[annuaireDetail alloc] initWithNibName:nibName bundle:nil];
     controller.personne = p;
     [model tableView:table cellForRowAtIndexPath:indexPath].highlighted = NO;

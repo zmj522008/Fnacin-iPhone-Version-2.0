@@ -44,6 +44,7 @@ enum ArticleDetailSections {
     IBOutlet UIButton* rubrique;
     IBOutlet UIButton* thematique;
     IBOutlet UILabel* titre;
+    IBOutlet UILabel* date;
     IBOutlet UIImageView* vignette;
     IBOutlet UILabel* mediaButton;
 
@@ -67,6 +68,7 @@ enum ArticleDetailSections {
     CGRect keyboardBounds;
 }
 
+- (IBAction) push:(id)sender;
 - (IBAction) jaimeClick;
 - (IBAction) commentaireClick;
 - (IBAction) favorisClick;
@@ -93,6 +95,7 @@ enum ArticleDetailSections {
 @property (nonatomic, retain) IBOutlet UIButton *rubrique;
 @property (nonatomic, retain) IBOutlet UIButton *thematique;
 @property (nonatomic, retain) IBOutlet UILabel *titre;
+@property (nonatomic, retain) IBOutlet UILabel *date;
 @property (nonatomic, retain) IBOutlet UIImageView *vignette;
 @property (nonatomic, retain) IBOutlet UILabel *mediaButton;
 @property (nonatomic, retain) ASIHTTPRequest *imageRequest;

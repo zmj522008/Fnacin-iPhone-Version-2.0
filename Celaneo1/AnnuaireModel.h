@@ -17,6 +17,8 @@ extern NSString *const AnnuaireModelDataStatusChange;
     NSArray* filteredData;
     NSString* currentFilter;
     
+    NSArray *listItems;
+    
     int dataCount;
     
     BOOL filtered;

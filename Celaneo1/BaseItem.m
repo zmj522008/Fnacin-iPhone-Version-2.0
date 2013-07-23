@@ -8,7 +8,7 @@
 
 #import "BaseItem.h"
 
-#include <objc/runtime.h>
+#import <objc/runtime.h>
 
 id attributeGetter(id self, SEL _cmd) {
     NSString* attr = [NSString stringWithCString:sel_getName(_cmd) encoding:NSASCIIStringEncoding];

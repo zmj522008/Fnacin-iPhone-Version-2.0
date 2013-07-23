@@ -1,44 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
 	<data>
-		<int key="IBDocument.SystemTarget">1056</int>
-		<string key="IBDocument.SystemVersion">11B26</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1617</string>
-		<string key="IBDocument.AppKitVersion">1138</string>
-		<string key="IBDocument.HIToolboxVersion">566.00</string>
+		<int key="IBDocument.SystemTarget">1552</int>
+		<string key="IBDocument.SystemVersion">12E55</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">534</string>
+			<string key="NS.object.0">2083</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>IBUIImageView</string>
-			<string>IBUIButton</string>
+			<string>IBProxyObject</string>
 			<string>IBUIActivityIndicatorView</string>
+			<string>IBUIButton</string>
+			<string>IBUICustomObject</string>
+			<string>IBUIImageView</string>
 			<string>IBUILabel</string>
 			<string>IBUINavigationBar</string>
-			<string>IBProxyObject</string>
-			<string>IBUICustomObject</string>
-			<string>IBUIWindow</string>
-			<string>IBUITabBar</string>
-			<string>IBUINavigationItem</string>
-			<string>IBUITextField</string>
-			<string>IBUITabBarItem</string>
-			<string>IBUIView</string>
 			<string>IBUINavigationController</string>
-			<string>IBUIViewController</string>
+			<string>IBUINavigationItem</string>
+			<string>IBUITabBar</string>
 			<string>IBUITabBarController</string>
+			<string>IBUITabBarItem</string>
+			<string>IBUITextField</string>
+			<string>IBUIView</string>
+			<string>IBUIViewController</string>
+			<string>IBUIWindow</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.Metadata">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<object class="NSArray" key="dict.sortedKeys" id="0">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-			</object>
-			<reference key="dict.values" ref="0"/>
+			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
+			<integer value="1" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.RootObjects" id="1000">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -59,6 +56,7 @@
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{768, 1024}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -460,10 +458,9 @@
 					</object>
 				</object>
 				<object class="IBUITabBar" key="IBUITabBar" id="795333663">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">266</int>
 					<string key="NSFrame">{{0, 975}, {768, 49}}</string>
-					<reference key="NSSuperview"/>
 					<object class="NSColor" key="IBUIBackgroundColor" id="2431546">
 						<int key="NSColorSpace">3</int>
 						<bytes key="NSWhite">MCAwAA</bytes>
@@ -503,11 +500,6 @@
 							<bool key="IBUIUserInteractionEnabled">NO</bool>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<string key="IBUIText">Un mail vous a été envoyé. Veuillez suivre les instructions pour choisir un nouveau mot de passe.</string>
-							<object class="NSFont" key="IBUIFont" id="848890141">
-								<string key="NSName">Helvetica</string>
-								<double key="NSSize">30</double>
-								<int key="NSfFlags">16</int>
-							</object>
 							<object class="NSColor" key="IBUITextColor" id="151792184">
 								<int key="NSColorSpace">3</int>
 								<bytes key="NSWhite">MQA</bytes>
@@ -516,6 +508,18 @@
 							<int key="IBUIBaselineAdjustment">1</int>
 							<float key="IBUIMinimumFontSize">10</float>
 							<int key="IBUINumberOfLines">3</int>
+							<object class="IBUIFontDescription" key="IBUIFontDescription" id="974208886">
+								<string key="name">Helvetica</string>
+								<string key="family">Helvetica</string>
+								<int key="traits">0</int>
+								<double key="pointSize">30</double>
+							</object>
+							<object class="NSFont" key="IBUIFont" id="848890141">
+								<string key="NSName">Helvetica</string>
+								<double key="NSSize">30</double>
+								<int key="NSfFlags">16</int>
+							</object>
+							<double key="preferredMaxLayoutWidth">600</double>
 						</object>
 						<object class="IBUIView" id="542512899">
 							<reference key="NSNextResponder" ref="136884479"/>
@@ -532,11 +536,6 @@
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<int key="IBUIContentHorizontalAlignment">0</int>
 									<int key="IBUIContentVerticalAlignment">0</int>
-									<object class="NSFont" key="IBUIFont" id="234954183">
-										<string key="NSName">Helvetica-Bold</string>
-										<double key="NSSize">15</double>
-										<int key="NSfFlags">16</int>
-									</object>
 									<int key="IBUIButtonType">1</int>
 									<reference key="IBUIHighlightedTitleColor" ref="151792184"/>
 									<object class="NSColor" key="IBUINormalTitleColor">
@@ -546,6 +545,17 @@
 									<object class="NSColor" key="IBUINormalTitleShadowColor" id="880564110">
 										<int key="NSColorSpace">3</int>
 										<bytes key="NSWhite">MC41AA</bytes>
+									</object>
+									<object class="IBUIFontDescription" key="IBUIFontDescription" id="351153398">
+										<string key="name">Helvetica-Bold</string>
+										<string key="family">Helvetica</string>
+										<int key="traits">2</int>
+										<double key="pointSize">15</double>
+									</object>
+									<object class="NSFont" key="IBUIFont" id="234954183">
+										<string key="NSName">Helvetica-Bold</string>
+										<double key="NSSize">15</double>
+										<int key="NSfFlags">16</int>
 									</object>
 								</object>
 								<object class="IBUIImageView" id="776045428">
@@ -573,18 +583,25 @@
 									<bool key="IBUIUserInteractionEnabled">NO</bool>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<string key="IBUIText">Mot de passe</string>
+									<object class="NSColor" key="IBUITextColor" id="873292167">
+										<int key="NSColorSpace">1</int>
+										<bytes key="NSRGB">MCAwIDAAA</bytes>
+										<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
+									</object>
+									<nil key="IBUIHighlightedColor"/>
+									<int key="IBUIBaselineAdjustment">1</int>
+									<float key="IBUIMinimumFontSize">10</float>
+									<object class="IBUIFontDescription" key="IBUIFontDescription" id="716833226">
+										<string key="name">Helvetica-Bold</string>
+										<string key="family">Helvetica</string>
+										<int key="traits">2</int>
+										<double key="pointSize">36</double>
+									</object>
 									<object class="NSFont" key="IBUIFont" id="224371417">
 										<string key="NSName">Helvetica-Bold</string>
 										<double key="NSSize">36</double>
 										<int key="NSfFlags">16</int>
 									</object>
-									<object class="NSColor" key="IBUITextColor" id="873292167">
-										<int key="NSColorSpace">1</int>
-										<bytes key="NSRGB">MCAwIDAAA</bytes>
-									</object>
-									<nil key="IBUIHighlightedColor"/>
-									<int key="IBUIBaselineAdjustment">1</int>
-									<float key="IBUIMinimumFontSize">10</float>
 								</object>
 								<object class="IBUILabel" id="741937768">
 									<reference key="NSNextResponder" ref="542512899"/>
@@ -598,11 +615,12 @@
 									<bool key="IBUIUserInteractionEnabled">NO</bool>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<string key="IBUIText">Email</string>
-									<reference key="IBUIFont" ref="224371417"/>
 									<reference key="IBUITextColor" ref="873292167"/>
 									<nil key="IBUIHighlightedColor"/>
 									<int key="IBUIBaselineAdjustment">1</int>
 									<float key="IBUIMinimumFontSize">10</float>
+									<reference key="IBUIFontDescription" ref="716833226"/>
+									<reference key="IBUIFont" ref="224371417"/>
 								</object>
 								<object class="IBUITextField" id="254188499">
 									<reference key="NSNextResponder" ref="542512899"/>
@@ -623,7 +641,6 @@
 											<int key="NSID">2</int>
 										</object>
 									</object>
-									<reference key="IBUIFont" ref="848890141"/>
 									<bool key="IBUIClearsOnBeginEditing">YES</bool>
 									<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 									<float key="IBUIMinimumFontSize">17</float>
@@ -634,6 +651,8 @@
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 									</object>
 									<int key="IBUIClearButtonMode">1</int>
+									<reference key="IBUIFontDescription" ref="974208886"/>
+									<reference key="IBUIFont" ref="848890141"/>
 								</object>
 								<object class="IBUITextField" id="804926602">
 									<reference key="NSNextResponder" ref="542512899"/>
@@ -652,7 +671,6 @@
 										<bytes key="NSWhite">MAA</bytes>
 										<reference key="NSCustomColorSpace" ref="365169288"/>
 									</object>
-									<reference key="IBUIFont" ref="848890141"/>
 									<float key="IBUIMinimumFontSize">17</float>
 									<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 										<int key="IBUIKeyboardType">7</int>
@@ -660,6 +678,8 @@
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 									</object>
 									<int key="IBUIClearButtonMode">1</int>
+									<reference key="IBUIFontDescription" ref="974208886"/>
+									<reference key="IBUIFont" ref="848890141"/>
 								</object>
 							</object>
 							<string key="NSFrame">{{90, 320}, {586, 169}}</string>
@@ -679,15 +699,21 @@
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<int key="IBUIContentHorizontalAlignment">0</int>
 							<int key="IBUIContentVerticalAlignment">0</int>
+							<string key="IBUINormalTitle">Se connecter</string>
+							<reference key="IBUIHighlightedTitleColor" ref="151792184"/>
+							<reference key="IBUINormalTitleColor" ref="151792184"/>
+							<reference key="IBUINormalTitleShadowColor" ref="880564110"/>
+							<object class="IBUIFontDescription" key="IBUIFontDescription" id="937999387">
+								<string key="name">Helvetica-Bold</string>
+								<string key="family">Helvetica</string>
+								<int key="traits">2</int>
+								<double key="pointSize">24</double>
+							</object>
 							<object class="NSFont" key="IBUIFont" id="685435039">
 								<string key="NSName">Helvetica-Bold</string>
 								<double key="NSSize">24</double>
 								<int key="NSfFlags">16</int>
 							</object>
-							<string key="IBUINormalTitle">Se connecter</string>
-							<reference key="IBUIHighlightedTitleColor" ref="151792184"/>
-							<reference key="IBUINormalTitleColor" ref="151792184"/>
-							<reference key="IBUINormalTitleShadowColor" ref="880564110"/>
 						</object>
 						<object class="IBUIButton" id="1073564556">
 							<reference key="NSNextResponder" ref="136884479"/>
@@ -699,7 +725,6 @@
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<int key="IBUIContentHorizontalAlignment">0</int>
 							<int key="IBUIContentVerticalAlignment">0</int>
-							<reference key="IBUIFont" ref="685435039"/>
 							<int key="IBUILineBreakMode">0</int>
 							<string key="IBUINormalTitle">Mot de passe oublié?</string>
 							<reference key="IBUIHighlightedTitleColor" ref="151792184"/>
@@ -708,6 +733,8 @@
 								<bytes key="NSRGB">MC45OTMwNzM1MDMyIDAuOTY0MDY1MDI2NiAxAA</bytes>
 							</object>
 							<reference key="IBUINormalTitleShadowColor" ref="880564110"/>
+							<reference key="IBUIFontDescription" ref="937999387"/>
+							<reference key="IBUIFont" ref="685435039"/>
 						</object>
 						<object class="IBUIButton" id="815308085">
 							<reference key="NSNextResponder" ref="136884479"/>
@@ -719,7 +746,6 @@
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<int key="IBUIContentHorizontalAlignment">0</int>
 							<int key="IBUIContentVerticalAlignment">0</int>
-							<reference key="IBUIFont" ref="685435039"/>
 							<int key="IBUILineBreakMode">0</int>
 							<string key="IBUINormalTitle">Annuler</string>
 							<reference key="IBUIHighlightedTitleColor" ref="151792184"/>
@@ -728,6 +754,8 @@
 								<bytes key="NSRGB">MC45OTMwNzM1MDMyIDAuOTY0MDY1MDI2NiAxAA</bytes>
 							</object>
 							<reference key="IBUINormalTitleShadowColor" ref="880564110"/>
+							<reference key="IBUIFontDescription" ref="937999387"/>
+							<reference key="IBUIFont" ref="685435039"/>
 						</object>
 						<object class="IBUIButton" id="523976931">
 							<reference key="NSNextResponder" ref="136884479"/>
@@ -739,7 +767,6 @@
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<int key="IBUIContentHorizontalAlignment">0</int>
 							<int key="IBUIContentVerticalAlignment">0</int>
-							<reference key="IBUIFont" ref="685435039"/>
 							<int key="IBUILineBreakMode">0</int>
 							<string key="IBUINormalTitle">s'authentifier</string>
 							<reference key="IBUIHighlightedTitleColor" ref="151792184"/>
@@ -748,6 +775,8 @@
 								<bytes key="NSRGB">MC45OTMwNzM1MDMyIDAuOTY0MDY1MDI2NiAxAA</bytes>
 							</object>
 							<reference key="IBUINormalTitleShadowColor" ref="880564110"/>
+							<reference key="IBUIFontDescription" ref="937999387"/>
+							<reference key="IBUIFont" ref="685435039"/>
 						</object>
 						<object class="IBUIButton" id="228724518">
 							<reference key="NSNextResponder" ref="136884479"/>
@@ -759,7 +788,6 @@
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<int key="IBUIContentHorizontalAlignment">0</int>
 							<int key="IBUIContentVerticalAlignment">0</int>
-							<reference key="IBUIFont" ref="685435039"/>
 							<int key="IBUILineBreakMode">0</int>
 							<string key="IBUINormalTitle">Valider</string>
 							<reference key="IBUIHighlightedTitleColor" ref="151792184"/>
@@ -768,6 +796,8 @@
 								<bytes key="NSRGB">MC45OTMwNzM1MDMyIDAuOTY0MDY1MDI2NiAxAA</bytes>
 							</object>
 							<reference key="IBUINormalTitleShadowColor" ref="880564110"/>
+							<reference key="IBUIFontDescription" ref="937999387"/>
+							<reference key="IBUIFont" ref="685435039"/>
 						</object>
 						<object class="IBUIImageView" id="1066753917">
 							<reference key="NSNextResponder" ref="136884479"/>
@@ -793,7 +823,6 @@
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<int key="IBUIContentHorizontalAlignment">0</int>
 							<int key="IBUIContentVerticalAlignment">0</int>
-							<reference key="IBUIFont" ref="234954183"/>
 							<int key="IBUIButtonType">1</int>
 							<string key="IBUINormalTitle">DEBUG</string>
 							<reference key="IBUIHighlightedTitleColor" ref="151792184"/>
@@ -802,6 +831,8 @@
 								<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 							</object>
 							<reference key="IBUINormalTitleShadowColor" ref="880564110"/>
+							<reference key="IBUIFontDescription" ref="351153398"/>
+							<reference key="IBUIFont" ref="234954183"/>
 						</object>
 						<object class="IBUIActivityIndicatorView" id="349847743">
 							<reference key="NSNextResponder" ref="136884479"/>
@@ -835,14 +866,6 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">window</string>
-						<reference key="source" ref="664661524"/>
-						<reference key="destination" ref="380026005"/>
-					</object>
-					<int key="connectionID">9</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="664661524"/>
@@ -851,11 +874,81 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">window</string>
+						<reference key="source" ref="664661524"/>
+						<reference key="destination" ref="380026005"/>
+					</object>
+					<int key="connectionID">9</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">tabBarController</string>
 						<reference key="source" ref="664661524"/>
 						<reference key="destination" ref="1034742383"/>
 					</object>
 					<int key="connectionID">113</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">loginController</string>
+						<reference key="source" ref="664661524"/>
+						<reference key="destination" ref="575745275"/>
+					</object>
+					<int key="connectionID">137</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">authForgottenPassword</string>
+						<reference key="source" ref="1073564556"/>
+						<reference key="destination" ref="575745275"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">255</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">authSubmit</string>
+						<reference key="source" ref="885794346"/>
+						<reference key="destination" ref="575745275"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">251</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">onChange</string>
+						<reference key="source" ref="254188499"/>
+						<reference key="destination" ref="575745275"/>
+						<int key="IBEventType">18</int>
+					</object>
+					<int key="connectionID">146</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">passwordReturn</string>
+						<reference key="source" ref="254188499"/>
+						<reference key="destination" ref="575745275"/>
+						<int key="IBEventType">20</int>
+					</object>
+					<int key="connectionID">258</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">onChange</string>
+						<reference key="source" ref="804926602"/>
+						<reference key="destination" ref="575745275"/>
+						<int key="IBEventType">18</int>
+					</object>
+					<int key="connectionID">145</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">emailReturn</string>
+						<reference key="source" ref="804926602"/>
+						<reference key="destination" ref="575745275"/>
+						<int key="IBEventType">20</int>
+					</object>
+					<int key="connectionID">228</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -883,41 +976,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">loginController</string>
-						<reference key="source" ref="664661524"/>
-						<reference key="destination" ref="575745275"/>
-					</object>
-					<int key="connectionID">137</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">onChange</string>
-						<reference key="source" ref="804926602"/>
-						<reference key="destination" ref="575745275"/>
-						<int key="IBEventType">18</int>
-					</object>
-					<int key="connectionID">145</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">onChange</string>
-						<reference key="source" ref="254188499"/>
-						<reference key="destination" ref="575745275"/>
-						<int key="IBEventType">18</int>
-					</object>
-					<int key="connectionID">146</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">debugBypassLog</string>
-						<reference key="source" ref="1038018783"/>
-						<reference key="destination" ref="575745275"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">217</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">debugButton</string>
 						<reference key="source" ref="575745275"/>
 						<reference key="destination" ref="1038018783"/>
@@ -939,15 +997,6 @@
 						<reference key="destination" ref="514893120"/>
 					</object>
 					<int key="connectionID">222</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">emailReturn</string>
-						<reference key="source" ref="804926602"/>
-						<reference key="destination" ref="575745275"/>
-						<int key="IBEventType">20</int>
-					</object>
-					<int key="connectionID">228</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -990,13 +1039,37 @@
 					<int key="connectionID">242</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">authSubmitButton</string>
+						<reference key="source" ref="575745275"/>
+						<reference key="destination" ref="885794346"/>
+					</object>
+					<int key="connectionID">256</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">forgSubmitButton</string>
+						<reference key="source" ref="575745275"/>
+						<reference key="destination" ref="228724518"/>
+					</object>
+					<int key="connectionID">257</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">activity</string>
+						<reference key="source" ref="575745275"/>
+						<reference key="destination" ref="349847743"/>
+					</object>
+					<int key="connectionID">259</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">authSubmit</string>
-						<reference key="source" ref="885794346"/>
+						<string key="label">debugBypassLog</string>
+						<reference key="source" ref="1038018783"/>
 						<reference key="destination" ref="575745275"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">251</int>
+					<int key="connectionID">217</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -1025,55 +1098,15 @@
 					</object>
 					<int key="connectionID">254</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">authForgottenPassword</string>
-						<reference key="source" ref="1073564556"/>
-						<reference key="destination" ref="575745275"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">255</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">authSubmitButton</string>
-						<reference key="source" ref="575745275"/>
-						<reference key="destination" ref="885794346"/>
-					</object>
-					<int key="connectionID">256</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">forgSubmitButton</string>
-						<reference key="source" ref="575745275"/>
-						<reference key="destination" ref="228724518"/>
-					</object>
-					<int key="connectionID">257</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">passwordReturn</string>
-						<reference key="source" ref="254188499"/>
-						<reference key="destination" ref="575745275"/>
-						<int key="IBEventType">20</int>
-					</object>
-					<int key="connectionID">258</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">activity</string>
-						<reference key="source" ref="575745275"/>
-						<reference key="destination" ref="349847743"/>
-					</object>
-					<int key="connectionID">259</int>
-				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBObjectRecord">
 						<int key="objectID">0</int>
-						<reference key="object" ref="0"/>
+						<object class="NSArray" key="object" id="0">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+						</object>
 						<reference key="children" ref="1000"/>
 						<nil key="parent"/>
 					</object>
@@ -1640,7 +1673,7 @@
 					<string>3.CustomClassName</string>
 					<string>3.IBPluginDependency</string>
 				</object>
-				<object class="NSMutableArray" key="dict.values">
+				<object class="NSArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>UIApplication</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1782,7 +1815,7 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<integer value="1056" key="NS.object.0"/>
+			<real value="1552" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.InterfaceBuilder3</string>
@@ -1805,7 +1838,7 @@
 				<string>preferes_off.png</string>
 				<string>rubriques_off.png</string>
 			</object>
-			<object class="NSMutableArray" key="dict.values">
+			<object class="NSArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{30, 30}</string>
 				<string>{30, 30}</string>
@@ -1819,6 +1852,6 @@
 				<string>{30, 30}</string>
 			</object>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">534</string>
+		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

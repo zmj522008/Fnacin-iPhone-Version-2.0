@@ -79,11 +79,9 @@
 		E34553E213541C13004B9D1E /* nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E34553E013541C11004B9D1E /* nav@2x.png */; };
 		E34553E313541C13004B9D1E /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = E34553E113541C12004B9D1E /* nav.png */; };
 		E360B17F13BD9EA4004A9E94 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E360B17E13BD9EA4004A9E94 /* AddressBook.framework */; };
-		E360B19213BDABB9004A9E94 /* ArticleList.xib in Resources */ = {isa = PBXBuildFile; fileRef = E360B18213BDABB9004A9E94 /* ArticleList.xib */; };
 		E360B19313BDABB9004A9E94 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E360B18413BDABB9004A9E94 /* InfoPlist.strings */; };
 		E360B19413BDABB9004A9E94 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E360B18613BDABB9004A9E94 /* MainWindow.xib */; };
 		E360B19513BDABB9004A9E94 /* PrefereEdit.xib in Resources */ = {isa = PBXBuildFile; fileRef = E360B18813BDABB9004A9E94 /* PrefereEdit.xib */; };
-		E360B19613BDABB9004A9E94 /* RubriqueList.xib in Resources */ = {isa = PBXBuildFile; fileRef = E360B18A13BDABB9004A9E94 /* RubriqueList.xib */; };
 		E360B19813BDABB9004A9E94 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E360B18E13BDABB9004A9E94 /* MainWindow-iPad.xib */; };
 		E360B19E13BDBF12004A9E94 /* ChangePassword.m in Sources */ = {isa = PBXBuildFile; fileRef = E360B19C13BDBF11004A9E94 /* ChangePassword.m */; };
 		E360B19F13BDBF12004A9E94 /* ChangePassword.xib in Resources */ = {isa = PBXBuildFile; fileRef = E360B19D13BDBF12004A9E94 /* ChangePassword.xib */; };
@@ -136,7 +134,6 @@
 		E3D97E7D1349C3B300E2C1BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D97E7C1349C3B300E2C1BA /* main.m */; };
 		E3D97E801349C3B300E2C1BA /* Celaneo1AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D97E7F1349C3B300E2C1BA /* Celaneo1AppDelegate.m */; };
 		E3D97E861349C3B300E2C1BA /* ArticleList.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D97E851349C3B300E2C1BA /* ArticleList.m */; };
-		E3D97E891349C3B300E2C1BA /* RubriqueListController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D97E881349C3B300E2C1BA /* RubriqueListController.m */; };
 		E3D97E981349C56C00E2C1BA /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D97E961349C56C00E2C1BA /* LoginController.m */; };
 		E3E086F613B48BC400062D03 /* AnnuaireSync.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E086F513B48BC400062D03 /* AnnuaireSync.m */; };
 		E3E086F913B4AE3D00062D03 /* AnnuaireDB.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E086F813B4AE3D00062D03 /* AnnuaireDB.m */; };
@@ -150,6 +147,44 @@
 		E3E69FFB13584FA900827128 /* ArticleDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3E69FF913584FA500827128 /* ArticleDetail.xib */; };
 		E3F987DD13AF8C3700BD5C20 /* Annuaire.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F987DB13AF8C3700BD5C20 /* Annuaire.m */; };
 		E3F987DE13AF8C3700BD5C20 /* Annuaire.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3F987DC13AF8C3700BD5C20 /* Annuaire.xib */; };
+		F909D6AD16284A7A0059904B /* AppList.png in Resources */ = {isa = PBXBuildFile; fileRef = F909D6AC16284A7A0059904B /* AppList.png */; };
+		F91018B0163ACEA900534579 /* RubriqueList.xib in Resources */ = {isa = PBXBuildFile; fileRef = F91018AE163ACEA900534579 /* RubriqueList.xib */; };
+		F911DB8C161C65A900446ABE /* AppListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F911DB8A161C65A800446ABE /* AppListController.m */; };
+		F911DB8D161C65A900446ABE /* AppListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F911DB8B161C65A900446ABE /* AppListController.xib */; };
+		F911DB97161F0A7500446ABE /* FnacCom.png in Resources */ = {isa = PBXBuildFile; fileRef = F911DB94161F0A7400446ABE /* FnacCom.png */; };
+		F911DB98161F0A7500446ABE /* ticketLive.png in Resources */ = {isa = PBXBuildFile; fileRef = F911DB95161F0A7400446ABE /* ticketLive.png */; };
+		F911DB99161F0A7500446ABE /* MobileFnac.png in Resources */ = {isa = PBXBuildFile; fileRef = F911DB96161F0A7500446ABE /* MobileFnac.png */; };
+		F923BCE0163AD78B008B557E /* RubriqueListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F91018B2163ACEB700534579 /* RubriqueListController.m */; };
+		F93B5C4E1758E52E008AD2E2 /* icone_Kobo_by_Fnac.png in Resources */ = {isa = PBXBuildFile; fileRef = F93B5C4D1758E52E008AD2E2 /* icone_Kobo_by_Fnac.png */; };
+		F93B5C501758E53D008AD2E2 /* icone_Tick_Live.png in Resources */ = {isa = PBXBuildFile; fileRef = F93B5C4F1758E53D008AD2E2 /* icone_Tick_Live.png */; };
+		F95AE9EC163F3837008244B2 /* PullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = F95AE9EB163F36B9008244B2 /* PullToRefreshView.m */; };
+		F96812FB161AE1B60068E669 /* actions.png in Resources */ = {isa = PBXBuildFile; fileRef = F96812FA161AE1B30068E669 /* actions.png */; };
+		F985B28E16C3BBB200F8B9FB /* navbar_landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = F985B28D16C3BBB200F8B9FB /* navbar_landscape.png */; };
+		F985B29016C3BBBB00F8B9FB /* navbar_landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F985B28F16C3BBBB00F8B9FB /* navbar_landscape@2x.png */; };
+		F98F5705164BB73F00CFC3D5 /* arrowP.png in Resources */ = {isa = PBXBuildFile; fileRef = F98F5704164BB73F00CFC3D5 /* arrowP.png */; };
+		F98F5708164BB74900CFC3D5 /* arrowP@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F98F5707164BB74900CFC3D5 /* arrowP@2x.png */; };
+		F98F570D164BCAE400CFC3D5 /* app_labo_fnac.png in Resources */ = {isa = PBXBuildFile; fileRef = F98F5709164BCAE400CFC3D5 /* app_labo_fnac.png */; };
+		F98F570E164BCAE400CFC3D5 /* iconeAdherentClubFnac_iOS.png in Resources */ = {isa = PBXBuildFile; fileRef = F98F570A164BCAE400CFC3D5 /* iconeAdherentClubFnac_iOS.png */; };
+		F98F570F164BCAE400CFC3D5 /* Jpreferes_off.png in Resources */ = {isa = PBXBuildFile; fileRef = F98F570B164BCAE400CFC3D5 /* Jpreferes_off.png */; };
+		F98F5710164BCAE400CFC3D5 /* Jpreferes_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F98F570C164BCAE400CFC3D5 /* Jpreferes_off@2x.png */; };
+		F9A27680178ACB000038139A /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F9A2767F178ACB000038139A /* Default-Portrait@2x~ipad.png */; };
+		F9A27682178ACB0A0038139A /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F9A27681178ACB090038139A /* Default-Landscape~ipad.png */; };
+		F9A27684178ACB0E0038139A /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F9A27683178ACB0E0038139A /* Default-Landscape@2x~ipad.png */; };
+		F9B5C002175E4190005D5D74 /* SiteGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B5C000175E418F005D5D74 /* SiteGroupController.m */; };
+		F9B5C003175E4190005D5D74 /* SiteGroupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9B5C001175E418F005D5D74 /* SiteGroupController.xib */; };
+		F9C2CDFE16539B1900425406 /* kobo_By_Fnac_iOS.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C2CDFD16539B1900425406 /* kobo_By_Fnac_iOS.png */; };
+		F9C2CE0C1653D6AA00425406 /* kobo_By_Fnac_iOS-retina.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C2CE061653D6A400425406 /* kobo_By_Fnac_iOS-retina.png */; };
+		F9C2CE111653DB7200425406 /* 120x120 FnacCom.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C2CE101653DB7100425406 /* 120x120 FnacCom.png */; };
+		F9C2CE1B1653DEA100425406 /* 120x120 iconeAdherentClubFnac_iOS.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C2CE171653DEA100425406 /* 120x120 iconeAdherentClubFnac_iOS.png */; };
+		F9C2CE1C1653DEA100425406 /* 120x120 logo_app_labo_fnac.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C2CE181653DEA100425406 /* 120x120 logo_app_labo_fnac.png */; };
+		F9C2CE1D1653DEA100425406 /* 120x120 MobileFnac.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C2CE191653DEA100425406 /* 120x120 MobileFnac.png */; };
+		F9C2CE1E1653DEA100425406 /* 120x120 ticketLive.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C2CE1A1653DEA100425406 /* 120x120 ticketLive.png */; };
+		F9C510EF166F8ABD003E46D8 /* ArticleList.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9C510ED166F8ABD003E46D8 /* ArticleList.xib */; };
+		F9DFDC631767BE6C004E9B28 /* ico_fnacIn57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = F9DFDC621767BE6C004E9B28 /* ico_fnacIn57x57.png */; };
+		F9DFDC651767BE73004E9B28 /* ico_fnacIn114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = F9DFDC641767BE72004E9B28 /* ico_fnacIn114x114.png */; };
+		F9DFDC671767BEDE004E9B28 /* ico_fnacIn72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = F9DFDC661767BEDE004E9B28 /* ico_fnacIn72x72.png */; };
+		F9DFDC691767BF27004E9B28 /* ico_fnacIn144x144.png in Resources */ = {isa = PBXBuildFile; fileRef = F9DFDC681767BF27004E9B28 /* ico_fnacIn144x144.png */; };
+		F9F750DE163F446E00400A90 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9F750DD163F446E00400A90 /* QuartzCore.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -249,11 +284,9 @@
 		E34553E013541C11004B9D1E /* nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@2x.png"; sourceTree = "<group>"; };
 		E34553E113541C12004B9D1E /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
 		E360B17E13BD9EA4004A9E94 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
-		E360B18313BDABB9004A9E94 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ArticleList.xib; sourceTree = "<group>"; };
 		E360B18513BDABB9004A9E94 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = InfoPlist.strings; sourceTree = "<group>"; };
 		E360B18713BDABB9004A9E94 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = MainWindow.xib; sourceTree = "<group>"; };
 		E360B18913BDABB9004A9E94 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = PrefereEdit.xib; sourceTree = "<group>"; };
-		E360B18B13BDABB9004A9E94 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = RubriqueList.xib; sourceTree = "<group>"; };
 		E360B18D13BDABB9004A9E94 /* ArticleList~iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ArticleList~iPad.xib"; sourceTree = "<group>"; };
 		E360B18F13BDABB9004A9E94 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = "fr.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		E360B19013BDABB9004A9E94 /* PrefereEdit~iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "PrefereEdit~iPad.xib"; sourceTree = "<group>"; };
@@ -318,19 +351,17 @@
 		E3C0850013ADF1E800A108D5 /* Magasins.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Magasins.m; sourceTree = "<group>"; };
 		E3C0850213ADF1F700A108D5 /* Magasin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Magasin.h; sourceTree = "<group>"; };
 		E3C0850313ADF1F700A108D5 /* Magasin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Magasin.m; sourceTree = "<group>"; };
-		E3D97E6B1349C3B300E2C1BA /* fnac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fnac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3D97E6B1349C3B300E2C1BA /* FnacIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FnacIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3D97E6F1349C3B300E2C1BA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E3D97E711349C3B300E2C1BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E3D97E731349C3B300E2C1BA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		E3D97E771349C3B300E2C1BA /* Celaneo1-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Celaneo1-Info.plist"; sourceTree = "<group>"; };
-		E3D97E7B1349C3B300E2C1BA /* Celaneo1-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Celaneo1-Prefix.pch"; sourceTree = "<group>"; };
+		E3D97E771349C3B300E2C1BA /* FnacIn-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FnacIn-Info.plist"; sourceTree = "<group>"; };
+		E3D97E7B1349C3B300E2C1BA /* FnacIn-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FnacIn-Prefix.pch"; sourceTree = "<group>"; };
 		E3D97E7C1349C3B300E2C1BA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E3D97E7E1349C3B300E2C1BA /* Celaneo1AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Celaneo1AppDelegate.h; sourceTree = "<group>"; };
 		E3D97E7F1349C3B300E2C1BA /* Celaneo1AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Celaneo1AppDelegate.m; sourceTree = "<group>"; };
 		E3D97E841349C3B300E2C1BA /* ArticleList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArticleList.h; sourceTree = "<group>"; };
 		E3D97E851349C3B300E2C1BA /* ArticleList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArticleList.m; sourceTree = "<group>"; };
-		E3D97E871349C3B300E2C1BA /* RubriqueListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RubriqueListController.h; sourceTree = "<group>"; };
-		E3D97E881349C3B300E2C1BA /* RubriqueListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RubriqueListController.m; sourceTree = "<group>"; };
 		E3D97E951349C56B00E2C1BA /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		E3D97E961349C56C00E2C1BA /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
 		E3E086F413B48BC400062D03 /* AnnuaireSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnuaireSync.h; sourceTree = "<group>"; };
@@ -349,6 +380,48 @@
 		E3F987DA13AF8C3700BD5C20 /* Annuaire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Annuaire.h; sourceTree = "<group>"; };
 		E3F987DB13AF8C3700BD5C20 /* Annuaire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Annuaire.m; sourceTree = "<group>"; };
 		E3F987DC13AF8C3700BD5C20 /* Annuaire.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Annuaire.xib; sourceTree = "<group>"; };
+		F909D6AC16284A7A0059904B /* AppList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppList.png; sourceTree = "<group>"; };
+		F91018AF163ACEA900534579 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = RubriqueList.xib; sourceTree = "<group>"; };
+		F91018B1163ACEB700534579 /* RubriqueListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RubriqueListController.h; sourceTree = "<group>"; };
+		F91018B2163ACEB700534579 /* RubriqueListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RubriqueListController.m; sourceTree = "<group>"; };
+		F911DB89161C65A800446ABE /* AppListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppListController.h; sourceTree = "<group>"; };
+		F911DB8A161C65A800446ABE /* AppListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppListController.m; sourceTree = "<group>"; };
+		F911DB8B161C65A900446ABE /* AppListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppListController.xib; sourceTree = "<group>"; };
+		F911DB94161F0A7400446ABE /* FnacCom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FnacCom.png; sourceTree = "<group>"; };
+		F911DB95161F0A7400446ABE /* ticketLive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticketLive.png; sourceTree = "<group>"; };
+		F911DB96161F0A7500446ABE /* MobileFnac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MobileFnac.png; sourceTree = "<group>"; };
+		F93B5C4D1758E52E008AD2E2 /* icone_Kobo_by_Fnac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icone_Kobo_by_Fnac.png; sourceTree = "<group>"; };
+		F93B5C4F1758E53D008AD2E2 /* icone_Tick_Live.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icone_Tick_Live.png; sourceTree = "<group>"; };
+		F95AE9EA163F36B9008244B2 /* PullToRefreshView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PullToRefreshView.h; sourceTree = "<group>"; };
+		F95AE9EB163F36B9008244B2 /* PullToRefreshView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshView.m; sourceTree = "<group>"; };
+		F96812FA161AE1B30068E669 /* actions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = actions.png; sourceTree = "<group>"; };
+		F985B28D16C3BBB200F8B9FB /* navbar_landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbar_landscape.png; sourceTree = "<group>"; };
+		F985B28F16C3BBBB00F8B9FB /* navbar_landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar_landscape@2x.png"; sourceTree = "<group>"; };
+		F98F5704164BB73F00CFC3D5 /* arrowP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowP.png; sourceTree = "<group>"; };
+		F98F5707164BB74900CFC3D5 /* arrowP@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrowP@2x.png"; sourceTree = "<group>"; };
+		F98F5709164BCAE400CFC3D5 /* app_labo_fnac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_labo_fnac.png; sourceTree = "<group>"; };
+		F98F570A164BCAE400CFC3D5 /* iconeAdherentClubFnac_iOS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconeAdherentClubFnac_iOS.png; sourceTree = "<group>"; };
+		F98F570B164BCAE400CFC3D5 /* Jpreferes_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Jpreferes_off.png; sourceTree = "<group>"; };
+		F98F570C164BCAE400CFC3D5 /* Jpreferes_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Jpreferes_off@2x.png"; sourceTree = "<group>"; };
+		F9A2767F178ACB000038139A /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		F9A27681178ACB090038139A /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		F9A27683178ACB0E0038139A /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		F9B5BFFF175E418E005D5D74 /* SiteGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SiteGroupController.h; sourceTree = "<group>"; };
+		F9B5C000175E418F005D5D74 /* SiteGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SiteGroupController.m; sourceTree = "<group>"; };
+		F9B5C001175E418F005D5D74 /* SiteGroupController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SiteGroupController.xib; sourceTree = "<group>"; };
+		F9C2CDFD16539B1900425406 /* kobo_By_Fnac_iOS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kobo_By_Fnac_iOS.png; sourceTree = "<group>"; };
+		F9C2CE061653D6A400425406 /* kobo_By_Fnac_iOS-retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kobo_By_Fnac_iOS-retina.png"; sourceTree = "<group>"; };
+		F9C2CE101653DB7100425406 /* 120x120 FnacCom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "120x120 FnacCom.png"; sourceTree = "<group>"; };
+		F9C2CE171653DEA100425406 /* 120x120 iconeAdherentClubFnac_iOS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "120x120 iconeAdherentClubFnac_iOS.png"; sourceTree = "<group>"; };
+		F9C2CE181653DEA100425406 /* 120x120 logo_app_labo_fnac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "120x120 logo_app_labo_fnac.png"; sourceTree = "<group>"; };
+		F9C2CE191653DEA100425406 /* 120x120 MobileFnac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "120x120 MobileFnac.png"; sourceTree = "<group>"; };
+		F9C2CE1A1653DEA100425406 /* 120x120 ticketLive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "120x120 ticketLive.png"; sourceTree = "<group>"; };
+		F9C510EE166F8ABD003E46D8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = ArticleList.xib; sourceTree = "<group>"; };
+		F9DFDC621767BE6C004E9B28 /* ico_fnacIn57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_fnacIn57x57.png; sourceTree = "<group>"; };
+		F9DFDC641767BE72004E9B28 /* ico_fnacIn114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_fnacIn114x114.png; sourceTree = "<group>"; };
+		F9DFDC661767BEDE004E9B28 /* ico_fnacIn72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_fnacIn72x72.png; sourceTree = "<group>"; };
+		F9DFDC681767BF27004E9B28 /* ico_fnacIn144x144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_fnacIn144x144.png; sourceTree = "<group>"; };
+		F9F750DD163F446E00400A90 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -356,6 +429,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9F750DE163F446E00400A90 /* QuartzCore.framework in Frameworks */,
 				E360B17F13BD9EA4004A9E94 /* AddressBook.framework in Frameworks */,
 				E38B885213BB61E500B1D6A4 /* MapKit.framework in Frameworks */,
 				E38B884F13BB614400B1D6A4 /* CoreLocation.framework in Frameworks */,
@@ -437,61 +511,83 @@
 		E3455373134F146E004B9D1E /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				E335240713BE12DA00970B87 /* password.png */,
-				E335240813BE12DA00970B87 /* password@2x.png */,
-				E33523FF13BE12D100970B87 /* annuaire.png */,
-				E335240013BE12D100970B87 /* annuaire@2x.png */,
-				E335240113BE12D100970B87 /* epingle.png */,
-				E335240213BE12D100970B87 /* epingle@2x.png */,
-				E3AFD2B8139581F70053E35F /* bg~iPad.png */,
-				E3AFD2B6139581610053E35F /* bg_log~iPad.png */,
-				E36C8226136AC628009C39C7 /* remove.png */,
-				E36C8227136AC628009C39C7 /* remove@2x.png */,
-				E3A782C31360885D00C7C0F2 /* ilike_toolbar.png */,
-				E3A782C41360885D00C7C0F2 /* ilike_toolbar@2x.png */,
-				E3A782BF136087D600C7C0F2 /* btn_left@2x.png */,
-				E3A782C0136087D600C7C0F2 /* btn@2x.png */,
-				E3A782A8135EDC9700C7C0F2 /* btn_left.png */,
-				E3A782A4135ED75F00C7C0F2 /* btn.png */,
-				E3E69FD11355E9B700827128 /* loading_detail.jpg */,
-				E3E69FD21355E9B700827128 /* loading_detail@2x.jpg */,
-				E3E69FD31355E9B700827128 /* loading_list.jpg */,
-				E3E69FD41355E9B700827128 /* loading_list@2x.jpg */,
-				E303264B1355A6A90012B181 /* nav_nologo.png */,
-				E303264C1355A6AA0012B181 /* nav_nologo@2x.png */,
-				E34553E013541C11004B9D1E /* nav@2x.png */,
-				E34553E113541C12004B9D1E /* nav.png */,
-				E34553DD13530CD6004B9D1E /* bg@2x.png */,
-				E34553DC13530CD6004B9D1E /* bg.png */,
+				F93B5C4F1758E53D008AD2E2 /* icone_Tick_Live.png */,
+				F93B5C4D1758E52E008AD2E2 /* icone_Kobo_by_Fnac.png */,
+				F985B28F16C3BBBB00F8B9FB /* navbar_landscape@2x.png */,
+				F985B28D16C3BBB200F8B9FB /* navbar_landscape.png */,
+				F9C2CE171653DEA100425406 /* 120x120 iconeAdherentClubFnac_iOS.png */,
+				F9C2CE181653DEA100425406 /* 120x120 logo_app_labo_fnac.png */,
+				F9C2CE191653DEA100425406 /* 120x120 MobileFnac.png */,
+				F9C2CE1A1653DEA100425406 /* 120x120 ticketLive.png */,
+				F9C2CE101653DB7100425406 /* 120x120 FnacCom.png */,
+				F96812FA161AE1B30068E669 /* actions.png */,
 				E345537C13530BCF004B9D1E /* alaune_off.png */,
 				E345537D13530BCF004B9D1E /* alaune_off@2x.png */,
+				E33523FF13BE12D100970B87 /* annuaire.png */,
+				E335240013BE12D100970B87 /* annuaire@2x.png */,
+				F98F5709164BCAE400CFC3D5 /* app_labo_fnac.png */,
+				F909D6AC16284A7A0059904B /* AppList.png */,
 				E345538013530BCF004B9D1E /* arrow.png */,
 				E345538113530BCF004B9D1E /* arrow@2x.png */,
+				F98F5704164BB73F00CFC3D5 /* arrowP.png */,
+				F98F5707164BB74900CFC3D5 /* arrowP@2x.png */,
+				E34553DC13530CD6004B9D1E /* bg.png */,
+				E34553DD13530CD6004B9D1E /* bg@2x.png */,
 				E345538213530BCF004B9D1E /* bg_log.png */,
 				E345538313530BCF004B9D1E /* bg_log@2x.png */,
+				E3AFD2B6139581610053E35F /* bg_log~iPad.png */,
 				E345538413530BCF004B9D1E /* bg_topbar.png */,
 				E345538513530BCF004B9D1E /* bg_topbar@2x.png */,
+				E3AFD2B8139581F70053E35F /* bg~iPad.png */,
+				E3A782A4135ED75F00C7C0F2 /* btn.png */,
+				E3A782C0136087D600C7C0F2 /* btn@2x.png */,
+				E3A782A8135EDC9700C7C0F2 /* btn_left.png */,
+				E3A782BF136087D600C7C0F2 /* btn_left@2x.png */,
 				E345538613530BCF004B9D1E /* checkbox_checked.png */,
 				E345538713530BCF004B9D1E /* checkbox_checked@2x.png */,
 				E345538813530BCF004B9D1E /* checkbox_unchecked.png */,
 				E345538913530BCF004B9D1E /* checkbox_unchecked@2x.png */,
 				E345538A13530BD0004B9D1E /* comments.png */,
 				E345538B13530BD0004B9D1E /* comments@2x.png */,
+				E335240113BE12D100970B87 /* epingle.png */,
+				E335240213BE12D100970B87 /* epingle@2x.png */,
 				E345538C13530BD0004B9D1E /* favoris_add.png */,
 				E345538D13530BD0004B9D1E /* favoris_add@2x.png */,
 				E345538E13530BD0004B9D1E /* favoris_off.png */,
 				E345538F13530BD0004B9D1E /* favoris_off@2x.png */,
+				F911DB94161F0A7400446ABE /* FnacCom.png */,
+				F98F570A164BCAE400CFC3D5 /* iconeAdherentClubFnac_iOS.png */,
 				E345539713530BD0004B9D1E /* ilike.png */,
 				E345539813530BD0004B9D1E /* ilike@2x.png */,
+				E3A782C31360885D00C7C0F2 /* ilike_toolbar.png */,
+				E3A782C41360885D00C7C0F2 /* ilike_toolbar@2x.png */,
 				E345539913530BD0004B9D1E /* iTunesArtwork.png */,
+				F98F570B164BCAE400CFC3D5 /* Jpreferes_off.png */,
+				F98F570C164BCAE400CFC3D5 /* Jpreferes_off@2x.png */,
+				F9C2CE061653D6A400425406 /* kobo_By_Fnac_iOS-retina.png */,
+				F9C2CDFD16539B1900425406 /* kobo_By_Fnac_iOS.png */,
+				E3E69FD11355E9B700827128 /* loading_detail.jpg */,
+				E3E69FD21355E9B700827128 /* loading_detail@2x.jpg */,
+				E3E69FD31355E9B700827128 /* loading_list.jpg */,
+				E3E69FD41355E9B700827128 /* loading_list@2x.jpg */,
+				F911DB96161F0A7500446ABE /* MobileFnac.png */,
+				E3E69FD91355F40B00827128 /* more.jpg */,
+				E3E69FDA1355F40B00827128 /* more@2x.jpg */,
+				E34553E113541C12004B9D1E /* nav.png */,
+				E34553E013541C11004B9D1E /* nav@2x.png */,
+				E303264B1355A6A90012B181 /* nav_nologo.png */,
+				E303264C1355A6AA0012B181 /* nav_nologo@2x.png */,
+				E335240713BE12DA00970B87 /* password.png */,
+				E335240813BE12DA00970B87 /* password@2x.png */,
 				E345539C13530BD0004B9D1E /* podcast_off.png */,
 				E345539D13530BD0004B9D1E /* podcast_off@2x.png */,
 				E34553A013530BD0004B9D1E /* preferes_off.png */,
 				E34553A113530BD0004B9D1E /* preferes_off@2x.png */,
+				E36C8226136AC628009C39C7 /* remove.png */,
+				E36C8227136AC628009C39C7 /* remove@2x.png */,
 				E34553A413530BD0004B9D1E /* rubriques_off.png */,
 				E34553A513530BD0004B9D1E /* rubriques_off@2x.png */,
-				E3E69FD91355F40B00827128 /* more.jpg */,
-				E3E69FDA1355F40B00827128 /* more@2x.jpg */,
+				F911DB95161F0A7400446ABE /* ticketLive.png */,
 			);
 			path = Images;
 			sourceTree = SOURCE_ROOT;
@@ -499,11 +595,11 @@
 		E360B18113BDABB8004A9E94 /* fr.lproj */ = {
 			isa = PBXGroup;
 			children = (
-				E360B18213BDABB9004A9E94 /* ArticleList.xib */,
+				F9C510ED166F8ABD003E46D8 /* ArticleList.xib */,
+				F91018AE163ACEA900534579 /* RubriqueList.xib */,
 				E360B18413BDABB9004A9E94 /* InfoPlist.strings */,
 				E360B18613BDABB9004A9E94 /* MainWindow.xib */,
 				E360B18813BDABB9004A9E94 /* PrefereEdit.xib */,
-				E360B18A13BDABB9004A9E94 /* RubriqueList.xib */,
 			);
 			path = fr.lproj;
 			sourceTree = "<group>";
@@ -564,12 +660,11 @@
 		E3C084DB13AA438400A108D5 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				E38D1ED2135D754C000D5FE1 /* CommentaireCell.xib */,
+				E3455352134C990C004B9D1E /* ArticleCell.h */,
+				E390EC04134C6EAA00B1B705 /* ArticleCell.m */,
 				E3AFD2BD139616150053E35F /* CommentaireCell~iPad.xib */,
 				E38D1ED3135D754C000D5FE1 /* CommentaireCell.h */,
 				E38D1ED4135D754C000D5FE1 /* CommentaireCell.m */,
-				E3455352134C990C004B9D1E /* ArticleCell.h */,
-				E390EC04134C6EAA00B1B705 /* ArticleCell.m */,
 				E390EC05134C6EAA00B1B705 /* ArticleCell.xib */,
 				E3AFD2BA139616080053E35F /* ArticleCell~iPad.xib */,
 				E3AFD2DE1396BFBA0053E35F /* ArticleCellLarge~iPad.xib */,
@@ -586,16 +681,16 @@
 		E3C084DD13AA43AE00A108D5 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F91018B1163ACEB700534579 /* RubriqueListController.h */,
+				F91018B2163ACEB700534579 /* RubriqueListController.m */,
 				E3455379134F173C004B9D1E /* PrefereEditController.h */,
 				E345537A134F173C004B9D1E /* PrefereEditController.m */,
-				E3D97E841349C3B300E2C1BA /* ArticleList.h */,
 				E3D97E851349C3B300E2C1BA /* ArticleList.m */,
-				E3D97E871349C3B300E2C1BA /* RubriqueListController.h */,
-				E3D97E881349C3B300E2C1BA /* RubriqueListController.m */,
-				E341C8AF134B3CAD009BB506 /* BaseController.h */,
-				E341C8B0134B3CAD009BB506 /* BaseController.m */,
 				E3D97E951349C56B00E2C1BA /* LoginController.h */,
 				E3D97E961349C56C00E2C1BA /* LoginController.m */,
+				E3D97E841349C3B300E2C1BA /* ArticleList.h */,
+				E341C8AF134B3CAD009BB506 /* BaseController.h */,
+				E341C8B0134B3CAD009BB506 /* BaseController.m */,
 				E303264613545BCA0012B181 /* MediaPlayer.h */,
 				E303264713545BCA0012B181 /* MediaPlayer.m */,
 				E3E69FF713584FA000827128 /* ArticleDetail.h */,
@@ -605,6 +700,13 @@
 				E360B19B13BDBF11004A9E94 /* ChangePassword.h */,
 				E360B19C13BDBF11004A9E94 /* ChangePassword.m */,
 				E360B19D13BDBF12004A9E94 /* ChangePassword.xib */,
+				F911DB89161C65A800446ABE /* AppListController.h */,
+				E38D1ED2135D754C000D5FE1 /* CommentaireCell.xib */,
+				F911DB8A161C65A800446ABE /* AppListController.m */,
+				F911DB8B161C65A900446ABE /* AppListController.xib */,
+				F9B5BFFF175E418E005D5D74 /* SiteGroupController.h */,
+				F9B5C000175E418F005D5D74 /* SiteGroupController.m */,
+				F9B5C001175E418F005D5D74 /* SiteGroupController.xib */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -647,6 +749,14 @@
 		E3D97E601349C3B300E2C1BA = {
 			isa = PBXGroup;
 			children = (
+				F9A27683178ACB0E0038139A /* Default-Landscape@2x~ipad.png */,
+				F9A27681178ACB090038139A /* Default-Landscape~ipad.png */,
+				F9A2767F178ACB000038139A /* Default-Portrait@2x~ipad.png */,
+				F9DFDC681767BF27004E9B28 /* ico_fnacIn144x144.png */,
+				F9DFDC661767BEDE004E9B28 /* ico_fnacIn72x72.png */,
+				F9DFDC641767BE72004E9B28 /* ico_fnacIn114x114.png */,
+				F9DFDC621767BE6C004E9B28 /* ico_fnacIn57x57.png */,
+				F9F750DD163F446E00400A90 /* QuartzCore.framework */,
 				E360B17E13BD9EA4004A9E94 /* AddressBook.framework */,
 				E38B885113BB61E500B1D6A4 /* MapKit.framework */,
 				E38B884E13BB614400B1D6A4 /* CoreLocation.framework */,
@@ -667,7 +777,7 @@
 				E341C870134A32B6009BB506 /* CoreFoundation.framework */,
 				E3455373134F146E004B9D1E /* Images */,
 				E341C850134A31F9009BB506 /* ASIHTTPRequest */,
-				E3D97E751349C3B300E2C1BA /* Celaneo1 */,
+				E3D97E751349C3B300E2C1BA /* FnacIn */,
 				E3D97E6E1349C3B300E2C1BA /* Frameworks */,
 				E3D97E6C1349C3B300E2C1BA /* Products */,
 			);
@@ -676,7 +786,7 @@
 		E3D97E6C1349C3B300E2C1BA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E3D97E6B1349C3B300E2C1BA /* fnac.app */,
+				E3D97E6B1349C3B300E2C1BA /* FnacIn.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -691,7 +801,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E3D97E751349C3B300E2C1BA /* Celaneo1 */ = {
+		E3D97E751349C3B300E2C1BA /* FnacIn */ = {
 			isa = PBXGroup;
 			children = (
 				E360B18113BDABB8004A9E94 /* fr.lproj */,
@@ -709,14 +819,17 @@
 				E36C822B136AD29D009C39C7 /* NSString+removeTags.h */,
 				E36C822C136AD29D009C39C7 /* NSString+removeTags.m */,
 			);
+			name = FnacIn;
 			path = Celaneo1;
 			sourceTree = "<group>";
 		};
 		E3D97E761349C3B300E2C1BA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E3D97E771349C3B300E2C1BA /* Celaneo1-Info.plist */,
-				E3D97E7B1349C3B300E2C1BA /* Celaneo1-Prefix.pch */,
+				F95AE9EA163F36B9008244B2 /* PullToRefreshView.h */,
+				F95AE9EB163F36B9008244B2 /* PullToRefreshView.m */,
+				E3D97E7B1349C3B300E2C1BA /* FnacIn-Prefix.pch */,
+				E3D97E771349C3B300E2C1BA /* FnacIn-Info.plist */,
 				E3D97E7C1349C3B300E2C1BA /* main.m */,
 			);
 			name = "Supporting Files";
@@ -739,7 +852,7 @@
 			);
 			name = fnac;
 			productName = Celaneo1;
-			productReference = E3D97E6B1349C3B300E2C1BA /* fnac.app */;
+			productReference = E3D97E6B1349C3B300E2C1BA /* FnacIn.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -750,7 +863,7 @@
 			attributes = {
 				LastUpgradeCheck = 0430;
 			};
-			buildConfigurationList = E3D97E651349C3B300E2C1BA /* Build configuration list for PBXProject "Celaneo1" */;
+			buildConfigurationList = E3D97E651349C3B300E2C1BA /* Build configuration list for PBXProject "FnacIn" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -847,11 +960,9 @@
 				E328DE2313B9BED20041EC20 /* annuaireDetail.xib in Resources */,
 				E327FF8E13BB236B00616437 /* ShopMap.xib in Resources */,
 				E38B885C13BCD5D600B1D6A4 /* ShopMap~iPad.xib in Resources */,
-				E360B19213BDABB9004A9E94 /* ArticleList.xib in Resources */,
 				E360B19313BDABB9004A9E94 /* InfoPlist.strings in Resources */,
 				E360B19413BDABB9004A9E94 /* MainWindow.xib in Resources */,
 				E360B19513BDABB9004A9E94 /* PrefereEdit.xib in Resources */,
-				E360B19613BDABB9004A9E94 /* RubriqueList.xib in Resources */,
 				E360B19813BDABB9004A9E94 /* MainWindow-iPad.xib in Resources */,
 				E360B19F13BDBF12004A9E94 /* ChangePassword.xib in Resources */,
 				E335240313BE12D100970B87 /* annuaire.png in Resources */,
@@ -860,6 +971,39 @@
 				E335240613BE12D100970B87 /* epingle@2x.png in Resources */,
 				E335240913BE12DA00970B87 /* password.png in Resources */,
 				E335240A13BE12DA00970B87 /* password@2x.png in Resources */,
+				F96812FB161AE1B60068E669 /* actions.png in Resources */,
+				F911DB8D161C65A900446ABE /* AppListController.xib in Resources */,
+				F911DB97161F0A7500446ABE /* FnacCom.png in Resources */,
+				F911DB98161F0A7500446ABE /* ticketLive.png in Resources */,
+				F911DB99161F0A7500446ABE /* MobileFnac.png in Resources */,
+				F909D6AD16284A7A0059904B /* AppList.png in Resources */,
+				F91018B0163ACEA900534579 /* RubriqueList.xib in Resources */,
+				F98F5705164BB73F00CFC3D5 /* arrowP.png in Resources */,
+				F98F5708164BB74900CFC3D5 /* arrowP@2x.png in Resources */,
+				F98F570D164BCAE400CFC3D5 /* app_labo_fnac.png in Resources */,
+				F98F570E164BCAE400CFC3D5 /* iconeAdherentClubFnac_iOS.png in Resources */,
+				F98F570F164BCAE400CFC3D5 /* Jpreferes_off.png in Resources */,
+				F98F5710164BCAE400CFC3D5 /* Jpreferes_off@2x.png in Resources */,
+				F9C2CDFE16539B1900425406 /* kobo_By_Fnac_iOS.png in Resources */,
+				F9C2CE0C1653D6AA00425406 /* kobo_By_Fnac_iOS-retina.png in Resources */,
+				F9C2CE111653DB7200425406 /* 120x120 FnacCom.png in Resources */,
+				F9C2CE1B1653DEA100425406 /* 120x120 iconeAdherentClubFnac_iOS.png in Resources */,
+				F9C2CE1C1653DEA100425406 /* 120x120 logo_app_labo_fnac.png in Resources */,
+				F9C2CE1D1653DEA100425406 /* 120x120 MobileFnac.png in Resources */,
+				F9C2CE1E1653DEA100425406 /* 120x120 ticketLive.png in Resources */,
+				F9C510EF166F8ABD003E46D8 /* ArticleList.xib in Resources */,
+				F985B28E16C3BBB200F8B9FB /* navbar_landscape.png in Resources */,
+				F985B29016C3BBBB00F8B9FB /* navbar_landscape@2x.png in Resources */,
+				F93B5C4E1758E52E008AD2E2 /* icone_Kobo_by_Fnac.png in Resources */,
+				F93B5C501758E53D008AD2E2 /* icone_Tick_Live.png in Resources */,
+				F9B5C003175E4190005D5D74 /* SiteGroupController.xib in Resources */,
+				F9DFDC631767BE6C004E9B28 /* ico_fnacIn57x57.png in Resources */,
+				F9DFDC651767BE73004E9B28 /* ico_fnacIn114x114.png in Resources */,
+				F9DFDC671767BEDE004E9B28 /* ico_fnacIn72x72.png in Resources */,
+				F9DFDC691767BF27004E9B28 /* ico_fnacIn144x144.png in Resources */,
+				F9A27680178ACB000038139A /* Default-Portrait@2x~ipad.png in Resources */,
+				F9A27682178ACB0A0038139A /* Default-Landscape~ipad.png in Resources */,
+				F9A27684178ACB0E0038139A /* Default-Landscape@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -870,10 +1014,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F95AE9EC163F3837008244B2 /* PullToRefreshView.m in Sources */,
+				F923BCE0163AD78B008B557E /* RubriqueListController.m in Sources */,
 				E3D97E7D1349C3B300E2C1BA /* main.m in Sources */,
 				E3D97E801349C3B300E2C1BA /* Celaneo1AppDelegate.m in Sources */,
 				E3D97E861349C3B300E2C1BA /* ArticleList.m in Sources */,
-				E3D97E891349C3B300E2C1BA /* RubriqueListController.m in Sources */,
 				E3D97E981349C56C00E2C1BA /* LoginController.m in Sources */,
 				E341C865134A31F9009BB506 /* ASIAuthenticationDialog.m in Sources */,
 				E341C866134A31F9009BB506 /* ASIDataCompressor.m in Sources */,
@@ -912,20 +1057,14 @@
 				E328DE2213B9BED20041EC20 /* annuaireDetail.m in Sources */,
 				E327FF8F13BB236B00616437 /* ShopMapController.m in Sources */,
 				E360B19E13BDBF12004A9E94 /* ChangePassword.m in Sources */,
+				F911DB8C161C65A900446ABE /* AppListController.m in Sources */,
+				F9B5C002175E4190005D5D74 /* SiteGroupController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		E360B18213BDABB9004A9E94 /* ArticleList.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E360B18313BDABB9004A9E94 /* fr */,
-			);
-			name = ArticleList.xib;
-			sourceTree = "<group>";
-		};
 		E360B18413BDABB9004A9E94 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -950,20 +1089,28 @@
 			name = PrefereEdit.xib;
 			sourceTree = "<group>";
 		};
-		E360B18A13BDABB9004A9E94 /* RubriqueList.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E360B18B13BDABB9004A9E94 /* fr */,
-			);
-			name = RubriqueList.xib;
-			sourceTree = "<group>";
-		};
 		E360B18E13BDABB9004A9E94 /* MainWindow-iPad.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				E360B18F13BDABB9004A9E94 /* fr */,
 			);
 			name = "MainWindow-iPad.xib";
+			sourceTree = "<group>";
+		};
+		F91018AE163ACEA900534579 /* RubriqueList.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F91018AF163ACEA900534579 /* fr */,
+			);
+			name = RubriqueList.xib;
+			sourceTree = "<group>";
+		};
+		F9C510ED166F8ABD003E46D8 /* ArticleList.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F9C510EE166F8ABD003E46D8 /* fr */,
+			);
+			name = ArticleList.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -974,8 +1121,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -983,9 +1130,10 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PROVISIONING_PROFILE = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PRODUCT_NAME = FnacIn;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv7 armv7";
 			};
 			name = Debug;
 		};
@@ -994,17 +1142,17 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PRODUCT_NAME = FnacIn;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv7 armv7";
 			};
 			name = Release;
 		};
@@ -1012,19 +1160,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Celaneo1/Celaneo1-Prefix.pch";
+				GCC_PREFIX_HEADER = "Celaneo1/FnacIn-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = "Celaneo1/Celaneo1-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				INFOPLIST_FILE = "Celaneo1/FnacIn-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GoogleAnalytics\"",
 				);
-				PRODUCT_NAME = "${TARGET_NAME}";
+				PRODUCT_NAME = FnacIn;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1033,21 +1186,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Celaneo1/Celaneo1-Prefix.pch";
+				GCC_PREFIX_HEADER = "Celaneo1/FnacIn-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = "Celaneo1/Celaneo1-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				INFOPLIST_FILE = "Celaneo1/FnacIn-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GoogleAnalytics\"",
 				);
-				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PRODUCT_NAME = FnacIn;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -1057,7 +1210,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E3D97E651349C3B300E2C1BA /* Build configuration list for PBXProject "Celaneo1" */ = {
+		E3D97E651349C3B300E2C1BA /* Build configuration list for PBXProject "FnacIn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E3D97E901349C3B400E2C1BA /* Debug */,

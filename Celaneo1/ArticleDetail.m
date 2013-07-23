@@ -93,6 +93,10 @@
 {
     [super viewDidLoad];
     
+    [content.scrollView setScrollEnabled:YES];
+   
+    [[[content subviews] lastObject] setScrollEnabled:YES];
+    
     detailCellHeight = detailCell.bounds.size.height + (article.type != ARTICLE_TYPE_TEXT ? mediaButton.bounds.size.height + 2 : 0);
     postCommentaireCellHeight = self.commentCount.frame.size.height + self.commentCount.frame.origin.y + 5;
     contentCellHeight = self.contentCell.bounds.size.height;
@@ -107,10 +111,19 @@
     activityIndicator.frame = CGRectMake((toolbar.bounds.size.width - 20) / 2, 
                                          (toolbar.bounds.size.height - 20) / 2, 20, 20);
     
-    UIImage* buttonBack = [[UIImage imageNamed:@"btn.png"] stretchableImageWithLeftCapWidth:10 topCapHeight:5];
+   UIImage* buttonBack = [[UIImage imageNamed:@"btn.png"] stretchableImageWithLeftCapWidth:10 topCapHeight:5];
     [commentSend setBackgroundImage:buttonBack forState:UIControlStateNormal];
     [commentToggle setBackgroundImage:buttonBack forState:UIControlStateNormal];
     [commentCancel setBackgroundImage:buttonBack forState:UIControlStateNormal];
+   
+    //self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"actions.png"] /*initWithTitle:@"icon AC"*/ style:UIBarButtonItemStyleDone target:self action:@selector(push:) ] autorelease];
+    
+   UIButton *bt=[UIButton buttonWithType:UIButtonTypeCustom];
+    [bt setFrame:CGRectMake(0, 0, 60, 30)];
+    [bt setImage:[UIImage imageNamed:@"actions.png"] forState:UIControlStateNormal];
+    [bt addTarget:self action:@selector(push:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftButton=[[UIBarButtonItem alloc] initWithCustomView:bt];
+    self.navigationItem.rightBarButtonItem=leftButton;
 }
 
 - (void)viewDidUnload
@@ -147,6 +160,38 @@
 {
     [super viewWillAppear:animated];
     [self update];
+    self.content.dataDetectorTypes=UIDataDetectorTypeAll;
+
+}
+-(BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    NSURL *requestUrl = [[request URL] retain];
+    if (([[requestUrl scheme] isEqualToString:@"http"] || [[requestUrl scheme] isEqualToString:@"https"] || [[requestUrl scheme] isEqualToString:@"mailto"]) && (navigationType==UIWebViewNavigationTypeLinkClicked)) {
+        NSURL *newURL = [[NSURL alloc] initWithString: [[[request URL] absoluteString] stringByReplacingOccurrencesOfString: @"allo:" withString: @"tel:"]];
+        [requestUrl release];
+        return ! [[UIApplication sharedApplication] openURL: [newURL autorelease]];
+    }
+    [requestUrl release];
+    return YES;
+}
+ /*-(void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
+   if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
+        [self updateContent2];
+       [self.table reloadData];
+    }else [self updateContent];
+}*/
+
+-(void)viewDidLayoutSubviews{
+    UIDeviceOrientation currentOrientation = [UIDevice currentDevice].orientation;
+        if (UIDeviceOrientationIsLandscape(currentOrientation)||UIInterfaceOrientationIsLandscape(self.interfaceOrientation) ){
+            [self updateContentLandscape];
+        NSLog(@"Landscape view now");
+        
+    }else if(UIDeviceOrientationIsPortrait(currentOrientation)||UIInterfaceOrientationIsPortrait(self.interfaceOrientation)){
+        [self updateContent];
+        NSLog(@"Portrait View now");
+    }
+    [self.table reloadData];
 }
 
 - (NSString *)pageName
@@ -180,6 +225,12 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
 }
 
 - (ServerRequest*) createListRequest
@@ -314,14 +365,16 @@
 - (void) updateDetail
 {
     self.titre.text = article.titre;
-    
+    self.date.text = article.dateAffichee;
+
     int x = self.rubrique.frame.origin.x;
+    //NSLog(@"%d",x);
     
     CGSize rubriqueSize = [article.rubrique sizeWithFont:self.rubrique.titleLabel.font];
     rubriqueSize.width += 10;
     rubriqueSize.height = self.rubrique.frame.size.height;
     self.rubrique.frame = CGRectMake(x, rubrique.frame.origin.y, rubriqueSize.width, rubriqueSize.height);
-    self.rubrique.bounds = CGRectMake(0, 0, rubriqueSize.width, rubriqueSize.height);
+   self.rubrique.bounds = CGRectMake(0, 0, rubriqueSize.width, rubriqueSize.height);
     x += rubriqueSize.width;
     [self.rubrique setTitle:article.rubrique forState:UIControlStateNormal];
     
@@ -363,12 +416,34 @@
 
 - (void) updateContent
 {
-    self.content.frame = CGRectMake(self.content.frame.origin.x, 0, self.content.frame.size.width, 1);
+    CGRect screenFrame=[[UIScreen mainScreen] applicationFrame];
+     UIDeviceOrientation currentOrientation = [UIDevice currentDevice].orientation;
+    if (UIDeviceOrientationIsLandscape(currentOrientation)||UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+        self.content.frame = CGRectMake(self.content.frame.origin.x,0, screenFrame.size.height, 1);
+    }else if(UIDeviceOrientationIsPortrait(currentOrientation)||UIInterfaceOrientationIsPortrait(self.interfaceOrientation)){
+        self.content.frame = CGRectMake(self.content.frame.origin.x, 0, screenFrame.size.width, 1);
+
+    }
     NSMutableString* contentString = [NSMutableString stringWithCapacity:100];
     [contentString appendString:@"<style>body { margin: 8px; padding: 0; font: 12px helvetica; }</style>"];
     if (article.accroche) {
         [contentString appendString:article.accroche];
-        [contentString appendString:@"<br/><br/>"];
+    }
+    if (article.contenu) {
+        [contentString appendString:article.contenu];
+    }
+    [self.content loadHTMLString:contentString baseURL:nil];
+    self.content.delegate = self;
+}
+- (void) updateContentLandscape
+{
+    CGRect screen=[[UIScreen mainScreen] applicationFrame];
+    self.content.frame = CGRectMake(self.content.frame.origin.x, 0, screen.size.height, 1);
+    //self.content.frame = CGRectMake(self.content.frame.origin.x, 0, screen.size.height, 1);
+    NSMutableString* contentString = [NSMutableString stringWithCapacity:100];
+    [contentString appendString:@"<style>body { margin: 8px; padding: 0; font: 12px helvetica; }</style>"];
+    if (article.accroche) {
+        [contentString appendString:article.accroche];
     }
     if (article.contenu) {
         [contentString appendString:article.contenu];
@@ -379,12 +454,12 @@
 
 - (void) updateToolbar
 {
-    jaime.title = [NSString stringWithFormat:@"J'aime (%d)", article.nb_jaime];
+    jaime.title = [NSString stringWithFormat:@"(%d)", article.nb_jaime];
     commentaire.title = [NSString stringWithFormat:@"Réactions (%d)", article.nb_commentaires];
     if (!article.favoris) {
-        favoris.title = @"Ajout Dossier";
+        favoris.title = @"Ajout préférés";
     } else {
-        favoris.title = @"(Dossiers)";
+        favoris.title = @"(Préférés)";
     }
 }
 
@@ -466,7 +541,7 @@
         MediaPlayer* mediaPlayer = [[MediaPlayer alloc] initWithNibName:nibName bundle:nil];
         mediaPlayer.article = article;
         
-        [self.navigationController pushViewController:mediaPlayer animated:YES];   
+        [self.navigationController pushViewController:mediaPlayer animated:YES];
     }
 }
 
@@ -476,11 +551,60 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:article.urlFnacCom]];
 }
 
+- (IBAction)push:(id)sender
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle: @""
+                                  delegate:self
+                                  cancelButtonTitle:@"Retour"
+                                  destructiveButtonTitle:nil
+                                  otherButtonTitles:@"J'aime", @"Ajouter à mes préférés", nil];
+    [[[actionSheet valueForKey:@"_buttons"] objectAtIndex:0] setImage:[UIImage imageNamed:@"ilike.png"] forState:UIControlStateNormal];
+     [[[actionSheet valueForKey:@"_buttons"] objectAtIndex:1] setImage:[UIImage imageNamed:@"Jpreferes_off.png"] forState:UIControlStateNormal];
+    [actionSheet showInView:self.view];
+      [actionSheet release];
+    
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+            NSLog(@"bouton 1");
+            [self.jaimeRequest cancel];
+            self.jaimeRequest = [[ArticleParser alloc] getRequestJaimeWithArticleId:article.articleId];
+            jaimeRequest.delegate = self;
+            [jaimeRequest start];
+            [toolbar addSubview:activityIndicator];
+            break;
+        case 1:
+            NSLog(@"bouton 2");
+            if (!article.favoris) {
+                [self.favorisRequest cancel];
+                self.favorisRequest = [[ArticleParser alloc] getRequestSetFavoris:YES withArticleId:article.articleId];
+                favorisRequest.delegate = self;
+                [favorisRequest start];
+                
+                [toolbar addSubview:activityIndicator];
+            } else {
+                UIAlertView *feedback = [[UIAlertView alloc] initWithTitle:@"Article"
+                                                                   message:@"Cet article est déjà dans vos dossiers."
+                                                                  delegate:nil
+                                                         cancelButtonTitle:@"OK"
+                                                         otherButtonTitles:nil];
+                [feedback show];
+                [feedback release];
+                
+            }
+            break;
+        default:
+            break;
+       }
+}
+
 #pragma mark toolbar actions
 - (IBAction) jaimeClick
-{
-    [self.jaimeRequest cancel];
-    self.jaimeRequest = [[ArticleParser alloc] getRequestJaimeWithArticleId:article.articleId];
+{     self.jaimeRequest = [[ArticleParser alloc] getRequestJaimeWithArticleId:article.articleId];
     jaimeRequest.delegate = self;
     [jaimeRequest start];
     [toolbar addSubview:activityIndicator];
@@ -578,7 +702,7 @@
         article.favoris = YES;
         [self updateToolbar];
         self.favorisRequest = nil;
-        message = @"Article ajouté à vos dossiers.";
+        message = @"Article ajouté à vos préférés.";
     } else if (jaimeRequest == request) {
         if (parsed.nb_jaime > article.nb_jaime) {
             article.nb_jaime = parsed.nb_jaime;

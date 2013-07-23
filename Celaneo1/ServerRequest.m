@@ -56,7 +56,8 @@
     ASIDownloadCache* cache = [ASIDownloadCache sharedCache];
 
     [asiRequest setDownloadCache:cache];
-    [asiRequest setCachePolicy:forced ? ASIDontLoadCachePolicy : ASIDoNotReadFromCacheCachePolicy];
+    //[asiRequest setCachePolicy:forced ? ASIDontLoadCachePolicy : ASIDoNotReadFromCacheCachePolicy];
+    [asiRequest setCachePolicy:forced ? ASIAskServerIfModifiedCachePolicy : ASIDoNotReadFromCacheCachePolicy];
     [asiRequest setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
 }
 
@@ -70,17 +71,20 @@
 {
     // Use when fetching binary data
     NSData *responseData = [request responseData];
-
+    NSString *string = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+   // NSLog(@"%@", string);
     if (responseData == nil) {
         [self requestFailed:request];
     } else {
-        NSLog(@"requestFinished: %d bytes", responseData.length);
+        NSLog(@"requestFinished: %d bytes,url----%@", responseData.length,self.asiRequest.url);
 #ifdef DEBUG
         if (responseData.length < 100000) {
             NSLog(@"%@\n%@", request.url, request.responseString);
         } else {
-            void* data = [[responseData subdataWithRange:NSMakeRange(800000, 1000000)] bytes];// to remove
-            NSLog(@"%@ : %d", request.url, responseData.length);
+            if (responseData.length > 1000000) {
+                void* data = [[responseData subdataWithRange:NSMakeRange(800000, 1000000)] bytes];// to remove
+                NSLog(@"%@ : %d", request.url, responseData.length);
+            }
         }
 #endif
         NSXMLParser* xmlParser = [[NSXMLParser alloc] initWithData:responseData];

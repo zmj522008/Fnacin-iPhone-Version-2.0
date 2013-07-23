@@ -12,21 +12,26 @@
 @class AnnuaireDB;
 @class AnnuaireModel;
 
-@interface Celaneo1AppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate, UINavigationBarDelegate, UINavigationControllerDelegate> {
+@interface Celaneo1AppDelegate :BaseController <UIApplicationDelegate, UITabBarControllerDelegate, UINavigationBarDelegate, UINavigationControllerDelegate> {
     IBOutlet LoginController* loginController;
-    
+
     NSString* sessionId;
     BOOL dirigeant;
     int articlesPerPage;
     
     BOOL offline;
     BOOL prefereEditDone;
-    
     IBOutlet UINavigationController* rubriquesNavigation;
-    
+    IBOutlet UINavigationController* navController;
+   // IBOutlet UITextField* fldBadgeNumber;
+
     AnnuaireDB* annuaireDb;
     AnnuaireModel* annuaireModel;
+    NSData* tokenId;
 }
+
+- (BOOL)readDataFromFile;
+- (BOOL)writeDataToFile;
 
 @property (nonatomic, retain) AnnuaireModel* annuaireModel;
 
@@ -41,9 +46,15 @@
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, retain) IBOutlet LoginController *loginController;
 @property (nonatomic, retain) IBOutlet UINavigationController *rubriquesNavigation;
+@property (nonatomic, retain) IBOutlet UINavigationController *navController;
 
 @property (nonatomic, retain) AnnuaireDB* annuaireDb;
+@property (nonatomic, retain) NSData* tokenId;
 
+
+
++ (NSData*) tokenId;
++ (void) setTokenId:(NSData*)toId;
 + (Celaneo1AppDelegate*) getSingleton;
 
 @end

@@ -95,7 +95,7 @@
 
 - (NSString*) pageName
 {
-    return @"/prepage";
+    return @"prepage";
 }
 
 - (IBAction) continuerClick

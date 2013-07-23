@@ -21,7 +21,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+ [super viewDidLoad];
 }
 */
 
@@ -62,14 +62,14 @@
 
 - (void) updateList:(ServerRequest*)request parser:(ArticleParser*)parsed onlineContent:(BOOL)onlineContent;
 {    
-    self.rubriques = [parsed.rubriques sortedArrayUsingSelector:@selector(compare:)];
+    self.rubriques = [parsed.thematiques sortedArrayUsingSelector:@selector(compare:)];
     
     [table reloadData];
 }
 
 - (ServerRequest*) createListRequest
 {
-    return [[ArticleParser alloc] getRequestGetRubriques];
+    return [[ArticleParser alloc] getRequestGetThematiques];
 }
 
 #pragma mark table view datasource
@@ -99,12 +99,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [[GANTracker sharedTracker] trackEvent:@"INTRAFNAC" action:@"THEMATIQUE" label:[[rubriques objectAtIndex:indexPath.row] name] value:nil withError:nil];
-
     NSString* nibName = @"ArticleList";
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         nibName = [nibName stringByAppendingString:@"~iPad"];
     }
-
+    
     ArticleList* controller = [[ArticleList alloc] initWithNibName:nibName bundle:nil];
     controller.rubriqueId = [[rubriques objectAtIndex:indexPath.row] categoryId];
     [self.navigationController pushViewController:controller animated:YES];

@@ -80,7 +80,7 @@
     [imageRequest setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
     [[ASIDownloadCache sharedCache] setShouldRespectCacheControlHeaders:NO];
     
-    NSLog(@"Cache: %@", [imageRequest.downloadCache pathToCachedResponseDataForRequest:imageRequest]);
+    //NSLog(@"Cache: %@", [imageRequest.downloadCache pathToCachedResponseDataForRequest:imageRequest]);
 
     return imageRequest;
 }

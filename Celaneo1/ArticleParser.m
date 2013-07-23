@@ -111,7 +111,9 @@
 - (ServerRequest*) getRequestSendTokenId:(NSString*)tokenId
 {
     ServerRequest* request = [self getServerRequest:@"push"];
-    NSLog(@"Sending token id: %@", tokenId);
+    NSLog(@"Sending token id via WebService: %@", tokenId);
+    //NSString* sessionId = [Celaneo1AppDelegate getSingleton].sessionId;
+    //[request setParameter:@"session_id" withIntValue:sessionId];
     [request setParameter:@"token_id" withValue:tokenId];
     return request;  
 }
@@ -239,6 +241,7 @@
 
 - (void) handleElementEnd_pre_page:(NSString*)value
 {
+    NSLog(@"prepageContent = %@", value);
     self.prepageContent = value;
 }
 

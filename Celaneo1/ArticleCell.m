@@ -50,6 +50,7 @@
     [reactionsIcon release];
     [reactionsText release];
     [favorisButton release];
+    [detailAccessory release];
     imageRequest.delegate = nil;
     [imageRequest cancel];
     [imageRequest release];
@@ -64,6 +65,11 @@
 #ifdef DEBUG__
     article.nb_commentaires = 2;
 #endif
+    
+    CGRect accrocheFrame = accroche.frame;
+    CGRect accessoryFrame = detailAccessory.frame;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
     
     self.titre.text = article.titre;
     
@@ -92,9 +98,17 @@
     
     if (article.accroche) {
         self.accrocheText.text = [NSString stringWithoutTags:article.accroche];
-        self.accrocheText.contentInset = UIEdgeInsetsMake(-8,-8,0,0);
+        accrocheFrame.size.width=BASE_ACCROCHE_WIDTH;
+        self.accrocheText.contentSize = accrocheFrame.size;
+        self.accrocheText.frame = accrocheFrame;
+            self.accrocheText.contentInset = UIEdgeInsetsMake(-8,-8,0,0);
 
         [self.accroche loadHTMLString:[@"<style>body { margin: 0; padding: 0; font: 12px helvetica; }</style>" stringByAppendingString:article.accroche] baseURL:nil];
+        
+        self.detailAccessory.hidden = NO;
+        self.detailAccessory.image = [UIImage imageNamed:@"arrow.png"];
+        accessoryFrame.origin.x = screenWidth-self.detailAccessory.frame.size.width;
+        self.detailAccessory.frame =accessoryFrame;
     } else {
         self.accroche.hidden = YES;
     }
@@ -114,7 +128,7 @@
         [imageLoadingQueue addOperation:self.imageRequest];
     }
     
-    jaimeText.text = [NSString stringWithFormat:@"J'aime (%d)", article.nb_jaime];
+    jaimeText.text = [NSString stringWithFormat:@"(%d)", article.nb_jaime];
     BOOL showCommentaires = article.nb_commentaires > 0;
     showCommentaires = NO; // Comments disabled! 08/01/2012
     reactionsText.hidden = !showCommentaires;
@@ -136,8 +150,104 @@
             mediaButton.text = @"➜ Écouter";
             break;
     }
-    
 }
+
+- (void) updateWithArticleLandscape:(Article*) article usingImageLoadingQueue:(NSOperationQueue*)imageLoadingQueue
+{
+#ifdef DEBUG__
+    article.nb_commentaires = 2;
+#endif
+    
+    CGRect accrocheFrame = accroche.frame;
+    CGRect accessoryFrame = detailAccessory.frame;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    //CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    
+    self.titre.text = article.titre;
+    
+    int x = self.rubrique.frame.origin.x;
+    
+    CGSize rubriqueSize = [article.rubrique sizeWithFont:self.rubrique.titleLabel.font];
+    rubriqueSize.width += 10;
+    rubriqueSize.height = self.rubrique.frame.size.height;
+    self.rubrique.frame = CGRectMake(x, rubrique.frame.origin.y, rubriqueSize.width, rubriqueSize.height);
+    self.rubrique.bounds = CGRectMake(0, 0, rubriqueSize.width, rubriqueSize.height);
+    x += rubriqueSize.width;
+    [self.rubrique setTitle:article.rubrique forState:UIControlStateNormal];
+    
+    
+    x += 5; // margin
+    
+    CGSize thematiqueSize = [article.thematique sizeWithFont:self.thematique.titleLabel.font];
+    thematiqueSize.width += 5;
+    thematiqueSize.height = self.thematique.frame.size.height;
+    self.thematique.frame = CGRectMake(x, thematique.frame.origin.y, thematiqueSize.width, thematiqueSize.height);
+    [self.thematique setTitle:article.thematique forState:UIControlStateNormal];
+    
+    self.date.text = article.dateAffichee;
+    
+    self.accroche.hidden = YES;
+    
+    self.detailAccessory.hidden = NO;
+    self.detailAccessory.image = [UIImage imageNamed:@"arrow.png"];
+    accessoryFrame.origin.x=screenHeight-self.detailAccessory.frame.size.width;
+    self.detailAccessory.frame = accessoryFrame;
+    
+    if (article.accroche) {
+        
+        self.accrocheText.text = [NSString stringWithoutTags:article.accroche];
+        accrocheFrame.size.width = screenHeight - accessoryFrame.size.width-self.vignette.frame.size.width;
+         //accrocheFrame.size.width=BASE_ACCROCHE_WIDTH+160;
+         self.accrocheText.contentSize = accrocheFrame.size;
+         self.accrocheText.frame = accrocheFrame;
+         self.accrocheText.contentInset=UIEdgeInsetsMake(-8,-8,0,0);
+        [self.accroche loadHTMLString:[@"<style>body { margin: 0; padding: 0; font: 12px helvetica; }</style>" stringByAppendingString:article.accroche] baseURL:nil];
+
+
+    } else {
+        self.accroche.hidden = YES;
+    }
+    self.accroche.delegate = self;
+    
+    self.vignette.hidden = NO;
+    
+    self.imageRequest.delegate = nil;
+    [self.imageRequest cancel];
+    self.imageRequest = [article createImageRequestForViewSize:self.vignette.bounds.size];
+    
+    if ([[self.imageRequest.url absoluteString] compare:self.currentImageUrl] != 0) {
+        if (![self.imageRequest.downloadCache canUseCachedDataForRequest:self.imageRequest]) {
+            self.vignette.image = [UIImage imageNamed:@"loading_list.jpg"];
+        }
+        self.imageRequest.delegate = self;
+        [imageLoadingQueue addOperation:self.imageRequest];
+    }
+    
+    jaimeText.text = [NSString stringWithFormat:@"(%d)", article.nb_jaime];
+    BOOL showCommentaires = article.nb_commentaires > 0;
+    showCommentaires = NO; // Comments disabled! 08/01/2012
+    reactionsText.hidden = !showCommentaires;
+    reactionsIcon.hidden = !showCommentaires;
+    if (showCommentaires) {
+        reactionsText.text = [NSString stringWithFormat:@"Réactions (%d)", article.nb_commentaires];
+    }
+    
+    switch (article.type) {
+        case ARTICLE_TYPE_TEXT:
+            mediaButton.hidden = YES;
+            break;
+        case ARTICLE_TYPE_VIDEO:
+            mediaButton.hidden = NO;
+            mediaButton.text = @"➜ Lire la vidéo";
+            break;
+        case ARTICLE_TYPE_AUDIO:
+            mediaButton.hidden = NO;
+            mediaButton.text = @"➜ Écouter";
+            break;
+    }
+}
+
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
@@ -198,21 +308,23 @@
 {
     CGRect accrocheFrame = accroche.frame;
     CGRect titreFrame = self.titre.frame;
-    
     deleteMode = (state & (UITableViewCellStateShowingDeleteConfirmationMask
                            | UITableViewCellStateShowingEditControlMask));
     if (deleteMode) {
-        accrocheFrame.size.width = BASE_ACCROCHE_WIDTH - 20;
-        titreFrame.size.width = TITRE_WIDTH - 20;
+        
+            accrocheFrame.size.width = BASE_ACCROCHE_WIDTH - 20;
+            titreFrame.size.width = TITRE_WIDTH - 20;
         self.accroche.hidden = YES;
     } else {
+        
         accrocheFrame.size.width = BASE_ACCROCHE_WIDTH;
-        titreFrame.size.width = TITRE_WIDTH;
+            titreFrame.size.width = TITRE_WIDTH;
         self.accroche.hidden = NO;
     }
     self.titre.frame = titreFrame;
     self.accrocheText.contentSize = accrocheFrame.size;
     self.accrocheText.frame = accrocheFrame;
+    
     
     [self.accroche layoutIfNeeded];
 }

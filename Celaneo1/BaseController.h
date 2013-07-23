@@ -16,7 +16,7 @@
 #define NAVBUTTON_ARROW_LEFT 0
 #define NAVBUTTON_PLAIN 1
 
-@interface BaseController : UIViewController <ServerRequestDelegate> {    
+@interface BaseController : UIViewController <ServerRequestDelegate> {
     ServerRequest* offlineRequest;
     ServerRequest* onlineRequest;
     NSOperationQueue* imageLoadingQueue;

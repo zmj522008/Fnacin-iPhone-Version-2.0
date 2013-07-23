@@ -10,8 +10,10 @@
 #import "BaseController.h"
 #import "ServerRequest.h"
 #import "ArticleCell.h"
+#import "PullToRefreshView.h"
 
-@interface ArticleList : BaseController <UITableViewDataSource, UITableViewDelegate, ArticleCellDelegate> {
+@interface ArticleList : BaseController <UITableViewDataSource, UITableViewDelegate, ArticleCellDelegate, PullToRefreshViewDelegate> {
+    
     NSMutableArray* articles;
     
     BOOL favoris;
@@ -20,10 +22,14 @@
     int rubriqueId;
     int thematiqueId;
     int magasinId;
-    
+    int newArticles;
+    BOOL test;
+    int tag;
+    int notif;
     BOOL hasMore;
-    
     IBOutlet UITableView* table;
+    IBOutlet UITextField* fldBadgeNumber;
+
 }
 @property (nonatomic, retain) NSMutableArray *articles;
 @property (nonatomic, retain) IBOutlet UITableView *table;
@@ -33,7 +39,10 @@
 @property (nonatomic, assign) int rubriqueId;
 @property (nonatomic, assign) int thematiqueId;
 @property (nonatomic, assign) int magasinId;
+@property (nonatomic,assign) UIAlertView *loadAlert;
+@property (nonatomic,assign) UIActivityIndicatorView *loadIndocator;
 
+@property (nonatomic, strong) NSMutableDictionary *prefDictionary;
 - (IBAction) cellMediaClick:(id)sender;
 - (IBAction) cellContentClick:(id)sender;
 - (IBAction) cellRubriqueClick:(id)sender;

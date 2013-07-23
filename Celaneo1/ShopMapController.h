@@ -15,14 +15,16 @@
     IBOutlet UITableView* table;
     IBOutlet UIWebView* details;
     
-    NSArray* list;
-    
+    NSMutableArray* list;
+    NSMutableArray *stateIndex;
+    NSMutableArray *listName;
     Magasin* shop;
 }
+
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain) IBOutlet UITableView *table;
 @property (nonatomic, retain) IBOutlet UIWebView *details;
-@property (nonatomic, retain) NSArray *list;
+@property (nonatomic, retain) NSMutableArray *list;
 @property (nonatomic, retain) Magasin* shop;
 
 - (IBAction) switchToMap;

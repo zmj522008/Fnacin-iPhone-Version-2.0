@@ -38,8 +38,9 @@
         //        date = @"2011-06-13 19:13:07"; // Modif + suppression
         // 
         if (date != nil && date.length > 0) {
-            [request setParameter:@"date_derniere_maj" withValue:date];
-            
+           // [request setParameter:@"date_derniere_maj" withValue:date];
+            [db removeAll];
+
 #ifdef DEBUG
 //            [db createObjects];
 //            [[Celaneo1AppDelegate getSingleton].annuaireModel fetchData];

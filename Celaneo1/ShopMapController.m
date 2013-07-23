@@ -1,4 +1,4 @@
-//
+    //
 //  ShopMap.m
 //  FlowCover
 //
@@ -26,6 +26,7 @@
 @synthesize shop;
 @synthesize list;
 
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -43,7 +44,7 @@
     [details release];
     [list release];
     [shop release];
-    
+    [stateIndex release];
     [super dealloc];
 }
 
@@ -67,6 +68,8 @@
     self.mapView = nil;
     self.table = nil;
     self.details = nil;
+    [self setRecherche:nil];
+
     
     [super viewDidUnload];
 }
@@ -80,7 +83,7 @@
 {
     [super viewWillAppear:animated];
     [self switchToList];
-    [self mapCenterOnUser];
+    //[self mapCenterOnUser];
 }
 
 - (NSString *)pageName
@@ -93,6 +96,34 @@
 - (void) serverRequest:(ServerRequest*)request didSucceedWithObject:(id)result
 {
     self.list = [((Magasins*)result) children];
+
+    //init d'une liste contenant uniquement les noms de magasins
+    listName = [[NSMutableArray alloc] init];
+    for(shop in list)
+    {
+        NSString *name = [shop title];
+        [listName addObject:name];
+    }
+    
+    
+    
+    //liste contenant chaques section
+    stateIndex = [[NSMutableArray alloc] init];
+    
+    for (int i=0; i<[listName count]-1; i++){
+        char alphabet = [[listName objectAtIndex:i] characterAtIndex:0];
+        NSString *uniChar = [NSString stringWithFormat:@"%c", alphabet];
+        
+        if (![stateIndex containsObject:uniChar])
+        {
+            [stateIndex addObject:uniChar];
+        }
+    }
+    
+    
+    
+    
+
     [table reloadData];
     [mapView removeAnnotations:mapView.annotations];
     [mapView addAnnotations:list];
@@ -110,7 +141,6 @@
             [request setParameter:@"session_id" withValue:sessionId];
         }
     }
-    
     return request;
 }
 
@@ -161,9 +191,9 @@
     if ([[s ouverture] length] > 0) {
         [content appendFormat:@"<p>%@</p>", [s ouverture]];
     }
-    if ([[s ouverture_exceptionnelle] length] > 0) {
+   /* if ([[s ouverture_exceptionnelle] length] > 0) {
         [content appendFormat:@"<p>%@</p>", [s ouverture_exceptionnelle]];
-    }
+    }*/
     [details loadHTMLString:content baseURL:nil];
     MKCoordinateRegion newRegion;
     
@@ -192,20 +222,32 @@
 {
     UITableViewCell *cell = [self.table dequeueReusableCellWithIdentifier:@"ShopCell"];
     
-    if (cell == nil) 
+    if (cell == nil)
     {
         cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:@"ShopCell"] autorelease];
     }
-    Magasin* shop = [list objectAtIndex:indexPath.row];
+    
 
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.text = [shop nom];
-    return cell;
+    NSString *alphabet = [stateIndex objectAtIndex:[indexPath section]];
+    NSPredicate *predicate =
+    [NSPredicate predicateWithFormat:@"SELF beginswith[c] %@", alphabet];
+    NSArray *states = [listName filteredArrayUsingPredicate:predicate];
+
+    if ([states count]>0) {
+        NSString *cellValue = [states objectAtIndex:indexPath.row];
+        cell.textLabel.text = cellValue;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return list.count;
+    NSString *alphabet = [stateIndex objectAtIndex:section];
+    NSPredicate *predicate =
+    [NSPredicate predicateWithFormat:@"SELF beginswith[c] %@", alphabet];
+    NSArray *states = [listName filteredArrayUsingPredicate:predicate];
+    return [states count];
 }
 
 - (void)mapView:(MKMapView *)mv didUpdateUserLocation:(MKUserLocation *)userLocation
@@ -230,8 +272,24 @@
 #pragma mark UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self updateShopDetailWithShop:[list objectAtIndex:indexPath.row]];
-    [self switchToDetail];
+    
+    NSMutableArray *listSection = [[NSMutableArray alloc] init];
+    int section = 0;
+    
+    for (int i=0; i<[listName count]-1; i++){
+        char alphabet = [[listName objectAtIndex:i] characterAtIndex:0];
+        NSString *uniChar = [NSString stringWithFormat:@"%c", alphabet];
+        if (![listSection containsObject:uniChar])
+        {
+            [listSection addObject:uniChar];
+            if (section == indexPath.section)
+            {
+                [self updateShopDetailWithShop:[list objectAtIndex:i + indexPath.row]];
+                [self switchToDetail];
+            }
+            section = section + 1;
+        }
+    }
 }
 
 #pragma mark changeLayout
@@ -242,7 +300,7 @@
         table.hidden = YES;
         details.hidden = YES;
         mapView.frame = self.view.bounds;
-
+        self.navigationItem.leftBarButtonItem = nil;
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                                   initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"Liste" action:@selector(switchToList)]];
     }
@@ -267,29 +325,78 @@
         mapView.hidden = NO;
         table.hidden = YES;
         details.hidden = NO;
-        mapView.frame = CGRectMake(0, 0, mapView.frame.size.width, details.frame.origin.y);
+
+        mapView.frame = CGRectMake(0, 0, 320, 200);
+        details.frame = CGRectMake(0, 200, 320, 200);
     
         self.navigationItem.rightBarButtonItem = nil;
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithCustomView:[self navButton:NAVBUTTON_ARROW_LEFT withTitle:@"Liste" action:@selector(switchToList)]];
     }
 }
+- (void) switchToDetailLandscape
+{
+    if (table.hidden || mapView.hidden) {
+        mapView.hidden = NO;
+        table.hidden = YES;
+        details.hidden = NO;
+        mapView.frame = CGRectMake(0, 0, 480, 100);
+        details.frame = CGRectMake(0, 100,480 ,180);
+
+        self.navigationItem.rightBarButtonItem = nil;
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                                 initWithCustomView:[self navButton:NAVBUTTON_ARROW_LEFT withTitle:@"Liste" action:@selector(switchToList)]];
+    }
+}
 
 - (void) switchToList
 {
     self.shop = nil;
-    
     if (table.hidden || mapView.hidden) {
         mapView.hidden = YES;
         table.hidden = NO;
         details.hidden = YES;
+        self.navigationItem.leftBarButtonItem = nil;
 
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"Carte" action:@selector(switchToMap)]];
         [self updateLeftBarNavigationButton];
-    } else {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-                                                  initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"Près de moi" action:@selector(switchToMap)]];
+   } else {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self navButton:NAVBUTTON_PLAIN withTitle:@"Près de moi" action:@selector(switchToMap)]];
     }
 }
+
+-(void)viewDidLayoutSubviews{
+    UIDeviceOrientation currentOrientation = [UIDevice currentDevice].orientation;
+    UIInterfaceOrientation currentInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (UIDeviceOrientationIsLandscape(currentOrientation)||UIDeviceOrientationIsLandscape(currentInterfaceOrientation)) {
+        if (table.hidden && (!details.hidden)) {
+
+            [self switchToDetailLandscape];
+        }
+    
+        
+        
+    }else if (UIDeviceOrientationIsPortrait(currentOrientation)||UIDeviceOrientationIsPortrait(currentInterfaceOrientation)){
+        if(table.hidden && (!details.hidden)){
+            [self switchToDetail];
+        }
+    }
+    
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [stateIndex count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{    
+    return [stateIndex objectAtIndex:section];
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    return stateIndex;
+}
+
 @end

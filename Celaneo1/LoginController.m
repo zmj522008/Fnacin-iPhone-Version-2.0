@@ -75,14 +75,14 @@
     
     email.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"loginEmail"];
 #ifdef DEBUG
-    self.debugButton.hidden = NO;
+    self.debugButton.hidden = YES;
 #endif
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    
+
     self.email = nil;
     self.password = nil;
     self.debugButton = nil;
@@ -112,6 +112,11 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (NSString*) pageName
@@ -291,6 +296,7 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:email.text forKey:@"loginEmail"];
     [activity startAnimating];
+   
 }
 
 - (IBAction) forgSubmit

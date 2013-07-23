@@ -47,13 +47,33 @@
 {
     [super viewWillAppear:animated];
     
-    NSString* pageName = [self pageName];
-    NSLog(@"GA: %@", pageName);
+    NSString* pageName = [@"/" stringByAppendingString:[self pageName]];
+    //NSLog(@"GA: %@", pageName);
     [[GANTracker sharedTracker] trackPageview:pageName withError:nil];
     [self refresh];
     [self updateLeftBarNavigationButton];
     errorShown = NO;
     active = YES;
+
+    UINavigationBar *navBar = [[self navigationController] navigationBar];
+    UIImage *backgroundImage = [UIImage imageNamed:@"nav.png"];
+    [navBar setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];
+   }
+
+-(void)viewWillLayoutSubviews{
+    UINavigationBar *navBar = [[self navigationController] navigationBar];
+    UIImage *backgroundImage = [UIImage imageNamed:@"nav.png"];
+    UIImage *backgroundImageLandscape = [UIImage imageNamed:@"navbar_landscape.png"];
+   
+    UIDeviceOrientation currentOrientation = [UIDevice currentDevice].orientation;
+    UIInterfaceOrientation currentInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (UIDeviceOrientationIsLandscape(currentOrientation)||UIDeviceOrientationIsLandscape(currentInterfaceOrientation)) {
+        [navBar setBackgroundImage:backgroundImageLandscape forBarMetrics:UIBarMetricsLandscapePhone];
+     
+    }else if (UIDeviceOrientationIsPortrait(currentOrientation)||UIDeviceOrientationIsPortrait(currentInterfaceOrientation)){
+     [navBar setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];
+    }
+
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -64,14 +84,15 @@
 }
 
 - (void) refresh {
-    [self.offlineRequest cancel];
-    [self.onlineRequest cancel];
-    self.offlineRequest = nil;
-    self.onlineRequest = nil;
+   // [self.offlineRequest cancel];
+   // [self.onlineRequest cancel];
+    //self.offlineRequest = nil;
+    //self.onlineRequest = nil;
     if (!self.resetCache) {
         [self doOfflineRequest];
     } else {
-        [self doOnlineRequest:YES];
+       [self doOnlineRequest:NO];
+
     }
 }
 
@@ -79,15 +100,19 @@
 
 - (void) doOfflineRequest
 {
+    NSLog(@"doOffLineRequest:::::::::");
+
     ServerRequest* request = [self createListRequest];
-    NSLog(@"offline Request %@", request);
     if (request) {
+        NSLog(@"request:::::::::%@",request);
         [self.offlineRequest cancel];
 
         self.offlineRequest = request;
         offlineRequest.delegate = self;
-        [offlineRequest enableCacheWithForced:YES];
+        NSLog(@"offline request %@",request);
+        [offlineRequest enableCacheWithForced:NO];
         [offlineRequest start];
+        
     }
 }
 
@@ -96,6 +121,7 @@
     Celaneo1AppDelegate* delegate = [Celaneo1AppDelegate getSingleton];
 
     NSLog(@"online Request %d %d", delegate.offline, forced);
+
     ServerRequest* request = [self createListRequest];
     if (request && (!delegate.offline || forced)) {
         [self.onlineRequest cancel];
@@ -162,7 +188,6 @@
 {
     ArticleParser* parser = (ArticleParser*) result;
     resetCache = NO;
-
     [self updateList:request parser:parser onlineContent:request == onlineRequest];
     if (request == offlineRequest) {
         [self doOnlineRequest:NO];
@@ -185,6 +210,7 @@
 
 - (ServerRequest*) createListRequest
 {
+    NSLog(@"createListRequest----in BaseController");
         // code here to create a request to update the view content. or nil for no request
     return nil;
 }
@@ -233,8 +259,9 @@
 
 - (void)viewDidLoad {   
     [super viewDidLoad];
-    
-    imageLoadingQueue = [[NSOperationQueue alloc] init];    
+    //resetCache=YES;
+
+    imageLoadingQueue = [[NSOperationQueue alloc] init];
     self.navigationItem.titleView = [[UIView alloc] init];
     self.navigationItem.hidesBackButton = NO;
 //    self.navigationController.navigationBar.translucent = YES;
@@ -285,7 +312,8 @@
         [[[AnnuaireSync alloc] init] startSync];
     }
     
-    delegate.window.rootViewController = delegate.tabBarController;    
+    delegate.window.rootViewController = delegate.tabBarController;
+    
 }
 @end
 
@@ -296,9 +324,9 @@
     [img drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     if (portaitWidth == self.frame.size.width) {
         UIImage *logo	= [UIImage imageNamed:@"nav.png"];
-        [logo drawInRect:CGRectMake((self.frame.size.width - 320) / 2, 0, 
-                                    320, self.frame.size.height)];
+        [logo drawInRect:CGRectMake((self.frame.size.width - 320) / 2, 0,320, self.frame.size.height)];
     }
+
     self.tintColor = [UIColor colorWithRed:200/256.0 green:200/256.0 blue:200/256.0 alpha:0];
  
     for (UIView* view in self.subviews) {

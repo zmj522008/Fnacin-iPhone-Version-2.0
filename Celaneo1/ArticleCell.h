@@ -10,14 +10,16 @@
 
 #import "Article.h"
 #import "ASIHTTPRequest.h"
+#import "BaseController.h"
 
 @protocol ArticleCellDelegate <NSObject>
 
 - (IBAction)cellDeleteClick:(id)sender;
 
+
 @end
 
-@interface ArticleCell : UITableViewCell <ASIHTTPRequestDelegate, UIWebViewDelegate> {
+@interface ArticleCell : UITableViewCell <ASIHTTPRequestDelegate, UIWebViewDelegate>{
     IBOutlet UIButton* rubrique;
     IBOutlet UIButton* thematique;
     IBOutlet UILabel* titre;
@@ -64,4 +66,5 @@
 
 
 - (void) updateWithArticle:(Article*) article usingImageLoadingQueue:(NSOperationQueue*)imageLoadingQueue;
+- (void) updateWithArticleLandscape:(Article*) article usingImageLoadingQueue:(NSOperationQueue*)imageLoadingQueue;
 @end

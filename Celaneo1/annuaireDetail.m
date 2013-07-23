@@ -224,25 +224,43 @@ enum {
 - (void) saveInContacts
 {
     CFErrorRef  error = NULL;
-    
-	ABAddressBookRef addressBook = ABAddressBookCreate(); 
+    ABAddressBookRef addressBook= ABAddressBookCreateWithOptions(NULL, &error);
+
+    __block BOOL accessGranted = NO;
+    if (ABAddressBookRequestAccessWithCompletion != NULL) {
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+        ABAddressBookRequestAccessWithCompletion(addressBook,^(bool granted, CFErrorRef error){
+            accessGranted=granted;
+            dispatch_semaphore_signal(sema);
+        });
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        dispatch_release(sema);
+    }else{
+        accessGranted=YES;
+
+    }
+    if (accessGranted) {
+        
+	//ABAddressBookRef addressBook = ABAddressBookCreate();
+   
     ABRecordRef aRecord = ABPersonCreate(); 
     
-	
-	ABRecordSetValue(aRecord, kABPersonFirstNameProperty, 
-					 personne.prenom, &error); 
-	ABRecordSetValue(aRecord, kABPersonLastNameProperty, 
-					 personne.nom, &error); 
+	NSLog(@"adressBook:%@",addressBook);
+
+	ABRecordSetValue(aRecord, kABPersonFirstNameProperty,personne.prenom, &error); 
+	ABRecordSetValue(aRecord, kABPersonLastNameProperty, personne.nom, &error);
+
     if (personne.fonction.length > 0) {
-        ABRecordSetValue(aRecord, kABPersonJobTitleProperty,
-                         personne.fonction, &error); 
+        ABRecordSetValue(aRecord, kABPersonJobTitleProperty,personne.fonction, &error); 
     }
     ABMultiValueRef phones = ABMultiValueCreateMutable(kABMultiStringPropertyType);
     if (personne.telephone_fax.length > 0) {
         ABMultiValueAddValueAndLabel(phones, personne.telephone_fax, kABPersonPhoneWorkFAXLabel, nil);    
     }
     if (personne.telephone_fixe.length > 0) {
-        ABMultiValueAddValueAndLabel(phones, personne.telephone_fixe, kABPersonPhoneMainLabel, nil);    
+       // ABMultiValueAddValueAndLabel(phones, personne.telephone_fixe, kABPersonPhoneMainLabel, nil);
+        ABMultiValueAddValueAndLabel(phones, personne.telephone_fixe, kABWorkLabel, nil);
+
     }
     if (personne.telephone_interne.length > 0) {
         ABMultiValueAddValueAndLabel(phones, personne.telephone_interne, kABPersonPhonePagerLabel, nil);    
@@ -252,10 +270,10 @@ enum {
     }
 	ABRecordSetValue(aRecord, kABPersonPhoneProperty, phones, &error);
     
-    ABMultiValueRef emails = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-    if (personne.email.length > 0) {
-        ABMultiValueAddValueAndLabel(emails, personne.email, kABWorkLabel, nil);    
-        ABRecordSetValue(aRecord, kABPersonEmailProperty, emails, &error);
+   ABMultiValueRef emails = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+     if (personne.email.length > 0) {
+        //ABMultiValueAddValueAndLabel(emails, personne.email, kABPersonEmailProperty, nil);
+       // ABRecordSetValue(aRecord, kABPersonEmailProperty, personne.email, &error);
     }
     
     if (personne.site_nom.length > 0) {
@@ -265,25 +283,25 @@ enum {
 	if (error != NULL) { 		
 		NSLog(@"error while creating.. %@", error);
 	} 
-	
-	BOOL isAdded = ABAddressBookAddRecord (
-                                           addressBook,
-                                           aRecord,
-                                           &error
-                                           );	
-    NSLog(@"added: %d", isAdded);
+    NSLog(@"aRecord:%@",aRecord);
+  
+        BOOL isAdded = ABAddressBookAddRecord (addressBook,aRecord,&error);
+        
+        NSLog(@"added: %d", isAdded);
+        BOOL isSaved = ABAddressBookSave (
+                                          addressBook,
+                                          &error
+                                          );
+        
+        NSLog(@"saved: %d", isSaved);
 
+	
 	if (error != NULL) {
 		NSLog(@"ABAddressBookAddRecord %@", error);
 	} 
 //	error = NULL;
 	
-	BOOL isSaved = ABAddressBookSave (
-                                      addressBook,
-                                      &error
-                                      );
 	
-    NSLog(@"saved: %d", isSaved);
 	
 	if (error != NULL) {
 		NSLog(@"ABAddressBookSave %@", error);
@@ -293,6 +311,7 @@ enum {
 	CFRelease(addressBook);
     CFRelease(phones);
     CFRelease(emails);
+    }
     
     if (error) {
         UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Ajout"
@@ -312,5 +331,6 @@ enum {
         [errorView release];
         self.navigationItem.rightBarButtonItem = nil;
     }
+     
 }
 @end
